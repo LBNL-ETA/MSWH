@@ -23,7 +23,7 @@ setup(
 
     # Author details
     author='Milica Grahovac/Robert Hosbach/'\
-           'Mohan Ganeshalingam/Hannes Gerhart/Katie Coughlin',
+           'Katie Coughlin/Mohan Ganeshalingam/Hannes Gerhart',
 
 
     classifiers=[
