@@ -14,9 +14,13 @@ Folder | Content
 
 The fastest way to explore the preset simulations is to use the [`Project Level SWH System Tool`](scripts/Project&#32;Level&#32;SWH&#32;System&#32;Tool.ipynb) notebook. In the notebook the user provides a climate zone for a project, an occupancy for each household and whether any of the occupants stay at home during the day. The notebook can then load a set of example California specific hourly domestic hot water end-use load profiles from a database, size and locate the systems. The user can now simulate the hourly system performance over a period of one representative year, visualize and explore the simulation results using time-series plots for temperature profiles, heat and power rates, or look at annual summaries. Similarly the user can model individual household solar water heating projects and base case conventional gas tank water heater systems, such that the results can be compared between the individual, community and base case systems. All simulation and sizing parameters are exposed in the notebook and the user can easily change them if needed.
 
-[If you opt to use the web framework](#django-web-framework-deployment) the shortest path to explore the simulaton results is by clicking `Configurations` on the landing page, and then on `Simulate` on
-any of the example preconfigured systems (`Solar Thermal New` or `Solar Electric`). This leads the user to a visualization page with hourly timeseries results for a representative year. It is fairly straight forward to edit sizes and performance
-parameters of preconfigured components. To add new system types (such as `Solar Thermal Retrofit`) one would need to map it through the backend analogously to the preconfigured systems.
+If you opt to use the web framework the shortest path to explore the simulaton results after [setting up a local server](#django-web-framework-deployment) is to:
+
+* Click on `Configurations` on the landing page
+* Click on `Simulate` for any of the example preconfigured systems (`Solar Thermal New` or `Solar Electric`). This leads the user to a visualization page with hourly timeseries results for a representative year. 
+* Play with sizes and performance parameters of preconfigured components.
+
+To add new system types (such as `Solar Thermal Retrofit`) one would need to map it through the backend analogously to the preconfigured systems.
 
 ## Setup and Installation
 
