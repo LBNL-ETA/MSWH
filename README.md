@@ -102,9 +102,12 @@ To run tests:
 ## Publications
 
 The code was used for the following publications:
-* CEC report (link will be posted upon publishing)
+* CEC Report (link will be posted upon publishing)
 * Master Thesis (link will be posted upon publishing)
 
 ## About
 
 The software may be distributed under the copyright and license provided in [legal.md](legal.md).
+
+Milica Grahovac, Robert Hosbach, Katie Coughlin, Mohan Ganeshalingam and Hannes Gerhart created the contents of this repo
+in the scope of the CEC "Costs and Benefits of Community vs. Individual End-Use Infrastructure for Solar Water Heating" project.
