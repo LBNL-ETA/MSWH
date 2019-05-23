@@ -385,8 +385,8 @@ class Plot(object):
             colors=['#3D9970', '#FF4136', '#FF851B'],
             title='Energy Use',
             boxpoints='outliers'):
-        """Creates box plots for the chosen plot_col and can
-        group plots by the groupby_col.
+        """Creates box plots for the chosen `plot_col` and can
+        group plots by the `groupby_col`.
 
         Parameters:
 

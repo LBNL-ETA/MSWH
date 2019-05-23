@@ -18,17 +18,14 @@ class SourceAndSink(object):
     model and are known prior to the simulation, such as
     outdoor air temperature and end use load profiles.
 
-    Parameters
+    Parameters:
 
         input_dfs: a dict of pd dfs
-
             Dictionary of input dataframes
-            as read in from the input db by the Sql class
-            (see example in
-            `test_source_and_sink.SourceAndSinkTests.setUp`)
+            as read in from the input db by the :func:`Sql <Sql>` class
+            (see example in :func:`test_source_and_sink.SourceAndSinkTests.setUp <test_source_and_sink.SourceAndSinkTests.setUp>`)
 
         random_state: numpy random state object or an integer
-
              numpy random state object : if there is a need
              to maintain the same random seed throughout the
              analysis.
@@ -821,7 +818,7 @@ class SourceAndSink(object):
 
         Parameters:
 
-            occ : float
+            occ: float
                 Number of individual household occupants
         """
         if occ == 1:

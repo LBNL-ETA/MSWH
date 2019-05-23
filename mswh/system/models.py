@@ -75,9 +75,10 @@ class System(object):
 
     Examples:
 
-        See ```swh.system.tests.test_models``` module and
-        ```scripts/Project Level SWH System Tool.ipynb```
-        for examples on how to set up models for simulation.
+        See :func:`swh.system.tests.test_components <swh.system.tests.test_components>` module and
+        :func:`scripts/Project Level SWH System Tool.ipynb <scripts/Project Level SWH System Tool.ipynb>`
+        for examples on how to use the methods as stand alone and
+        in a system model simulation.
     """
     def __init__(self, sys_params=None, backup_params=None, \
             weather=None, sys_sizes=1., backup_sizes=1., \
@@ -186,7 +187,7 @@ class System(object):
     @weather.setter
     def weather(self, value):
         """Re-extracts weather timeseries if a new weather dataset
-        is assigned to an instantiated class objectsolar_electric
+        is assigned to an instance
         """
         self.__weather = value
         if isinstance(value, pd.DataFrame):
@@ -975,8 +976,9 @@ class System(object):
 
             ts_proj: dict of arrays, W
                 Heat:
-                self.r['q_del']: delivered
-                self.r['gas_use']: gas consumed
+
+                * self.r['q_del']: delivered
+                * self.r['gas_use']: gas consumed
         """
         # components
         heater = Storage(
@@ -1054,10 +1056,12 @@ class System(object):
             Parameters:
 
                 type: string
-                    gas_tank_wh
-                    solar_thermal_retrofit (gas tank backup at each household)
-                    solar_thermal_new (gas tankless backup at each household)
-                    solar_electric
+                    * 'gas_tank_wh'
+                    * 'solar_thermal_retrofit'
+                      (gas tank backup at each household)
+                    * 'solar_thermal_new'
+                      (gas tankless backup at each household)
+                    * 'solar_electric'
 
             Returns:
 
@@ -1122,7 +1126,7 @@ class System(object):
                 Timestep household level results for energy uses [W],
                 and heat rates [W].
 
-            Updates self.cons_total with the backup simulation
+            Updates `self.cons_total` with the backup simulation
             energy use and heat rates results.
         """
 
@@ -1416,7 +1420,7 @@ class System(object):
                 Timestep household level results for energy use [W],
                 and delivered heat rate [W].
 
-            Updates self.cons_total with the backup simulation
+            Updates `self.cons_total` with the backup simulation
             energy use and heat rates results.
         """
 
@@ -1602,14 +1606,16 @@ class System(object):
 
             el_use: dict, Wh
                 Electricity consumption for the analyzed period by:
-                'dist_pump' - distribution pump
-                'sol_pump' - solar pump
-                'total' - total (all pumps in the system)
+
+                * 'dist_pump' - distribution pump
+                * 'sol_pump' - solar pump
+                * 'total' - total (all pumps in the system)
 
             op_hour: dict, h
                 Operating hours for the analyzed period by:
-                'dist_pump' - distribution pump
-                'sol_pump' - solar pump
+
+                * 'dist_pump' - distribution pump
+                * 'sol_pump' - solar pump
         """
         ts_el_use = dict()
         ts_el_use['total'] = np.zeros(self.num_timesteps + 1)
