@@ -97,7 +97,8 @@ To add new system types (such as `Solar Thermal Retrofit`) one would need to map
 
 ## Contributing
 
-Anyone may contribute features with the appropriate tests using the issue tracker, forks and pull requests.
+Anyone may contribute features with the appropriate tests using the issue tracker, forks and pull requests. Please 
+check out [code documentation](https://lbnl-eta.github.io/MSWH/) for guidance.
 
 To run tests:
 
