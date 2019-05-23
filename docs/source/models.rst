@@ -15,7 +15,7 @@ Usage
 
 The user provides a climate zone for a project, an occupancy for each household and whether any of the occupants stay at home during the day. The software can then load a set of example California specific hourly domestic hot water end-use load profiles from a database, size and locate the systems. The user can now simulate the hourly system performance over a period of one representative year, visualize and explore the simulation results using time-series plots for temperature profiles, heat and power rates, or look at annual summaries. Similarly the user can model individual household solar water heating projects and base case conventional gas tank water heater systems, such that the results can be compared between the individual, community and base case systems.
 
-This functionality is readily available through a Jupyter notebook and a Django web framework, depending on what level of detail the user would like to access. Please see the README file on the repo *mg_add_link_when_public for usage and installation detail.
+This functionality is readily available through a Jupyter notebook and a Django web framework, depending on what level of detail the user would like to access. Please see the README file on the `MSWH repo <https://github.com/LBNL-ETA/MSWH>`_ for usage and installation details.
 
 Features
 ^^^^^^^^
