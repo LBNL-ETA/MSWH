@@ -1,0 +1,1299 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>System and Component Models &mdash; Multiscale Solar Water Heating 1.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Tools" href="mswh.tools.html" />
+    <link rel="prev" title="Python Code Documentation" href="modules.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Multiscale Solar Water Heating
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="models.html">Multiscale Solar Water Heating (MSWH)</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">Python Code Documentation</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="modules.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">System and Component Models</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#module-mswh.system.components">mswh.system.components module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-mswh.system.models">mswh.system.models module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-mswh.system.source_and_sink">mswh.system.source_and_sink module</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="mswh.tools.html">Tools</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mswh.comm.html">Database Communication</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Multiscale Solar Water Heating</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="modules.html">Python Code Documentation</a> &raquo;</li>
+        
+      <li>System and Component Models</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/source/mswh.system.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="system-and-component-models">
+<h1>System and Component Models<a class="headerlink" href="#system-and-component-models" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="module-mswh.system.components">
+<span id="mswh-system-components-module"></span><h2>mswh.system.components module<a class="headerlink" href="#module-mswh.system.components" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="mswh.system.components.Converter">
+<em class="property">class </em><code class="descclassname">mswh.system.components.</code><code class="descname">Converter</code><span class="sig-paren">(</span><em>params=None</em>, <em>weather=None</em>, <em>sizes=1.0</em>, <em>log_level=10</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mswh/system/components.html#Converter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mswh.system.components.Converter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Contains energy converter models, such as
+solar collectors, electric resistance heaters, gas burners,
+photovoltaic panels, and heat pumps. Depending on the intended
+usage, the models can be used to determine either a time period
+of component operation (for example an entire year), or a single
+timestep of component performance.</p>
+<p>Parameters:</p>
+<blockquote>
+<div><dl class="simple">
+<dt>params: pd df</dt><dd><p>Component performance parameters per project
+Default: None (default model parameters will get used)</p>
+</dd>
+<dt>weather: pd df</dt><dd><p>Weather data timeseeries with columns: amb. temp,
+solar irradiation. Number of rows equals the number of timesteps.
+Default: None (constant values will be set - use for
+a single timestep calculation, or if passing arguments
+directly to static methods)</p>
+</dd>
+<dt>sizes: pd df</dt><dd><p>Component sizes per project.
+Default: 1. (see individual components for specifics)</p>
+</dd>
+<dt>log_level: None or python logger logging level,</dt><dd><p>Default: logging.DEBUG
+This applies for a subset of the class functionality, mostly
+used to deprecate logger messages for certain calculations.
+For Example: log_level = logging.ERROR will only throw error
+messages and ignore INFO, DEBUG and WARNING.</p>
+</dd>
+</dl>
+</div></blockquote>
+<p>Note:</p>
+<blockquote>
+<div><p>If more than one of the same component is a part of the
+system, a separate instance of the converter should
+be created for each instance of the component.</p>
+<p>Each component is also implemented as a static method that
+can be used outside of this framework.</p>
+</div></blockquote>
+<p>Examples:</p>
+<blockquote>
+<div><p>See <code class="docutils literal notranslate"><span class="pre">`swh.system.tests.test_components`</span></code> module and
+<code class="docutils literal notranslate"><span class="pre">`scripts/Project</span> <span class="pre">Level</span> <span class="pre">SWH</span> <span class="pre">System</span> <span class="pre">Tool.ipynb`</span></code>
+for examples on how to use the methods as stand alone and
+in a system model simulation.</p>
+</div></blockquote>
+<dl class="method">
+<dt id="mswh.system.components.Converter.electric_resistance">
+<code class="descname">electric_resistance</code><span class="sig-paren">(</span><em>Q_dem</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mswh/system/components.html#Converter.electric_resistance"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mswh.system.components.Converter.electric_resistance" title="Permalink to this definition">¶</a></dt>
+<dd><p>Electric resistance heater model. Can be
+used both as an instantaneous electric WH and as
+an auxiliary heater within the thermal tank.</p>
+<p>Parameters:</p>
+<blockquote>
+<div><dl class="simple">
+<dt>Q_dem: float or array like, [W]</dt><dd><p>Heat demand</p>
+</dd>
+</dl>
+</div></blockquote>
+<p>Returns:</p>
+<blockquote>
+<div><dl class="simple">
+<dt>res: dict</dt><dd><p>self.r[‘q_del_bckp’] : float, array - delivered heat rate, [W]
+self.r[‘q_el_use’] : float, array - electricity use, [W]
+self.r[‘q_unmet’] : float, array - unmet demand heat rate, [W]</p>
+</dd>
+</dl>
+</div></blockquote>
+</dd></dl>
+
+<dl class="method">
+<dt id="mswh.system.components.Converter.gas_burner">
+<code class="descname">gas_burner</code><span class="sig-paren">(</span><em>Q_dem</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mswh/system/components.html#Converter.gas_burner"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mswh.system.components.Converter.gas_burner" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gas burner model. Used both
+as an instantaneous gas WH and as a
+gas backup for solar thermal.</p>
+<p>Parameters:</p>
+<blockquote>
+<div><dl class="simple">
+<dt>Q_dem: float or array like, W</dt><dd><p>Heat demand</p>
+</dd>
+</dl>
+</div></blockquote>
+<p>Returns:</p>
+<blockquote>
+<div><dl>
+<dt>res: dict</dt><dd><p>self.r[‘q_del_bckp’] : float, array - delivered heat rate, [W]
+self.r[‘q_gas_use’] : float, array - gas use heat rate, [W]
+self.r[‘q_unmet’] : float, array - unmet demand heat rate, [W]</p>
+<p>Any further unit conversion should be performed
+using unit_converters.Utility class</p>
+</dd>
+</dl>
+</div></blockquote>
+</dd></dl>
+
+<dl class="method">
+<dt id="mswh.system.components.Converter.heat_pump">
+<code class="descname">heat_pump</code><span class="sig-paren">(</span><em>T_wet_bulb</em>, <em>T_tank</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mswh/system/components.html#Converter.heat_pump"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mswh.system.components.Converter.heat_pump" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the current heating performance and electricity usage
+in the current conditions depending on wet bulb temperature,
+average tank water temperature, and the rated heating performance.</p>
+<p>Rated conditions are: wet bulb = 14 degC, tank = 48.9 degC</p>
+<p>Parameters:</p>
+<blockquote>
+<div><dl class="simple">
+<dt>T_wet_bulb: real, array</dt><dd><p>Inlet air wet bulb temperature [K]</p>
+</dd>
+<dt>T_tank: real, array</dt><dd><p>Water temperature in the storage tank [K]</p>
+</dd>
+<dt>C1: real</dt><dd><p>Coefficient 1, either for normalized COP or heating
+capacity curve [-]</p>
+</dd>
+<dt>C2: real</dt><dd><p>Coefficient 2, either for normalized COP or heating
+capacity curve [1/degC]</p>
+</dd>
+<dt>C3: real</dt><dd><p>Coefficient 3, either for normalized COP or heating
+capacity curve [1/degC2]</p>
+</dd>
+<dt>C4: real</dt><dd><p>Coefficient 4, either for normalized COP or heating
+capacity curve [1/degC]</p>
+</dd>
+<dt>C5: real</dt><dd><p>Coefficient 5, either for normalized COP or heating
+capacity curve [1/degC2]</p>
+</dd>
+<dt>C6: real</dt><dd><p>Coefficient 6, either for normalized COP or heating
+capacity curve [1/degC2]</p>
+</dd>
+</dl>
+</div></blockquote>
+<p>Returns:</p>
+<blockquote>
+<div><dl>
+<dt>performance: dict</dt><dd><p>{‘cop’: current Coefficient Of Performance (COP) of
+heat pump, [-]</p>
+<blockquote>
+<div><p>‘heat_cap’: current heating capacity of heat pump, [W]
+‘el_use’: current electricity use of heat pump
+(heat_cap / cop), [W]}</p>
+</div></blockquote>
+</dd>
+</dl>
+</div></blockquote>
+</dd></dl>
+
+<dl class="method">
+<dt id="mswh.system.components.Converter.photovoltaic">
+<code class="descname">photovoltaic</code><span class="sig-paren">(</span><em>use_p_peak=True</em>, <em>inc_rad=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mswh/system/components.html#Converter.photovoltaic"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mswh.system.components.Converter.photovoltaic" title="Permalink to this definition">¶</a></dt>
+<dd><p>Photovoltaic model</p>
+<p>Parameters:</p>
+<blockquote>
+<div><dl class="simple">
+<dt>use_p_peak: boolean</dt><dd><p>Boolean flag determining if peak power is used for sizing
+the pv panel (instead of area and efficiency)</p>
+</dd>
+</dl>
+</div></blockquote>
+<p>Returns:</p>
+<blockquote>
+<div><dl class="simple">
+<dt>self.pv_power: dict of floats</dt><dd><p>Generated power [W]
+‘ac’ : AC
+‘dc’ : DC</p>
+</dd>
+</dl>
+</div></blockquote>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="mswh.system.components.Converter.size">
+<code class="descname">size</code><a class="headerlink" href="#mswh.system.components.Converter.size" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mswh.system.components.Converter.solar_collector">
+<code class="descname">solar_collector</code><span class="sig-paren">(</span><em>t_in</em>, <em>t_amb=None</em>, <em>inc_rad=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mswh/system/components.html#Converter.solar_collector"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mswh.system.components.Converter.solar_collector" title="Permalink to this definition">¶</a></dt>
+<dd><p>Two commonly used empirical instantaneous collector
+efficiency models based on test data from standard
+test procedures (SRCC, ISO9806), found in
+J. A. Duffie and W. A. Beckman, Solar engineering of thermal processes, 3rd ed. Hoboken, N.J: Wiley, 2006., are:</p>
+<ul class="simple">
+<li><p>Cooper and Dunkle (CD model, eq 6.17.7)</p></li>
+<li><p>Hottel-Whillier-Bliss (HWB model, eq 6.16.1, 6.7.6)</p></li>
+</ul>
+<p>Parameters:</p>
+<blockquote>
+<div><dl class="simple">
+<dt>t_in: float, array</dt><dd><p>Collector inlet temperature (timeseries) [K]</p>
+</dd>
+<dt>t_amb: float, array</dt><dd><p>Ambient temperature (timeseries) [K]
+Default: None (to use data extracted from the weather df)</p>
+</dd>
+<dt>inc_rad: float, array</dt><dd><p>Incident radiation (timeseries) [W]
+Default: None (to use data extracted from the weather df)</p>
+</dd>
+</dl>
+</div></blockquote>
+<p>Returns:</p>
+<blockquote>
+<div><p>res: dict or floats or arrays</p>
+<blockquote>
+<div><dl class="simple">
+<dt>{‘Q_gain’<span class="classifier">Solar gains from the gross collector area, [W]</span></dt><dd><p>‘eff’ : Efficiency of solar to heat conversion, [-]</p>
+</dd>
+</dl>
+</div></blockquote>
+</div></blockquote>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="mswh.system.components.Converter.weather">
+<code class="descname">weather</code><a class="headerlink" href="#mswh.system.components.Converter.weather" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="mswh.system.components.Distribution">
+<em class="property">class </em><code class="descclassname">mswh.system.components.</code><code class="descname">Distribution</code><span class="sig-paren">(</span><em>params=None</em>, <em>sizes=1.0</em>, <em>fluid_medium='water'</em>, <em>timestep=1.0</em>, <em>log_level=10</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mswh/system/components.html#Distribution"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mswh.system.components.Distribution" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Describes performance of distribution system components.</p>
+<dl class="simple">
+<dt>Parameters:</dt><dd><dl class="simple">
+<dt>sizes: pd df</dt><dd><p>Pandas dataframe with component sizes, or 1.</p>
+</dd>
+<dt>fluid_medium: string</dt><dd><p>Default: ‘water’. No other options implemented</p>
+</dd>
+<dt>timestep: float, h</dt><dd><p>Duration of a single timestep, in hours, defaults to 1.</p>
+</dd>
+<dt>log_level: None or python logger logging level,</dt><dd><p>Default: logging.DEBUG
+This applies for a subset of the class functionality, mostly
+used to deprecate logger messages for certain calculations.
+For Example: log_level = logging.ERROR will only throw error
+messages and ignore INFO, DEBUG and WARNING.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p>Note:</p>
+<blockquote>
+<div><p>Each component is also implemented as a static method that
+can be used outside of this framework.</p>
+</div></blockquote>
+<p>Examples:</p>
+<blockquote>
+<div><p>See <code class="docutils literal notranslate"><span class="pre">`swh.system.tests.test_components`</span></code> module and
+for examples on how to use the methods.</p>
+</div></blockquote>
+<dl class="method">
+<dt id="mswh.system.components.Distribution.pipe_losses">
+<code class="descname">pipe_losses</code><span class="sig-paren">(</span><em>T_in=333.15</em>, <em>T_amb=293.15</em>, <em>V_tap=0.05</em>, <em>max_V_tap=0.1514</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mswh/system/components.html#Distribution.pipe_losses"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mswh.system.components.Distribution.pipe_losses" title="Permalink to this definition">¶</a></dt>
+<dd><p>Thermal losses from distribution pipes.</p>
+<p>Parameters:</p>
+<blockquote>
+<div><dl class="simple">
+<dt>T_in: float, K</dt><dd><p>Hot water temperature at distribution pipe inlet</p>
+</dd>
+<dt>T_amb: float, K</dt><dd><p>Ambient temperature</p>
+</dd>
+<dt>V_tap: float, m3/h</dt><dd><p>Timestep draw volume</p>
+</dd>
+<dt>max_V_tap: float, m3/h</dt><dd><p>Maximum draw volume, m3/h (design variable)</p>
+</dd>
+</dl>
+</div></blockquote>
+<p>Returns:</p>
+<blockquote>
+<div><dl class="simple">
+<dt>res: dict</dt><dd><p>[‘heat_rate’]: Loss heat rate, W</p>
+</dd>
+</dl>
+</div></blockquote>
+</dd></dl>
+
+<dl class="method">
+<dt id="mswh.system.components.Distribution.pump">
+<code class="descname">pump</code><span class="sig-paren">(</span><em>on_array=array([1.</em>, <em>1.</em>, <em>1.</em>, <em>...</em>, <em>1.</em>, <em>1.</em>, <em>1.])</em>, <em>role='solar'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mswh/system/components.html#Distribution.pump"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mswh.system.components.Distribution.pump" title="Permalink to this definition">¶</a></dt>
+<dd><p>Solar and distribution pump energy use.
+Assumes a fixed speed pump.</p>
+<p>Parameters:</p>
+<blockquote>
+<div><dl class="simple">
+<dt>on_array: array</dt><dd><p>Pump on/off status for the chosen number of discrete
+timesteps
+Default: np.ones(8760) - on for a year in hourly timesteps.</p>
+</dd>
+<dt>role: string</dt><dd><p>‘solar’ : primary (solar collector) loop
+‘distribution’ : secondary (distribution) loop</p>
+</dd>
+</dl>
+</div></blockquote>
+<p>Returns:</p>
+<blockquote>
+<div><p>en_use: float or array like</p>
+</div></blockquote>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="mswh.system.components.Distribution.size">
+<code class="descname">size</code><a class="headerlink" href="#mswh.system.components.Distribution.size" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="mswh.system.components.Storage">
+<em class="property">class </em><code class="descclassname">mswh.system.components.</code><code class="descname">Storage</code><span class="sig-paren">(</span><em>params=None</em>, <em>size=1.0</em>, <em>type='sol_tank'</em>, <em>timestep=1.0</em>, <em>log_level=10</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mswh/system/components.html#Storage"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mswh.system.components.Storage" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Describes performance of storage components, such as
+solar thermal tank, heat pump thermal tank, conventional gas
+tank water heater.</p>
+<p>Parameters:</p>
+<blockquote>
+<div><dl class="simple">
+<dt>params: pd df</dt><dd><p>Component performance parameters per project
+Default: None. See tests and examples on how to
+structure this input.</p>
+</dd>
+<dt>weather: pd df</dt><dd><p>Weather data timeseeries (amb. temp, solar irradiation)
+Default: None. See tests and examples on how to
+structure this input.</p>
+</dd>
+<dt>size: pd df or float, m3</dt><dd><p>Tank size.
+Default 1. See tests and examples on how to
+structure this input.</p>
+</dd>
+<dt>type: string</dt><dd><p>Type of storage component. Options:
+‘sol_tank’ - indirect tank WH with a coil to circulate
+fluid heated by a solar collector
+‘hp_tank’ - tank with an inbuilt heat pump
+‘wham_tank’ - conventional gas tank water heater model
+based on a WH model from the efficiency standards analysis
+‘gas_tank’ - conventional gas tank water heater (<a href="#id1"><span class="problematic" id="id2">*</span></a>mg not
+implemented)</p>
+</dd>
+<dt>log_level: None or python logger logging level,</dt><dd><p>Default: logging.DEBUG
+This applies for a subset of the class functionality, mostly
+used to deprecate logger messages for certain calculations.
+For Example: log_level = logging.ERROR will only throw error
+messages and ignore INFO, DEBUG and WARNING.</p>
+</dd>
+<dt>timestep: float, h</dt><dd><p>Duration of a single timestep, in hours, defaults to 1.</p>
+</dd>
+</dl>
+</div></blockquote>
+<p>Note:</p>
+<blockquote>
+<div><p>Create a new instance of the class for each storage component.</p>
+</div></blockquote>
+<p>Examples:</p>
+<blockquote>
+<div><p>See <code class="docutils literal notranslate"><span class="pre">`swh.system.tests.test_components`</span></code> module and
+<code class="docutils literal notranslate"><span class="pre">`scripts/Project</span> <span class="pre">Level</span> <span class="pre">SWH</span> <span class="pre">System</span> <span class="pre">Tool.ipynb`</span></code>
+for examples on how to use the methods as stand alone and
+in a system model simulation.</p>
+</div></blockquote>
+<dl class="method">
+<dt id="mswh.system.components.Storage.electric_tank_wh">
+<code class="descname">electric_tank_wh</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mswh/system/components.html#Storage.electric_tank_wh"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mswh.system.components.Storage.electric_tank_wh" title="Permalink to this definition">¶</a></dt>
+<dd><p>Currently not implemented.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mswh.system.components.Storage.gas_tank_wh">
+<code class="descname">gas_tank_wh</code><span class="sig-paren">(</span><em>V_draw</em>, <em>T_feed</em>, <em>T_amb=291.48</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mswh/system/components.html#Storage.gas_tank_wh"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mswh.system.components.Storage.gas_tank_wh" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gas tank model for state-level analysis based on WHAM equation:</p>
+<dl>
+<dt>Q_dot_cons [W] =</dt><dd><dl class="simple">
+<dt>(V_dot_draw * rho * c * (T_draw,set - T_feed)) /</dt><dd><p>n_re * (1-(U*A*(T_draw,set - T_amb))/P_rated) +</p>
+</dd>
+</dl>
+<p>U*A*(T_draw,set - T_amb)</p>
+</dd>
+</dl>
+<p>Parameters:</p>
+<blockquote>
+<div><dl class="simple">
+<dt>V_draw: float or array like, m3/h</dt><dd><p>Hourly water draw for a single timestep of
+an entire analysis period</p>
+</dd>
+<dt>T_feed: float or array like, K</dt><dd><p>Temperature of water heater inlet water for
+a single timestep of an entire analysis period</p>
+</dd>
+<dt>T_amb: float or array like, K</dt><dd><p>Temperature of space surrounding water heater
+Default: 65 degF</p>
+</dd>
+</dl>
+</div></blockquote>
+<p>Returns:</p>
+<blockquote>
+<div><dl class="simple">
+<dt>res: dict</dt><dd><p>self.r[‘q_del’] : float, array - delivered heat rate, [W]
+self.r[‘q_dem’] : float, array - demand heat rate, [W]
+self.r[‘q_gas_use’] : float, array - gas use heat rate, [W]
+self.r[‘q_unmet’] : float, array - unmet demand, [w]
+self.r[‘q_dump’] : float, array - dumped heat, [W]</p>
+</dd>
+</dl>
+</div></blockquote>
+<p>Note:</p>
+<blockquote>
+<div><p>Assuming no electricity consumption in this version.</p>
+<p>Make sure to size the tank according to the recommended
+sizing rules, since the WHAM model does not apply to
+tanks that are not appropriately sized.</p>
+</div></blockquote>
+</dd></dl>
+
+<dl class="method">
+<dt id="mswh.system.components.Storage.setup_electric">
+<code class="descname">setup_electric</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mswh/system/components.html#Storage.setup_electric"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mswh.system.components.Storage.setup_electric" title="Permalink to this definition">¶</a></dt>
+<dd><p>Currently not implemented.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mswh.system.components.Storage.setup_thermal">
+<code class="descname">setup_thermal</code><span class="sig-paren">(</span><em>medium='water'</em>, <em>split_tank=True</em>, <em>vol_fra_upper=0.5</em>, <em>h_vs_r=6.0</em>, <em>dT_param=2.0</em>, <em>T_max=344.15</em>, <em>T_draw_set=322.04</em>, <em>insul_thickness=0.085</em>, <em>spec_hea_cond=0.04</em>, <em>coil_eff=0.84</em>, <em>tank_re=0.76</em>, <em>dT_err_max=2.0</em>, <em>gas_heater_autosize=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mswh/system/components.html#Storage.setup_thermal"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mswh.system.components.Storage.setup_thermal" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets thermal storage variables related to:</p>
+<ul class="simple">
+<li><p>loss calculation</p></li>
+<li><p>distribution of net gains/losses within two
+tank volumes (upper and lower)</p></li>
+</ul>
+<p>Parameters:</p>
+<blockquote>
+<div><dl>
+<dt>medimum: string</dt><dd><p>Storing medium (for thermal defaults to ‘water’)</p>
+</dd>
+<dt>vol_fra_upper: float</dt><dd><p>Fraction of storage volume assigned to the upper
+tank volume (applies to ‘thermal’ only)
+If split_tank set to False, the value is ignored</p>
+</dd>
+<dt>dT_param: float, K</dt><dd><p>Used as:</p>
+<ul class="simple">
+<li><p>Maximum temperature difference expected to occur</p></li>
+</ul>
+<p>between the upper and the lower tank volume while charging</p>
+<ul class="simple">
+<li><p>In-tank-coil approach</p></li>
+</ul>
+</dd>
+<dt>h_vs_r: float</dt><dd><p>Regression parameter - tank height/diameter ratio
+(based on web scraped data, see
+<cite>scripts/Gallons vs. Height</cite> notebook), default: 6.</p>
+</dd>
+<dt>T_max: float, K</dt><dd><p>Maximum allowed fluid temperature in the thermal
+storage tank, defaults to 344.15 K = 71 degC.</p>
+</dd>
+<dt>T_draw_set: float, K</dt><dd><p>Draw temperature used in the
+load calculation, defaults to
+120 degF = 322.04 K = 48.89 degC</p>
+</dd>
+<dt>coil_eff: float</dt><dd><p>Simplified efficiency of the coil heat exchanger
+Used in modeling of indirect coil-in-tank water heaters
+It excludes the approach temperature and represents
+the remaining heat transfer inefficiency</p>
+</dd>
+<dt>tank_re: float</dt><dd><p>Recovery efficiency of a gas tank water heater.
+Used for the Storage.gas_tank_wh model</p>
+</dd>
+<dt>dT_err_max: float</dt><dd><p>Allowed dT error below the minimum
+tank temperature due to finite timestep length
+approximation</p>
+</dd>
+<dt>gas_heater_autosize: boolean</dt><dd><p>There is a gas heater in the tank and it will be
+autosized based on the tank volume</p>
+</dd>
+</dl>
+</div></blockquote>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="mswh.system.components.Storage.size">
+<code class="descname">size</code><a class="headerlink" href="#mswh.system.components.Storage.size" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mswh.system.components.Storage.tap">
+<code class="descname">tap</code><span class="sig-paren">(</span><em>V_draw_load</em>, <em>T_tank</em>, <em>T_feed</em>, <em>dT_loss=0.0</em>, <em>T_draw_min=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mswh/system/components.html#Storage.tap"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mswh.system.components.Storage.tap" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the water draw volume and
+heat content drawn from the top of an infinitely
+large adiabatic tank given the hot water demand,
+tank temperature and the water main temperature.</p>
+<p>It functions somewhat similarly to a
+thermostatic valve since it regulates the
+tap flow from the tank as follows:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>limits above if the tank temperature</p></li>
+</ul>
+<p>is higher than the nominal draw temperature</p>
+<ul class="simple">
+<li><p>tap flow equals V_draw_load for any</p></li>
+</ul>
+<p>tank temperature between T_draw_min
+and T_draw_nom</p>
+<ul class="simple">
+<li><p>tap flow is zero if tank temperature</p></li>
+</ul>
+<p>is below T_draw_min and T_draw_min is
+provided</p>
+</div></blockquote>
+<p>The results represent the theoretical limit
+for the draw. The tank model will check if the
+full amount can be delivered or only a
+part of the demand, due to the limited
+tank volume and thermal losses from the tank,
+and adjust the values.</p>
+<p>Parameters:</p>
+<blockquote>
+<div><dl class="simple">
+<dt>V_draw_load: float, m3/h</dt><dd><p>Volume of DHW drawn at the nominal
+end-use load temperature.</p>
+</dd>
+<dt>T_tank: float, K</dt><dd><p>Tank node temperature from which the
+DHW is being tapped (usually the
+upper volume)</p>
+</dd>
+<dt>T_feed: float or array, K</dt><dd><p>Temperature of water heater inlet water</p>
+</dd>
+<dt>dT_loss: float, K</dt><dd><p>Distribution loss temperature difference</p>
+</dd>
+<dt>T_draw_min: float, K</dt><dd><p>Minimal temperature that needs to
+be achieved in the tank in order
+to allow tapping.
+Default: None - tapping is always
+enabled
+Recommended usage - in colder climates
+where an outdoors tank may be cooler
+than the water main.</p>
+</dd>
+</dl>
+</div></blockquote>
+<p>Returns:</p>
+<blockquote>
+<div><dl class="simple">
+<dt>draw: dict</dt><dd><p>Draw volume: ‘vol’, m3/h
+Total demand heat rate: ‘tot_dem’, W
+Infinite volume delivered heat rate: ‘heat_rate’, W
+Infinite volume unmet heat rate: ‘unmet_heat_rate’, W</p>
+</dd>
+</dl>
+</div></blockquote>
+</dd></dl>
+
+<dl class="method">
+<dt id="mswh.system.components.Storage.thermal_tank">
+<code class="descname">thermal_tank</code><span class="sig-paren">(</span><em>pre_T_amb=293.15</em>, <em>pre_T_feed=291.15</em>, <em>pre_T_upper=328.15</em>, <em>pre_T_lower=323.15</em>, <em>pre_V_tap=0.00757</em>, <em>pre_Q_in=400.0</em>, <em>max_V_tap=0.1514</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mswh/system/components.html#Storage.thermal_tank"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mswh.system.components.Storage.thermal_tank" title="Permalink to this definition">¶</a></dt>
+<dd><p>Model of a thermal storage tank with:</p>
+<ul class="simple">
+<li><p>coil heat exchanger for the solar gains</p></li>
+<li><p>DHW tap at the top of the tank</p></li>
+<li><p>recharge tap at the bottom of the tank</p></li>
+</ul>
+<p>The model can be instantiated as a:</p>
+<ul class="simple">
+<li><p>solar thermal tank</p></li>
+<li><p>heat pump tank</p></li>
+</ul>
+<p>Parameters:</p>
+<blockquote>
+<div><dl>
+<dt>type: string</dt><dd><p>‘solar’ - solar tank (assumes
+that heated fluid from a solar collector is circulated
+through an in-tank-coil)
+‘hp’ - heat pump tank (assumes an inbuilt heat pump
+as a main heat source)</p>
+<p>The type will affect output labeling and heat transfer
+efficiency.</p>
+</dd>
+<dt>pre_T_amb: float, K</dt><dd><p>Ambient temperature</p>
+</dd>
+<dt>pre_T_feed: float, K</dt><dd><p>Temperature of the water
+that replenishes the tapped volume
+(e.g. water main temperature)</p>
+</dd>
+<dt>pre_T_upper: float, K</dt><dd><p>Upper tank volume temperature</p>
+</dd>
+<dt>pre_T_lower: float, K</dt><dd><p>Lower tank volume temperature</p>
+</dd>
+<dt>pre_Q_in: float, W</dt><dd><p>Heat gain passed to in-tank coil from solar collector
+or from a heat pump, depending on the type</p>
+</dd>
+<dt>pre_V_tap: float, m3/h</dt><dd><p>Volume of water tapped from the top of the tank</p>
+</dd>
+<dt>max_V_tap: float, m3/h</dt><dd><p>Annual peak flow</p>
+</dd>
+</dl>
+</div></blockquote>
+<p>Returns:</p>
+<blockquote>
+<div><dl>
+<dt>res: dict</dt><dd><blockquote>
+<div><p>Single Timestep input and output values for temperatures [K]
+and heat rates [W]:</p>
+</div></blockquote>
+<dl>
+<dt>{net_gain_label<span class="classifier">pre_Q_in_net,                self.r[‘q_loss_low’]</span><span class="classifier">pre_Q_loss_lower,                self.r[‘q_loss_up’]</span><span class="classifier">pre_Q_loss_upper,                # demand, delivered and unmet heat</span></dt><dd><p># (between tap setpoint and water main)
+self.r[‘q_dem’] : tap[‘net_dem’],                self.r[‘q_dem_tot’] : tap[‘tot_dem’],                self.r[‘q_del_tank’] : tank[self.r[‘q_del_tank’]],                self.r[‘q_unmet_tank’] :                     np.round(                tank[self.r[‘q_unmet_tank’]] + tap[‘unmet_heat_rate’], 2),                self.r[‘q_dump’] : tank[self.r[‘q_dump’]],                self.r[‘q_ovrcool_tank’] : tank[self.r[‘q_ovrcool_tank’]],                self.r[‘q_dem_balance’] : np.round(Q_dem_balance),                # average temperatures for tank volumes
+self.r[‘t_tank_low’] : tank[self.r[‘t_tank_low’]],                self.r[‘t_tank_up’] : tank[self.r[‘t_tank_up’]],                self.r[‘dt_dist’] : dist[‘dt_dist’],                self.r[‘t_set’] : self.T_draw_set,                self.r[‘q_dist_loss’] : dist[‘heat_loss’],
+self.r[‘flow_on_frac’] : dist[‘flow_on_frac’]}</p>
+<p>Temperatures in K, heat rates in W</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</div></blockquote>
+</dd></dl>
+
+<dl class="method">
+<dt id="mswh.system.components.Storage.thermal_tank_dynamics">
+<code class="descname">thermal_tank_dynamics</code><span class="sig-paren">(</span><em>pre_T_amb</em>, <em>pre_T_upper</em>, <em>pre_T_lower</em>, <em>pre_Q_in</em>, <em>pre_Q_loss_upper</em>, <em>pre_Q_loss_lower</em>, <em>pre_T_feed</em>, <em>pre_Q_tap</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mswh/system/components.html#Storage.thermal_tank_dynamics"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mswh.system.components.Storage.thermal_tank_dynamics" title="Permalink to this definition">¶</a></dt>
+<dd><p>Partial model of a thermal storage tank.
+Applies first order forward marching Euler method and updates
+the tank state for the current timestep
+based on the enthalpy balance and simplified
+assumptions about stratification. Thus, all
+input variables pertain to the previous timestep,
+while the outputs are solutions for the current timestep.</p>
+<p>For example partial model application see thermal_tank method.</p>
+<p>See inline comments for detailed explanation of the model.</p>
+<p>Parameters:</p>
+<blockquote>
+<div><dl>
+<dt>pre_T_amb: float, K</dt><dd><p>Ambient air temperature</p>
+</dd>
+<dt>pre_T_upper: float, K</dt><dd><p>Upper tank volume temperature</p>
+</dd>
+<dt>pre_T_lower: float, K</dt><dd><p>Lower tank volume temperature</p>
+<p>It is recommended to set equal initial values
+for pre_T_upper and pre_T_lower</p>
+</dd>
+<dt>pre_Q_in: float, W</dt><dd><p>Total heat gain (e.g. from a coil heat exchanger,
+a heating element, etc.)</p>
+</dd>
+<dt>pre_Q_loss_upper: float, W</dt><dd><p>Heat loss from the upper tank volume</p>
+</dd>
+<dt>pre_T_lower: float, W</dt><dd><p>Heat loss from the lower tank volume</p>
+</dd>
+<dt>pre_T_feed: float, K</dt><dd><p>Temperature of the water
+that replenishes the tapped volume
+(e.g. water main temperature)</p>
+</dd>
+<dt>pre_Q_tap: float, W</dt><dd><p>Heat loss that would occur if the tank
+volume at pre_T_upper was infinite</p>
+</dd>
+</dl>
+</div></blockquote>
+<p>Returns:</p>
+<blockquote>
+<div><dl>
+<dt>res: dict of floats</dt><dd><p>Represent averages in a single timestep.
+Average temperatures for tank volumes:
+self.r[self.r[‘t_tank_low’]] : lower, K
+self.r[‘t_tank_up’] : upper, K
+Heat rates:
+‘Q_net’ : expected timestep net gain/loss based on inputs, W
+self.r[‘q_dump’] : dumped heat, W
+‘Q_draw’ : delivered to load W
+‘Q_draw_unmet’ : unmet load due to finite tank volume, W
+self.r[‘q_ovrcool_tank’] : error in balancing due to minimal
+tank temperature limit assumption in each timestep</p>
+<p>Note: ‘Q_draw’ + ‘Q_draw_unmet’ = pre_Q_tap</p>
+</dd>
+</dl>
+</div></blockquote>
+</dd></dl>
+
+<dl class="method">
+<dt id="mswh.system.components.Storage.volume_to_power">
+<code class="descname">volume_to_power</code><span class="sig-paren">(</span><em>tank_volume</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mswh/system/components.html#Storage.volume_to_power"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mswh.system.components.Storage.volume_to_power" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to convert a gas water heater’s volume input power
+based on a linear regression of Prospector data.
+Look in the X drive Data/Water Heaters/Regressions folder
+for the WaterHeater_ScrapeData_Python.xlsx file.
+Parameters:</p>
+<blockquote>
+<div><dl class="simple">
+<dt>tank_volume: float or int</dt><dd><p>Water heater tank volume [m3]</p>
+</dd>
+</dl>
+</div></blockquote>
+<p>Returns</p>
+<blockquote>
+<div><dl class="simple">
+<dt>tank_input_power: float</dt><dd><p>Water heater input (rated) power [W]</p>
+</dd>
+</dl>
+</div></blockquote>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-mswh.system.models">
+<span id="mswh-system-models-module"></span><h2>mswh.system.models module<a class="headerlink" href="#module-mswh.system.models" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="mswh.system.models.System">
+<em class="property">class </em><code class="descclassname">mswh.system.models.</code><code class="descname">System</code><span class="sig-paren">(</span><em>sys_params=None</em>, <em>backup_params=None</em>, <em>weather=None</em>, <em>sys_sizes=1.0</em>, <em>backup_sizes=1.0</em>, <em>loads=None</em>, <em>timestep=1.0</em>, <em>log_level=10</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mswh/system/models.html#System"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mswh.system.models.System" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Project level system models:</p>
+<ul class="simple">
+<li><p>Assembles system configurations</p></li>
+<li><p>Performs timestep simulation</p></li>
+<li><p>Returns annual and timestep project and household
+level results, such as gas and electricity use, heat delivered,
+unmet demand and solar fraction.</p></li>
+</ul>
+<p>Parameters:</p>
+<blockquote>
+<div><dl>
+<dt>sys_params: pd df</dt><dd><p>Main system component performance parameters per project
+Default: None (default model parameters will get used)</p>
+</dd>
+<dt>backup_params: pd df</dt><dd><p>Backup system performance parameters per project.
+It should contain a household ID column, otherwise
+columns identical to params.</p>
+</dd>
+<dt>sys_sizes: pd df</dt><dd><p>Main system component sizes
+Default: 1. (see individual components for specifics)</p>
+</dd>
+<dt>backup_sizes: pd df</dt><dd><p>Backup system component sizes, contains household id column
+Default: 1. (see individual components for specifics)</p>
+</dd>
+<dt>weather: pd df</dt><dd><p>Weather data timeseries.
+Number of rows equals the number of timesteps. Can be
+generated using the Source.irradiation_and_water_main
+method</p>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">sourceASource</span><span class="p">(</span><span class="n">read_from_input_dataframes</span> <span class="o">=</span> <span class="n">inputs</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Oakland climate zone in CEC weather data is ‘03’:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="bp">self</span><span class="o">.</span><span class="n">weather</span> <span class="o">=</span> <span class="n">source</span><span class="o">.</span><span class="n">irradiation_and_water_main</span><span class="p">(</span><span class="s1">&#39;03&#39;</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;isotropic diffuse&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+<dt>loads: pd df</dt><dd><p>A dataframe with loads for all individual household
+served by the project level system. It should
+contain 3 columns: household id, occupancy and a column
+with a load array in m3 for each household.</p>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">loads_com</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="n">occ_indiv</span> <span class="o">-</span> <span class="mf">1.</span><span class="p">,</span> <span class="mf">0.8</span> <span class="o">*</span> <span class="n">load_array</span><span class="p">],[</span><span class="mi">2</span><span class="p">,</span> <span class="n">occ_indiv</span><span class="p">,</span> <span class="mf">1.</span> <span class="o">*</span> <span class="n">load_array</span><span class="p">],[</span><span class="mi">3</span><span class="p">,</span> <span class="n">occ_indiv</span><span class="p">,</span> <span class="mf">1.2</span> <span class="o">*</span> <span class="n">load_array</span><span class="p">],[</span><span class="mi">4</span><span class="p">,</span> <span class="n">occ_indiv</span> <span class="o">+</span> <span class="mf">1.</span><span class="p">,</span> <span class="mf">1.4</span> <span class="o">*</span> <span class="n">load_array</span><span class="p">]],</span>                    <span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">c</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">c</span><span class="p">[</span><span class="s1">&#39;occ&#39;</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">c</span><span class="p">[</span><span class="s1">&#39;load_m3&#39;</span><span class="p">]])</span>
+</pre></div>
+</div>
+</dd>
+<dt>timestep: float, h</dt><dd><p>Duration of a single timestep, in hours
+Default: 1. h</p>
+</dd>
+<dt>log_level: None or python logger logging level,</dt><dd><p>Default: logging.DEBUG
+This applies for a subset of the class functionality, mostly
+used to deprecate logger messages for certain calculations.
+For Example: log_level = logging.ERROR will only throw error
+messages and ignore INFO, DEBUG and WARNING.</p>
+</dd>
+</dl>
+</div></blockquote>
+<p>Examples:</p>
+<blockquote>
+<div><p>See <code class="docutils literal notranslate"><span class="pre">`swh.system.tests.test_models`</span></code> module and
+<code class="docutils literal notranslate"><span class="pre">`scripts/Project</span> <span class="pre">Level</span> <span class="pre">SWH</span> <span class="pre">System</span> <span class="pre">Tool.ipynb`</span></code>
+for examples on how to set up models for simulation.</p>
+</div></blockquote>
+<dl class="method">
+<dt id="mswh.system.models.System.conventional_gas_tank">
+<code class="descname">conventional_gas_tank</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mswh/system/models.html#System.conventional_gas_tank"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mswh.system.models.System.conventional_gas_tank" title="Permalink to this definition">¶</a></dt>
+<dd><p>Basecase conventional gas tank water heater.
+Make sure to size the tank according to the recommended
+sizing rules, since the WHAM model does not apply to
+tanks that are not appropriately sized.</p>
+<p>Returns:</p>
+<blockquote>
+<div><dl class="simple">
+<dt>ts_proj: dict of arrays, W</dt><dd><p>Heat:
+self.r[‘q_del’]: delivered
+self.r[‘gas_use’]: gas consumed</p>
+</dd>
+</dl>
+</div></blockquote>
+</dd></dl>
+
+<dl class="method">
+<dt id="mswh.system.models.System.simulate">
+<code class="descname">simulate</code><span class="sig-paren">(</span><em>type='gas_tank_wh'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mswh/system/models.html#System.simulate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mswh.system.models.System.simulate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Runs a 8760. hourly simulation of the
+provided system type.</p>
+<p>Parameters</p>
+<blockquote>
+<div><dl class="simple">
+<dt>type: string</dt><dd><p>gas_tank_wh
+solar_thermal_retrofit (gas tank backup at each household)
+solar_thermal_new (gas tankless backup at each household)
+solar_electric</p>
+</dd>
+</dl>
+</div></blockquote>
+<p>Returns</p>
+<blockquote>
+<div><dl class="simple">
+<dt>en_use: dict</dt><dd><p>Total energy use for the analysis period:
+‘gas’, Wh
+‘electricity’, Wh</p>
+</dd>
+<dt>sys_res: list</dt><dd><p>List containing detailed system level
+output. See dedicated methods for details</p>
+</dd>
+</dl>
+</div></blockquote>
+</dd></dl>
+
+<dl class="method">
+<dt id="mswh.system.models.System.solar_electric">
+<code class="descname">solar_electric</code><span class="sig-paren">(</span><em>backup='electric'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mswh/system/models.html#System.solar_electric"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mswh.system.models.System.solar_electric" title="Permalink to this definition">¶</a></dt>
+<dd><p>Connects the components of the
+solar electric system and enables simulation.</p>
+<p>Parameters:</p>
+<blockquote>
+<div><dl class="simple">
+<dt>backup: string</dt><dd><p>electric - instantaneous WHs (new installations)</p>
+</dd>
+</dl>
+</div></blockquote>
+<p>Returns:</p>
+<blockquote>
+<div><dl class="simple">
+<dt>sys_en_use: dict</dt><dd><p>System level energy use for the analysis period:
+‘electricity’, Wh</p>
+</dd>
+<dt>sol_fra: dict</dt><dd><p>Solar fraction. Keys: ‘annual’, ‘monthly’</p>
+</dd>
+<dt>ts_res: pd df</dt><dd><p>Colums populated with state variable timeseries, such as
+average timstep heat rates and temperatures</p>
+</dd>
+<dt>res: dict</dt><dd><p>Summarizes ts_res. Any heat rates are summed, while the
+temperatures are averaged for the analysis period
+(usually one year)</p>
+</dd>
+<dt>el_use: dict</dt><dd><p>Electricity use broken into end uses
+‘dist_pump’ - distribution pump, if present</p>
+</dd>
+<dt>rel_err: float</dt><dd><p>Balancing error due to limitations of finite
+timestep averaging. More precisely, due to
+selecting minimum tank temperature
+as the lower between the water main and the ambient.</p>
+</dd>
+</dl>
+</div></blockquote>
+</dd></dl>
+
+<dl class="method">
+<dt id="mswh.system.models.System.solar_thermal">
+<code class="descname">solar_thermal</code><span class="sig-paren">(</span><em>backup='gas'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mswh/system/models.html#System.solar_thermal"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mswh.system.models.System.solar_thermal" title="Permalink to this definition">¶</a></dt>
+<dd><p>Connects the components of the solar thermal system and
+simulates it in discrete timesteps.</p>
+<p>Parameters:</p>
+<blockquote>
+<div><dl class="simple">
+<dt>backup: string</dt><dd><p>retrofit - pulls from the basecase for each household
+gas, electric - instantaneous WHs (new installations)</p>
+</dd>
+</dl>
+</div></blockquote>
+<p>Returns:</p>
+<blockquote>
+<div><dl class="simple">
+<dt>self.cons_total: pd df</dt><dd><p>Consumer level energy use [W], heat rates [W],
+average temperatures [K],
+and solar fraction for the analysis period.</p>
+</dd>
+<dt>proj_total: pd series</dt><dd><p>Project level energy use [W], heat rates [W],
+average temperatures [K],
+and solar fraction for the analysis period.</p>
+</dd>
+<dt>sol_fra: dict</dt><dd><p>Solar fraction. Keys: ‘annual’, ‘monthly’</p>
+</dd>
+<dt>pump_el_use: dict</dt><dd><p>Electricity use broken into end uses
+‘dist_pump’ - distribution pump, if present
+‘sol_pump’ - solar pump</p>
+</dd>
+<dt>ts_res: pd df</dt><dd><p>Timestep project level results for all energy uses [W],
+heat rates [W], temperatures [K], and the load.</p>
+</dd>
+<dt>backup_ts_cons: dict of dicts</dt><dd><p>Timestep household level results for energy uses [W],
+and heat rates [W].</p>
+</dd>
+<dt>rel_err: float</dt><dd><p>Balancing error due to limitations of finite
+timestep averaging.</p>
+</dd>
+</dl>
+</div></blockquote>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="mswh.system.models.System.weather">
+<code class="descname">weather</code><a class="headerlink" href="#mswh.system.models.System.weather" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-mswh.system.source_and_sink">
+<span id="mswh-system-source-and-sink-module"></span><h2>mswh.system.source_and_sink module<a class="headerlink" href="#module-mswh.system.source_and_sink" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="mswh.system.source_and_sink.SourceAndSink">
+<em class="property">class </em><code class="descclassname">mswh.system.source_and_sink.</code><code class="descname">SourceAndSink</code><span class="sig-paren">(</span><em>input_dfs=None</em>, <em>random_state=123</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mswh/system/source_and_sink.html#SourceAndSink"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mswh.system.source_and_sink.SourceAndSink" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Generates timeseries that are inputs to the simulation
+model and are known prior to the simulation, such as
+outdoor air temperature and end use load profiles.</p>
+<p>Parameters:</p>
+<blockquote>
+<div><p>input_dfs : a dict of pd dfs</p>
+<blockquote>
+<div><p>Dictionary of input dataframes
+as read in from the input db by the Sql class
+(see example in
+<cite>test_source_and_sink.SourceAndSinkTests.setUp</cite>)</p>
+</div></blockquote>
+<p>random_state : numpy random state object or an integer</p>
+<blockquote>
+<div><p>numpy random state object : if there is a need
+to maintain the same random seed throughout the
+analysis.</p>
+<p>integer : a new random state object gets
+instanteated at init</p>
+</div></blockquote>
+</div></blockquote>
+<dl class="staticmethod">
+<dt id="mswh.system.source_and_sink.SourceAndSink.demand_estimate">
+<em class="property">static </em><code class="descname">demand_estimate</code><span class="sig-paren">(</span><em>occ</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mswh/system/source_and_sink.html#SourceAndSink.demand_estimate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mswh.system.source_and_sink.SourceAndSink.demand_estimate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Estimates gal/day demand as provided in the
+CSI-Thermal Program Handbook, April 2016 for
+installations with a known occupancy</p>
+<p>Parameters:</p>
+<blockquote>
+<div><dl class="simple">
+<dt>occ<span class="classifier">float</span></dt><dd><p>Number of individual household occupants</p>
+</dd>
+</dl>
+</div></blockquote>
+</dd></dl>
+
+<dl class="method">
+<dt id="mswh.system.source_and_sink.SourceAndSink.irradiation_and_water_main">
+<code class="descname">irradiation_and_water_main</code><span class="sig-paren">(</span><em>climate_zone</em>, <em>collector_tilt='latitude'</em>, <em>tilt_standard_deviation=None</em>, <em>collector_azimuth=0.0</em>, <em>azimuth_standard_deviation=None</em>, <em>location_ground_reflectance=0.16</em>, <em>solar_constant_Wm2=1367.0</em>, <em>method='isotropic diffuse'</em>, <em>weather_data_source='cec'</em>, <em>single_row_with_arrays=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mswh/system/source_and_sink.html#SourceAndSink.irradiation_and_water_main"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mswh.system.source_and_sink.SourceAndSink.irradiation_and_water_main" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the hourly total incident radiation on a tilted surface
+for any climate zone in California. If weather data from the provided
+database are passed as <cite>input_dfs</cite>, the user can specify a single
+climate.</p>
+<p>Two separate methods are available for use, with all equations
+(along with the equation numbers provided in comments) as provided in
+J. A. Duffie and W. A. Beckman, Solar engineering of thermal
+processes, 3rd ed. Hoboken, N.J: Wiley, 2006.</p>
+<p>Parameters:</p>
+<blockquote>
+<div><dl class="simple">
+<dt>climate_zone: string</dt><dd><p>String of two digits to indicate the CEC climate zone
+being analyzed (‘01’ to ‘16’).</p>
+</dd>
+<dt>collector_azimuth: float, default: 0.</dt><dd><p>The deviation of the projection on a horizontal
+plane of the normal to the collector surface from
+the local meridian, in degrees.  Allowable values
+are between +/- 180 degrees (inclusive).  0 degrees
+corresponds to due south, east is negative, and west
+is positive.  Default value is 0 degrees (due south).</p>
+</dd>
+<dt>azimuth_standard_deviation: float, default: ‘None’</dt><dd><p>Final collector azimuth is a value drawn using a normal
+distribution around the collector_azimuth value
+with a azimuth_standard_deviation standard deviation.
+If set to ‘None’ the final collector azimuth
+equals collector_azimuth</p>
+</dd>
+<dt>collector_tilt: float, default: ‘latitude’</dt><dd><p>The angle between the plane of the collector and the
+horizontal, in degrees.  Allowable values are between
+0 and 180 degrees (inclusive), and values greater than
+90 degrees mean that the surface has a downward-facing
+component. If a default flag is left unchanged, the code
+will assign latitude value to the tilt as a good
+approximation of a design collector or PV tilt.</p>
+</dd>
+<dt>tilt_standard_deviation: float, default: ‘None’</dt><dd><p>Final collector tilt is a value drawn using a normal
+distribution around the collector_tilt value
+with a tilt_standard_deviation standard deviation.
+If set to ‘None’ the final collector tilt
+equals collector_tilt</p>
+</dd>
+<dt>location_ground_reflectance: float, default: 0.16</dt><dd><p>The degree of ground reflectance.  Allowable
+values are 0-1 (inclusive), with 0 meaning
+no reflectance and 1 meaning very high
+reflectance.  For reference, fresh snow has
+a high ground reflectance of ~ 0.7.  Default
+value is 0.16, which is the annual average surface
+albedo averaged across the 16 CEC climate zones.</p>
+</dd>
+<dt>method: string, default: ‘HDKR anisotropic sky’</dt><dd><p>Calculation method to use for estimating the total irradiance
+on the tilted collector surface. See notes below. Default
+value is ‘HDKR anisotropic sky.’</p>
+</dd>
+<dt>solar_constant_Wm2: float, default: 1367.</dt><dd><p>Energy from the sun per unit time received on a unit
+area of surface perpendicular to the direction of
+propagation of the radiation at mean earth-sun distance
+outside the atmosphere.  Default value is 1367 W/m^2.</p>
+</dd>
+<dt>weather_data_source: string, default: ‘cec’</dt><dd><p>The type of weather data being used to analyze the
+climate zone for solar insolation.  Allowable values
+are ‘cec’ and ‘tmy3.’  Default value is ‘cec.’</p>
+</dd>
+<dt>single_row_with_arrays<span class="classifier">boolean</span></dt><dd><p>A flag to reformat the resulting dataframe in a row
+of data where each resulting 8760 is stored as an
+array</p>
+</dd>
+</dl>
+</div></blockquote>
+<p>Returns:</p>
+<blockquote>
+<div><dl class="simple">
+<dt>data: pd df</dt><dd><p>Weather data frame with appended columns:
+‘global_tilt_radiation_Wm2’, ‘water_main_t_F’,
+‘water_main_t_C’, ‘dry_bulb_C’, ‘wet_bulb_C’, ‘Tilt’,
+‘Azimuth’]</p>
+</dd>
+</dl>
+</div></blockquote>
+<p>Notes:</p>
+<blockquote>
+<div><p>The user can select one of two methods to use for
+this calculation:</p>
+<ol class="arabic simple">
+<li><dl class="simple">
+<dt>‘isotropic diffuse’:</dt><dd><p>This model was derived by Liu and Jordan (1963).
+All diffuse radiation is assumed to be isotropic.
+It is the simpler and more conservative model,
+and it has been widely used.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>‘HDKR anisotropic sky’:</dt><dd><p>This model combined methods from Hay and Davies (1980),
+Klucher (1979), and Reindl, et al. (1990).
+Diffuse radiation in this model is represented in two
+parts: isotropic and circumsolar. The model also accounts
+for horizon brightening.
+This is also a simple model, but it has been found to be
+slightly more accurate (and less conservative) than the
+‘isotropic diffuse’ model.  For collectors tilted toward
+the equator, this model is suggested.</p>
+</dd>
+</dl>
+</li>
+</ol>
+</div></blockquote>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="mswh.tools.html" class="btn btn-neutral float-right" title="Tools" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="modules.html" class="btn btn-neutral float-left" title="Python Code Documentation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 
+Multiscale Solar Water Heating (MSWH) Copyright (c) 2019, The
+Regents of the University of California, through Lawrence Berkeley National
+Laboratory (subject to receipt of any required approvals from the U.S.
+Dept. of Energy).  All rights reserved.
+
+If you have questions about your rights to use or distribute this software,
+please contact Berkeley Lab&#39;s Intellectual Property Office at
+IPO@lbl.gov.
+
+NOTICE.  This Software was developed under funding from the U.S. Department
+of Energy and the U.S. Government consequently retains certain rights.  As
+such, the U.S. Government has been granted for itself and others acting on
+its behalf a paid-up, nonexclusive, irrevocable, worldwide license in the
+Software to reproduce, distribute copies to the public, prepare derivative
+works, and perform publicly and display publicly, and to permit other to do
+so.
+
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

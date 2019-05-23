@@ -1,0 +1,695 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Tools &mdash; Multiscale Solar Water Heating 1.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Database Communication" href="mswh.comm.html" />
+    <link rel="prev" title="System and Component Models" href="mswh.system.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Multiscale Solar Water Heating
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="models.html">Multiscale Solar Water Heating (MSWH)</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">Python Code Documentation</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="modules.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="mswh.system.html">System and Component Models</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Tools</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#module-mswh.tools.plots">mswh.tools.plots module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-mswh.tools.unit_converters">mswh.tools.unit_converters module</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="mswh.comm.html">Database Communication</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Multiscale Solar Water Heating</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="modules.html">Python Code Documentation</a> &raquo;</li>
+        
+      <li>Tools</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/source/mswh.tools.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="tools">
+<h1>Tools<a class="headerlink" href="#tools" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="module-mswh.tools.plots">
+<span id="mswh-tools-plots-module"></span><h2>mswh.tools.plots module<a class="headerlink" href="#module-mswh.tools.plots" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="mswh.tools.plots.Plot">
+<em class="property">class </em><code class="descclassname">mswh.tools.plots.</code><code class="descname">Plot</code><span class="sig-paren">(</span><em>title=''</em>, <em>label_h='Time [h]'</em>, <em>label_v='Component performance'</em>, <em>data_headers=None</em>, <em>save_image=True</em>, <em>legend=True</em>, <em>outpath=''</em>, <em>duration_curve=False</em>, <em>boxmode='group'</em>, <em>notebook_mode=False</em>, <em>width=1200</em>, <em>height=800</em>, <em>fontsize=18</em>, <em>legend_x=0.4</em>, <em>legend_y=1.0</em>, <em>margin_l=200.0</em>, <em>margin_b=200.0</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mswh/tools/plots.html#Plot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mswh.tools.plots.Plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Creates and saves plots to visualize and
+correlate arrays, usually timeseries</p>
+<p>Parameters:</p>
+<blockquote>
+<div><dl class="simple">
+<dt>title: str</dt><dd><p>Plot title</p>
+</dd>
+<dt>data_headers: list</dt><dd><p>A list of labels in the same order as the corresponding data
+If None the labels will be the df column labels, or integer
+indices if a list got provided</p>
+</dd>
+<dt>label_h: str</dt><dd><p>Horizontal axis label</p>
+</dd>
+<dt>label_v: str</dt><dd><p>Vertical axis label</p>
+</dd>
+<dt>legend: boolean</dt><dd><p>Plot the legend or not</p>
+</dd>
+<dt>save_image: boolean</dt><dd><p>If True saves the created image with either
+a given or default path and filename. Supported
+file types are ‘png’ and ‘pdf’, as specified in
+the filename.</p>
+</dd>
+<dt>duration_curve: boolean</dt><dd><p>If True it sorts the columns (df or arrays)
+and plots the duration_curve, returns a
+duration_curve metric as a real</p>
+</dd>
+<dt>outpath: string or ‘’ (for current directory)</dt><dd><p>Path to save the png image of the plot</p>
+</dd>
+</dl>
+<p>boxmean: True, False, ‘sd’, ‘Only Mean’</p>
+<dl class="simple">
+<dt>notebook_mode: boolean</dt><dd><p>Plot in the notebook if True</p>
+</dd>
+<dt>width: int</dt><dd><p>Image width</p>
+</dd>
+<dt>height: int</dt><dd><p>Image height</p>
+</dd>
+<dt>fontsize: int</dt><dd><p>Axis label font size</p>
+</dd>
+</dl>
+</div></blockquote>
+<p>Returns:</p>
+<blockquote>
+<div><dl class="simple">
+<dt>fig: plotly figure if self.interactive</dt><dd><p>else True</p>
+</dd>
+</dl>
+</div></blockquote>
+<dl class="method">
+<dt id="mswh.tools.plots.Plot.box">
+<code class="descname">box</code><span class="sig-paren">(</span><em>dfs, plot_cols=None, groupby_cols=None, df_cat=None, outfile='box.png', boxmean=False, colors=['#3D9970', '#FF4136', '#FF851B'], title='Energy Use', boxpoints='outliers'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mswh/tools/plots.html#Plot.box"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mswh.tools.plots.Plot.box" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates box plots for the chosen plot_col and can
+group plots by the groupby_col.</p>
+<p>Parameters:</p>
+<blockquote>
+<div><p>dfs: list of dfs</p>
+<dl class="simple">
+<dt>df_cat: list of str</dt><dd><p>Indicator of the category carried by the dfs
+(E.g. the dfs differ by housing type)</p>
+</dd>
+<dt>plot_col: list of columns to plot, one from each df in</dt><dd><p>dfs. If multiple dfs are passed, the values will be
+shown as groups on the plot</p>
+</dd>
+<dt>groupby_cols: list of cols to use as x axis, from each</dt><dd><p>df. Use the same column if it has the same elements.
+Use None if x axis category not used</p>
+</dd>
+<dt>boxpoints: False, ‘all’, ‘outliers’, ‘suspectedoutliers’</dt><dd><p>See <a class="reference external" href="https://plot.ly/python/reference/#box">https://plot.ly/python/reference/#box</a></p>
+</dd>
+</dl>
+</div></blockquote>
+<p>Returns:</p>
+<blockquote>
+<div><dl class="simple">
+<dt>fig: plotly figure if self.interactive</dt><dd><p>else True</p>
+</dd>
+</dl>
+</div></blockquote>
+</dd></dl>
+
+<dl class="method">
+<dt id="mswh.tools.plots.Plot.scatter">
+<code class="descname">scatter</code><span class="sig-paren">(</span><em>data</em>, <em>outfile='scatter.png'</em>, <em>modes='lines+markers'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mswh/tools/plots.html#Plot.scatter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mswh.tools.plots.Plot.scatter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a scatter plot</p>
+<p>Parameters:</p>
+<blockquote>
+<div><dl class="simple">
+<dt>data: array/list, pd series, list of arrays/lists, pd df</dt><dd><p>Provide a list or arrays/lists or a pandas dataframe.
+The variables should be ordered in pairs such that
+each odd variable in the list/first column in the df
+gets assigned to the horizontal axis, each even
+variable to the vertical axes. Each pair needs
+to have the same length, but pairs can be of
+a different length.</p>
+</dd>
+<dt>outfile: str</dt><dd><p>Filename, include .png, .png .pdf</p>
+</dd>
+<dt>modes: str or list of str</dt><dd><p>‘markers’, ‘lines’, ‘lines + markers’ or
+a list of the above to assign to each plot
+(one string in a list for each pair of data)</p>
+</dd>
+</dl>
+</div></blockquote>
+<p>Returns:</p>
+<blockquote>
+<div><dl class="simple">
+<dt>fig: plotly figure if self.interactive</dt><dd><p>else True</p>
+</dd>
+</dl>
+</div></blockquote>
+</dd></dl>
+
+<dl class="method">
+<dt id="mswh.tools.plots.Plot.series">
+<code class="descname">series</code><span class="sig-paren">(</span><em>data</em>, <em>index_in_a_column=None</em>, <em>outfile='series.png'</em>, <em>modes='lines+markers'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mswh/tools/plots.html#Plot.series"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mswh.tools.plots.Plot.series" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots all series data against either the index or the first
+provided series. It can sort the data and plot the duration_curve.</p>
+<p>Parameters:</p>
+<blockquote>
+<div><dl>
+<dt>data: array/list, pd series, list of arrays/lists, pd df</dt><dd><p>Provide an array or a list if plotting a single
+variable. If plotting multiple variables provide
+a list of arrays or a pandas dataframe.
+Horizontal axis corresponds to:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>if pd df: the index of the dataframe or the first columns of the dataframe</p></li>
+<li><p>if list or arrays/lists: a range or array lenth or the first array/list in the list</p></li>
+</ul>
+</div></blockquote>
+<p>All arrays in the list need to have the same length.</p>
+</dd>
+<dt>index_in_a_column: boolean</dt><dd><p>Horizontal axis labels
+If None, dataframe index is used, otherwise pass a
+column label for a column (it will not be considered
+as a series to plot)</p>
+</dd>
+<dt>outfile: str</dt><dd><p>Filename, include .png, .png .pdf</p>
+</dd>
+<dt>modes: str or list of str</dt><dd><p>‘markers’, ‘lines’, ‘lines+markers’ or
+a list of the above to assign to each column
+of data, excluding the first column if
+index_in_a_column is not None</p>
+</dd>
+</dl>
+</div></blockquote>
+<p>Returns:</p>
+<blockquote>
+<div><dl class="simple">
+<dt>fig: plotly figure if self.interactive</dt><dd><p>else True</p>
+</dd>
+</dl>
+</div></blockquote>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-mswh.tools.unit_converters">
+<span id="mswh-tools-unit-converters-module"></span><h2>mswh.tools.unit_converters module<a class="headerlink" href="#module-mswh.tools.unit_converters" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="mswh.tools.unit_converters.UnitConv">
+<em class="property">class </em><code class="descclassname">mswh.tools.unit_converters.</code><code class="descname">UnitConv</code><span class="sig-paren">(</span><em>x_in</em>, <em>scale_in=1.0</em>, <em>scale_out=1.0</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mswh/tools/unit_converters.html#UnitConv"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mswh.tools.unit_converters.UnitConv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Unit conversions using conversion parameters from
+ASHRAE Fundamentals 2017.</p>
+<p>Parameters:</p>
+<dl class="simple">
+<dt>x_in: float, array</dt><dd><p>Input value to be converted to a desired unit</p>
+</dd>
+<dt>scale_in: str or 1.</dt><dd><p>Scale of the input value, options: ‘k’, ‘kilo’,
+‘mega’, ‘million’, ‘M’, ‘MM’, ‘giga’, ‘G’, ‘tera’, ‘T’,
+‘peta’, ‘P’, ‘mili’, ‘micro’.
+Default: 1.</p>
+</dd>
+<dt>scale_out: str or 1.</dt><dd><p>Scale of the input value, options: ‘k’, ‘kilo’,
+‘mega’, ‘million’, ‘M’, ‘MM’, ‘giga’, ‘G’, ‘tera’, ‘T’,
+‘peta’, ‘P’, ‘mili’, ‘m’, ‘micro’.
+Default: 1.</p>
+</dd>
+</dl>
+<p>Examples:</p>
+<p>To convert temperature from degF to degC</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">t_in_degC</span> <span class="o">=</span> <span class="n">UnitConv</span><span class="p">(</span><span class="n">t_in_degF</span><span class="p">)</span><span class="o">.</span><span class="n">degF_degC</span><span class="p">(</span><span class="n">unit_in</span><span class="o">=</span><span class="s1">&#39;degF&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>To convert power in hp to kW:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">p_in_kW</span> <span class="o">=</span> <span class="n">UnitConv</span><span class="p">(</span><span class="n">p_in_hp</span><span class="p">,</span> <span class="n">scale_out</span><span class="o">=</span><span class="s1">&#39;kilo&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">hp_W</span><span class="p">(</span><span class="n">unit_in</span><span class="o">=</span><span class="s1">&#39;hp&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>To convert energy from GJ to MMBtu:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">e_MMBtu</span> <span class="o">=</span> <span class="n">UnitConv</span><span class="p">(</span><span class="n">e_GJ</span><span class="p">,</span> <span class="n">scale_in</span><span class="o">=</span><span class="s1">&#39;G&#39;</span><span class="p">,</span> <span class="n">scale_out</span><span class="o">=</span><span class="s1">&#39;MM&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">Btu_J</span><span class="p">(</span><span class="n">unit_in</span><span class="o">=</span><span class="s1">&#39;J&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="method">
+<dt id="mswh.tools.unit_converters.UnitConv.Btu_J">
+<code class="descname">Btu_J</code><span class="sig-paren">(</span><em>unit_in='Btu'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mswh/tools/unit_converters.html#UnitConv.Btu_J"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mswh.tools.unit_converters.UnitConv.Btu_J" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts work / energy / heat content between Btu and joule</p>
+<p>Parameters:</p>
+<blockquote>
+<div><dl class="simple">
+<dt>x: float, array</dt><dd><p>Input value</p>
+</dd>
+<dt>unit_in: string, options: ‘Btu’, ‘J’</dt><dd><p>Unit of the input value</p>
+</dd>
+</dl>
+</div></blockquote>
+<p>Returns:</p>
+<blockquote>
+<div><dl class="simple">
+<dt>x_out: float, array</dt><dd><p>Output value</p>
+</dd>
+</dl>
+</div></blockquote>
+</dd></dl>
+
+<dl class="method">
+<dt id="mswh.tools.unit_converters.UnitConv.Wh_J">
+<code class="descname">Wh_J</code><span class="sig-paren">(</span><em>unit_in='J'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mswh/tools/unit_converters.html#UnitConv.Wh_J"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mswh.tools.unit_converters.UnitConv.Wh_J" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts work / energy / heat content between watthour and joule</p>
+<p>Parameters:</p>
+<blockquote>
+<div><dl class="simple">
+<dt>x: float, array</dt><dd><p>Input value</p>
+</dd>
+<dt>unit_in: string, options: ‘Wh’, ‘J’</dt><dd><p>Unit of the input value</p>
+</dd>
+</dl>
+</div></blockquote>
+<p>Returns:</p>
+<blockquote>
+<div><dl class="simple">
+<dt>x_out: float, array</dt><dd><p>Output value</p>
+</dd>
+</dl>
+</div></blockquote>
+</dd></dl>
+
+<dl class="method">
+<dt id="mswh.tools.unit_converters.UnitConv.degC_K">
+<code class="descname">degC_K</code><span class="sig-paren">(</span><em>unit_in='degC'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mswh/tools/unit_converters.html#UnitConv.degC_K"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mswh.tools.unit_converters.UnitConv.degC_K" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts temperature between degree Celsius and Kelvin</p>
+<p>Parameters:</p>
+<blockquote>
+<div><dl class="simple">
+<dt>unit_in: string, options: ‘K’, ‘degC’</dt><dd><p>Unit of the input value</p>
+</dd>
+</dl>
+</div></blockquote>
+<p>Returns:</p>
+<blockquote>
+<div><dl class="simple">
+<dt>x_out: float, array</dt><dd><p>Output value</p>
+</dd>
+</dl>
+</div></blockquote>
+</dd></dl>
+
+<dl class="method">
+<dt id="mswh.tools.unit_converters.UnitConv.degF_degC">
+<code class="descname">degF_degC</code><span class="sig-paren">(</span><em>unit_in='degF'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mswh/tools/unit_converters.html#UnitConv.degF_degC"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mswh.tools.unit_converters.UnitConv.degF_degC" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts temperature between degree Fahrenheit and Celsius</p>
+<p>Parameters:</p>
+<blockquote>
+<div><dl class="simple">
+<dt>unit_in: string, options: ‘degF’, ‘degC’</dt><dd><p>Unit of the input value</p>
+</dd>
+</dl>
+</div></blockquote>
+<p>Returns:</p>
+<blockquote>
+<div><dl class="simple">
+<dt>x_out: float, array</dt><dd><p>Output value</p>
+</dd>
+</dl>
+</div></blockquote>
+</dd></dl>
+
+<dl class="method">
+<dt id="mswh.tools.unit_converters.UnitConv.ft_m">
+<code class="descname">ft_m</code><span class="sig-paren">(</span><em>unit_in='ft'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mswh/tools/unit_converters.html#UnitConv.ft_m"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mswh.tools.unit_converters.UnitConv.ft_m" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts length between foot
+and meter</p>
+<p>Parameters:</p>
+<blockquote>
+<div><dl class="simple">
+<dt>x: float, array</dt><dd><p>Input value</p>
+</dd>
+<dt>unit_in: string, options: ‘Wh’, ‘J’</dt><dd><p>Unit of the input value</p>
+</dd>
+</dl>
+</div></blockquote>
+<p>Returns:</p>
+<blockquote>
+<div><dl class="simple">
+<dt>x_out: float, array</dt><dd><p>Output value</p>
+</dd>
+</dl>
+</div></blockquote>
+</dd></dl>
+
+<dl class="method">
+<dt id="mswh.tools.unit_converters.UnitConv.hp_W">
+<code class="descname">hp_W</code><span class="sig-paren">(</span><em>unit_in='hp'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mswh/tools/unit_converters.html#UnitConv.hp_W"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mswh.tools.unit_converters.UnitConv.hp_W" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts power between watt and horsepower</p>
+<p>Parameters:</p>
+<blockquote>
+<div><dl class="simple">
+<dt>unit_in: string, options: ‘hp’, ‘W’</dt><dd><p>Unit of the input value</p>
+</dd>
+</dl>
+</div></blockquote>
+<p>Returns:</p>
+<blockquote>
+<div><dl class="simple">
+<dt>x_out: float, array</dt><dd><p>Output value</p>
+</dd>
+</dl>
+</div></blockquote>
+</dd></dl>
+
+<dl class="method">
+<dt id="mswh.tools.unit_converters.UnitConv.m3_gal">
+<code class="descname">m3_gal</code><span class="sig-paren">(</span><em>unit_in='gal'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mswh/tools/unit_converters.html#UnitConv.m3_gal"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mswh.tools.unit_converters.UnitConv.m3_gal" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts volume between cubic meter and gallon</p>
+<p>Parameters:</p>
+<blockquote>
+<div><dl class="simple">
+<dt>unit_in: string, options: ‘m3’, ‘gal’</dt><dd><p>Unit of the input value</p>
+</dd>
+</dl>
+</div></blockquote>
+<p>Returns:</p>
+<blockquote>
+<div><dl class="simple">
+<dt>x_out: float, array</dt><dd><p>Output value</p>
+</dd>
+</dl>
+</div></blockquote>
+</dd></dl>
+
+<dl class="method">
+<dt id="mswh.tools.unit_converters.UnitConv.m3perh_m3pers">
+<code class="descname">m3perh_m3pers</code><span class="sig-paren">(</span><em>unit_in='m3perh'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mswh/tools/unit_converters.html#UnitConv.m3perh_m3pers"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mswh.tools.unit_converters.UnitConv.m3perh_m3pers" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts volume flow between cubic meter
+per hour and cubic meter per second</p>
+<p>Parameters:</p>
+<blockquote>
+<div><dl class="simple">
+<dt>x: float, array</dt><dd><p>Input value</p>
+</dd>
+<dt>unit_in: string, options: ‘Wh’, ‘J’</dt><dd><p>Unit of the input value</p>
+</dd>
+</dl>
+</div></blockquote>
+<p>Returns:</p>
+<blockquote>
+<div><dl class="simple">
+<dt>x_out: float, array</dt><dd><p>Output value</p>
+</dd>
+</dl>
+</div></blockquote>
+</dd></dl>
+
+<dl class="method">
+<dt id="mswh.tools.unit_converters.UnitConv.sqft_m2">
+<code class="descname">sqft_m2</code><span class="sig-paren">(</span><em>unit_in='sqft'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mswh/tools/unit_converters.html#UnitConv.sqft_m2"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mswh.tools.unit_converters.UnitConv.sqft_m2" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts area between square foot
+and square meter</p>
+<p>Parameters:</p>
+<blockquote>
+<div><dl class="simple">
+<dt>x: float, array</dt><dd><p>Input value</p>
+</dd>
+<dt>unit_in: string, options: ‘Wh’, ‘J’</dt><dd><p>Unit of the input value</p>
+</dd>
+</dl>
+</div></blockquote>
+<p>Returns:</p>
+<blockquote>
+<div><dl class="simple">
+<dt>x_out: float, array</dt><dd><p>Output value</p>
+</dd>
+</dl>
+</div></blockquote>
+</dd></dl>
+
+<dl class="method">
+<dt id="mswh.tools.unit_converters.UnitConv.therm_J">
+<code class="descname">therm_J</code><span class="sig-paren">(</span><em>unit_in='therm'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mswh/tools/unit_converters.html#UnitConv.therm_J"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mswh.tools.unit_converters.UnitConv.therm_J" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts work / energy / heat content between therm and joule</p>
+<p>Parameters:</p>
+<blockquote>
+<div><dl class="simple">
+<dt>x: float, array</dt><dd><p>Input value</p>
+</dd>
+<dt>unit_in: string, options: ‘therm’, ‘J’</dt><dd><p>Unit of the input value</p>
+</dd>
+</dl>
+</div></blockquote>
+<p>Returns:</p>
+<blockquote>
+<div><dl class="simple">
+<dt>x_out: float, array</dt><dd><p>Output value</p>
+</dd>
+</dl>
+</div></blockquote>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="mswh.tools.unit_converters.Utility">
+<em class="property">class </em><code class="descclassname">mswh.tools.unit_converters.</code><code class="descname">Utility</code><span class="sig-paren">(</span><em>quantity_in</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mswh/tools/unit_converters.html#Utility"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mswh.tools.unit_converters.Utility" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Converts gas or electricity
+consumption into commonly used units.</p>
+<p>Parameters:</p>
+<blockquote>
+<div><dl class="simple">
+<dt>quantity_in: float, array</dt><dd><p>Quantity to be converted.
+E.g. gas use in kJ</p>
+</dd>
+</dl>
+</div></blockquote>
+<dl class="method">
+<dt id="mswh.tools.unit_converters.Utility.gas">
+<code class="descname">gas</code><span class="sig-paren">(</span><em>unit_in='kJ'</em>, <em>unit_out='MMBtu'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mswh/tools/unit_converters.html#Utility.gas"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mswh.tools.unit_converters.Utility.gas" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts gas consumption.</p>
+<p>Parameters:</p>
+<blockquote>
+<div><dl class="simple">
+<dt>unit_in: string</dt><dd><p>Units of the input quantity that needs
+to be converted.
+Options: ‘kWh’, ‘kJ’</p>
+</dd>
+<dt>unit_out: string</dt><dd><p>Desired output unit</p>
+</dd>
+</dl>
+</div></blockquote>
+<p>Returns:</p>
+<blockquote>
+<div><dl class="simple">
+<dt>gas_use: float</dt><dd><p>Gas use in output units</p>
+</dd>
+</dl>
+</div></blockquote>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="mswh.comm.html" class="btn btn-neutral float-right" title="Database Communication" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="mswh.system.html" class="btn btn-neutral float-left" title="System and Component Models" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 
+Multiscale Solar Water Heating (MSWH) Copyright (c) 2019, The
+Regents of the University of California, through Lawrence Berkeley National
+Laboratory (subject to receipt of any required approvals from the U.S.
+Dept. of Energy).  All rights reserved.
+
+If you have questions about your rights to use or distribute this software,
+please contact Berkeley Lab&#39;s Intellectual Property Office at
+IPO@lbl.gov.
+
+NOTICE.  This Software was developed under funding from the U.S. Department
+of Energy and the U.S. Government consequently retains certain rights.  As
+such, the U.S. Government has been granted for itself and others acting on
+its behalf a paid-up, nonexclusive, irrevocable, worldwide license in the
+Software to reproduce, distribute copies to the public, prepare derivative
+works, and perform publicly and display publicly, and to permit other to do
+so.
+
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
