@@ -212,8 +212,7 @@
 
 <span class="sd">            Example:</span>
 
-<span class="sd">            &gt;&gt;&gt; loads_com = pd.DataFrame(data = [[1, occ_indiv - 1., 0.8 * load_array],[2, occ_indiv, 1. * load_array],[3, occ_indiv, 1.2 * load_array],[4, occ_indiv + 1., 1.4 * load_array]],\</span>
-<span class="sd">                    columns = [self.c[&#39;id&#39;], self.c[&#39;occ&#39;], self.c[&#39;load_m3&#39;]])</span>
+<span class="sd">            &gt;&gt;&gt; loads_com = pd.DataFrame(data = [[1, occ_indiv - 1., 0.8 * load_array],[2, occ_indiv, 1. * load_array],[3, occ_indiv, 1.2 * load_array],[4, occ_indiv + 1., 1.4 * load_array]], columns = [self.c[&#39;id&#39;], self.c[&#39;occ&#39;], self.c[&#39;load_m3&#39;]])</span>
 
 <span class="sd">        timestep: float, h</span>
 <span class="sd">            Duration of a single timestep, in hours</span>
@@ -1204,7 +1203,7 @@
             <span class="sd">&quot;&quot;&quot;Runs a 8760. hourly simulation of the</span>
 <span class="sd">            provided system type.</span>
 
-<span class="sd">            Parameters</span>
+<span class="sd">            Parameters:</span>
 
 <span class="sd">                type: string</span>
 <span class="sd">                    gas_tank_wh</span>
@@ -1212,7 +1211,7 @@
 <span class="sd">                    solar_thermal_new (gas tankless backup at each household)</span>
 <span class="sd">                    solar_electric</span>
 
-<span class="sd">            Returns</span>
+<span class="sd">            Returns:</span>
 
 <span class="sd">                en_use: dict</span>
 <span class="sd">                    Total energy use for the analysis period:</span>
@@ -1705,7 +1704,7 @@
 <span class="sd">        households based on a size defining variable,</span>
 <span class="sd">        such as occupancy.</span>
 
-<span class="sd">        Parameters</span>
+<span class="sd">        Parameters:</span>
 
 <span class="sd">            df: pd df</span>
 <span class="sd">                Contains household ID and split on column</span>

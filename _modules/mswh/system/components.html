@@ -509,10 +509,9 @@
 <span class="sd">            performance: dict</span>
 <span class="sd">                {&#39;cop&#39;: current Coefficient Of Performance (COP) of</span>
 <span class="sd">                heat pump, [-]</span>
-<span class="sd">                 &#39;heat_cap&#39;: current heating capacity of heat pump, [W]</span>
-<span class="sd">                 &#39;el_use&#39;: current electricity use of heat pump</span>
-<span class="sd">                 (heat_cap / cop), [W]}</span>
-
+<span class="sd">                &#39;heat_cap&#39;: current heating capacity of heat pump, [W]</span>
+<span class="sd">                &#39;el_use&#39;: current electricity use of heat pump</span>
+<span class="sd">                (heat_cap / cop), [W]}</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="c1"># Set rated heating capacity</span>
@@ -1129,7 +1128,7 @@
 <span class="sd">            &#39;hp_tank&#39; - tank with an inbuilt heat pump</span>
 <span class="sd">            &#39;wham_tank&#39; - conventional gas tank water heater model</span>
 <span class="sd">            based on a WH model from the efficiency standards analysis</span>
-<span class="sd">            &#39;gas_tank&#39; - conventional gas tank water heater (*mg not</span>
+<span class="sd">            &#39;gas_tank&#39; - conventional gas tank water heater (currently not</span>
 <span class="sd">            implemented)</span>
 
 <span class="sd">        log_level: None or python logger logging level,</span>
@@ -1384,7 +1383,7 @@
 <span class="sd">        Parameters:</span>
 
 <span class="sd">            medimum: string</span>
-<span class="sd">                Storing medium (for thermal defaults to &#39;water&#39;)</span>
+<span class="sd">                Storage medium (for thermal defaults to &#39;water&#39;)</span>
 
 <span class="sd">            vol_fra_upper: float</span>
 <span class="sd">                Fraction of storage volume assigned to the upper</span>
@@ -1395,7 +1394,7 @@
 <span class="sd">                Used as:</span>
 
 <span class="sd">                * Maximum temperature difference expected to occur</span>
-<span class="sd">                between the upper and the lower tank volume while charging</span>
+<span class="sd">                  between the upper and the lower tank volume while charging</span>
 
 <span class="sd">                * In-tank-coil approach</span>
 
@@ -2198,251 +2197,6 @@
 
         <span class="k">return</span> <span class="n">res</span></div>
 
-<span class="c1"># ----------------------------------------------------------------------------</span>
-<span class="c1"># this belongs to models.py as a variety of backup</span>
-<span class="c1"># gas_comb_eff, el_res_eff</span>
-<span class="c1">#</span>
-<span class="c1">#         # *mg gas tank specific</span>
-<span class="c1">#</span>
-<span class="c1">#         # turn on the gas burner for the whole</span>
-<span class="c1">#         # or a fraction of the timestep to</span>
-<span class="c1">#         # reach the temperature setpoint, increased in any</span>
-<span class="c1">#         # anticipated distribution losses, in the upper</span>
-<span class="c1">#         # half of the tank</span>
-<span class="c1">#         if tank[self.r[&#39;t_tank_up&#39;]] &lt; \</span>
-<span class="c1">#             (self.T_draw_set + dT_dist):</span>
-<span class="c1">#</span>
-<span class="c1">#             # heat rate that would be needed to reach the setpoint in</span>
-<span class="c1">#             # the upper volume of the tank</span>
-<span class="c1">#             dT = max((self.T_draw_set + dT_dist - \</span>
-<span class="c1">#                 tank[self.r[&#39;t_tank_up&#39;]]), 0.)</span>
-<span class="c1">#</span>
-<span class="c1">#             Q_to_set = self.V_upper * self.ro * self.shc * dT</span>
-<span class="c1">#</span>
-<span class="c1">#             if Q_to_set &lt;= self.Q_nom:</span>
-<span class="c1">#                 Q_bckp = Q_to_set</span>
-<span class="c1">#                 tank[self.r[&#39;q_unmet&#39;]] = 0.</span>
-<span class="c1">#                 tank[self.r[&#39;t_tank_up&#39;]] += dT</span>
-<span class="c1">#                 if tank[self.r[&#39;t_tank_up&#39;]] != \</span>
-<span class="c1">#                     (self.T_draw_set + dT_dist):</span>
-<span class="c1">#                     msg = &#39;Upper tank temperature &#39;\</span>
-<span class="c1">#                     &#39;should be at the HW setpoint &#39;\</span>
-<span class="c1">#                     &#39;since the backup was capable of reaching it.&#39;\</span>
-<span class="c1">#                     &#39; Check draw setpoint T: {}, distribution T drop: {}, &#39;\</span>
-<span class="c1">#                     &#39;upper tank volume T before backup: {}.&#39;</span>
-<span class="c1">#                     log.error(msg.format(self.T_draw_set, dT_dist, \</span>
-<span class="c1">#                     tank[self.r[&#39;t_tank_up&#39;]] - dT))</span>
-<span class="c1">#             else:</span>
-<span class="c1">#                 Q_bckp = self.Q_nom</span>
-<span class="c1">#                 tank[self.r[&#39;q_unmet&#39;]] = Q_to_set - self.Q_nom</span>
-<span class="c1">#</span>
-<span class="c1">#                 dT = Q_bckp/(self.V_upper * self.ro * self.shc)</span>
-<span class="c1">#</span>
-<span class="c1">#                 tank[self.r[&#39;t_tank_up&#39;]] = self.T_draw_set + dT_dist</span>
-<span class="c1">#</span>
-<span class="c1">#             tank[self.r[&#39;q_del_bckp&#39;]] = Q_bckp</span>
-<span class="c1">#</span>
-<span class="c1">#             if intank_backup == &#39;gas&#39;:</span>
-<span class="c1">#                 tank[self.r[&#39;q_gas_use&#39;]] = Q_bckp/gas_comb_eff</span>
-<span class="c1">#             elif intank_bakup == &#39;electric&#39;:</span>
-<span class="c1">#                 tank[self.r[&#39;q_gas_use&#39;]] = Q_bckp/el_res_eff</span>
-<span class="c1">#</span>
-<span class="c1">#         # *mg update as needed</span>
-<span class="c1">#</span>
-<span class="c1">#         # Include all states</span>
-<span class="c1">#         res = {self.r[&#39;q_del_sol&#39;] : pre_Q_in,\</span>
-<span class="c1">#                self.r[&#39;q_dem&#39;] : tap[&#39;net_dem&#39;],\</span>
-<span class="c1">#                self.r[&#39;q_dem_tot&#39;] : tap[&#39;tot_dem&#39;],\</span>
-<span class="c1">#                self.r[&#39;q_del_tank&#39;] : tank[self.r[&#39;q_del_tank&#39;]],\</span>
-<span class="c1">#                self.r[&#39;q_unmet_tank&#39;] : \</span>
-<span class="c1">#                    np.round(\</span>
-<span class="c1">#                 tank[self.r[&#39;q_unmet_tank&#39;]] + tap[&#39;unmet_heat_rate&#39;], 2),\</span>
-<span class="c1">#                self.r[&#39;q_dump&#39;] : tank[self.r[&#39;q_dump&#39;]],\</span>
-<span class="c1">#                self.r[&#39;q_ovrcool_tank&#39;] : tank[self.r[&#39;q_ovrcool_tank&#39;]],\</span>
-<span class="c1">#                self.r[&#39;q_dem_balance&#39;] : np.round(Q_dem_balance),\</span>
-<span class="c1">#                # to heat source (e.g. collector)</span>
-<span class="c1">#                self.r[&#39;t_coil_out&#39;] : T_sol_col_return,\</span>
-<span class="c1">#                # average temperatures for tank volumes</span>
-<span class="c1">#                self.r[&#39;t_tank_low&#39;] : tank[self.r[&#39;t_tank_low&#39;]],\</span>
-<span class="c1">#                self.r[&#39;t_tank_up&#39;] : tank[self.r[&#39;t_tank_up&#39;]],\</span>
-<span class="c1">#                self.r[&#39;dt_dist&#39;] : dT_dist,\</span>
-<span class="c1">#                self.r[&#39;t_set&#39;] : self.T_draw_set,\</span>
-<span class="c1">#                self.r[&#39;q_dist_loss&#39;] : dQ_dist,\</span>
-<span class="c1">#                self.r[&#39;flow_on_frac&#39;] : flow_on_timestep_fraction}</span>
-<span class="c1">#</span>
-<span class="c1"># ----------------------------------------------------------------</span>
-    <span class="c1">#</span>
-    <span class="c1">#</span>
-    <span class="c1"># def heat_pump_tank(self, pre_T_amb = 293.15, \</span>
-    <span class="c1">#             pre_T_feed = 291.15, \</span>
-    <span class="c1">#             pre_T_upper = 328.15, pre_T_lower = 323.15, \</span>
-    <span class="c1">#             pre_V_tap = .00757, \</span>
-    <span class="c1">#             pre_Q_in = 2350., \</span>
-    <span class="c1">#             max_V_tap = 0.1514):</span>
-    <span class="c1">#     &quot;&quot;&quot;Model of a thermal storage tank with:</span>
-    <span class="c1">#</span>
-    <span class="c1">#     * condenser coil acting as heat exchanger for the heat pump gains</span>
-    <span class="c1">#     * DHW tap at the top of the tank</span>
-    <span class="c1">#     * recharge tap at the bottom of the tank</span>
-    <span class="c1">#</span>
-    <span class="c1">#     Parameters:</span>
-    <span class="c1">#</span>
-    <span class="c1">#         pre_T_amb: float, K</span>
-    <span class="c1">#             Ambient temperature</span>
-    <span class="c1">#</span>
-    <span class="c1">#         pre_T_feed: float, K</span>
-    <span class="c1">#             Temperature of the water</span>
-    <span class="c1">#             that replenishes the tapped volume</span>
-    <span class="c1">#             (e.g. water main temperature)</span>
-    <span class="c1">#</span>
-    <span class="c1">#         pre_T_upper: float, K</span>
-    <span class="c1">#             Upper tank volume temperature</span>
-    <span class="c1">#</span>
-    <span class="c1">#         pre_T_lower: float, K</span>
-    <span class="c1">#             Lower tank volume temperature</span>
-    <span class="c1">#</span>
-    <span class="c1">#         pre_Q_in: float, W</span>
-    <span class="c1">#             Heat gain passed to tank from heat pump condenser coil</span>
-    <span class="c1">#</span>
-    <span class="c1">#         pre_V_tap: float, m3/h</span>
-    <span class="c1">#             Volume of water tapped from the top of the tank</span>
-    <span class="c1">#</span>
-    <span class="c1">#         max_V_tap: float, m3/h</span>
-    <span class="c1">#             Annual peak flow</span>
-    <span class="c1">#</span>
-    <span class="c1">#     Returns:</span>
-    <span class="c1">#</span>
-    <span class="c1">#         res : dict</span>
-    <span class="c1">#             Single timestep input and output values for temperatures [K]</span>
-    <span class="c1">#             and heat rates [W]:</span>
-    <span class="c1">#</span>
-    <span class="c1">#                self.r[&#39;q_del_hp&#39;]</span>
-    <span class="c1">#                self.r[&#39;q_loss_low&#39;]</span>
-    <span class="c1">#                self.r[&#39;q_loss_up&#39;]</span>
-    <span class="c1">#                self.r[&#39;q_dem&#39;]</span>
-    <span class="c1">#                self.r[&#39;q_dem_tot&#39;]</span>
-    <span class="c1">#                self.r[&#39;q_del_tank&#39;]</span>
-    <span class="c1">#                self.r[&#39;q_unmet_tank&#39;]</span>
-    <span class="c1">#                self.r[&#39;q_dump&#39;]</span>
-    <span class="c1">#                self.r[&#39;q_err_tank&#39;]</span>
-    <span class="c1">#                self.r[&#39;q_ovrcool_tank&#39;]</span>
-    <span class="c1">#                self.r[&#39;q_dem_balance&#39;]</span>
-    <span class="c1">#                self.r[&#39;t_tank_low&#39;]</span>
-    <span class="c1">#                self.r[&#39;t_tank_up&#39;]</span>
-    <span class="c1">#                self.r[&#39;t_set&#39;]</span>
-    <span class="c1">#                self.r[&#39;q_dist_loss&#39;]</span>
-    <span class="c1">#</span>
-    <span class="c1">#             Temperatures in K, heat rates in W</span>
-    <span class="c1">#     &quot;&quot;&quot;</span>
-    <span class="c1">#</span>
-    <span class="c1">#     # Heat loss from the upper tank volume</span>
-    <span class="c1">#     pre_Q_loss_upper = \</span>
-    <span class="c1">#         self._thermal_loss(\</span>
-    <span class="c1">#         self.therm_transm_coef, self.A_upper,\</span>
-    <span class="c1">#         pre_T_amb, pre_T_upper)</span>
-    <span class="c1">#</span>
-    <span class="c1">#     # Heat loss from the lower tank volume</span>
-    <span class="c1">#     pre_Q_loss_lower = \</span>
-    <span class="c1">#         self._thermal_loss(\</span>
-    <span class="c1">#         self.therm_transm_coef, self.A_lower,\</span>
-    <span class="c1">#         pre_T_amb, pre_T_lower)</span>
-    <span class="c1">#</span>
-    <span class="c1">#     # temperature drop in the distribution system</span>
-    <span class="c1">#     pipe_loss, flow_factor = self.distribution.pipe_losses(\</span>
-    <span class="c1">#         T_amb = pre_T_amb, T_in = pre_T_upper)</span>
-    <span class="c1">#</span>
-    <span class="c1">#     # fraction of timestep during which the flow was on based on</span>
-    <span class="c1">#     # nominal flow and peak timestep flows</span>
-    <span class="c1">#     flow_on_timestep_fraction = \</span>
-    <span class="c1">#         pre_V_tap * flow_factor/(max_V_tap * self.timestep)</span>
-    <span class="c1">#</span>
-    <span class="c1">#     dQ_dist = pipe_loss[&#39;heat_rate&#39;] * self.timestep *\</span>
-    <span class="c1">#         flow_on_timestep_fraction</span>
-    <span class="c1">#</span>
-    <span class="c1">#     dE_dist = UnitConv(dQ_dist).Wh_J(unit_in = &#39;Wh&#39;)</span>
-    <span class="c1">#</span>
-    <span class="c1">#     # temperature drop in the distribution system</span>
-    <span class="c1">#     # for the timestep draw</span>
-    <span class="c1">#     if dE_dist != 0.:</span>
-    <span class="c1">#         dT_dist = dE_dist/(self.ro * pre_V_tap * self.shc)</span>
-    <span class="c1">#     else:</span>
-    <span class="c1">#         dT_dist = 0.</span>
-    <span class="c1">#</span>
-    <span class="c1">#     # Heat loss due to tapping water from</span>
-    <span class="c1">#     # the upper tank volume and</span>
-    <span class="c1">#     # replenishing it by water main. This</span>
-    <span class="c1">#     # method also calculates any upfront unmet load</span>
-    <span class="c1">#     # if the upper tank temperature is below the</span>
-    <span class="c1">#     # dhw setpoint + the distribution temperature drop</span>
-    <span class="c1">#     tap = self.tap(\</span>
-    <span class="c1">#         pre_V_tap, pre_T_upper, pre_T_feed,\</span>
-    <span class="c1">#         # dT_loss = dT_loss,\</span>
-    <span class="c1">#         dT_loss = dT_dist,\</span>
-    <span class="c1">#         # T_draw_min = pre_T_feed + dT_loss)</span>
-    <span class="c1">#         T_draw_min = pre_T_feed + dT_dist)</span>
-    <span class="c1">#</span>
-    <span class="c1">#</span>
-    <span class="c1">#     pre_Q_tap = tap[&#39;heat_rate&#39;]</span>
-    <span class="c1">#</span>
-    <span class="c1">#     # run a single timestep of tank behavior</span>
-    <span class="c1">#     tank = self.thermal_tank_dynamics(pre_T_amb, \</span>
-    <span class="c1">#         pre_T_upper, pre_T_lower, \</span>
-    <span class="c1">#         pre_Q_in, pre_Q_loss_upper, pre_Q_loss_lower, \</span>
-    <span class="c1">#         pre_T_feed, tap[&#39;heat_rate&#39;])</span>
-    <span class="c1">#</span>
-    <span class="c1">#     # check total demand balance (compare total heat</span>
-    <span class="c1">#     # requirement needed to increase the water temperature of the</span>
-    <span class="c1">#     # timestep&#39;s draw volume up to the setpoint temperature increased</span>
-    <span class="c1">#     # in any distribution losses with the sum of heat delivered by the</span>
-    <span class="c1">#     # tank, heat unmet due to finite tank volume and thermal losses,</span>
-    <span class="c1">#     # and heat unmet due to the tank temperature at the upper tank volume)</span>
-    <span class="c1">#     Q_del_and_unmet = \</span>
-    <span class="c1">#            tank[self.r[&#39;q_del_tank&#39;]] + \</span>
-    <span class="c1">#            tank[self.r[&#39;q_unmet_tank&#39;]] + \</span>
-    <span class="c1">#            tap[&#39;unmet_heat_rate&#39;]</span>
-    <span class="c1">#</span>
-    <span class="c1">#     Q_dem_balance = tap[&#39;tot_dem&#39;] - Q_del_and_unmet</span>
-    <span class="c1">#</span>
-    <span class="c1">#     # Include all states</span>
-    <span class="c1">#     res = {self.r[&#39;q_del_hp&#39;] : pre_Q_in,\</span>
-    <span class="c1">#            self.r[&#39;q_loss_low&#39;] : pre_Q_loss_lower,\</span>
-    <span class="c1">#            self.r[&#39;q_loss_up&#39;] : pre_Q_loss_upper,\</span>
-    <span class="c1">#            # demand, delivered and unmet heat</span>
-    <span class="c1">#            # (between tap setpoint and water main)</span>
-    <span class="c1">#            self.r[&#39;q_dem&#39;] : tap[&#39;net_dem&#39;],\</span>
-    <span class="c1">#            self.r[&#39;q_dem_tot&#39;] : tap[&#39;tot_dem&#39;],\</span>
-    <span class="c1">#            self.r[&#39;q_del_tank&#39;] : tank[self.r[&#39;q_del_tank&#39;]],\</span>
-    <span class="c1">#            self.r[&#39;q_unmet_tank&#39;] : \</span>
-    <span class="c1">#                 np.round(\</span>
-    <span class="c1">#                 tank[self.r[&#39;q_unmet_tank&#39;]] + tap[&#39;unmet_heat_rate&#39;],2),\</span>
-    <span class="c1">#            self.r[&#39;q_dump&#39;] : tank[self.r[&#39;q_dump&#39;]],\</span>
-    <span class="c1">#            self.r[&#39;q_ovrcool_tank&#39;] : tank[self.r[&#39;q_ovrcool_tank&#39;]],\</span>
-    <span class="c1">#            self.r[&#39;q_dem_balance&#39;] : np.round(Q_dem_balance),\</span>
-    <span class="c1">#            # average temperatures for tank volumes</span>
-    <span class="c1">#            self.r[&#39;t_tank_low&#39;] : tank[self.r[&#39;t_tank_low&#39;]],\</span>
-    <span class="c1">#            self.r[&#39;t_tank_up&#39;] : tank[self.r[&#39;t_tank_up&#39;]],</span>
-    <span class="c1">#            self.r[&#39;dt_dist&#39;] : dT_dist,\</span>
-    <span class="c1">#            self.r[&#39;t_set&#39;] : self.T_draw_set,\</span>
-    <span class="c1">#            self.r[&#39;q_dist_loss&#39;] : dQ_dist,\</span>
-    <span class="c1">#            self.r[&#39;flow_on_frac&#39;] : flow_on_timestep_fraction}</span>
-    <span class="c1">#</span>
-    <span class="c1">#     return res</span>
-
-
-    <span class="c1"># def simple_thermal_tank(self):</span>
-    <span class="c1">#     *mg replace with a system in models.py that uses thermal_tank and</span>
-    <span class="c1">#     gas burner as heat input.</span>
-    <span class="c1">#</span>
-    <span class="c1">#</span>
-    <span class="c1">#     &quot;&quot;&quot;</span>
-    <span class="c1">#     Tmax defines Cap_0 (H t max - H t main 0)</span>
-    <span class="c1">#     Qdraw each hour</span>
-    <span class="c1">#     Charge and discharge one volume only!</span>
-    <span class="c1">#     add test with a constant and a solar charge,</span>
-    <span class="c1">#     constant and a water main discharge</span>
-    <span class="c1">#     &quot;&quot;&quot;</span>
-    <span class="c1">#     pass</span>
-
 
     <span class="k">def</span> <span class="nf">_tank_area</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">split_tank</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Calculates tank area associated with</span>
@@ -2506,16 +2260,16 @@
 <span class="sd">        thermostatic valve since it regulates the</span>
 <span class="sd">        tap flow from the tank as follows:</span>
 
-<span class="sd">            * limits above if the tank temperature</span>
-<span class="sd">            is higher than the nominal draw temperature</span>
+<span class="sd">            * limits above if the tank temperature is</span>
+<span class="sd">              higher than the nominal draw temperature</span>
 
-<span class="sd">            * tap flow equals V_draw_load for any</span>
-<span class="sd">            tank temperature between T_draw_min</span>
-<span class="sd">            and T_draw_nom</span>
+<span class="sd">            * tap flow equals V_draw_load for any tank</span>
+<span class="sd">              temperature between T_draw_min</span>
+<span class="sd">              and T_draw_nom</span>
 
 <span class="sd">            * tap flow is zero if tank temperature</span>
-<span class="sd">            is below T_draw_min and T_draw_min is</span>
-<span class="sd">            provided</span>
+<span class="sd">              is below T_draw_min and T_draw_min is</span>
+<span class="sd">              provided</span>
 
 <span class="sd">        The results represent the theoretical limit</span>
 <span class="sd">        for the draw. The tank model will check if the</span>
@@ -2699,12 +2453,8 @@
         <span class="k">return</span> <span class="n">tank_input_power</span></div>
 
 <div class="viewcode-block" id="Storage.gas_tank_wh"><a class="viewcode-back" href="../../../source/mswh.system.html#mswh.system.components.Storage.gas_tank_wh">[docs]</a>    <span class="k">def</span> <span class="nf">gas_tank_wh</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">V_draw</span><span class="p">,</span> <span class="n">T_feed</span><span class="p">,</span> <span class="n">T_amb</span><span class="o">=</span><span class="mf">291.48</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Gas tank model for state-level analysis based on WHAM equation:</span>
-
-<span class="sd">        Q_dot_cons [W] =</span>
-<span class="sd">            (V_dot_draw * rho * c * (T_draw,set - T_feed)) /</span>
-<span class="sd">             n_re * (1-(U*A*(T_draw,set - T_amb))/P_rated) +</span>
-<span class="sd">            U*A*(T_draw,set - T_amb)</span>
+        <span class="sd">&quot;&quot;&quot;Gas storage water heater model</span>
+<span class="sd">        (`_gas_tank_wh`) wrapper.</span>
 
 <span class="sd">        Parameters:</span>
 
@@ -2766,7 +2516,7 @@
                      <span class="n">tank_A</span><span class="o">=</span><span class="mf">1.3522</span><span class="p">,</span> <span class="n">tank_U</span><span class="o">=</span><span class="mf">1.</span><span class="p">,</span> <span class="n">tank_re</span><span class="o">=</span><span class="mf">0.78</span><span class="p">,</span>
                      <span class="n">T_set</span><span class="o">=</span><span class="mf">322.039</span><span class="p">,</span> <span class="n">T_feed</span><span class="o">=</span><span class="mf">291.15</span><span class="p">,</span> <span class="n">T_amb</span><span class="o">=</span><span class="mf">291.48</span><span class="p">,</span>
                      <span class="n">water_density</span><span class="o">=</span><span class="mf">998.2</span><span class="p">,</span> <span class="n">water_specheat</span><span class="o">=</span><span class="mf">4180.</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Implementation of gas tank water heater</span>
+        <span class="sd">&quot;&quot;&quot;Implementation of the gas storage water heater</span>
 <span class="sd">        based on the WHAM model (J. D. Lutz, C. Dunham Whitehead, A. Lekov,</span>
 <span class="sd">        D. Winiarski, and G. Rosenquist, “WHAM: A Simplified Energy Consumption Equation for Water Heaters,” in 472246,</span>
 <span class="sd">        1998, vol. 1, pp. 171–183.):</span>
@@ -2778,7 +2528,7 @@
 
 <span class="sd">        The model in the source cited calculates the total</span>
 <span class="sd">        energy consumed during a day of water draw, whereas</span>
-<span class="sd">        this model provides a consumption rate in W</span>
+<span class="sd">        this model provides consumption rate in W</span>
 
 <span class="sd">        Parameters:</span>
 
@@ -3251,9 +3001,7 @@
 <span class="sd">            res: dict</span>
 <span class="sd">                [&#39;heat_rate&#39;]: Loss heat rate, W</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="c1"># *mg move over, confirm results</span>
-        <span class="c1"># introduce avg temp and adjust flow_factor for state level</span>
-        <span class="c1"># update pipe sizing</span>
+
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">use_defaults</span><span class="p">:</span>
 
             <span class="n">diameter</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">params_piping</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">s</span><span class="p">[</span><span class="s1">&#39;dia_len_sca&#39;</span><span class="p">]]</span> <span class="o">*</span>

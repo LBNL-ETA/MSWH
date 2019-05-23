@@ -306,14 +306,12 @@ capacity curve [1/degC2]</p>
 </div></blockquote>
 <p>Returns:</p>
 <blockquote>
-<div><dl>
+<div><dl class="simple">
 <dt>performance: dict</dt><dd><p>{‘cop’: current Coefficient Of Performance (COP) of
-heat pump, [-]</p>
-<blockquote>
-<div><p>‘heat_cap’: current heating capacity of heat pump, [W]
+heat pump, [-]
+‘heat_cap’: current heating capacity of heat pump, [W]
 ‘el_use’: current electricity use of heat pump
 (heat_cap / cop), [W]}</p>
-</div></blockquote>
 </dd>
 </dl>
 </div></blockquote>
@@ -506,7 +504,7 @@ fluid heated by a solar collector
 ‘hp_tank’ - tank with an inbuilt heat pump
 ‘wham_tank’ - conventional gas tank water heater model
 based on a WH model from the efficiency standards analysis
-‘gas_tank’ - conventional gas tank water heater (<a href="#id1"><span class="problematic" id="id2">*</span></a>mg not
+‘gas_tank’ - conventional gas tank water heater (currently not
 implemented)</p>
 </dd>
 <dt>log_level: None or python logger logging level,</dt><dd><p>Default: logging.DEBUG
@@ -539,15 +537,8 @@ in a system model simulation.</p>
 <dl class="method">
 <dt id="mswh.system.components.Storage.gas_tank_wh">
 <code class="descname">gas_tank_wh</code><span class="sig-paren">(</span><em>V_draw</em>, <em>T_feed</em>, <em>T_amb=291.48</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mswh/system/components.html#Storage.gas_tank_wh"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mswh.system.components.Storage.gas_tank_wh" title="Permalink to this definition">¶</a></dt>
-<dd><p>Gas tank model for state-level analysis based on WHAM equation:</p>
-<dl>
-<dt>Q_dot_cons [W] =</dt><dd><dl class="simple">
-<dt>(V_dot_draw * rho * c * (T_draw,set - T_feed)) /</dt><dd><p>n_re * (1-(U*A*(T_draw,set - T_amb))/P_rated) +</p>
-</dd>
-</dl>
-<p>U*A*(T_draw,set - T_amb)</p>
-</dd>
-</dl>
+<dd><p>Gas storage water heater model
+(<cite>_gas_tank_wh</cite>) wrapper.</p>
 <p>Parameters:</p>
 <blockquote>
 <div><dl class="simple">
@@ -599,8 +590,8 @@ tank volumes (upper and lower)</p></li>
 </ul>
 <p>Parameters:</p>
 <blockquote>
-<div><dl>
-<dt>medimum: string</dt><dd><p>Storing medium (for thermal defaults to ‘water’)</p>
+<div><dl class="simple">
+<dt>medimum: string</dt><dd><p>Storage medium (for thermal defaults to ‘water’)</p>
 </dd>
 <dt>vol_fra_upper: float</dt><dd><p>Fraction of storage volume assigned to the upper
 tank volume (applies to ‘thermal’ only)
@@ -608,10 +599,8 @@ If split_tank set to False, the value is ignored</p>
 </dd>
 <dt>dT_param: float, K</dt><dd><p>Used as:</p>
 <ul class="simple">
-<li><p>Maximum temperature difference expected to occur</p></li>
-</ul>
-<p>between the upper and the lower tank volume while charging</p>
-<ul class="simple">
+<li><p>Maximum temperature difference expected to occur
+between the upper and the lower tank volume while charging</p></li>
 <li><p>In-tank-coil approach</p></li>
 </ul>
 </dd>
@@ -662,19 +651,15 @@ thermostatic valve since it regulates the
 tap flow from the tank as follows:</p>
 <blockquote>
 <div><ul class="simple">
-<li><p>limits above if the tank temperature</p></li>
+<li><p>limits above if the tank temperature is
+higher than the nominal draw temperature</p></li>
+<li><p>tap flow equals V_draw_load for any tank
+temperature between T_draw_min
+and T_draw_nom</p></li>
+<li><p>tap flow is zero if tank temperature
+is below T_draw_min and T_draw_min is
+provided</p></li>
 </ul>
-<p>is higher than the nominal draw temperature</p>
-<ul class="simple">
-<li><p>tap flow equals V_draw_load for any</p></li>
-</ul>
-<p>tank temperature between T_draw_min
-and T_draw_nom</p>
-<ul class="simple">
-<li><p>tap flow is zero if tank temperature</p></li>
-</ul>
-<p>is below T_draw_min and T_draw_min is
-provided</p>
 </div></blockquote>
 <p>The results represent the theoretical limit
 for the draw. The tank model will check if the
@@ -916,7 +901,7 @@ served by the project level system. It should
 contain 3 columns: household id, occupancy and a column
 with a load array in m3 for each household.</p>
 <p>Example:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">loads_com</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="n">occ_indiv</span> <span class="o">-</span> <span class="mf">1.</span><span class="p">,</span> <span class="mf">0.8</span> <span class="o">*</span> <span class="n">load_array</span><span class="p">],[</span><span class="mi">2</span><span class="p">,</span> <span class="n">occ_indiv</span><span class="p">,</span> <span class="mf">1.</span> <span class="o">*</span> <span class="n">load_array</span><span class="p">],[</span><span class="mi">3</span><span class="p">,</span> <span class="n">occ_indiv</span><span class="p">,</span> <span class="mf">1.2</span> <span class="o">*</span> <span class="n">load_array</span><span class="p">],[</span><span class="mi">4</span><span class="p">,</span> <span class="n">occ_indiv</span> <span class="o">+</span> <span class="mf">1.</span><span class="p">,</span> <span class="mf">1.4</span> <span class="o">*</span> <span class="n">load_array</span><span class="p">]],</span>                    <span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">c</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">c</span><span class="p">[</span><span class="s1">&#39;occ&#39;</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">c</span><span class="p">[</span><span class="s1">&#39;load_m3&#39;</span><span class="p">]])</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">loads_com</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="n">occ_indiv</span> <span class="o">-</span> <span class="mf">1.</span><span class="p">,</span> <span class="mf">0.8</span> <span class="o">*</span> <span class="n">load_array</span><span class="p">],[</span><span class="mi">2</span><span class="p">,</span> <span class="n">occ_indiv</span><span class="p">,</span> <span class="mf">1.</span> <span class="o">*</span> <span class="n">load_array</span><span class="p">],[</span><span class="mi">3</span><span class="p">,</span> <span class="n">occ_indiv</span><span class="p">,</span> <span class="mf">1.2</span> <span class="o">*</span> <span class="n">load_array</span><span class="p">],[</span><span class="mi">4</span><span class="p">,</span> <span class="n">occ_indiv</span> <span class="o">+</span> <span class="mf">1.</span><span class="p">,</span> <span class="mf">1.4</span> <span class="o">*</span> <span class="n">load_array</span><span class="p">]],</span> <span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">c</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">c</span><span class="p">[</span><span class="s1">&#39;occ&#39;</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">c</span><span class="p">[</span><span class="s1">&#39;load_m3&#39;</span><span class="p">]])</span>
 </pre></div>
 </div>
 </dd>
@@ -960,7 +945,7 @@ self.r[‘gas_use’]: gas consumed</p>
 <code class="descname">simulate</code><span class="sig-paren">(</span><em>type='gas_tank_wh'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mswh/system/models.html#System.simulate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mswh.system.models.System.simulate" title="Permalink to this definition">¶</a></dt>
 <dd><p>Runs a 8760. hourly simulation of the
 provided system type.</p>
-<p>Parameters</p>
+<p>Parameters:</p>
 <blockquote>
 <div><dl class="simple">
 <dt>type: string</dt><dd><p>gas_tank_wh
@@ -970,7 +955,7 @@ solar_electric</p>
 </dd>
 </dl>
 </div></blockquote>
-<p>Returns</p>
+<p>Returns:</p>
 <blockquote>
 <div><dl class="simple">
 <dt>en_use: dict</dt><dd><p>Total energy use for the analysis period:
@@ -1083,16 +1068,16 @@ timestep averaging.</p>
 <p>Generates timeseries that are inputs to the simulation
 model and are known prior to the simulation, such as
 outdoor air temperature and end use load profiles.</p>
-<p>Parameters:</p>
+<p>Parameters</p>
 <blockquote>
-<div><p>input_dfs : a dict of pd dfs</p>
+<div><p>input_dfs: a dict of pd dfs</p>
 <blockquote>
 <div><p>Dictionary of input dataframes
 as read in from the input db by the Sql class
 (see example in
 <cite>test_source_and_sink.SourceAndSinkTests.setUp</cite>)</p>
 </div></blockquote>
-<p>random_state : numpy random state object or an integer</p>
+<p>random_state: numpy random state object or an integer</p>
 <blockquote>
 <div><p>numpy random state object : if there is a need
 to maintain the same random seed throughout the
