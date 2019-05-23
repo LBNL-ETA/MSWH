@@ -1,0 +1,20 @@
+\babel@toc {english}{}
+\contentsline {chapter}{\numberline {1}Multiscale Solar Water Heating (MSWH)}{1}{chapter.1}% 
+\contentsline {section}{\numberline {1.1}Scope}{1}{section.1.1}% 
+\contentsline {section}{\numberline {1.2}Usage}{1}{section.1.2}% 
+\contentsline {section}{\numberline {1.3}Features}{1}{section.1.3}% 
+\contentsline {section}{\numberline {1.4}Approach to System Modeling and Simulation}{2}{section.1.4}% 
+\contentsline {chapter}{\numberline {2}Python Code Documentation}{3}{chapter.2}% 
+\contentsline {section}{\numberline {2.1}Subpackages}{3}{section.2.1}% 
+\contentsline {subsection}{\numberline {2.1.1}System and Component Models}{3}{subsection.2.1.1}% 
+\contentsline {subsubsection}{mswh.system.components module}{3}{subsubsection*.3}% 
+\contentsline {subsubsection}{mswh.system.models module}{10}{subsubsection*.26}% 
+\contentsline {subsubsection}{mswh.system.source\_and\_sink module}{12}{subsubsection*.33}% 
+\contentsline {subsection}{\numberline {2.1.2}Tools}{14}{subsection.2.1.2}% 
+\contentsline {subsubsection}{mswh.tools.plots module}{14}{subsubsection*.37}% 
+\contentsline {subsubsection}{mswh.tools.unit\_converters module}{16}{subsubsection*.42}% 
+\contentsline {subsection}{\numberline {2.1.3}Database Communication}{19}{subsection.2.1.3}% 
+\contentsline {subsubsection}{mswh.comm.sql module}{19}{subsubsection*.56}% 
+\contentsline {chapter}{\numberline {3}Copyright Notice}{21}{chapter.3}% 
+\contentsline {chapter}{\numberline {4}License Agreement}{22}{chapter.4}% 
+\contentsline {chapter}{Python Module Index}{23}{section*.63}% 

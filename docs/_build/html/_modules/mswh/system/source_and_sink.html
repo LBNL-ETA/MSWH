@@ -1,0 +1,1043 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>mswh.system.source_and_sink &mdash; Multiscale Solar Water Heating 1.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> Multiscale Solar Water Heating
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../source/models.html">Multiscale Solar Water Heating (MSWH)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../source/modules.html">Python Code Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../source/legal.html">Copyright Notice</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../source/legal.html#license-agreement">License Agreement</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Multiscale Solar Water Heating</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+      <li>mswh.system.source_and_sink</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for mswh.system.source_and_sink</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">calendar</span>
+<span class="kn">import</span> <span class="nn">csv</span>
+<span class="kn">import</span> <span class="nn">datetime</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">os</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="kn">from</span> <span class="nn">mswh.tools.unit_converters</span> <span class="k">import</span> <span class="n">UnitConv</span>
+
+<span class="n">log</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+<span class="n">log</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="SourceAndSink"><a class="viewcode-back" href="../../../source/mswh.system.html#mswh.system.source_and_sink.SourceAndSink">[docs]</a><span class="k">class</span> <span class="nc">SourceAndSink</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Generates timeseries that are inputs to the simulation</span>
+<span class="sd">    model and are known prior to the simulation, such as</span>
+<span class="sd">    outdoor air temperature and end use load profiles.</span>
+
+<span class="sd">    Parameters:</span>
+
+<span class="sd">        input_dfs : a dict of pd dfs</span>
+
+<span class="sd">            Dictionary of input dataframes</span>
+<span class="sd">            as read in from the input db by the Sql class</span>
+<span class="sd">            (see example in</span>
+<span class="sd">            `test_source_and_sink.SourceAndSinkTests.setUp`)</span>
+
+<span class="sd">        random_state : numpy random state object or an integer</span>
+
+<span class="sd">             numpy random state object : if there is a need</span>
+<span class="sd">             to maintain the same random seed throughout the</span>
+<span class="sd">             analysis.</span>
+
+<span class="sd">             integer : a new random state object gets</span>
+<span class="sd">             instanteated at init</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_dfs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">123</span><span class="p">):</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">input_dfs</span>
+
+        <span class="c1"># define the random state object which enbles random draw</span>
+        <span class="c1"># repeatability</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">random_state</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+            <span class="n">msg</span> <span class="o">=</span> <span class="s1">&#39;The user did not provide a numpy random state &#39;</span> \
+                   <span class="s1">&#39;object. Initiating one with a provided or default&#39;</span> \
+                   <span class="s1">&#39; seed value = </span><span class="si">{}</span><span class="s1">.&#39;</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">msg</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">random_state</span><span class="p">))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">random_state</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">RandomState</span><span class="p">(</span><span class="n">random_state</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">random_state</span> <span class="o">=</span> <span class="n">random_state</span>
+
+
+<div class="viewcode-block" id="SourceAndSink.irradiation_and_water_main"><a class="viewcode-back" href="../../../source/mswh.system.html#mswh.system.source_and_sink.SourceAndSink.irradiation_and_water_main">[docs]</a>    <span class="k">def</span> <span class="nf">irradiation_and_water_main</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                                   <span class="n">climate_zone</span><span class="p">,</span>
+                                   <span class="n">collector_tilt</span><span class="o">=</span><span class="s1">&#39;latitude&#39;</span><span class="p">,</span>
+                                   <span class="n">tilt_standard_deviation</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                                   <span class="n">collector_azimuth</span><span class="o">=</span><span class="mf">0.</span><span class="p">,</span>
+                                   <span class="n">azimuth_standard_deviation</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                                   <span class="n">location_ground_reflectance</span><span class="o">=</span><span class="mf">0.16</span><span class="p">,</span>
+                                   <span class="n">solar_constant_Wm2</span><span class="o">=</span><span class="mf">1367.</span><span class="p">,</span>
+                                   <span class="n">method</span><span class="o">=</span><span class="s1">&#39;isotropic diffuse&#39;</span><span class="p">,</span>
+                                   <span class="n">weather_data_source</span><span class="o">=</span><span class="s1">&#39;cec&#39;</span><span class="p">,</span>
+                                   <span class="n">single_row_with_arrays</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Calculates the hourly total incident radiation on a tilted surface</span>
+<span class="sd">        for any climate zone in California. If weather data from the provided</span>
+<span class="sd">        database are passed as `input_dfs`, the user can specify a single</span>
+<span class="sd">        climate.</span>
+
+<span class="sd">        Two separate methods are available for use, with all equations</span>
+<span class="sd">        (along with the equation numbers provided in comments) as provided in</span>
+<span class="sd">        J. A. Duffie and W. A. Beckman, Solar engineering of thermal</span>
+<span class="sd">        processes, 3rd ed. Hoboken, N.J: Wiley, 2006.</span>
+
+<span class="sd">        Parameters:</span>
+
+<span class="sd">            climate_zone: string</span>
+<span class="sd">                String of two digits to indicate the CEC climate zone</span>
+<span class="sd">                being analyzed (&#39;01&#39; to &#39;16&#39;).</span>
+
+<span class="sd">            collector_azimuth: float, default: 0.</span>
+<span class="sd">                The deviation of the projection on a horizontal</span>
+<span class="sd">                plane of the normal to the collector surface from</span>
+<span class="sd">                the local meridian, in degrees.  Allowable values</span>
+<span class="sd">                are between +/- 180 degrees (inclusive).  0 degrees</span>
+<span class="sd">                corresponds to due south, east is negative, and west</span>
+<span class="sd">                is positive.  Default value is 0 degrees (due south).</span>
+
+<span class="sd">            azimuth_standard_deviation: float, default: &#39;None&#39;</span>
+<span class="sd">                Final collector azimuth is a value drawn using a normal</span>
+<span class="sd">                distribution around the collector_azimuth value</span>
+<span class="sd">                with a azimuth_standard_deviation standard deviation.</span>
+<span class="sd">                If set to &#39;None&#39; the final collector azimuth</span>
+<span class="sd">                equals collector_azimuth</span>
+
+<span class="sd">            collector_tilt: float, default: &#39;latitude&#39;</span>
+<span class="sd">                The angle between the plane of the collector and the</span>
+<span class="sd">                horizontal, in degrees.  Allowable values are between</span>
+<span class="sd">                0 and 180 degrees (inclusive), and values greater than</span>
+<span class="sd">                90 degrees mean that the surface has a downward-facing</span>
+<span class="sd">                component. If a default flag is left unchanged, the code</span>
+<span class="sd">                will assign latitude value to the tilt as a good</span>
+<span class="sd">                approximation of a design collector or PV tilt.</span>
+
+<span class="sd">            tilt_standard_deviation: float, default: &#39;None&#39;</span>
+<span class="sd">                Final collector tilt is a value drawn using a normal</span>
+<span class="sd">                distribution around the collector_tilt value</span>
+<span class="sd">                with a tilt_standard_deviation standard deviation.</span>
+<span class="sd">                If set to &#39;None&#39; the final collector tilt</span>
+<span class="sd">                equals collector_tilt</span>
+
+<span class="sd">            location_ground_reflectance: float, default: 0.16</span>
+<span class="sd">                The degree of ground reflectance.  Allowable</span>
+<span class="sd">                values are 0-1 (inclusive), with 0 meaning</span>
+<span class="sd">                no reflectance and 1 meaning very high</span>
+<span class="sd">                reflectance.  For reference, fresh snow has</span>
+<span class="sd">                a high ground reflectance of ~ 0.7.  Default</span>
+<span class="sd">                value is 0.16, which is the annual average surface</span>
+<span class="sd">                albedo averaged across the 16 CEC climate zones.</span>
+
+<span class="sd">            method: string, default: &#39;HDKR anisotropic sky&#39;</span>
+<span class="sd">                Calculation method to use for estimating the total irradiance</span>
+<span class="sd">                on the tilted collector surface. See notes below. Default</span>
+<span class="sd">                value is &#39;HDKR anisotropic sky.&#39;</span>
+
+<span class="sd">            solar_constant_Wm2: float, default: 1367.</span>
+<span class="sd">                Energy from the sun per unit time received on a unit</span>
+<span class="sd">                area of surface perpendicular to the direction of</span>
+<span class="sd">                propagation of the radiation at mean earth-sun distance</span>
+<span class="sd">                outside the atmosphere.  Default value is 1367 W/m^2.</span>
+
+<span class="sd">            weather_data_source: string, default: &#39;cec&#39;</span>
+<span class="sd">                The type of weather data being used to analyze the</span>
+<span class="sd">                climate zone for solar insolation.  Allowable values</span>
+<span class="sd">                are &#39;cec&#39; and &#39;tmy3.&#39;  Default value is &#39;cec.&#39;</span>
+
+<span class="sd">            single_row_with_arrays : boolean</span>
+<span class="sd">                A flag to reformat the resulting dataframe in a row</span>
+<span class="sd">                of data where each resulting 8760 is stored as an</span>
+<span class="sd">                array</span>
+
+<span class="sd">        Returns:</span>
+
+<span class="sd">            data: pd df</span>
+<span class="sd">                  Weather data frame with appended columns:</span>
+<span class="sd">                  &#39;global_tilt_radiation_Wm2&#39;, &#39;water_main_t_F&#39;,</span>
+<span class="sd">                  &#39;water_main_t_C&#39;, &#39;dry_bulb_C&#39;, &#39;wet_bulb_C&#39;, &#39;Tilt&#39;,</span>
+<span class="sd">                  &#39;Azimuth&#39;]</span>
+
+<span class="sd">        Notes:</span>
+
+<span class="sd">            The user can select one of two methods to use for</span>
+<span class="sd">            this calculation:</span>
+
+<span class="sd">            1) &#39;isotropic diffuse&#39;:</span>
+<span class="sd">                   This model was derived by Liu and Jordan (1963).</span>
+<span class="sd">                   All diffuse radiation is assumed to be isotropic.</span>
+<span class="sd">                   It is the simpler and more conservative model,</span>
+<span class="sd">                   and it has been widely used.</span>
+
+<span class="sd">            2) &#39;HDKR anisotropic sky&#39;:</span>
+<span class="sd">                   This model combined methods from Hay and Davies (1980),</span>
+<span class="sd">                   Klucher (1979), and Reindl, et al. (1990).</span>
+<span class="sd">                   Diffuse radiation in this model is represented in two</span>
+<span class="sd">                   parts: isotropic and circumsolar. The model also accounts</span>
+<span class="sd">                   for horizon brightening.</span>
+<span class="sd">                   This is also a simple model, but it has been found to be</span>
+<span class="sd">                   slightly more accurate (and less conservative) than the</span>
+<span class="sd">                   &#39;isotropic diffuse&#39; model.  For collectors tilted toward</span>
+<span class="sd">                   the equator, this model is suggested.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Read in CEC weather data</span>
+        <span class="c1"># Ensure climate_zone is a string and has a leading &#39;0,&#39; if needed</span>
+        <span class="n">climate_zone</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">climate_zone</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">climate_zone</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">climate_zone</span> <span class="o">=</span> <span class="s1">&#39;0&#39;</span> <span class="o">+</span> <span class="n">climate_zone</span>
+
+        <span class="c1"># There are only 16 climate zones in CA, so ensure a valid zone</span>
+        <span class="c1"># is provided.</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">climate_zone_int</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">climate_zone</span><span class="p">)</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="n">msg</span> <span class="o">=</span> <span class="s1">&#39;Climate zone value (</span><span class="si">{}</span><span class="s1">) is not a number.  Please&#39;</span> \
+            <span class="s1">&#39; ensure the climate zone is a number from 1-16, represented&#39;</span> \
+            <span class="s1">&#39; as a string.&#39;</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">msg</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">climate_zone</span><span class="p">))</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="n">climate_zone_int</span> <span class="o">&gt;</span> <span class="mi">16</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">climate_zone_int</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">):</span>
+            <span class="n">msg</span> <span class="o">=</span> <span class="s1">&#39;Climate zone must be a number from 1-16.&#39;</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span>
+
+        <span class="c1"># draw azimuth value from a distribution if standard</span>
+        <span class="c1"># deviation provided</span>
+        <span class="k">if</span> <span class="n">azimuth_standard_deviation</span><span class="p">:</span>
+            <span class="n">azimuth_mean</span> <span class="o">=</span> <span class="n">collector_azimuth</span>
+            <span class="n">collector_azimuth</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">random_state</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span>
+                <span class="n">azimuth_mean</span><span class="p">,</span>
+                <span class="n">azimuth_standard_deviation</span><span class="p">)</span>
+
+        <span class="c1"># Ensure collector_azimuth is between -180 (due east) and</span>
+        <span class="c1"># +180 (due west)</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">collector_azimuth</span> <span class="o">&gt;</span> <span class="mf">180.</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">collector_azimuth</span> <span class="o">&lt;</span> <span class="o">-</span><span class="mf">180.</span><span class="p">):</span>
+            <span class="n">msg</span> <span class="o">=</span> <span class="s1">&#39;Collector azimuth angle must be a number between&#39;</span> \
+            <span class="s1">&#39; -180 degrees (due east) and +180 degrees (due west).&#39;</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span>
+
+        <span class="c1"># Ensure location_ground_reflectance is between 0 and 1.</span>
+        <span class="k">if</span> <span class="p">((</span><span class="n">location_ground_reflectance</span> <span class="o">&gt;</span> <span class="mf">1.</span><span class="p">)</span>
+            <span class="o">|</span> <span class="p">(</span><span class="n">location_ground_reflectance</span> <span class="o">&lt;</span> <span class="mf">0.</span><span class="p">)):</span>
+            <span class="n">msg</span> <span class="o">=</span> <span class="s1">&#39;The annual average location ground reflectance must&#39;</span> \
+            <span class="s1">&#39; be a number between 0. (no reflectance) and 1 (perfect&#39;</span> \
+            <span class="s1">&#39; reflectance).&#39;</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span>
+
+        <span class="c1"># Ensure the provided solar constant is reasonable</span>
+        <span class="k">if</span> <span class="p">((</span><span class="n">solar_constant_Wm2</span> <span class="o">&gt;</span> <span class="mf">1450.</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">solar_constant_Wm2</span> <span class="o">&lt;</span> <span class="mf">1300.</span><span class="p">)):</span>
+            <span class="n">msg</span> <span class="o">=</span> <span class="s1">&#39;The accepted solar constant is near 1367. W/m^2.&#39;</span> \
+            <span class="s1">&#39; Please select a reasonable solar constant value that is&#39;</span> \
+            <span class="s1">&#39; between 1300. and 1450. W/m^2.&#39;</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span>
+
+        <span class="c1"># Ensure selected method type is valid</span>
+        <span class="k">if</span> <span class="p">((</span><span class="n">method</span> <span class="o">!=</span> <span class="s1">&#39;isotropic diffuse&#39;</span><span class="p">)</span> <span class="o">&amp;</span>
+            <span class="p">(</span><span class="n">method</span> <span class="o">!=</span> <span class="s1">&#39;HDKR anisotropic sky&#39;</span><span class="p">)):</span>
+            <span class="n">msg</span> <span class="o">=</span> <span class="s1">&#39;This model only calculated results for two models:&#39;</span> \
+            <span class="s1">&#39; </span><span class="se">\&#39;</span><span class="s1">isotropic diffuse</span><span class="se">\&#39;</span><span class="s1"> and </span><span class="se">\&#39;</span><span class="s1">HDKR anisotropic sky</span><span class="se">\&#39;</span><span class="s1">.&#39;</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span>
+
+        <span class="c1"># Read in header data to get latitude and longitude of given</span>
+        <span class="c1"># climate zone</span>
+        <span class="k">if</span> <span class="n">weather_data_source</span> <span class="o">==</span> <span class="s1">&#39;cec&#39;</span><span class="p">:</span>
+
+            <span class="n">key</span> <span class="o">=</span> <span class="s1">&#39;CTZ&#39;</span> <span class="o">+</span> <span class="n">climate_zone</span> <span class="o">+</span> <span class="s1">&#39;S13b&#39;</span>
+            <span class="n">header</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+                <span class="n">data</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span><span class="mi">20</span><span class="p">,</span> <span class="p">:</span><span class="mi">2</span><span class="p">])</span>
+            <span class="n">header_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span>
+                <span class="n">data</span><span class="o">=</span><span class="n">header</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">,</span>
+                <span class="n">index</span><span class="o">=</span><span class="n">header</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span><span class="mi">0</span><span class="p">])</span>
+            <span class="c1"># latitude in degrees, north = positive</span>
+            <span class="n">latitude</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">header_data</span><span class="p">[</span><span class="s1">&#39;Latitude&#39;</span><span class="p">])</span>
+            <span class="c1"># longitude in degrees, west = positive</span>
+            <span class="n">longitude</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">header_data</span><span class="p">[</span><span class="s1">&#39;Longitude&#39;</span><span class="p">]))</span>
+
+
+        <span class="k">elif</span> <span class="n">weather_data_source</span> <span class="o">==</span> <span class="s1">&#39;tmy3&#39;</span><span class="p">:</span>
+
+            <span class="c1"># Map CEC climate zone to proper tmy3 weather file</span>
+            <span class="n">climate_zone_to_tmy3</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="s1">&#39;01&#39;</span><span class="p">:</span> <span class="s1">&#39;725945&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;02&#39;</span><span class="p">:</span> <span class="s1">&#39;724957&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;03&#39;</span><span class="p">:</span> <span class="s1">&#39;724930&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;04&#39;</span><span class="p">:</span> <span class="s1">&#39;724945&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;05&#39;</span><span class="p">:</span> <span class="s1">&#39;723940&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;06&#39;</span><span class="p">:</span> <span class="s1">&#39;722970&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;07&#39;</span><span class="p">:</span> <span class="s1">&#39;722900&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;08&#39;</span><span class="p">:</span> <span class="s1">&#39;722976&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;09&#39;</span><span class="p">:</span> <span class="s1">&#39;722880&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;10&#39;</span><span class="p">:</span> <span class="s1">&#39;722869&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;11&#39;</span><span class="p">:</span> <span class="s1">&#39;725910&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;12&#39;</span><span class="p">:</span> <span class="s1">&#39;724830&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;13&#39;</span><span class="p">:</span> <span class="s1">&#39;723890&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;14&#39;</span><span class="p">:</span> <span class="s1">&#39;723820&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;15&#39;</span><span class="p">:</span> <span class="s1">&#39;722868&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;16&#39;</span><span class="p">:</span> <span class="s1">&#39;725845&#39;</span>
+            <span class="p">}</span>
+
+            <span class="n">key</span> <span class="o">=</span> <span class="n">climate_zone_to_tmy3</span><span class="p">[</span><span class="n">climate_zone</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;TY&#39;</span>
+            <span class="c1"># latitude in degrees, north = positive</span>
+            <span class="n">latitude</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>
+            <span class="c1"># longitude in degrees, west = positive</span>
+            <span class="n">longitude</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">]))</span>
+
+
+        <span class="c1"># set the tilt to latitude if no custom tilt got provided</span>
+        <span class="k">if</span> <span class="n">collector_tilt</span> <span class="o">==</span> <span class="s1">&#39;latitude&#39;</span><span class="p">:</span>
+            <span class="n">collector_tilt</span> <span class="o">=</span> <span class="n">latitude</span>
+
+        <span class="c1"># check tilt data type</span>
+        <span class="k">elif</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">collector_tilt</span><span class="p">,</span> <span class="nb">float</span><span class="p">):</span>
+            <span class="n">msg</span> <span class="o">=</span> <span class="s1">&#39;Collector tilt value (</span><span class="si">{}</span><span class="s1">) is neither a float nor&#39;</span> \
+            <span class="s1">&#39; </span><span class="se">\&#39;</span><span class="s1">latitude</span><span class="se">\&#39;</span><span class="s1">. Please use an allowed value.&#39;</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">msg</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">collector_tilt</span><span class="p">))</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span>
+
+        <span class="c1"># draw tilt value from a distribution if standard deviation provided</span>
+        <span class="k">if</span> <span class="n">tilt_standard_deviation</span><span class="p">:</span>
+            <span class="n">tilt_mean</span> <span class="o">=</span> <span class="n">collector_tilt</span>
+            <span class="n">collector_tilt</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">random_state</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span>
+                <span class="n">tilt_mean</span><span class="p">,</span>
+                <span class="n">tilt_standard_deviation</span><span class="p">)</span>
+
+        <span class="c1"># Read in actual weather data for the given climate zone</span>
+        <span class="k">if</span> <span class="n">weather_data_source</span> <span class="o">==</span> <span class="s1">&#39;cec&#39;</span><span class="p">:</span>
+
+            <span class="n">key</span> <span class="o">=</span> <span class="s1">&#39;CTZ&#39;</span> <span class="o">+</span> <span class="n">climate_zone</span> <span class="o">+</span> <span class="s1">&#39;S13b&#39;</span>
+            <span class="n">solar_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+                <span class="n">data</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">26</span><span class="p">:,</span> <span class="p">:]</span><span class="o">.</span><span class="n">values</span><span class="p">,</span>
+                <span class="n">columns</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">25</span><span class="p">,</span> <span class="p">:])</span>
+
+            <span class="n">solar_data</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">solar_data</span><span class="o">.</span><span class="n">columns</span><span class="p">]</span>
+
+            <span class="c1"># deal with data formats as needed</span>
+            <span class="n">solar_data</span> <span class="o">=</span> <span class="n">solar_data</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
+            <span class="n">solar_data</span><span class="p">[</span><span class="n">solar_data</span><span class="o">.</span><span class="n">columns</span><span class="p">[:</span><span class="mi">3</span><span class="p">]]</span> <span class="o">=</span> \
+                <span class="n">solar_data</span><span class="p">[</span><span class="n">solar_data</span><span class="o">.</span><span class="n">columns</span><span class="p">[:</span><span class="mi">3</span><span class="p">]]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+
+            <span class="c1"># Rename solar columns</span>
+            <span class="n">solar_data</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span>
+                <span class="s1">&#39;global horizontal radiation&#39;</span><span class="p">:</span> <span class="s1">&#39;global_horizontal_radiation_Wm2&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;direct normal radiation&#39;</span><span class="p">:</span> <span class="s1">&#39;direct_normal_radiation_Wm2&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;diffuse horiz radiation&#39;</span><span class="p">:</span> <span class="s1">&#39;diffuse_horizontal_radiation_Wm2&#39;</span><span class="p">},</span>
+                <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="c1"># Convert solar units from Btu/hr/ft^2 to W/m^2</span>
+            <span class="n">solar_data</span><span class="o">.</span><span class="n">global_horizontal_radiation_Wm2</span> <span class="o">*=</span> <span class="mf">3.15459075</span>
+            <span class="n">solar_data</span><span class="o">.</span><span class="n">direct_normal_radiation_Wm2</span> <span class="o">*=</span> <span class="mf">3.15459075</span>
+            <span class="n">solar_data</span><span class="o">.</span><span class="n">diffuse_horizontal_radiation_Wm2</span> <span class="o">*=</span> <span class="mf">3.15459075</span>
+
+            <span class="n">solar_data</span><span class="p">[</span><span class="s1">&#39;climate_zone&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">climate_zone</span>
+            <span class="c1"># The hour data from the CEC is for the end of the hour;</span>
+            <span class="c1"># we&#39;re setting it to be the start of the hour</span>
+            <span class="n">solar_data</span><span class="o">.</span><span class="n">hour</span> <span class="o">-=</span> <span class="mi">1</span>
+
+        <span class="k">elif</span> <span class="n">weather_data_source</span> <span class="o">==</span> <span class="s1">&#39;tmy3&#39;</span><span class="p">:</span>
+
+            <span class="n">solar_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">2</span><span class="p">:,</span> <span class="p">:]</span>
+            <span class="n">solar_data</span> <span class="o">=</span> <span class="n">solar_data</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">to_numeric</span><span class="p">,</span> <span class="n">errors</span><span class="o">=</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span>
+            <span class="n">solar_data</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="p">:]</span>
+
+            <span class="n">solar_data</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">solar_data</span><span class="o">.</span><span class="n">columns</span><span class="p">]</span>
+            <span class="c1"># Rename solar columns</span>
+            <span class="n">solar_data</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span>
+                <span class="s1">&#39;etr (w/m^2)&#39;</span><span class="p">:</span> <span class="s1">&#39;extraterrestrial_horizontal_radiation_Wm2&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;etrn (w/m^2)&#39;</span><span class="p">:</span> <span class="s1">&#39;extraterrestrial_normal_radiation_Wm2&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;ghi (w/m^2)&#39;</span><span class="p">:</span> <span class="s1">&#39;global_horizontal_radiation_Wm2&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;dni (w/m^2)&#39;</span><span class="p">:</span> <span class="s1">&#39;direct_normal_radiation_Wm2&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;dhi (w/m^2)&#39;</span><span class="p">:</span> <span class="s1">&#39;diffuse_horizontal_radiation_Wm2&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;alb (unitless)&#39;</span><span class="p">:</span> <span class="s1">&#39;surface_albedo&#39;</span><span class="p">},</span>
+                <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+            <span class="n">solar_data</span><span class="p">[</span><span class="s1">&#39;month&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">solar_data</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span>
+                <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="s1">&#39;date (mm/dd/yyyy)&#39;</span><span class="p">][:</span><span class="mi">2</span><span class="p">]),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+            <span class="n">solar_data</span><span class="p">[</span><span class="s1">&#39;day&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">solar_data</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span>
+                <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="s1">&#39;date (mm/dd/yyyy)&#39;</span><span class="p">][</span><span class="mi">3</span><span class="p">:</span><span class="mi">5</span><span class="p">]),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+            <span class="n">solar_data</span><span class="p">[</span><span class="s1">&#39;hour&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">solar_data</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span>
+                <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="s1">&#39;time (hh:mm)&#39;</span><span class="p">][:</span><span class="mi">2</span><span class="p">])</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+            <span class="c1"># The TMY3 data contain surface albedo values that can be used</span>
+            <span class="c1"># Ensure missing values (coded as -9900) are replaced with the</span>
+            <span class="c1"># average of the available data</span>
+            <span class="n">solar_data</span><span class="o">.</span><span class="n">surface_albedo</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span>
+                <span class="n">solar_data</span><span class="o">.</span><span class="n">surface_albedo</span> <span class="o">==</span> <span class="o">-</span><span class="mf">9900.0</span><span class="p">,</span>
+                <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span>
+                <span class="n">solar_data</span><span class="o">.</span><span class="n">surface_albedo</span><span class="p">)</span>
+
+            <span class="n">solar_data</span><span class="o">.</span><span class="n">surface_albedo</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span>
+                <span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">solar_data</span><span class="o">.</span><span class="n">surface_albedo</span><span class="p">),</span>
+                <span class="n">solar_data</span><span class="o">.</span><span class="n">surface_albedo</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span>
+                <span class="n">solar_data</span><span class="o">.</span><span class="n">surface_albedo</span><span class="p">)</span>
+            <span class="n">location_ground_reflectance</span> <span class="o">=</span> <span class="n">solar_data</span><span class="o">.</span><span class="n">surface_albedo</span><span class="o">.</span><span class="n">values</span>
+
+        <span class="n">solar_data</span><span class="p">[</span><span class="s1">&#39;day_number_of_year&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">solar_data</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span>
+            <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2018</span><span class="p">,</span> <span class="n">x</span><span class="o">.</span><span class="n">month</span><span class="p">,</span> <span class="n">x</span><span class="o">.</span><span class="n">day</span><span class="p">)</span><span class="o">.</span><span class="n">timetuple</span><span class="p">()</span><span class="o">.</span><span class="n">tm_yday</span><span class="p">,</span>
+            <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+        <span class="n">solar_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_add_season_column</span><span class="p">(</span><span class="n">solar_data</span><span class="p">)</span>
+
+        <span class="c1"># Calculate solar time:</span>
+        <span class="c1"># Solar time - standard time [minutes]= 4 *</span>
+        <span class="c1">#     (longitude_standard - longitude_location) + E</span>
+        <span class="c1">#    where: longitude_standard = 15 * (PST-GMT),</span>
+        <span class="c1"># and PST-GMT is always -8 hours</span>
+        <span class="c1"># Calculate E (equation of time, in minutes)</span>
+        <span class="n">B</span> <span class="o">=</span> <span class="p">(</span><span class="n">solar_data</span><span class="o">.</span><span class="n">day_number_of_year</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="mf">360.</span> <span class="o">/</span> <span class="mf">365.</span> <span class="c1"># Equation 1.4.2</span>
+        <span class="n">E_minutes</span> <span class="o">=</span> <span class="mf">229.2</span> <span class="o">*</span> <span class="p">(</span><span class="mf">0.000075</span> <span class="o">+</span>
+            <span class="p">(</span><span class="mf">0.001868</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">B</span><span class="p">))</span> <span class="o">-</span>
+            <span class="p">(</span><span class="mf">0.032077</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">B</span><span class="p">))</span> <span class="o">-</span>
+            <span class="p">(</span><span class="mf">0.014615</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">B</span><span class="p">))</span> <span class="o">-</span>
+            <span class="p">(</span><span class="mf">0.04089</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">B</span><span class="p">)))</span> <span class="c1"># Equation 1.5.3</span>
+
+        <span class="c1"># REMEMBER: longitudes are in degrees West, meaning they should</span>
+        <span class="c1"># both be positive here for California!</span>
+        <span class="n">minutes_to_add</span> <span class="o">=</span> <span class="p">(</span><span class="mf">4.</span> <span class="o">*</span> <span class="p">((</span><span class="mf">15.</span> <span class="o">*</span> <span class="mf">8.</span><span class="p">)</span> <span class="o">-</span> <span class="n">longitude</span><span class="p">))</span> <span class="o">+</span> <span class="n">E_minutes</span>
+        <span class="n">solar_time</span> <span class="o">=</span> <span class="n">solar_data</span><span class="o">.</span><span class="n">hour</span> <span class="o">+</span> <span class="n">minutes_to_add</span> <span class="o">/</span> <span class="mf">60.</span> <span class="c1"># in hours</span>
+
+        <span class="c1"># Calculate the hour angle</span>
+        <span class="c1"># hour_angle = 15 degrees per hour away from solar noon (12),</span>
+        <span class="c1"># with morning being negative</span>
+        <span class="n">hour_angle_start</span> <span class="o">=</span> <span class="mf">15.</span> <span class="o">*</span> <span class="p">(</span><span class="n">solar_time</span> <span class="o">-</span> <span class="mf">12.</span><span class="p">)</span>
+        <span class="n">hour_angle_end</span> <span class="o">=</span> <span class="mf">15.</span> <span class="o">*</span> <span class="p">(</span><span class="n">solar_time</span> <span class="o">+</span> <span class="mf">1.</span> <span class="o">-</span> <span class="mf">12.</span><span class="p">)</span>
+
+        <span class="c1"># Calculate the declination angle for the day (declination_angle)</span>
+        <span class="n">declination_angle</span> <span class="o">=</span> <span class="p">(</span><span class="mf">180.</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="mf">0.006918</span> <span class="o">-</span>
+            <span class="p">(</span><span class="mf">0.399912</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">B</span><span class="p">)))</span> <span class="o">+</span>
+            <span class="p">(</span><span class="mf">0.070257</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">B</span><span class="p">)))</span> <span class="o">-</span>
+            <span class="p">(</span><span class="mf">0.006758</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">B</span><span class="p">)))</span> <span class="o">+</span>
+            <span class="p">(</span><span class="mf">0.000907</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">B</span><span class="p">)))</span> <span class="o">-</span>
+            <span class="p">(</span><span class="mf">0.002697</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="mi">3</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">B</span><span class="p">)))</span> <span class="o">+</span>
+            <span class="p">(</span><span class="mf">0.001480</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">3</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">B</span><span class="p">))))</span> <span class="c1"># Equation 1.6.1b</span>
+
+        <span class="c1"># Calculate the ratio of beam radiation to that on a horizontal</span>
+        <span class="c1"># surface for the collector, averaged over the hour of consideration</span>
+        <span class="c1"># (to avoid mathematical issues that can arise for hours in which</span>
+        <span class="c1"># sunrise or sunset occurs)</span>
+        <span class="n">R_b_a</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="p">(((</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">declination_angle</span><span class="p">))</span> <span class="o">*</span>
+             <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">latitude</span><span class="p">))</span> <span class="o">*</span>
+             <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">collector_tilt</span><span class="p">)))</span> <span class="o">-</span>
+            <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">declination_angle</span><span class="p">))</span> <span class="o">*</span>
+             <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">latitude</span><span class="p">))</span> <span class="o">*</span>
+             <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">collector_tilt</span><span class="p">))</span> <span class="o">*</span>
+             <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">collector_azimuth</span><span class="p">))))</span> <span class="o">*</span>
+             <span class="n">np</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">hour_angle_end</span> <span class="o">-</span> <span class="n">hour_angle_start</span><span class="p">))</span> <span class="o">+</span>
+            <span class="p">(((</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">declination_angle</span><span class="p">))</span> <span class="o">*</span>
+             <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">latitude</span><span class="p">))</span> <span class="o">*</span>
+             <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">collector_tilt</span><span class="p">)))</span> <span class="o">+</span>
+            <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">declination_angle</span><span class="p">))</span> <span class="o">*</span>
+             <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">latitude</span><span class="p">))</span> <span class="o">*</span>
+             <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">collector_tilt</span><span class="p">))</span> <span class="o">*</span>
+             <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">collector_azimuth</span><span class="p">))))</span> <span class="o">*</span>
+            <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">hour_angle_end</span><span class="p">))</span> <span class="o">-</span>
+             <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">hour_angle_start</span><span class="p">))))</span> <span class="o">-</span>
+            <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">declination_angle</span><span class="p">))</span> <span class="o">*</span>
+             <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">collector_tilt</span><span class="p">))</span> <span class="o">*</span>
+             <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">collector_azimuth</span><span class="p">))</span> <span class="o">*</span>
+            <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">hour_angle_end</span><span class="p">))</span> <span class="o">-</span>
+             <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">hour_angle_start</span><span class="p">)))))</span>
+        <span class="n">R_b_b</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">latitude</span><span class="p">))</span> <span class="o">*</span>
+              <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">declination_angle</span><span class="p">)))</span> <span class="o">*</span>
+             <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">hour_angle_end</span><span class="p">))</span> <span class="o">-</span>
+              <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">hour_angle_start</span><span class="p">))))</span> <span class="o">+</span>
+            <span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">latitude</span><span class="p">))</span> <span class="o">*</span>
+              <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">declination_angle</span><span class="p">)))</span> <span class="o">*</span>
+             <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">hour_angle_end</span> <span class="o">-</span> <span class="n">hour_angle_start</span><span class="p">))))</span>
+        <span class="n">R_b_ave</span> <span class="o">=</span> <span class="n">R_b_a</span> <span class="o">/</span> <span class="n">R_b_b</span> <span class="c1"># Equation 2.14.6</span>
+
+
+        <span class="c1"># Calculate horizontal radiation in absense of atmosphere</span>
+        <span class="c1"># (Equation 1.10.4, [J/m^2])</span>
+        <span class="k">if</span> <span class="n">weather_data_source</span> <span class="o">==</span> <span class="s1">&#39;cec&#39;</span><span class="p">:</span>
+            <span class="n">extraterrestrial_horizontal_radiation_Jm2</span> <span class="o">=</span> <span class="p">(</span>
+                <span class="mf">12.</span> <span class="o">*</span> <span class="mf">3600.</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">solar_constant_Wm2</span> <span class="o">*</span>
+                <span class="p">(</span><span class="mf">1.</span> <span class="o">+</span> <span class="mf">0.033</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="mf">360.</span> <span class="o">*</span>
+                 <span class="n">solar_data</span><span class="o">.</span><span class="n">day_number_of_year</span> <span class="o">/</span> <span class="mf">365.</span><span class="p">))</span> <span class="o">*</span>
+                <span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">latitude</span><span class="p">))</span> <span class="o">*</span>
+                  <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">declination_angle</span><span class="p">))</span> <span class="o">*</span>
+                 <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">hour_angle_end</span><span class="p">))</span> <span class="o">-</span>
+                  <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">hour_angle_start</span><span class="p">))))</span> <span class="o">+</span>
+                 <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mf">180.</span> <span class="o">*</span> <span class="p">(</span><span class="n">hour_angle_end</span> <span class="o">-</span> <span class="n">hour_angle_start</span><span class="p">)</span> <span class="o">*</span>
+                  <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">latitude</span><span class="p">))</span> <span class="o">*</span>
+                  <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">declination_angle</span><span class="p">)))))</span>
+            <span class="c1"># Convert to W/m^2 and ensure the values aren&#39;t less than 0.</span>
+            <span class="n">solar_data</span><span class="p">[</span><span class="s1">&#39;extraterrestrial_horizontal_radiation_Wm2&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+                <span class="n">extraterrestrial_horizontal_radiation_Jm2</span> <span class="o">*</span> <span class="mf">0.000277777778</span><span class="p">)</span>
+            <span class="n">solar_data</span><span class="o">.</span><span class="n">extraterrestrial_horizontal_radiation_Wm2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span>
+                <span class="n">solar_data</span><span class="o">.</span><span class="n">extraterrestrial_horizontal_radiation_Wm2</span> <span class="o">&lt;</span> <span class="mf">0.</span><span class="p">,</span>
+                <span class="mf">0.</span><span class="p">,</span>
+                <span class="n">solar_data</span><span class="o">.</span><span class="n">extraterrestrial_horizontal_radiation_Wm2</span><span class="p">)</span>
+
+        <span class="c1"># Calculate beam radiation on a horizontal plane</span>
+        <span class="n">solar_data</span><span class="p">[</span><span class="s1">&#39;beam_horizontal_radiation_Wm2&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">solar_data</span><span class="o">.</span><span class="n">global_horizontal_radiation_Wm2</span> <span class="o">-</span>
+            <span class="n">solar_data</span><span class="o">.</span><span class="n">diffuse_horizontal_radiation_Wm2</span><span class="p">)</span>
+
+        <span class="c1"># Calculate total radiation on a tilted surface using the isotropic</span>
+        <span class="c1"># diffuse model.</span>
+        <span class="k">if</span> <span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;isotropic diffuse&#39;</span><span class="p">:</span>
+            <span class="n">solar_data</span><span class="p">[</span><span class="s1">&#39;global_tilt_radiation_Wm2&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+                <span class="p">(</span><span class="n">solar_data</span><span class="o">.</span><span class="n">beam_horizontal_radiation_Wm2</span> <span class="o">*</span> <span class="n">R_b_ave</span><span class="p">)</span> <span class="o">+</span>
+                <span class="p">(</span><span class="n">solar_data</span><span class="o">.</span><span class="n">diffuse_horizontal_radiation_Wm2</span> <span class="o">*</span> <span class="p">((</span><span class="mi">1</span> <span class="o">+</span>
+                 <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">collector_tilt</span><span class="p">)))</span> <span class="o">/</span> <span class="mf">2.0</span><span class="p">))</span> <span class="o">+</span>
+                <span class="p">(</span><span class="n">solar_data</span><span class="o">.</span><span class="n">global_horizontal_radiation_Wm2</span> <span class="o">*</span>
+                 <span class="n">location_ground_reflectance</span> <span class="o">*</span> <span class="p">((</span><span class="mi">1</span> <span class="o">-</span>
+                 <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">collector_tilt</span><span class="p">)))</span> <span class="o">/</span> <span class="mf">2.0</span><span class="p">)))</span>
+                 <span class="c1"># Equation 2.15.1</span>
+        <span class="k">elif</span> <span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;HDKR anisotropic sky&#39;</span><span class="p">:</span>
+            <span class="c1"># Calculate the anisotropy index</span>
+            <span class="n">anisotropy_index</span> <span class="o">=</span> <span class="p">(</span><span class="n">solar_data</span><span class="o">.</span><span class="n">beam_horizontal_radiation_Wm2</span> <span class="o">/</span>
+            <span class="n">solar_data</span><span class="o">.</span><span class="n">extraterrestrial_horizontal_radiation_Wm2</span><span class="p">)</span>
+            <span class="c1"># Equation 2.16.3</span>
+            <span class="c1"># Calculate the modulating factor, f</span>
+            <span class="n">f</span> <span class="o">=</span> <span class="p">(</span><span class="n">solar_data</span><span class="o">.</span><span class="n">beam_horizontal_radiation_Wm2</span> <span class="o">/</span>
+                <span class="n">solar_data</span><span class="o">.</span><span class="n">global_horizontal_radiation_Wm2</span><span class="p">)</span> <span class="o">**</span> <span class="mf">0.5</span>
+                <span class="c1"># Equation 2.16.6</span>
+            <span class="n">solar_data</span><span class="p">[</span><span class="s1">&#39;global_tilt_radiation_Wm2&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+                <span class="p">((</span><span class="n">solar_data</span><span class="o">.</span><span class="n">beam_horizontal_radiation_Wm2</span> <span class="o">+</span>
+                <span class="p">(</span><span class="n">solar_data</span><span class="o">.</span><span class="n">diffuse_horizontal_radiation_Wm2</span> <span class="o">*</span>
+                 <span class="n">anisotropy_index</span><span class="p">))</span> <span class="o">*</span>
+                <span class="n">R_b_ave</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">solar_data</span><span class="o">.</span><span class="n">diffuse_horizontal_radiation_Wm2</span> <span class="o">*</span>
+                <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">anisotropy_index</span><span class="p">)</span> <span class="o">*</span>
+                <span class="p">((</span><span class="mi">1</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">collector_tilt</span><span class="p">)))</span> <span class="o">/</span> <span class="mf">2.0</span><span class="p">)</span>
+                <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="p">(</span><span class="n">f</span> <span class="o">*</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">collector_tilt</span> <span class="o">/</span> <span class="mf">2.0</span><span class="p">))</span> <span class="o">**</span>
+                <span class="mi">3</span><span class="p">))))</span> <span class="o">+</span>
+                <span class="p">(</span><span class="n">solar_data</span><span class="o">.</span><span class="n">global_horizontal_radiation_Wm2</span> <span class="o">*</span>
+                <span class="n">location_ground_reflectance</span> <span class="o">*</span>
+                <span class="p">((</span><span class="mi">1</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">collector_tilt</span><span class="p">)))</span> <span class="o">/</span> <span class="mf">2.0</span><span class="p">)))</span>
+                <span class="c1"># Equation 2.16.7</span>
+
+        <span class="c1"># You can&#39;t get negative energy collection</span>
+        <span class="c1"># It&#39;s also probably unreasonable to expect &gt; 2000 W/m^2</span>
+        <span class="c1"># In comparisons with PVWatts results, when our model predicts</span>
+        <span class="c1"># &gt; 2000 W/m^2, it is due to a mathematical</span>
+        <span class="c1"># anomaly where the actual result should be closer to 0.</span>
+        <span class="n">solar_data</span><span class="o">.</span><span class="n">global_tilt_radiation_Wm2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span>
+            <span class="p">(</span><span class="n">solar_data</span><span class="o">.</span><span class="n">global_tilt_radiation_Wm2</span> <span class="o">&lt;</span> <span class="mf">0.</span><span class="p">)</span> <span class="o">|</span>
+            <span class="p">(</span><span class="n">solar_data</span><span class="o">.</span><span class="n">global_tilt_radiation_Wm2</span> <span class="o">&gt;=</span> <span class="mf">2000.</span><span class="p">),</span>
+            <span class="mf">0.</span><span class="p">,</span>
+            <span class="n">solar_data</span><span class="o">.</span><span class="n">global_tilt_radiation_Wm2</span><span class="p">)</span>
+
+        <span class="c1"># To avoid NaNs and other weird values, set the result to 0 if global</span>
+        <span class="c1"># and diffuse horizontal are both 0</span>
+        <span class="n">solar_data</span><span class="o">.</span><span class="n">global_tilt_radiation_Wm2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span>
+            <span class="p">(</span><span class="n">solar_data</span><span class="o">.</span><span class="n">global_horizontal_radiation_Wm2</span> <span class="o">==</span> <span class="mf">0.</span><span class="p">)</span> <span class="o">&amp;</span>
+            <span class="p">(</span><span class="n">solar_data</span><span class="o">.</span><span class="n">diffuse_horizontal_radiation_Wm2</span> <span class="o">==</span> <span class="mf">0.</span><span class="p">),</span>
+            <span class="mf">0.</span><span class="p">,</span>
+            <span class="n">solar_data</span><span class="o">.</span><span class="n">global_tilt_radiation_Wm2</span><span class="p">)</span>
+
+        <span class="c1"># Read in water mains temperature data</span>
+        <span class="c1"># We only need one hour&#39;s worth of data for each month and location</span>
+        <span class="c1"># because the provided</span>
+        <span class="c1"># temperatures are equal for each hour of the day.</span>
+        <span class="n">water_mains_data</span> <span class="o">=</span> \
+            <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;Appendix_54B_Schedules_WaterMain&#39;</span><span class="p">]</span><span class="o">.</span>\
+            <span class="n">iloc</span><span class="p">[</span><span class="mi">3</span><span class="p">:,</span> <span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">]</span>
+
+        <span class="n">water_mains_data</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;climate_zone_water&#39;</span><span class="p">,</span> <span class="s1">&#39;month_abb&#39;</span><span class="p">,</span>
+                                    <span class="s1">&#39;water_main_t_F&#39;</span><span class="p">]</span>
+
+        <span class="c1"># Fill the climate zone forward</span>
+        <span class="c1"># Only get water mains data for the climate zone we are analyzing</span>
+        <span class="n">water_mains_data</span> <span class="o">=</span> <span class="n">water_mains_data</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s1">&#39;ffill&#39;</span><span class="p">)</span>
+        <span class="n">water_mains_data</span> <span class="o">=</span> <span class="n">water_mains_data</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span>
+            <span class="n">water_mains_data</span><span class="o">.</span><span class="n">climate_zone_water</span> <span class="o">==</span> <span class="s1">&#39;WaterMainCZ&#39;</span> <span class="o">+</span> <span class="n">climate_zone</span><span class="p">]</span>
+
+        <span class="c1"># Convert calendar abbreviation to calendar number</span>
+        <span class="n">water_mains_data</span><span class="p">[</span><span class="s1">&#39;month_num&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">water_mains_data</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span>
+            <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">list</span><span class="p">(</span><span class="n">calendar</span><span class="o">.</span><span class="n">month_abbr</span><span class="p">)</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">month_abb</span><span class="p">),</span>
+            <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+        <span class="c1"># Drop unused columns and merge with the weather data</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span>
+            <span class="n">left</span><span class="o">=</span><span class="n">solar_data</span><span class="p">,</span>
+            <span class="n">right</span><span class="o">=</span><span class="n">water_mains_data</span><span class="p">,</span>
+            <span class="n">how</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">,</span>
+            <span class="n">left_on</span><span class="o">=</span><span class="s1">&#39;month&#39;</span><span class="p">,</span>
+            <span class="n">right_on</span><span class="o">=</span><span class="s1">&#39;month_num&#39;</span><span class="p">)</span>
+
+        <span class="c1"># convert temperatures from F to C</span>
+        <span class="n">data</span><span class="p">[</span><span class="s1">&#39;water_main_t_C&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">UnitConv</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;water_main_t_F&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">degF_degC</span><span class="p">(</span>
+             <span class="n">unit_in</span><span class="o">=</span><span class="s1">&#39;degF&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">weather_data_source</span> <span class="o">==</span> <span class="s1">&#39;cec&#39;</span><span class="p">:</span>
+            <span class="n">data</span><span class="p">[</span><span class="s1">&#39;dry_bulb_C&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">UnitConv</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;dry bulb&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">degF_degC</span><span class="p">(</span>
+            <span class="n">unit_in</span><span class="o">=</span><span class="s1">&#39;degF&#39;</span><span class="p">)</span>
+            <span class="n">data</span><span class="p">[</span><span class="s1">&#39;wet_bulb_C&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">UnitConv</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;wet bulb&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">degF_degC</span><span class="p">(</span>
+            <span class="n">unit_in</span><span class="o">=</span><span class="s1">&#39;degF&#39;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">weather_data_source</span> <span class="o">==</span> <span class="s1">&#39;tmy3&#39;</span><span class="p">:</span>
+            <span class="n">data</span><span class="p">[</span><span class="s1">&#39;dry_bulb_C&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;dry-bulb (c)&#39;</span><span class="p">]</span>
+            <span class="c1"># Derive wet bulb temperature from dry bulb temperature and</span>
+            <span class="c1"># relative humidity</span>
+            <span class="n">data</span><span class="p">[</span><span class="s1">&#39;wet_bulb_C&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_wet_bulb_approx</span><span class="p">(</span>
+                <span class="n">data</span><span class="p">[</span><span class="s1">&#39;dry_bulb_C&#39;</span><span class="p">],</span>
+                <span class="n">data</span><span class="p">[</span><span class="s1">&#39;rhum (%)&#39;</span><span class="p">])</span>
+
+        <span class="c1"># add collector tilt value</span>
+        <span class="n">data</span><span class="p">[</span><span class="s1">&#39;Tilt&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">collector_tilt</span>
+        <span class="n">data</span><span class="p">[</span><span class="s1">&#39;Azimuth&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">collector_azimuth</span>
+
+        <span class="n">data</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span>
+            <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;climate_zone_water&#39;</span><span class="p">,</span>
+                     <span class="s1">&#39;month_abb&#39;</span><span class="p">,</span>
+                     <span class="s1">&#39;month_num&#39;</span><span class="p">],</span>
+            <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">single_row_with_arrays</span><span class="p">:</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pack_timeseries</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">data</span></div>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">_wet_bulb_approx</span><span class="p">(</span><span class="n">dry_bulb_C</span><span class="p">,</span> <span class="n">rel_hum</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Converts dry bulb temperature to wet bulb by using an approximation</span>
+<span class="sd">        provided in this paper (Roland Stull):</span>
+<span class="sd">        https://journals.ametsoc.org/doi/pdf/10.1175/JAMC-D-11-0143.1</span>
+
+<span class="sd">        The provided formula is designed for a pressure like at sea level</span>
+<span class="sd">        of 1013.25 hPa.</span>
+
+<span class="sd">        Parameters:</span>
+
+<span class="sd">            dry_bulb_C: pd df</span>
+<span class="sd">                Timeseries containing dry bulb temperature in Celsius [degC]</span>
+<span class="sd">            rel_hum: pd df</span>
+<span class="sd">                Timeseries containing relative Humidity in percent (0 - 100)</span>
+
+<span class="sd">        Returns:</span>
+
+<span class="sd">            wet_bulb_C: pd df</span>
+<span class="sd">                Timeseries containing wet bulb temperature in Celcius [degC]</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Calculate wet bulb temperature</span>
+        <span class="n">wet_bulb_C</span> <span class="o">=</span> <span class="p">(</span><span class="n">dry_bulb_C</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">arctan</span><span class="p">(</span>
+            <span class="mf">0.151977</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">power</span><span class="p">((</span><span class="n">rel_hum</span> <span class="o">+</span> <span class="mf">8.313659</span><span class="p">),</span><span class="mf">0.5</span><span class="p">))</span> <span class="o">+</span>
+            <span class="n">np</span><span class="o">.</span><span class="n">arctan</span><span class="p">(</span><span class="n">dry_bulb_C</span> <span class="o">+</span> <span class="n">rel_hum</span><span class="p">)</span> <span class="o">-</span>
+            <span class="n">np</span><span class="o">.</span><span class="n">arctan</span><span class="p">(</span><span class="n">rel_hum</span> <span class="o">-</span> <span class="mf">1.676331</span><span class="p">)</span> <span class="o">+</span>
+            <span class="mf">0.00391838</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">power</span><span class="p">(</span><span class="n">rel_hum</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">)</span> <span class="o">*</span>
+            <span class="n">np</span><span class="o">.</span><span class="n">arctan</span><span class="p">(</span><span class="mf">0.023101</span> <span class="o">*</span> <span class="n">rel_hum</span><span class="p">)</span> <span class="o">-</span> <span class="mf">4.686035</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">wet_bulb_C</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">_pack_timeseries</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">row_index</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Converts a dataframe of timeseries data</span>
+<span class="sd">        with timestep values in each row to</span>
+<span class="sd">        a dataframe with a single row such that the timeseries</span>
+<span class="sd">        are packed as a list into each cell in that single row.</span>
+
+<span class="sd">        Parameters:</span>
+
+<span class="sd">            df: pd df</span>
+<span class="sd">                Timeseries data with timeseries headers</span>
+<span class="sd">                as column labels and timestep indices as</span>
+<span class="sd">                row indices</span>
+
+<span class="sd">            row_index: int or str</span>
+<span class="sd">                Default: 0</span>
+<span class="sd">                Row index for the returned single row of data</span>
+
+<span class="sd">        Returns:</span>
+
+<span class="sd">            single_row_df: pd df</span>
+<span class="sd">                Timeseries data packed as a list in each cell of</span>
+<span class="sd">                a single df row</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">single_row_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+            <span class="n">columns</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">,</span>
+            <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="n">row_index</span><span class="p">])</span>
+
+        <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+            <span class="n">single_row_df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]]</span>
+
+        <span class="k">return</span> <span class="n">single_row_df</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">_add_season_column</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Adds a season column to a timeseries</span>
+<span class="sd">        dataframe containing a month column.</span>
+
+<span class="sd">        Parameters:</span>
+
+<span class="sd">            df : pd df</span>
+<span class="sd">                Timeseries data with a month column</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">map</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">:</span> <span class="s1">&#39;winter&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span> <span class="s1">&#39;winter&#39;</span><span class="p">,</span>
+               <span class="mi">3</span><span class="p">:</span> <span class="s1">&#39;winter&#39;</span><span class="p">,</span> <span class="mi">4</span><span class="p">:</span> <span class="s1">&#39;winter&#39;</span><span class="p">,</span>
+               <span class="mi">5</span><span class="p">:</span> <span class="s1">&#39;summer&#39;</span><span class="p">,</span> <span class="mi">6</span><span class="p">:</span> <span class="s1">&#39;summer&#39;</span><span class="p">,</span>
+               <span class="mi">7</span><span class="p">:</span> <span class="s1">&#39;summer&#39;</span><span class="p">,</span> <span class="mi">8</span><span class="p">:</span> <span class="s1">&#39;summer&#39;</span><span class="p">,</span>
+               <span class="mi">9</span><span class="p">:</span> <span class="s1">&#39;summer&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">:</span> <span class="s1">&#39;winter&#39;</span><span class="p">,</span>
+               <span class="mi">11</span><span class="p">:</span> <span class="s1">&#39;winter&#39;</span><span class="p">,</span> <span class="mi">12</span><span class="p">:</span> <span class="s1">&#39;winter&#39;</span><span class="p">}</span>
+
+        <span class="n">df</span><span class="p">[</span><span class="s1">&#39;season&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;month&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">map</span><span class="p">[</span><span class="n">x</span><span class="p">])</span>
+
+        <span class="k">return</span> <span class="n">df</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">_make_example_loading_inputs</span><span class="p">(</span><span class="n">inputs</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">random_state</span><span class="p">,</span>
+                                     <span class="n">occupancy</span> <span class="o">=</span> <span class="p">[</span><span class="mf">4.</span><span class="p">,</span> <span class="mf">4.</span><span class="p">,</span> <span class="mf">4.</span><span class="p">,</span> <span class="mf">4.</span><span class="p">],</span>
+                                     <span class="n">at_home</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;n&#39;</span><span class="p">,</span> <span class="s1">&#39;n&#39;</span><span class="p">,</span> <span class="s1">&#39;n&#39;</span><span class="p">,</span> <span class="s1">&#39;n&#39;</span><span class="p">]):</span>
+        <span class="sd">&quot;&quot;&quot;Creates example end-use load profile inputs using the example</span>
+<span class="sd">        load database (sample of 128 households).</span>
+
+<span class="sd">        Parameters:</span>
+
+<span class="sd">            inputs: dict of dfs</span>
+<span class="sd">                Inputs read from the input database</span>
+
+<span class="sd">            labels: dist</span>
+<span class="sd">                Consumer label map</span>
+
+<span class="sd">            random_state: np.RandomState object</span>
+
+<span class="sd">            occupancy: list</span>
+<span class="sd">                List of household occupancies. Any occupancy</span>
+<span class="sd">                above 6 is considered as an occupancy of 6</span>
+<span class="sd">                for simplicity. If occupancies significantly larger</span>
+<span class="sd">                than 6 are needed, please aggregate example loads</span>
+<span class="sd">                in postprocessing</span>
+
+<span class="sd">            at_home: list</span>
+<span class="sd">                List of at home during the day info, &#39;y&#39; or &#39;n&#39;</span>
+
+<span class="sd">        Returns:</span>
+
+<span class="sd">            loading_input : df</span>
+<span class="sd">                Contains household id, occupancy and load array input</span>
+<span class="sd">                (see models.py for details)</span>
+
+<span class="sd">            household_info: df</span>
+<span class="sd">                Contains load id and maximum load in [gal] for</span>
+<span class="sd">                sizing purposes.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># reformat the example end-use loads table</span>
+        <span class="n">loads_df</span> <span class="o">=</span> <span class="n">inputs</span><span class="p">[</span><span class="n">labels</span><span class="p">[</span><span class="s1">&#39;exmp_loads&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="c1"># drop hour column</span>
+        <span class="n">loads_df</span> <span class="o">=</span> <span class="n">loads_df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">labels</span><span class="p">[</span><span class="s1">&#39;hour&#39;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="c1"># convert loads into gallons</span>
+        <span class="n">loads_df_m3</span> <span class="o">=</span> <span class="n">loads_df</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span>
+            <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">UnitConv</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">m3_gal</span><span class="p">(</span><span class="n">unit_in</span><span class="o">=</span><span class="s1">&#39;gal&#39;</span><span class="p">))</span>
+        <span class="n">single_row_loads</span> <span class="o">=</span> <span class="n">SourceAndSink</span><span class="o">.</span><span class="n">_pack_timeseries</span><span class="p">(</span>
+            <span class="n">loads_df_m3</span><span class="p">,</span>
+            <span class="n">row_index</span><span class="o">=</span><span class="n">labels</span><span class="p">[</span><span class="s1">&#39;load_m3&#39;</span><span class="p">])</span>
+        <span class="n">example_cons</span> <span class="o">=</span> <span class="n">single_row_loads</span><span class="o">.</span><span class="n">transpose</span><span class="p">()</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+        <span class="n">example_cons</span><span class="p">[</span><span class="n">labels</span><span class="p">[</span><span class="s1">&#39;ld_id&#39;</span><span class="p">]]</span> <span class="o">=</span> <span class="n">inputs</span><span class="p">[</span>
+                <span class="n">labels</span><span class="p">[</span><span class="s1">&#39;exmp_consload&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="n">labels</span><span class="p">[</span><span class="s1">&#39;ld_id&#39;</span><span class="p">]]</span>
+        <span class="n">example_cons</span><span class="p">[</span><span class="n">labels</span><span class="p">[</span><span class="s1">&#39;occ&#39;</span><span class="p">]]</span> <span class="o">=</span> <span class="n">inputs</span><span class="p">[</span>
+                <span class="n">labels</span><span class="p">[</span><span class="s1">&#39;exmp_consload&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="n">labels</span><span class="p">[</span><span class="s1">&#39;occ&#39;</span><span class="p">]]</span>
+        <span class="n">example_cons</span><span class="p">[</span><span class="n">labels</span><span class="p">[</span><span class="s1">&#39;at_hm&#39;</span><span class="p">]]</span> <span class="o">=</span> <span class="n">inputs</span><span class="p">[</span>
+                <span class="n">labels</span><span class="p">[</span><span class="s1">&#39;exmp_consload&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="n">labels</span><span class="p">[</span><span class="s1">&#39;at_hm&#39;</span><span class="p">]]</span>
+        <span class="n">example_cons</span><span class="p">[</span><span class="n">labels</span><span class="p">[</span><span class="s1">&#39;max_load&#39;</span><span class="p">]]</span> <span class="o">=</span> <span class="n">loads_df</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">values</span>
+
+        <span class="n">example_cons</span> <span class="o">=</span> <span class="n">example_cons</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span>
+            <span class="n">columns</span><span class="o">=</span><span class="s1">&#39;index&#39;</span><span class="p">,</span>
+            <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">occupancy</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">at_home</span><span class="p">):</span>
+            <span class="n">mg</span> <span class="o">=</span> <span class="s1">&#39;Occupancy and at home arrays should have the same length.&#39;</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">Exception</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">occupancy</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">6</span><span class="p">)</span><span class="o">.</span><span class="n">any</span><span class="p">():</span>
+            <span class="n">occ_arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">occupancy</span><span class="p">)</span>
+            <span class="n">max_occ</span> <span class="o">=</span> <span class="n">occ_arr</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+            <span class="n">occ_arr</span><span class="p">[</span><span class="n">occ_arr</span> <span class="o">&gt;</span> <span class="mi">6</span><span class="p">]</span> <span class="o">=</span> <span class="mf">6.</span>
+            <span class="n">occupancy</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">occ_arr</span><span class="p">)</span>
+            <span class="n">msg</span> <span class="o">=</span> <span class="s1">&#39;Any occupancy above 6 is considered as occupancy of 6.&#39;</span>\
+            <span class="s1">&#39; Maximum provided is </span><span class="si">{}</span><span class="s1">. Consider aggregating loads if this is&#39;</span>\
+            <span class="s1">&#39; of concern.&#39;</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="n">msg</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">max_occ</span><span class="p">))</span>
+
+        <span class="n">uniq_occupancy</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">occupancy</span><span class="p">)</span>
+
+        <span class="n">uniq_at_home</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">at_home</span><span class="p">)</span>
+
+        <span class="n">available_example_cons</span> <span class="o">=</span> <span class="n">example_cons</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span>
+            <span class="p">(</span><span class="n">example_cons</span><span class="p">[</span><span class="n">labels</span><span class="p">[</span><span class="s1">&#39;occ&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">uniq_occupancy</span><span class="p">))</span> <span class="o">&amp;</span>
+            <span class="p">(</span><span class="n">example_cons</span><span class="p">[</span><span class="n">labels</span><span class="p">[</span><span class="s1">&#39;at_hm&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">uniq_at_home</span><span class="p">))]</span>
+
+        <span class="k">if</span> <span class="n">available_example_cons</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">msg</span> <span class="o">=</span> <span class="s1">&#39;We don</span><span class="se">\&#39;</span><span class="s1">t have any households matching your inputs in&#39;</span>\
+                  <span class="s1">&#39; the database.&#39;</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">meg</span><span class="o">.</span><span class="n">format</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">Exception</span>
+
+        <span class="n">selected_load_ids</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="n">cons_id</span> <span class="o">=</span> <span class="mi">1</span>
+
+        <span class="k">for</span> <span class="n">cons</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">occupancy</span><span class="p">)):</span>
+
+            <span class="n">occ</span> <span class="o">=</span> <span class="n">occupancy</span><span class="p">[</span><span class="n">cons</span><span class="p">]</span>
+            <span class="n">at_hm</span> <span class="o">=</span> <span class="n">at_home</span><span class="p">[</span><span class="n">cons</span><span class="p">]</span>
+
+            <span class="n">pick_from</span> <span class="o">=</span> <span class="n">available_example_cons</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span>
+                <span class="p">(</span><span class="n">example_cons</span><span class="p">[</span><span class="n">labels</span><span class="p">[</span><span class="s1">&#39;occ&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">isin</span><span class="p">([</span><span class="n">occ</span><span class="p">]))</span> <span class="o">&amp;</span>
+                <span class="p">(</span><span class="n">example_cons</span><span class="p">[</span><span class="n">labels</span><span class="p">[</span><span class="s1">&#39;at_hm&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">isin</span><span class="p">([</span><span class="n">at_hm</span><span class="p">]))]</span>
+
+            <span class="n">load_id</span> <span class="o">=</span> <span class="n">random_state</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span>
+                <span class="n">pick_from</span><span class="p">[</span><span class="n">labels</span><span class="p">[</span><span class="s1">&#39;ld_id&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+
+            <span class="k">while</span> <span class="p">((</span><span class="n">load_id</span> <span class="ow">in</span> <span class="n">selected_load_ids</span><span class="p">)</span> <span class="ow">and</span>
+                <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">selected_load_ids</span><span class="p">)</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span>
+                    <span class="n">pick_from</span><span class="p">[</span><span class="n">labels</span><span class="p">[</span><span class="s1">&#39;ld_id&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">unique</span><span class="p">()))):</span>
+
+                <span class="n">load_id</span> <span class="o">=</span> <span class="n">random_state</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span>
+                    <span class="n">pick_from</span><span class="p">[</span><span class="n">labels</span><span class="p">[</span><span class="s1">&#39;ld_id&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+
+            <span class="n">selected_load_ids</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">load_id</span><span class="p">)</span>
+
+            <span class="n">load_row</span> <span class="o">=</span> <span class="n">pick_from</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span>
+                <span class="n">pick_from</span><span class="p">[</span><span class="n">labels</span><span class="p">[</span><span class="s1">&#39;ld_id&#39;</span><span class="p">]]</span> <span class="o">==</span> <span class="n">load_id</span><span class="p">,</span> <span class="p">:]</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+
+            <span class="n">cons_id</span> <span class="o">+=</span> <span class="mi">1</span>
+
+        <span class="n">indxs</span> <span class="o">=</span> <span class="n">available_example_cons</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span>
+            <span class="n">available_example_cons</span><span class="p">[</span><span class="n">labels</span><span class="p">[</span><span class="s1">&#39;ld_id&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span>
+                <span class="n">selected_load_ids</span><span class="p">)]</span><span class="o">.</span><span class="n">index</span>
+
+        <span class="n">loading_input</span> <span class="o">=</span> <span class="n">available_example_cons</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">indxs</span><span class="p">,</span> <span class="p">:]</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+        <span class="n">loading_input</span><span class="p">[</span><span class="n">labels</span><span class="p">[</span><span class="s1">&#39;load_m3&#39;</span><span class="p">]]</span> <span class="o">=</span> \
+            <span class="n">loading_input</span><span class="p">[</span><span class="n">labels</span><span class="p">[</span><span class="s1">&#39;load_m3&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+
+        <span class="n">loading_input</span> <span class="o">=</span> <span class="n">loading_input</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span>
+            <span class="n">columns</span><span class="o">=</span><span class="s1">&#39;index&#39;</span><span class="p">,</span>
+            <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+        <span class="n">loading_input</span><span class="p">[</span><span class="n">labels</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]]</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">loading_input</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+
+        <span class="n">columns_expected_by_system_model</span> <span class="o">=</span> \
+            <span class="p">[</span><span class="n">labels</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">],</span> <span class="n">labels</span><span class="p">[</span><span class="s1">&#39;occ&#39;</span><span class="p">],</span> <span class="n">labels</span><span class="p">[</span><span class="s1">&#39;load_m3&#39;</span><span class="p">]]</span>
+
+        <span class="n">info_columns</span> <span class="o">=</span> <span class="p">[</span><span class="n">labels</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">],</span> <span class="n">labels</span><span class="p">[</span><span class="s1">&#39;ld_id&#39;</span><span class="p">],</span> <span class="n">labels</span><span class="p">[</span><span class="s1">&#39;max_load&#39;</span><span class="p">]]</span>
+
+        <span class="n">household_info</span> <span class="o">=</span> <span class="n">loading_input</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="n">info_columns</span><span class="p">]</span>
+        <span class="n">loading_input</span> <span class="o">=</span> <span class="n">loading_input</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span>
+            <span class="p">:,</span> <span class="n">columns_expected_by_system_model</span><span class="p">]</span>
+
+        <span class="k">return</span> <span class="n">loading_input</span><span class="p">,</span> <span class="n">household_info</span>
+
+<div class="viewcode-block" id="SourceAndSink.demand_estimate"><a class="viewcode-back" href="../../../source/mswh.system.html#mswh.system.source_and_sink.SourceAndSink.demand_estimate">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">demand_estimate</span><span class="p">(</span><span class="n">occ</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Estimates gal/day demand as provided in the</span>
+<span class="sd">        CSI-Thermal Program Handbook, April 2016 for</span>
+<span class="sd">        installations with a known occupancy</span>
+
+<span class="sd">        Parameters:</span>
+
+<span class="sd">            occ : float</span>
+<span class="sd">                Number of individual household occupants</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">occ</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mf">20.</span>
+        <span class="k">if</span> <span class="n">occ</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mf">35.</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mf">35.</span> <span class="o">+</span> <span class="mf">10.</span> <span class="o">*</span> <span class="p">(</span><span class="n">occ</span> <span class="o">-</span> <span class="mf">2.</span><span class="p">)</span></div></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 
+Multiscale Solar Water Heating (MSWH) Copyright (c) 2019, The
+Regents of the University of California, through Lawrence Berkeley National
+Laboratory (subject to receipt of any required approvals from the U.S.
+Dept. of Energy).  All rights reserved.
+
+If you have questions about your rights to use or distribute this software,
+please contact Berkeley Lab&#39;s Intellectual Property Office at
+IPO@lbl.gov.
+
+NOTICE.  This Software was developed under funding from the U.S. Department
+of Energy and the U.S. Government consequently retains certain rights.  As
+such, the U.S. Government has been granted for itself and others acting on
+its behalf a paid-up, nonexclusive, irrevocable, worldwide license in the
+Software to reproduce, distribute copies to the public, prepare derivative
+works, and perform publicly and display publicly, and to permit other to do
+so.
+
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

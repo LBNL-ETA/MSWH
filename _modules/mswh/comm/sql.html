@@ -1,0 +1,384 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>mswh.comm.sql &mdash; Multiscale Solar Water Heating 1.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> Multiscale Solar Water Heating
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../source/models.html">Multiscale Solar Water Heating (MSWH)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../source/modules.html">Python Code Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../source/legal.html">Copyright Notice</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../source/legal.html#license-agreement">License Agreement</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Multiscale Solar Water Heating</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+      <li>mswh.comm.sql</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for mswh.comm.sql</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">sqlite3</span>
+
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="n">log</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+<span class="n">log</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="Sql"><a class="viewcode-back" href="../../../source/mswh.comm.html#mswh.comm.sql.Sql">[docs]</a><span class="k">class</span> <span class="nc">Sql</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Performs python-sqlite db communication.</span>
+
+<span class="sd">    Parameters:</span>
+
+<span class="sd">        path_OR_dbconn: str or a database connection instance</span>
+<span class="sd">            Full path to a database file or an already</span>
+<span class="sd">            instantiated connection object</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path_OR_dbconn</span><span class="p">):</span>
+        <span class="c1"># recognize or create the connection object</span>
+        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">path_OR_dbconn</span><span class="p">)</span> <span class="o">==</span> <span class="nb">str</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">db</span> <span class="o">=</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">path_OR_dbconn</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="nb">type</span><span class="p">(</span><span class="n">path_OR_dbconn</span><span class="p">)</span> <span class="o">==</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">Connection</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">db</span> <span class="o">=</span> <span class="n">path_OR_dbconn</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s1">&#39;Neither a path to a db file, &#39;</span>
+                      <span class="s1">&#39;nor a database connection got passed.&#39;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span>
+
+<div class="viewcode-block" id="Sql.tables2dict"><a class="viewcode-back" href="../../../source/mswh.comm.html#mswh.comm.sql.Sql.tables2dict">[docs]</a>    <span class="k">def</span> <span class="nf">tables2dict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">close</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Reads all tables contained in a</span>
+<span class="sd">        sql database and converts them to a</span>
+<span class="sd">        pandas dataframe.</span>
+
+<span class="sd">        Parameters:</span>
+
+<span class="sd">            close: boolean, default=True</span>
+<span class="sd">                If True, closes the connection to db</span>
+
+<span class="sd">        Returns:</span>
+
+<span class="sd">            data: dict of pandas dataframes</span>
+<span class="sd">                Saves each of the sql tabels as a</span>
+<span class="sd">                pandas dataframe under a sql table</span>
+<span class="sd">                name as a key</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">cursor</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+        <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;SELECT name FROM sqlite_master WHERE type=&#39;table&#39;;&quot;</span><span class="p">)</span>
+        <span class="n">tables</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">table_name</span> <span class="ow">in</span> <span class="n">tables</span><span class="p">:</span>
+            <span class="n">table_name</span> <span class="o">=</span> <span class="n">table_name</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">data</span><span class="p">[</span><span class="n">table_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_sql_query</span><span class="p">(</span>
+                <span class="sd">&#39;&#39;&#39; SELECT * FROM &#39;{}&#39; &#39;&#39;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">table_name</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">close</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+        <span class="k">return</span> <span class="n">data</span></div>
+
+<div class="viewcode-block" id="Sql.table2pd"><a class="viewcode-back" href="../../../source/mswh.comm.html#mswh.comm.sql.Sql.table2pd">[docs]</a>    <span class="k">def</span> <span class="nf">table2pd</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">table_name</span><span class="p">,</span> <span class="n">column_label_row</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Reads in a single sql table.</span>
+
+<span class="sd">        Parameters:</span>
+
+<span class="sd">            table_name: str</span>
+<span class="sd">                sql table name</span>
+
+<span class="sd">            column_label_row: int, default=0</span>
+<span class="sd">                Index of the row which gets</span>
+<span class="sd">                converted into column labels</span>
+
+<span class="sd">        Returns:</span>
+
+<span class="sd">            df: pandas dataframe</span>
+<span class="sd">                Sql table read in as a pandas df.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_sql</span><span class="p">(</span>
+            <span class="sd">&#39;&#39;&#39; SELECT * FROM &#39;{}&#39; &#39;&#39;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">table_name</span><span class="p">),</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="p">,</span>
+            <span class="n">index_col</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">df</span></div>
+
+<div class="viewcode-block" id="Sql.pd2table"><a class="viewcode-back" href="../../../source/mswh.comm.html#mswh.comm.sql.Sql.pd2table">[docs]</a>    <span class="k">def</span> <span class="nf">pd2table</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">df</span><span class="p">,</span> <span class="n">table_name</span><span class="p">,</span> <span class="n">close</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Write a dataframe out to the database.</span>
+<span class="sd">        If same named table exists, it gets replaced</span>
+
+<span class="sd">        Parameters:</span>
+
+<span class="sd">            table_name: str</span>
+<span class="sd">                sql table name</span>
+
+<span class="sd">            close: boolean, default=False</span>
+<span class="sd">                If True, closes the connection to db</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">df</span><span class="o">.</span><span class="n">to_sql</span><span class="p">(</span><span class="n">table_name</span><span class="p">,</span>
+                  <span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="p">,</span>
+                  <span class="n">if_exists</span><span class="o">=</span><span class="s1">&#39;replace&#39;</span><span class="p">,</span>
+                  <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">close</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+        <span class="k">return</span> <span class="kc">True</span></div>
+
+<div class="viewcode-block" id="Sql.csv2table"><a class="viewcode-back" href="../../../source/mswh.comm.html#mswh.comm.sql.Sql.csv2table">[docs]</a>    <span class="k">def</span> <span class="nf">csv2table</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path_to_csv</span><span class="p">,</span> <span class="n">table_name</span><span class="p">,</span>
+                  <span class="n">column_label_row</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+                  <span class="n">converters</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">close</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Use to update bulk price or performance data.</span>
+<span class="sd">        If same named table exists, it gets replaced</span>
+
+<span class="sd">        Parameters:</span>
+
+<span class="sd">            path_to_csv: str</span>
+<span class="sd">                Full path to the csv table</span>
+
+<span class="sd">            table_name: str</span>
+<span class="sd">                sql table name of choice</span>
+
+<span class="sd">            column_label_row: int, default=0</span>
+<span class="sd">                Index of the row which gets</span>
+<span class="sd">                converted into column labels</span>
+
+<span class="sd">            converters: dict, default=None</span>
+<span class="sd">                According to pandas documentation:</span>
+<span class="sd">                Dict of functions for converting</span>
+<span class="sd">                values in columns. Keys can be integers</span>
+<span class="sd">                or column labels.</span>
+
+<span class="sd">            close: boolean, default=False</span>
+<span class="sd">                If True, closes the connection to db</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">csv</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span>
+            <span class="n">path_to_csv</span><span class="p">,</span>
+            <span class="n">converters</span><span class="o">=</span><span class="n">converters</span><span class="p">,</span>
+            <span class="n">header</span><span class="o">=</span><span class="n">column_label_row</span><span class="p">)</span>
+
+        <span class="n">csv</span><span class="o">.</span><span class="n">to_sql</span><span class="p">(</span>
+            <span class="n">table_name</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="p">,</span>
+            <span class="n">if_exists</span><span class="o">=</span><span class="s1">&#39;replace&#39;</span><span class="p">,</span>
+            <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">close</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+        <span class="k">return</span> <span class="kc">True</span></div>
+
+<div class="viewcode-block" id="Sql.commit"><a class="viewcode-back" href="../../../source/mswh.comm.html#mswh.comm.sql.Sql.commit">[docs]</a>    <span class="k">def</span> <span class="nf">commit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sql_command</span><span class="p">,</span> <span class="n">close</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Execute a custom sql command</span>
+
+<span class="sd">        Parameters:</span>
+
+<span class="sd">            sql_command: string</span>
+<span class="sd">                sql_command to exectute</span>
+
+<span class="sd">        Returns:</span>
+
+<span class="sd">            close: boolean, default=False</span>
+<span class="sd">                If True, closes the connection to db</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">sql_command</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">close</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+        <span class="k">return</span> <span class="kc">True</span></div></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 
+Multiscale Solar Water Heating (MSWH) Copyright (c) 2019, The
+Regents of the University of California, through Lawrence Berkeley National
+Laboratory (subject to receipt of any required approvals from the U.S.
+Dept. of Energy).  All rights reserved.
+
+If you have questions about your rights to use or distribute this software,
+please contact Berkeley Lab&#39;s Intellectual Property Office at
+IPO@lbl.gov.
+
+NOTICE.  This Software was developed under funding from the U.S. Department
+of Energy and the U.S. Government consequently retains certain rights.  As
+such, the U.S. Government has been granted for itself and others acting on
+its behalf a paid-up, nonexclusive, irrevocable, worldwide license in the
+Software to reproduce, distribute copies to the public, prepare derivative
+works, and perform publicly and display publicly, and to permit other to do
+so.
+
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

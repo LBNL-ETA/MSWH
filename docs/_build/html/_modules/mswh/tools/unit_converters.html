@@ -1,0 +1,658 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>mswh.tools.unit_converters &mdash; Multiscale Solar Water Heating 1.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> Multiscale Solar Water Heating
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../source/models.html">Multiscale Solar Water Heating (MSWH)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../source/modules.html">Python Code Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../source/legal.html">Copyright Notice</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../source/legal.html#license-agreement">License Agreement</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Multiscale Solar Water Heating</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+      <li>mswh.tools.unit_converters</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for mswh.tools.unit_converters</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+
+<div class="viewcode-block" id="UnitConv"><a class="viewcode-back" href="../../../source/mswh.tools.html#mswh.tools.unit_converters.UnitConv">[docs]</a><span class="k">class</span> <span class="nc">UnitConv</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Unit conversions using conversion parameters from</span>
+<span class="sd">    ASHRAE Fundamentals 2017.</span>
+
+<span class="sd">    Parameters:</span>
+
+<span class="sd">    x_in: float, array</span>
+<span class="sd">        Input value to be converted to a desired unit</span>
+
+<span class="sd">    scale_in: str or 1.</span>
+<span class="sd">        Scale of the input value, options: &#39;k&#39;, &#39;kilo&#39;,</span>
+<span class="sd">        &#39;mega&#39;, &#39;million&#39;, &#39;M&#39;, &#39;MM&#39;, &#39;giga&#39;, &#39;G&#39;, &#39;tera&#39;, &#39;T&#39;,</span>
+<span class="sd">        &#39;peta&#39;, &#39;P&#39;, &#39;mili&#39;, &#39;micro&#39;.</span>
+<span class="sd">        Default: 1.</span>
+
+<span class="sd">    scale_out: str or 1.</span>
+<span class="sd">        Scale of the input value, options: &#39;k&#39;, &#39;kilo&#39;,</span>
+<span class="sd">        &#39;mega&#39;, &#39;million&#39;, &#39;M&#39;, &#39;MM&#39;, &#39;giga&#39;, &#39;G&#39;, &#39;tera&#39;, &#39;T&#39;,</span>
+<span class="sd">        &#39;peta&#39;, &#39;P&#39;, &#39;mili&#39;, &#39;m&#39;, &#39;micro&#39;.</span>
+<span class="sd">        Default: 1.</span>
+
+<span class="sd">    Examples:</span>
+
+<span class="sd">    To convert temperature from degF to degC</span>
+
+<span class="sd">    &gt;&gt;&gt; t_in_degC = UnitConv(t_in_degF).degF_degC(unit_in=&#39;degF&#39;)</span>
+
+<span class="sd">    To convert power in hp to kW:</span>
+
+<span class="sd">    &gt;&gt;&gt; p_in_kW = UnitConv(p_in_hp, scale_out=&#39;kilo&#39;).hp_W(unit_in=&#39;hp&#39;)</span>
+
+<span class="sd">    To convert energy from GJ to MMBtu:</span>
+
+<span class="sd">    &gt;&gt;&gt; e_MMBtu = UnitConv(e_GJ, scale_in=&#39;G&#39;, scale_out=&#39;MM&#39;).Btu_J(unit_in=&#39;J&#39;)</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x_in</span><span class="p">,</span> <span class="n">scale_in</span><span class="o">=</span><span class="mf">1.</span><span class="p">,</span> <span class="n">scale_out</span><span class="o">=</span><span class="mf">1.</span><span class="p">):</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">x_in</span> <span class="o">=</span> <span class="n">x_in</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="n">scale_in</span> <span class="o">==</span> <span class="s1">&#39;k&#39;</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">scale_in</span> <span class="o">==</span> <span class="s1">&#39;kilo&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">scale_in</span> <span class="o">=</span> <span class="mf">1000.</span>
+        <span class="k">elif</span> <span class="p">((</span><span class="n">scale_in</span> <span class="o">==</span> <span class="s1">&#39;milion&#39;</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">scale_in</span> <span class="o">==</span> <span class="s1">&#39;M&#39;</span><span class="p">)</span> <span class="ow">or</span>
+            <span class="p">(</span><span class="n">scale_in</span> <span class="o">==</span> <span class="s1">&#39;MM&#39;</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">scale_in</span> <span class="o">==</span> <span class="s1">&#39;mega&#39;</span><span class="p">)):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">scale_in</span> <span class="o">=</span> <span class="mf">1e6</span>
+        <span class="k">elif</span> <span class="p">(</span><span class="n">scale_in</span> <span class="o">==</span> <span class="s1">&#39;giga&#39;</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">scale_in</span> <span class="o">==</span> <span class="s1">&#39;G&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">scale_in</span> <span class="o">=</span> <span class="mf">1e9</span>
+        <span class="k">elif</span> <span class="p">(</span><span class="n">scale_in</span> <span class="o">==</span> <span class="s1">&#39;tera&#39;</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">scale_in</span> <span class="o">==</span> <span class="s1">&#39;T&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">scale_in</span> <span class="o">=</span> <span class="mf">1e12</span>
+        <span class="k">elif</span> <span class="p">(</span><span class="n">scale_in</span> <span class="o">==</span> <span class="s1">&#39;peta&#39;</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">scale_in</span> <span class="o">==</span> <span class="s1">&#39;P&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">scale_in</span> <span class="o">=</span> <span class="mf">1e15</span>
+        <span class="k">elif</span> <span class="p">(</span><span class="n">scale_in</span> <span class="o">==</span> <span class="s1">&#39;mili&#39;</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">scale_in</span> <span class="o">==</span> <span class="s1">&#39;m&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">scale_in</span> <span class="o">=</span> <span class="mf">1e-3</span>
+        <span class="k">elif</span> <span class="n">scale_in</span> <span class="o">==</span> <span class="s1">&#39;mikro&#39;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">scale_in</span> <span class="o">=</span> <span class="mf">1e-6</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">scale_in</span> <span class="o">=</span> <span class="n">scale_in</span>
+
+
+        <span class="k">if</span> <span class="p">(</span><span class="n">scale_out</span> <span class="o">==</span> <span class="s1">&#39;k&#39;</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">scale_out</span> <span class="o">==</span> <span class="s1">&#39;kilo&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">scale_out</span> <span class="o">=</span> <span class="mf">1000.</span>
+        <span class="k">elif</span> <span class="p">((</span><span class="n">scale_out</span> <span class="o">==</span> <span class="s1">&#39;milion&#39;</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">scale_out</span> <span class="o">==</span> <span class="s1">&#39;M&#39;</span><span class="p">)</span> <span class="ow">or</span>
+            <span class="p">(</span><span class="n">scale_out</span> <span class="o">==</span> <span class="s1">&#39;MM&#39;</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">scale_out</span> <span class="o">==</span> <span class="s1">&#39;mega&#39;</span><span class="p">)):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">scale_out</span> <span class="o">=</span> <span class="mf">1e6</span>
+        <span class="k">elif</span> <span class="p">(</span><span class="n">scale_out</span> <span class="o">==</span> <span class="s1">&#39;giga&#39;</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">scale_out</span> <span class="o">==</span> <span class="s1">&#39;G&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">scale_out</span> <span class="o">=</span> <span class="mf">1e9</span>
+        <span class="k">elif</span> <span class="p">(</span><span class="n">scale_out</span> <span class="o">==</span> <span class="s1">&#39;tera&#39;</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">scale_out</span> <span class="o">==</span> <span class="s1">&#39;T&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">scale_out</span> <span class="o">=</span> <span class="mf">1e12</span>
+        <span class="k">elif</span> <span class="p">(</span><span class="n">scale_out</span> <span class="o">==</span> <span class="s1">&#39;peta&#39;</span><span class="p">)</span>  <span class="ow">or</span> <span class="p">(</span><span class="n">scale_out</span> <span class="o">==</span> <span class="s1">&#39;P&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">scale_out</span> <span class="o">=</span> <span class="mf">1e15</span>
+        <span class="k">elif</span> <span class="p">(</span><span class="n">scale_out</span> <span class="o">==</span> <span class="s1">&#39;mili&#39;</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">scale_out</span> <span class="o">==</span> <span class="s1">&#39;m&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">scale_out</span> <span class="o">=</span> <span class="mf">1e-3</span>
+        <span class="k">elif</span> <span class="n">scale_out</span> <span class="o">==</span> <span class="s1">&#39;mikro&#39;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">scale_out</span> <span class="o">=</span> <span class="mf">1e-6</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">scale_out</span> <span class="o">=</span> <span class="n">scale_out</span>
+
+
+<div class="viewcode-block" id="UnitConv.degF_degC"><a class="viewcode-back" href="../../../source/mswh.tools.html#mswh.tools.unit_converters.UnitConv.degF_degC">[docs]</a>    <span class="k">def</span> <span class="nf">degF_degC</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">unit_in</span><span class="o">=</span><span class="s1">&#39;degF&#39;</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Converts temperature between degree Fahrenheit and Celsius</span>
+
+<span class="sd">        Parameters:</span>
+
+<span class="sd">            unit_in: string, options: &#39;degF&#39;, &#39;degC&#39;</span>
+<span class="sd">                Unit of the input value</span>
+
+<span class="sd">        Returns:</span>
+
+<span class="sd">            x_out: float, array</span>
+<span class="sd">                Output value</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">x_in</span> <span class="o">*=</span> <span class="bp">self</span><span class="o">.</span><span class="n">scale_in</span>
+
+        <span class="k">if</span> <span class="n">unit_in</span> <span class="o">==</span> <span class="s1">&#39;degF&#39;</span><span class="p">:</span>
+            <span class="n">x_out</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x_in</span> <span class="o">-</span> <span class="mf">32.</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="mf">5.</span> <span class="o">/</span> <span class="mf">9.</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">unit_in</span> <span class="o">==</span> <span class="s1">&#39;degC&#39;</span><span class="p">:</span>
+            <span class="n">x_out</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x_in</span> <span class="o">*</span> <span class="mf">9.</span> <span class="o">/</span> <span class="mf">5.</span><span class="p">)</span> <span class="o">+</span> <span class="mf">32.</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">msg</span> <span class="o">=</span> <span class="s1">&#39;User provided an unsupported input unit </span><span class="si">{}</span><span class="s1">.&#39;</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">msg</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">unit_in</span><span class="p">))</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span>
+
+        <span class="n">x_out</span> <span class="o">/=</span> <span class="bp">self</span><span class="o">.</span><span class="n">scale_out</span>
+
+        <span class="k">return</span> <span class="n">x_out</span></div>
+
+<div class="viewcode-block" id="UnitConv.degC_K"><a class="viewcode-back" href="../../../source/mswh.tools.html#mswh.tools.unit_converters.UnitConv.degC_K">[docs]</a>    <span class="k">def</span> <span class="nf">degC_K</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">unit_in</span><span class="o">=</span><span class="s1">&#39;degC&#39;</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Converts temperature between degree Celsius and Kelvin</span>
+
+<span class="sd">        Parameters:</span>
+
+<span class="sd">            unit_in: string, options: &#39;K&#39;, &#39;degC&#39;</span>
+<span class="sd">                Unit of the input value</span>
+
+<span class="sd">        Returns:</span>
+
+<span class="sd">            x_out: float, array</span>
+<span class="sd">                Output value</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">x_in</span> <span class="o">*=</span> <span class="bp">self</span><span class="o">.</span><span class="n">scale_in</span>
+
+        <span class="n">abs_zero</span> <span class="o">=</span> <span class="mf">273.15</span>
+
+        <span class="k">if</span> <span class="n">unit_in</span> <span class="o">==</span> <span class="s1">&#39;K&#39;</span><span class="p">:</span>
+            <span class="n">x_out</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">x_in</span> <span class="o">-</span> <span class="n">abs_zero</span>
+        <span class="k">elif</span> <span class="n">unit_in</span> <span class="o">==</span> <span class="s1">&#39;degC&#39;</span><span class="p">:</span>
+            <span class="n">x_out</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">x_in</span> <span class="o">+</span> <span class="n">abs_zero</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">msg</span> <span class="o">=</span> <span class="s1">&#39;User provided an unsupported input unit </span><span class="si">{}</span><span class="s1">.&#39;</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">msg</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">unit_in</span><span class="p">))</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span>
+
+        <span class="n">x_out</span> <span class="o">/=</span> <span class="bp">self</span><span class="o">.</span><span class="n">scale_out</span>
+
+        <span class="k">return</span> <span class="n">x_out</span></div>
+
+<div class="viewcode-block" id="UnitConv.m3_gal"><a class="viewcode-back" href="../../../source/mswh.tools.html#mswh.tools.unit_converters.UnitConv.m3_gal">[docs]</a>    <span class="k">def</span> <span class="nf">m3_gal</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">unit_in</span><span class="o">=</span><span class="s1">&#39;gal&#39;</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Converts volume between cubic meter and gallon</span>
+
+<span class="sd">        Parameters:</span>
+
+<span class="sd">            unit_in: string, options: &#39;m3&#39;, &#39;gal&#39;</span>
+<span class="sd">                Unit of the input value</span>
+
+<span class="sd">        Returns:</span>
+
+<span class="sd">            x_out: float, array</span>
+<span class="sd">                Output value</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">x_in</span> <span class="o">*=</span> <span class="bp">self</span><span class="o">.</span><span class="n">scale_in</span>
+
+        <span class="k">if</span> <span class="n">unit_in</span> <span class="o">==</span> <span class="s1">&#39;gal&#39;</span><span class="p">:</span>
+            <span class="n">x_out</span> <span class="o">=</span>  <span class="bp">self</span><span class="o">.</span><span class="n">x_in</span> <span class="o">*</span> <span class="mf">0.003785412</span>
+        <span class="k">elif</span> <span class="n">unit_in</span> <span class="o">==</span> <span class="s1">&#39;m3&#39;</span><span class="p">:</span>
+            <span class="n">x_out</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">x_in</span> <span class="o">*</span> <span class="p">(</span><span class="mf">1.</span> <span class="o">/</span> <span class="mf">0.003785412</span><span class="p">)</span>
+
+        <span class="n">x_out</span> <span class="o">/=</span> <span class="bp">self</span><span class="o">.</span><span class="n">scale_out</span>
+
+        <span class="k">return</span> <span class="n">x_out</span></div>
+
+<div class="viewcode-block" id="UnitConv.hp_W"><a class="viewcode-back" href="../../../source/mswh.tools.html#mswh.tools.unit_converters.UnitConv.hp_W">[docs]</a>    <span class="k">def</span> <span class="nf">hp_W</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">unit_in</span><span class="o">=</span><span class="s1">&#39;hp&#39;</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Converts power between watt and horsepower</span>
+
+<span class="sd">        Parameters:</span>
+
+<span class="sd">            unit_in: string, options: &#39;hp&#39;, &#39;W&#39;</span>
+<span class="sd">                Unit of the input value</span>
+
+<span class="sd">        Returns:</span>
+
+<span class="sd">            x_out: float, array</span>
+<span class="sd">                Output value</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">x_in</span> <span class="o">*=</span> <span class="bp">self</span><span class="o">.</span><span class="n">scale_in</span>
+
+        <span class="k">if</span> <span class="n">unit_in</span> <span class="o">==</span> <span class="s1">&#39;hp&#39;</span><span class="p">:</span>
+            <span class="n">x_out</span> <span class="o">=</span>  <span class="bp">self</span><span class="o">.</span><span class="n">x_in</span> <span class="o">*</span> <span class="mf">745.7</span>
+        <span class="k">elif</span> <span class="n">unit_in</span> <span class="o">==</span> <span class="s1">&#39;W&#39;</span><span class="p">:</span>
+            <span class="n">x_out</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">x_in</span> <span class="o">*</span> <span class="mf">1.</span> <span class="o">/</span> <span class="mf">745.7</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">msg</span> <span class="o">=</span> <span class="s1">&#39;User provided an unsupported input unit </span><span class="si">{}</span><span class="s1">.&#39;</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">msg</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">unit_in</span><span class="p">))</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span>
+
+        <span class="n">x_out</span> <span class="o">/=</span> <span class="bp">self</span><span class="o">.</span><span class="n">scale_out</span>
+
+        <span class="k">return</span> <span class="n">x_out</span></div>
+
+<div class="viewcode-block" id="UnitConv.Btu_J"><a class="viewcode-back" href="../../../source/mswh.tools.html#mswh.tools.unit_converters.UnitConv.Btu_J">[docs]</a>    <span class="k">def</span> <span class="nf">Btu_J</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">unit_in</span><span class="o">=</span><span class="s1">&#39;Btu&#39;</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Converts work / energy / heat content between Btu and joule</span>
+
+<span class="sd">        Parameters:</span>
+
+<span class="sd">            x: float, array</span>
+<span class="sd">                Input value</span>
+
+<span class="sd">            unit_in: string, options: &#39;Btu&#39;, &#39;J&#39;</span>
+<span class="sd">                Unit of the input value</span>
+
+<span class="sd">        Returns:</span>
+
+<span class="sd">            x_out: float, array</span>
+<span class="sd">                Output value</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">x_in</span> <span class="o">*=</span> <span class="bp">self</span><span class="o">.</span><span class="n">scale_in</span>
+
+        <span class="k">if</span> <span class="n">unit_in</span> <span class="o">==</span> <span class="s1">&#39;Btu&#39;</span><span class="p">:</span>
+            <span class="n">x_out</span> <span class="o">=</span>  <span class="bp">self</span><span class="o">.</span><span class="n">x_in</span> <span class="o">*</span> <span class="mf">1055.056</span>
+        <span class="k">elif</span> <span class="n">unit_in</span> <span class="o">==</span> <span class="s1">&#39;J&#39;</span><span class="p">:</span>
+            <span class="n">x_out</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">x_in</span> <span class="o">*</span> <span class="p">(</span><span class="mf">1.</span> <span class="o">/</span> <span class="mf">1055.056</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">msg</span> <span class="o">=</span> <span class="s1">&#39;User provided an unsupported input unit </span><span class="si">{}</span><span class="s1">.&#39;</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">msg</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">unit_in</span><span class="p">))</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span>
+
+        <span class="n">x_out</span> <span class="o">/=</span> <span class="bp">self</span><span class="o">.</span><span class="n">scale_out</span>
+
+        <span class="k">return</span> <span class="n">x_out</span></div>
+
+<div class="viewcode-block" id="UnitConv.therm_J"><a class="viewcode-back" href="../../../source/mswh.tools.html#mswh.tools.unit_converters.UnitConv.therm_J">[docs]</a>    <span class="k">def</span> <span class="nf">therm_J</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">unit_in</span><span class="o">=</span><span class="s1">&#39;therm&#39;</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Converts work / energy / heat content between therm and joule</span>
+
+<span class="sd">        Parameters:</span>
+
+<span class="sd">            x: float, array</span>
+<span class="sd">                Input value</span>
+
+<span class="sd">            unit_in: string, options: &#39;therm&#39;, &#39;J&#39;</span>
+<span class="sd">                Unit of the input value</span>
+
+<span class="sd">        Returns:</span>
+
+<span class="sd">            x_out: float, array</span>
+<span class="sd">                Output value</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">x_in</span> <span class="o">*=</span> <span class="bp">self</span><span class="o">.</span><span class="n">scale_in</span>
+
+        <span class="k">if</span> <span class="n">unit_in</span> <span class="o">==</span> <span class="s1">&#39;therm&#39;</span><span class="p">:</span>
+            <span class="n">x_out</span> <span class="o">=</span>  <span class="bp">self</span><span class="o">.</span><span class="n">x_in</span> <span class="o">*</span> <span class="mf">105.5</span> <span class="o">*</span> <span class="mf">1e6</span>
+        <span class="k">elif</span> <span class="n">unit_in</span> <span class="o">==</span> <span class="s1">&#39;J&#39;</span><span class="p">:</span>
+            <span class="n">x_out</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">x_in</span> <span class="o">/</span> <span class="p">(</span><span class="mf">1e6</span> <span class="o">*</span> <span class="mf">105.5</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">msg</span> <span class="o">=</span> <span class="s1">&#39;User provided an unsupported input unit </span><span class="si">{}</span><span class="s1">.&#39;</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">msg</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">unit_in</span><span class="p">))</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span>
+
+        <span class="n">x_out</span> <span class="o">/=</span> <span class="bp">self</span><span class="o">.</span><span class="n">scale_out</span>
+
+        <span class="k">return</span> <span class="n">x_out</span></div>
+
+<div class="viewcode-block" id="UnitConv.Wh_J"><a class="viewcode-back" href="../../../source/mswh.tools.html#mswh.tools.unit_converters.UnitConv.Wh_J">[docs]</a>    <span class="k">def</span> <span class="nf">Wh_J</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">unit_in</span><span class="o">=</span><span class="s1">&#39;J&#39;</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Converts work / energy / heat content between watthour and joule</span>
+
+<span class="sd">        Parameters:</span>
+
+<span class="sd">            x: float, array</span>
+<span class="sd">                Input value</span>
+
+<span class="sd">            unit_in: string, options: &#39;Wh&#39;, &#39;J&#39;</span>
+<span class="sd">                Unit of the input value</span>
+
+<span class="sd">        Returns:</span>
+
+<span class="sd">            x_out: float, array</span>
+<span class="sd">                Output value</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">x_in</span> <span class="o">*=</span> <span class="bp">self</span><span class="o">.</span><span class="n">scale_in</span>
+
+        <span class="k">if</span> <span class="n">unit_in</span> <span class="o">==</span> <span class="s1">&#39;Wh&#39;</span><span class="p">:</span>
+            <span class="n">x_out</span> <span class="o">=</span>  <span class="bp">self</span><span class="o">.</span><span class="n">x_in</span> <span class="o">*</span> <span class="mf">3600.</span>
+        <span class="k">elif</span> <span class="n">unit_in</span> <span class="o">==</span> <span class="s1">&#39;J&#39;</span><span class="p">:</span>
+            <span class="n">x_out</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">x_in</span> <span class="o">/</span> <span class="mf">3600.</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">msg</span> <span class="o">=</span> <span class="s1">&#39;User provided an unsupported input unit </span><span class="si">{}</span><span class="s1">.&#39;</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">msg</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">unit_in</span><span class="p">))</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span>
+
+        <span class="n">x_out</span> <span class="o">/=</span> <span class="bp">self</span><span class="o">.</span><span class="n">scale_out</span>
+
+        <span class="k">return</span> <span class="n">x_out</span></div>
+
+<div class="viewcode-block" id="UnitConv.m3perh_m3pers"><a class="viewcode-back" href="../../../source/mswh.tools.html#mswh.tools.unit_converters.UnitConv.m3perh_m3pers">[docs]</a>    <span class="k">def</span> <span class="nf">m3perh_m3pers</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">unit_in</span><span class="o">=</span><span class="s1">&#39;m3perh&#39;</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Converts volume flow between cubic meter</span>
+<span class="sd">        per hour and cubic meter per second</span>
+
+<span class="sd">        Parameters:</span>
+
+<span class="sd">            x: float, array</span>
+<span class="sd">                Input value</span>
+
+<span class="sd">            unit_in: string, options: &#39;Wh&#39;, &#39;J&#39;</span>
+<span class="sd">                Unit of the input value</span>
+
+<span class="sd">        Returns:</span>
+
+<span class="sd">            x_out: float, array</span>
+<span class="sd">                Output value</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">x_in</span> <span class="o">*=</span> <span class="bp">self</span><span class="o">.</span><span class="n">scale_in</span>
+
+        <span class="k">if</span> <span class="n">unit_in</span> <span class="o">==</span> <span class="s1">&#39;m3perh&#39;</span><span class="p">:</span>
+            <span class="n">x_out</span> <span class="o">=</span>  <span class="bp">self</span><span class="o">.</span><span class="n">x_in</span> <span class="o">/</span> <span class="mf">3600.</span>
+        <span class="k">elif</span> <span class="n">unit_in</span> <span class="o">==</span> <span class="s1">&#39;m3pers&#39;</span><span class="p">:</span>
+            <span class="n">x_out</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">x_in</span> <span class="o">*</span> <span class="mf">3600.</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">msg</span> <span class="o">=</span> <span class="s1">&#39;User provided an unsupported input unit </span><span class="si">{}</span><span class="s1">.&#39;</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">msg</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">unit_in</span><span class="p">))</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span>
+
+        <span class="n">x_out</span> <span class="o">/=</span> <span class="bp">self</span><span class="o">.</span><span class="n">scale_out</span>
+
+        <span class="k">return</span> <span class="n">x_out</span></div>
+
+<div class="viewcode-block" id="UnitConv.sqft_m2"><a class="viewcode-back" href="../../../source/mswh.tools.html#mswh.tools.unit_converters.UnitConv.sqft_m2">[docs]</a>    <span class="k">def</span> <span class="nf">sqft_m2</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">unit_in</span><span class="o">=</span><span class="s1">&#39;sqft&#39;</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Converts area between square foot</span>
+<span class="sd">        and square meter</span>
+
+<span class="sd">        Parameters:</span>
+
+<span class="sd">            x: float, array</span>
+<span class="sd">                Input value</span>
+
+<span class="sd">            unit_in: string, options: &#39;Wh&#39;, &#39;J&#39;</span>
+<span class="sd">                Unit of the input value</span>
+
+<span class="sd">        Returns:</span>
+
+<span class="sd">            x_out: float, array</span>
+<span class="sd">                Output value</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">x_in</span> <span class="o">*=</span> <span class="bp">self</span><span class="o">.</span><span class="n">scale_in</span>
+
+        <span class="k">if</span> <span class="n">unit_in</span> <span class="o">==</span> <span class="s1">&#39;sqft&#39;</span><span class="p">:</span>
+            <span class="n">x_out</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">x_in</span> <span class="o">*</span> <span class="p">(</span><span class="mf">0.3048</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">unit_in</span> <span class="o">==</span> <span class="s1">&#39;m2&#39;</span><span class="p">:</span>
+            <span class="n">x_out</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">x_in</span> <span class="o">/</span> <span class="p">(</span><span class="mf">0.3048</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">msg</span> <span class="o">=</span> <span class="s1">&#39;User provided an unsupported input unit </span><span class="si">{}</span><span class="s1">.&#39;</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">msg</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">unit_in</span><span class="p">))</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span>
+
+        <span class="n">x_out</span> <span class="o">/=</span> <span class="bp">self</span><span class="o">.</span><span class="n">scale_out</span>
+
+        <span class="k">return</span> <span class="n">x_out</span></div>
+
+<div class="viewcode-block" id="UnitConv.ft_m"><a class="viewcode-back" href="../../../source/mswh.tools.html#mswh.tools.unit_converters.UnitConv.ft_m">[docs]</a>    <span class="k">def</span> <span class="nf">ft_m</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">unit_in</span><span class="o">=</span><span class="s1">&#39;ft&#39;</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Converts length between foot</span>
+<span class="sd">        and meter</span>
+
+<span class="sd">        Parameters:</span>
+
+<span class="sd">            x: float, array</span>
+<span class="sd">                Input value</span>
+
+<span class="sd">            unit_in: string, options: &#39;Wh&#39;, &#39;J&#39;</span>
+<span class="sd">                Unit of the input value</span>
+
+<span class="sd">        Returns:</span>
+
+<span class="sd">            x_out: float, array</span>
+<span class="sd">                Output value</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">x_in</span> <span class="o">*=</span> <span class="bp">self</span><span class="o">.</span><span class="n">scale_in</span>
+
+        <span class="k">if</span> <span class="n">unit_in</span> <span class="o">==</span> <span class="s1">&#39;ft&#39;</span><span class="p">:</span>
+            <span class="n">x_out</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">x_in</span> <span class="o">*</span> <span class="mf">0.3048</span>
+        <span class="k">elif</span> <span class="n">unit_in</span> <span class="o">==</span> <span class="s1">&#39;m&#39;</span><span class="p">:</span>
+            <span class="n">x_out</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">x_in</span> <span class="o">/</span> <span class="mf">0.3048</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">msg</span> <span class="o">=</span> <span class="s1">&#39;User provided an unsupported input unit </span><span class="si">{}</span><span class="s1">.&#39;</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">msg</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">unit_in</span><span class="p">))</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span>
+
+        <span class="n">x_out</span> <span class="o">/=</span> <span class="bp">self</span><span class="o">.</span><span class="n">scale_out</span>
+
+        <span class="k">return</span> <span class="n">x_out</span></div></div>
+
+
+<div class="viewcode-block" id="Utility"><a class="viewcode-back" href="../../../source/mswh.tools.html#mswh.tools.unit_converters.Utility">[docs]</a><span class="k">class</span> <span class="nc">Utility</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Converts gas or electricity</span>
+<span class="sd">    consumption into commonly used units.</span>
+
+<span class="sd">    Parameters:</span>
+
+<span class="sd">        quantity_in: float, array</span>
+<span class="sd">            Quantity to be converted.</span>
+<span class="sd">            E.g. gas use in kJ</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">quantity_in</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">quantity_in</span> <span class="o">=</span> <span class="n">quantity_in</span>
+
+        <span class="c1"># Gas properties</span>
+        <span class="c1"># heating value ASHRAE fundamentals 28.3.</span>
+        <span class="c1"># usual range is 37.3 to 39.1 MJ/m3 at sea level</span>
+        <span class="c1"># table 3: methane= 37.7, ethane 66.1 [MJ/m3]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">hea_val_gas</span> <span class="o">=</span> <span class="mf">38.</span>  <span class="c1"># [MJ/m3]</span>
+
+
+<div class="viewcode-block" id="Utility.gas"><a class="viewcode-back" href="../../../source/mswh.tools.html#mswh.tools.unit_converters.Utility.gas">[docs]</a>    <span class="k">def</span> <span class="nf">gas</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">unit_in</span><span class="o">=</span><span class="s1">&#39;kJ&#39;</span><span class="p">,</span> <span class="n">unit_out</span><span class="o">=</span><span class="s1">&#39;MMBtu&#39;</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Converts gas consumption.</span>
+
+<span class="sd">        Parameters:</span>
+
+<span class="sd">            unit_in: string</span>
+<span class="sd">                Units of the input quantity that needs</span>
+<span class="sd">                to be converted.</span>
+<span class="sd">                Options: &#39;kWh&#39;, &#39;kJ&#39;</span>
+
+<span class="sd">            unit_out: string</span>
+<span class="sd">                Desired output unit</span>
+
+<span class="sd">        Returns:</span>
+
+<span class="sd">            gas_use: float</span>
+<span class="sd">                Gas use in output units</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">unit_in</span> <span class="o">==</span> <span class="s1">&#39;kWh&#39;</span><span class="p">:</span>
+            <span class="n">gas_use</span> <span class="o">=</span> <span class="n">UnitConv</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">quantity_in</span><span class="p">,</span>
+                <span class="n">scale_in</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span>
+                <span class="n">scale_out</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">Wh_J</span><span class="p">(</span><span class="n">unit_in</span><span class="o">=</span><span class="s1">&#39;Wh&#39;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">quantity_in</span> <span class="o">=</span> <span class="n">gas_use</span>
+            <span class="n">unit_in</span> <span class="o">=</span> <span class="s1">&#39;kJ&#39;</span>
+
+        <span class="k">if</span> <span class="n">unit_in</span> <span class="o">==</span> <span class="s1">&#39;kJ&#39;</span><span class="p">:</span>
+
+            <span class="k">if</span> <span class="n">unit_out</span> <span class="o">==</span> <span class="s1">&#39;m3&#39;</span><span class="p">:</span>
+                <span class="n">gas_use</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">quantity_in</span> <span class="o">/</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">hea_val_gas</span> <span class="o">*</span> <span class="mf">1000.</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">unit_out</span> <span class="o">==</span> <span class="s1">&#39;cf&#39;</span><span class="p">:</span>
+                <span class="n">gas_use</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">quantity_in</span> <span class="o">/</span> <span class="p">(</span>
+                    <span class="mf">0.02832</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">hea_val_gas</span> <span class="o">*</span> <span class="mf">1000.</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">unit_out</span> <span class="o">==</span> <span class="s1">&#39;therm&#39;</span><span class="p">:</span>
+                <span class="n">gas_use</span> <span class="o">=</span> <span class="n">UnitConv</span><span class="p">(</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">quantity_in</span><span class="p">,</span>
+                    <span class="n">scale_in</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">therm_J</span><span class="p">(</span><span class="n">unit_in</span><span class="o">=</span><span class="s1">&#39;J&#39;</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">unit_out</span> <span class="o">==</span> <span class="s1">&#39;MMBtu&#39;</span><span class="p">:</span>
+                <span class="n">gas_use</span> <span class="o">=</span> <span class="n">UnitConv</span><span class="p">(</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">quantity_in</span><span class="p">,</span>
+                    <span class="n">scale_in</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span>
+                    <span class="n">scale_out</span><span class="o">=</span><span class="s1">&#39;MM&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">Btu_J</span><span class="p">(</span><span class="n">unit_in</span><span class="o">=</span><span class="s1">&#39;J&#39;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">gas_use</span></div></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 
+Multiscale Solar Water Heating (MSWH) Copyright (c) 2019, The
+Regents of the University of California, through Lawrence Berkeley National
+Laboratory (subject to receipt of any required approvals from the U.S.
+Dept. of Energy).  All rights reserved.
+
+If you have questions about your rights to use or distribute this software,
+please contact Berkeley Lab&#39;s Intellectual Property Office at
+IPO@lbl.gov.
+
+NOTICE.  This Software was developed under funding from the U.S. Department
+of Energy and the U.S. Government consequently retains certain rights.  As
+such, the U.S. Government has been granted for itself and others acting on
+its behalf a paid-up, nonexclusive, irrevocable, worldwide license in the
+Software to reproduce, distribute copies to the public, prepare derivative
+works, and perform publicly and display publicly, and to permit other to do
+so.
+
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
