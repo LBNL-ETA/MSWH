@@ -26,7 +26,7 @@ To add new system types (such as `Solar Thermal Retrofit`) one would need to map
 
 1. Download this repository with:
 
-        git clone https://github.com/milicag/mswh
+        git clone https://github.com/LBNL-ETA/MSWH.git
 
      Since the repo comes with database files, please download, install [`git large file storage`](https://git-lfs.github.com/) and set up respective hooks with:
 
@@ -79,7 +79,7 @@ To add new system types (such as `Solar Thermal Retrofit`) one would need to map
 
 ## Django Web Framework Deployment
 
-1. If the installation succeeded, to run the Django application navigate to the `web` folder (where the file `manage.py` is stored in) and run the following command to start the development server on your local machine:
+1. If the installation succeeded, to run the Django application navigate to the `web` folder (there should be a `manage.py` file) and start the development server on your local machine with:
 
         python manage.py runserver
 
@@ -97,7 +97,7 @@ To add new system types (such as `Solar Thermal Retrofit`) one would need to map
 
 ## Contributing
 
-Anyone may contribute code using the issue tracker, forks and pull requests.
+Anyone may contribute features with the appropriate tests using the issue tracker, forks and pull requests.
 
 To run tests:
 
