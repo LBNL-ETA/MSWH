@@ -60,8 +60,7 @@ class System(object):
 
             Example:
 
-            >>> loads_com = pd.DataFrame(data = [[1, occ_indiv - 1., 0.8 * load_array],[2, occ_indiv, 1. * load_array],[3, occ_indiv, 1.2 * load_array],[4, occ_indiv + 1., 1.4 * load_array]],\
-                    columns = [self.c['id'], self.c['occ'], self.c['load_m3']])
+            >>> loads_com = pd.DataFrame(data = [[1, occ_indiv - 1., 0.8 * load_array],[2, occ_indiv, 1. * load_array],[3, occ_indiv, 1.2 * load_array],[4, occ_indiv + 1., 1.4 * load_array]], columns = [self.c['id'], self.c['occ'], self.c['load_m3']])
 
         timestep: float, h
             Duration of a single timestep, in hours
@@ -1052,7 +1051,7 @@ class System(object):
             """Runs a 8760. hourly simulation of the
             provided system type.
 
-            Parameters
+            Parameters:
 
                 type: string
                     gas_tank_wh
@@ -1060,7 +1059,7 @@ class System(object):
                     solar_thermal_new (gas tankless backup at each household)
                     solar_electric
 
-            Returns
+            Returns:
 
                 en_use: dict
                     Total energy use for the analysis period:
@@ -1553,7 +1552,7 @@ class System(object):
         households based on a size defining variable,
         such as occupancy.
 
-        Parameters
+        Parameters:
 
             df: pd df
                 Contains household ID and split on column
