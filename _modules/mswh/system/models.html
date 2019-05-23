@@ -227,9 +227,10 @@
 
 <span class="sd">    Examples:</span>
 
-<span class="sd">        See ```swh.system.tests.test_models``` module and</span>
-<span class="sd">        ```scripts/Project Level SWH System Tool.ipynb```</span>
-<span class="sd">        for examples on how to set up models for simulation.</span>
+<span class="sd">        See :func:`swh.system.tests.test_components &lt;swh.system.tests.test_components&gt;` module and</span>
+<span class="sd">        :func:`scripts/Project Level SWH System Tool.ipynb &lt;scripts/Project Level SWH System Tool.ipynb&gt;`</span>
+<span class="sd">        for examples on how to use the methods as stand alone and</span>
+<span class="sd">        in a system model simulation.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sys_params</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">backup_params</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> \
             <span class="n">weather</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">sys_sizes</span><span class="o">=</span><span class="mf">1.</span><span class="p">,</span> <span class="n">backup_sizes</span><span class="o">=</span><span class="mf">1.</span><span class="p">,</span> \
@@ -338,7 +339,7 @@
     <span class="nd">@weather</span><span class="o">.</span><span class="n">setter</span>
     <span class="k">def</span> <span class="nf">weather</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Re-extracts weather timeseries if a new weather dataset</span>
-<span class="sd">        is assigned to an instantiated class objectsolar_electric</span>
+<span class="sd">        is assigned to an instance</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__weather</span> <span class="o">=</span> <span class="n">value</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">):</span>
@@ -1127,8 +1128,9 @@
 
 <span class="sd">            ts_proj: dict of arrays, W</span>
 <span class="sd">                Heat:</span>
-<span class="sd">                self.r[&#39;q_del&#39;]: delivered</span>
-<span class="sd">                self.r[&#39;gas_use&#39;]: gas consumed</span>
+
+<span class="sd">                * self.r[&#39;q_del&#39;]: delivered</span>
+<span class="sd">                * self.r[&#39;gas_use&#39;]: gas consumed</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="c1"># components</span>
         <span class="n">heater</span> <span class="o">=</span> <span class="n">Storage</span><span class="p">(</span>
@@ -1206,10 +1208,12 @@
 <span class="sd">            Parameters:</span>
 
 <span class="sd">                type: string</span>
-<span class="sd">                    gas_tank_wh</span>
-<span class="sd">                    solar_thermal_retrofit (gas tank backup at each household)</span>
-<span class="sd">                    solar_thermal_new (gas tankless backup at each household)</span>
-<span class="sd">                    solar_electric</span>
+<span class="sd">                    * &#39;gas_tank_wh&#39;</span>
+<span class="sd">                    * &#39;solar_thermal_retrofit&#39;</span>
+<span class="sd">                      (gas tank backup at each household)</span>
+<span class="sd">                    * &#39;solar_thermal_new&#39;</span>
+<span class="sd">                      (gas tankless backup at each household)</span>
+<span class="sd">                    * &#39;solar_electric&#39;</span>
 
 <span class="sd">            Returns:</span>
 
@@ -1274,7 +1278,7 @@
 <span class="sd">                Timestep household level results for energy uses [W],</span>
 <span class="sd">                and heat rates [W].</span>
 
-<span class="sd">            Updates self.cons_total with the backup simulation</span>
+<span class="sd">            Updates `self.cons_total` with the backup simulation</span>
 <span class="sd">            energy use and heat rates results.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
@@ -1568,7 +1572,7 @@
 <span class="sd">                Timestep household level results for energy use [W],</span>
 <span class="sd">                and delivered heat rate [W].</span>
 
-<span class="sd">            Updates self.cons_total with the backup simulation</span>
+<span class="sd">            Updates `self.cons_total` with the backup simulation</span>
 <span class="sd">            energy use and heat rates results.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
@@ -1754,14 +1758,16 @@
 
 <span class="sd">            el_use: dict, Wh</span>
 <span class="sd">                Electricity consumption for the analyzed period by:</span>
-<span class="sd">                &#39;dist_pump&#39; - distribution pump</span>
-<span class="sd">                &#39;sol_pump&#39; - solar pump</span>
-<span class="sd">                &#39;total&#39; - total (all pumps in the system)</span>
+
+<span class="sd">                * &#39;dist_pump&#39; - distribution pump</span>
+<span class="sd">                * &#39;sol_pump&#39; - solar pump</span>
+<span class="sd">                * &#39;total&#39; - total (all pumps in the system)</span>
 
 <span class="sd">            op_hour: dict, h</span>
 <span class="sd">                Operating hours for the analyzed period by:</span>
-<span class="sd">                &#39;dist_pump&#39; - distribution pump</span>
-<span class="sd">                &#39;sol_pump&#39; - solar pump</span>
+
+<span class="sd">                * &#39;dist_pump&#39; - distribution pump</span>
+<span class="sd">                * &#39;sol_pump&#39; - solar pump</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">ts_el_use</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
         <span class="n">ts_el_use</span><span class="p">[</span><span class="s1">&#39;total&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">num_timesteps</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>

@@ -215,8 +215,8 @@ can be used outside of this framework.</p>
 </div></blockquote>
 <p>Examples:</p>
 <blockquote>
-<div><p>See <code class="docutils literal notranslate"><span class="pre">`swh.system.tests.test_components`</span></code> module and
-<code class="docutils literal notranslate"><span class="pre">`scripts/Project</span> <span class="pre">Level</span> <span class="pre">SWH</span> <span class="pre">System</span> <span class="pre">Tool.ipynb`</span></code>
+<div><p>See <code class="xref py py-func docutils literal notranslate"><span class="pre">swh.system.tests.test_components</span></code> module and
+<code class="xref py py-func docutils literal notranslate"><span class="pre">scripts/Project</span> <span class="pre">Level</span> <span class="pre">SWH</span> <span class="pre">System</span> <span class="pre">Tool.ipynb</span></code>
 for examples on how to use the methods as stand alone and
 in a system model simulation.</p>
 </div></blockquote>
@@ -236,9 +236,14 @@ an auxiliary heater within the thermal tank.</p>
 <p>Returns:</p>
 <blockquote>
 <div><dl class="simple">
-<dt>res: dict</dt><dd><p>self.r[‘q_del_bckp’] : float, array - delivered heat rate, [W]
-self.r[‘q_el_use’] : float, array - electricity use, [W]
-self.r[‘q_unmet’] : float, array - unmet demand heat rate, [W]</p>
+<dt>res: dict</dt><dd><ul class="simple">
+<li><p>self.r[‘q_del_bckp’] : float,
+array - delivered heat rate, [W]</p></li>
+<li><p>self.r[‘q_el_use’] : float,
+array - electricity use, [W]</p></li>
+<li><p>self.r[‘q_unmet’] : float,
+array - unmet demand heat rate, [W]</p></li>
+</ul>
 </dd>
 </dl>
 </div></blockquote>
@@ -260,9 +265,13 @@ gas backup for solar thermal.</p>
 <p>Returns:</p>
 <blockquote>
 <div><dl>
-<dt>res: dict</dt><dd><p>self.r[‘q_del_bckp’] : float, array - delivered heat rate, [W]
-self.r[‘q_gas_use’] : float, array - gas use heat rate, [W]
-self.r[‘q_unmet’] : float, array - unmet demand heat rate, [W]</p>
+<dt>res: dict</dt><dd><ul class="simple">
+<li><p>self.r[‘q_del_bckp’] : float,
+array - delivered heat rate, [W]</p></li>
+<li><p>self.r[‘q_gas_use’] : float, array - gas use heat rate, [W]</p></li>
+<li><p>self.r[‘q_unmet’] : float, array -
+unmet demand heat rate, [W]</p></li>
+</ul>
 <p>Any further unit conversion should be performed
 using unit_converters.Utility class</p>
 </dd>
@@ -307,11 +316,11 @@ capacity curve [1/degC2]</p>
 <p>Returns:</p>
 <blockquote>
 <div><dl class="simple">
-<dt>performance: dict</dt><dd><p>{‘cop’: current Coefficient Of Performance (COP) of
-heat pump, [-]
-‘heat_cap’: current heating capacity of heat pump, [W]
-‘el_use’: current electricity use of heat pump
-(heat_cap / cop), [W]}</p>
+<dt>performance: dict</dt><dd><ul class="simple">
+<li><p>‘cop’: current Coefficient Of Performance (COP), [-]</p></li>
+<li><p>‘heat_cap’: current heating capacity of heat pump, [W]</p></li>
+<li><p>‘el_use’: current electricity use of heat pump [W]</p></li>
+</ul>
 </dd>
 </dl>
 </div></blockquote>
@@ -332,9 +341,11 @@ the pv panel (instead of area and efficiency)</p>
 <p>Returns:</p>
 <blockquote>
 <div><dl class="simple">
-<dt>self.pv_power: dict of floats</dt><dd><p>Generated power [W]
-‘ac’ : AC
-‘dc’ : DC</p>
+<dt>self.pv_power: dict of floats</dt><dd><p>Generated power [W]</p>
+<ul class="simple">
+<li><p>‘ac’ : AC</p></li>
+<li><p>‘dc’ : DC</p></li>
+</ul>
 </dd>
 </dl>
 </div></blockquote>
@@ -417,7 +428,7 @@ can be used outside of this framework.</p>
 </div></blockquote>
 <p>Examples:</p>
 <blockquote>
-<div><p>See <code class="docutils literal notranslate"><span class="pre">`swh.system.tests.test_components`</span></code> module and
+<div><p>See <code class="xref py py-func docutils literal notranslate"><span class="pre">swh.system.tests.test_components</span></code> module and
 for examples on how to use the methods.</p>
 </div></blockquote>
 <dl class="method">
@@ -498,14 +509,16 @@ structure this input.</p>
 Default 1. See tests and examples on how to
 structure this input.</p>
 </dd>
-<dt>type: string</dt><dd><p>Type of storage component. Options:
-‘sol_tank’ - indirect tank WH with a coil to circulate
-fluid heated by a solar collector
-‘hp_tank’ - tank with an inbuilt heat pump
+<dt>type: string</dt><dd><p>Type of storage component. Options:</p>
+<ul class="simple">
+<li><p>‘sol_tank’ - indirect tank WH with a coil to circulate
+fluid heated by a solar collector</p></li>
+<li><p>‘hp_tank’ - tank with an inbuilt heat pump
 ‘wham_tank’ - conventional gas tank water heater model
-based on a WH model from the efficiency standards analysis
-‘gas_tank’ - conventional gas tank water heater (currently not
-implemented)</p>
+based on a WH model from the efficiency standards analysis</p></li>
+<li><p>‘gas_tank’ - conventional gas tank water heater (currently not
+implemented)</p></li>
+</ul>
 </dd>
 <dt>log_level: None or python logger logging level,</dt><dd><p>Default: logging.DEBUG
 This applies for a subset of the class functionality, mostly
@@ -523,8 +536,8 @@ messages and ignore INFO, DEBUG and WARNING.</p>
 </div></blockquote>
 <p>Examples:</p>
 <blockquote>
-<div><p>See <code class="docutils literal notranslate"><span class="pre">`swh.system.tests.test_components`</span></code> module and
-<code class="docutils literal notranslate"><span class="pre">`scripts/Project</span> <span class="pre">Level</span> <span class="pre">SWH</span> <span class="pre">System</span> <span class="pre">Tool.ipynb`</span></code>
+<div><p>See <code class="xref py py-func docutils literal notranslate"><span class="pre">swh.system.tests.test_components</span></code> module and
+<code class="xref py py-func docutils literal notranslate"><span class="pre">scripts/Project</span> <span class="pre">Level</span> <span class="pre">SWH</span> <span class="pre">System</span> <span class="pre">Tool.ipynb</span></code>
 for examples on how to use the methods as stand alone and
 in a system model simulation.</p>
 </div></blockquote>
@@ -556,11 +569,13 @@ Default: 65 degF</p>
 <p>Returns:</p>
 <blockquote>
 <div><dl class="simple">
-<dt>res: dict</dt><dd><p>self.r[‘q_del’] : float, array - delivered heat rate, [W]
-self.r[‘q_dem’] : float, array - demand heat rate, [W]
-self.r[‘q_gas_use’] : float, array - gas use heat rate, [W]
-self.r[‘q_unmet’] : float, array - unmet demand, [w]
-self.r[‘q_dump’] : float, array - dumped heat, [W]</p>
+<dt>res: dict</dt><dd><ul class="simple">
+<li><p>self.r[‘q_del’] : float, array - delivered heat rate, [W]</p></li>
+<li><p>self.r[‘q_dem’] : float, array - demand heat rate, [W]</p></li>
+<li><p>self.r[‘q_gas_use’] : float, array - gas use heat rate, [W]</p></li>
+<li><p>self.r[‘q_unmet’] : float, array - unmet demand, [w]</p></li>
+<li><p>self.r[‘q_dump’] : float, array - dumped heat, [W]</p></li>
+</ul>
 </dd>
 </dl>
 </div></blockquote>
@@ -605,8 +620,7 @@ between the upper and the lower tank volume while charging</p></li>
 </ul>
 </dd>
 <dt>h_vs_r: float</dt><dd><p>Regression parameter - tank height/diameter ratio
-(based on web scraped data, see
-<cite>scripts/Gallons vs. Height</cite> notebook), default: 6.</p>
+(based on web scraped data), default: 6.</p>
 </dd>
 <dt>T_max: float, K</dt><dd><p>Maximum allowed fluid temperature in the thermal
 storage tank, defaults to 344.15 K = 71 degC.</p>
@@ -651,12 +665,12 @@ thermostatic valve since it regulates the
 tap flow from the tank as follows:</p>
 <blockquote>
 <div><ul class="simple">
-<li><p>limits above if the tank temperature is
+<li><p>Limits above if the tank temperature is
 higher than the nominal draw temperature</p></li>
-<li><p>tap flow equals V_draw_load for any tank
+<li><p>Tap flow equals V_draw_load for any tank
 temperature between T_draw_min
 and T_draw_nom</p></li>
-<li><p>tap flow is zero if tank temperature
+<li><p>Tap flow is zero if tank temperature
 is below T_draw_min and T_draw_min is
 provided</p></li>
 </ul>
@@ -669,7 +683,7 @@ tank volume and thermal losses from the tank,
 and adjust the values.</p>
 <p>Parameters:</p>
 <blockquote>
-<div><dl class="simple">
+<div><dl>
 <dt>V_draw_load: float, m3/h</dt><dd><p>Volume of DHW drawn at the nominal
 end-use load temperature.</p>
 </dd>
@@ -683,10 +697,10 @@ upper volume)</p>
 </dd>
 <dt>T_draw_min: float, K</dt><dd><p>Minimal temperature that needs to
 be achieved in the tank in order
-to allow tapping.
-Default: None - tapping is always
-enabled
-Recommended usage - in colder climates
+to allow tapping.</p>
+<p>Default: None - tapping is always
+enabled</p>
+<p>Recommended usage - in colder climates
 where an outdoors tank may be cooler
 than the water main.</p>
 </dd>
@@ -695,10 +709,12 @@ than the water main.</p>
 <p>Returns:</p>
 <blockquote>
 <div><dl class="simple">
-<dt>draw: dict</dt><dd><p>Draw volume: ‘vol’, m3/h
-Total demand heat rate: ‘tot_dem’, W
-Infinite volume delivered heat rate: ‘heat_rate’, W
-Infinite volume unmet heat rate: ‘unmet_heat_rate’, W</p>
+<dt>draw: dict</dt><dd><ul class="simple">
+<li><p>Draw volume: ‘vol’, m3/h</p></li>
+<li><p>Total demand heat rate: ‘tot_dem’, W</p></li>
+<li><p>Infinite volume delivered heat rate: ‘heat_rate’, W</p></li>
+<li><p>Infinite volume unmet heat rate: ‘unmet_heat_rate’, W</p></li>
+</ul>
 </dd>
 </dl>
 </div></blockquote>
@@ -709,23 +725,25 @@ Infinite volume unmet heat rate: ‘unmet_heat_rate’, W</p>
 <code class="descname">thermal_tank</code><span class="sig-paren">(</span><em>pre_T_amb=293.15</em>, <em>pre_T_feed=291.15</em>, <em>pre_T_upper=328.15</em>, <em>pre_T_lower=323.15</em>, <em>pre_V_tap=0.00757</em>, <em>pre_Q_in=400.0</em>, <em>max_V_tap=0.1514</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mswh/system/components.html#Storage.thermal_tank"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mswh.system.components.Storage.thermal_tank" title="Permalink to this definition">¶</a></dt>
 <dd><p>Model of a thermal storage tank with:</p>
 <ul class="simple">
-<li><p>coil heat exchanger for the solar gains</p></li>
+<li><p>Coil heat exchanger for the solar gains</p></li>
 <li><p>DHW tap at the top of the tank</p></li>
-<li><p>recharge tap at the bottom of the tank</p></li>
+<li><p>Recharge tap at the bottom of the tank</p></li>
 </ul>
 <p>The model can be instantiated as a:</p>
 <ul class="simple">
-<li><p>solar thermal tank</p></li>
-<li><p>heat pump tank</p></li>
+<li><p>Solar thermal tank</p></li>
+<li><p>Heat pump tank</p></li>
 </ul>
 <p>Parameters:</p>
 <blockquote>
 <div><dl>
-<dt>type: string</dt><dd><p>‘solar’ - solar tank (assumes
+<dt>type: string</dt><dd><ul class="simple">
+<li><p>‘solar’ - solar tank (assumes
 that heated fluid from a solar collector is circulated
-through an in-tank-coil)
-‘hp’ - heat pump tank (assumes an inbuilt heat pump
-as a main heat source)</p>
+through an in-tank-coil)</p></li>
+<li><p>‘hp’ - heat pump tank (assumes an inbuilt heat pump
+as a main heat source)</p></li>
+</ul>
 <p>The type will affect output labeling and heat transfer
 efficiency.</p>
 </dd>
@@ -751,18 +769,31 @@ or from a heat pump, depending on the type</p>
 <p>Returns:</p>
 <blockquote>
 <div><dl>
-<dt>res: dict</dt><dd><blockquote>
-<div><p>Single Timestep input and output values for temperatures [K]
+<dt>res: dict</dt><dd><p>Single timestep input and output values for temperatures [K]
 and heat rates [W]:</p>
-</div></blockquote>
-<dl>
-<dt>{net_gain_label<span class="classifier">pre_Q_in_net,                self.r[‘q_loss_low’]</span><span class="classifier">pre_Q_loss_lower,                self.r[‘q_loss_up’]</span><span class="classifier">pre_Q_loss_upper,                # demand, delivered and unmet heat</span></dt><dd><p># (between tap setpoint and water main)
-self.r[‘q_dem’] : tap[‘net_dem’],                self.r[‘q_dem_tot’] : tap[‘tot_dem’],                self.r[‘q_del_tank’] : tank[self.r[‘q_del_tank’]],                self.r[‘q_unmet_tank’] :                     np.round(                tank[self.r[‘q_unmet_tank’]] + tap[‘unmet_heat_rate’], 2),                self.r[‘q_dump’] : tank[self.r[‘q_dump’]],                self.r[‘q_ovrcool_tank’] : tank[self.r[‘q_ovrcool_tank’]],                self.r[‘q_dem_balance’] : np.round(Q_dem_balance),                # average temperatures for tank volumes
-self.r[‘t_tank_low’] : tank[self.r[‘t_tank_low’]],                self.r[‘t_tank_up’] : tank[self.r[‘t_tank_up’]],                self.r[‘dt_dist’] : dist[‘dt_dist’],                self.r[‘t_set’] : self.T_draw_set,                self.r[‘q_dist_loss’] : dist[‘heat_loss’],
-self.r[‘flow_on_frac’] : dist[‘flow_on_frac’]}</p>
-<p>Temperatures in K, heat rates in W</p>
-</dd>
-</dl>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="p">{</span><span class="n">net_gain_label</span> <span class="p">:</span> <span class="n">pre_Q_in_net</span><span class="p">,</span>
+<span class="go">self.r[&#39;q_loss_low&#39;] : pre_Q_loss_lower,</span>
+<span class="go">self.r[&#39;q_loss_up&#39;] : pre_Q_loss_upper,</span>
+<span class="go"># demand, delivered and unmet heat</span>
+<span class="go"># (between tap setpoint and water main)</span>
+<span class="go">self.r[&#39;q_dem&#39;] : tap[&#39;net_dem&#39;],</span>
+<span class="go">self.r[&#39;q_dem_tot&#39;] : tap[&#39;tot_dem&#39;],</span>
+<span class="go">self.r[&#39;q_del_tank&#39;] : tank[self.r[&#39;q_del_tank&#39;]],</span>
+<span class="go">self.r[&#39;q_unmet_tank&#39;] : np.round(</span>
+<span class="go">tank[self.r[&#39;q_unmet_tank&#39;]] + tap[&#39;unmet_heat_rate&#39;], 2),</span>
+<span class="go">self.r[&#39;q_dump&#39;] : tank[self.r[&#39;q_dump&#39;]],</span>
+<span class="go">self.r[&#39;q_ovrcool_tank&#39;] : tank[self.r[&#39;q_ovrcool_tank&#39;]],</span>
+<span class="go">self.r[&#39;q_dem_balance&#39;] : np.round(Q_dem_balance),</span>
+<span class="go"># average temperatures for tank volumes</span>
+<span class="go">self.r[&#39;t_tank_low&#39;] : tank[self.r[&#39;t_tank_low&#39;]],</span>
+<span class="go">self.r[&#39;t_tank_up&#39;] : tank[self.r[&#39;t_tank_up&#39;]],</span>
+<span class="go">self.r[&#39;dt_dist&#39;] : dist[&#39;dt_dist&#39;],</span>
+<span class="go">self.r[&#39;t_set&#39;] : self.T_draw_set,</span>
+<span class="go">self.r[&#39;q_dist_loss&#39;] : dist[&#39;heat_loss&#39;],</span>
+<span class="go">self.r[&#39;flow_on_frac&#39;] : dist[&#39;flow_on_frac&#39;]}</span>
+<span class="go">Temperatures in K, heat rates in W</span>
+</pre></div>
+</div>
 </dd>
 </dl>
 </div></blockquote>
@@ -811,16 +842,20 @@ volume at pre_T_upper was infinite</p>
 <blockquote>
 <div><dl>
 <dt>res: dict of floats</dt><dd><p>Represent averages in a single timestep.
-Average temperatures for tank volumes:
-self.r[self.r[‘t_tank_low’]] : lower, K
-self.r[‘t_tank_up’] : upper, K
-Heat rates:
-‘Q_net’ : expected timestep net gain/loss based on inputs, W
-self.r[‘q_dump’] : dumped heat, W
-‘Q_draw’ : delivered to load W
-‘Q_draw_unmet’ : unmet load due to finite tank volume, W
+Average temperatures for tank volumes:</p>
+<ul class="simple">
+<li><p>self.r[self.r[‘t_tank_low’]] : lower, K</p></li>
+<li><p>self.r[‘t_tank_up’] : upper, K</p></li>
+</ul>
+<p>Heat rates:</p>
+<ul class="simple">
+<li><p>‘Q_net’ : expected timestep net gain/loss based on inputs, W
+self.r[‘q_dump’] : dumped heat, W</p></li>
+<li><p>‘Q_draw’ : delivered to load W</p></li>
+<li><p>‘Q_draw_unmet’ : unmet load due to finite tank volume, W
 self.r[‘q_ovrcool_tank’] : error in balancing due to minimal
-tank temperature limit assumption in each timestep</p>
+tank temperature limit assumption in each timestep</p></li>
+</ul>
 <p>Note: ‘Q_draw’ + ‘Q_draw_unmet’ = pre_Q_tap</p>
 </dd>
 </dl>
@@ -918,9 +953,10 @@ messages and ignore INFO, DEBUG and WARNING.</p>
 </div></blockquote>
 <p>Examples:</p>
 <blockquote>
-<div><p>See <code class="docutils literal notranslate"><span class="pre">`swh.system.tests.test_models`</span></code> module and
-<code class="docutils literal notranslate"><span class="pre">`scripts/Project</span> <span class="pre">Level</span> <span class="pre">SWH</span> <span class="pre">System</span> <span class="pre">Tool.ipynb`</span></code>
-for examples on how to set up models for simulation.</p>
+<div><p>See <code class="xref py py-func docutils literal notranslate"><span class="pre">swh.system.tests.test_components</span></code> module and
+<code class="xref py py-func docutils literal notranslate"><span class="pre">scripts/Project</span> <span class="pre">Level</span> <span class="pre">SWH</span> <span class="pre">System</span> <span class="pre">Tool.ipynb</span></code>
+for examples on how to use the methods as stand alone and
+in a system model simulation.</p>
 </div></blockquote>
 <dl class="method">
 <dt id="mswh.system.models.System.conventional_gas_tank">
@@ -932,9 +968,11 @@ tanks that are not appropriately sized.</p>
 <p>Returns:</p>
 <blockquote>
 <div><dl class="simple">
-<dt>ts_proj: dict of arrays, W</dt><dd><p>Heat:
-self.r[‘q_del’]: delivered
-self.r[‘gas_use’]: gas consumed</p>
+<dt>ts_proj: dict of arrays, W</dt><dd><p>Heat:</p>
+<ul class="simple">
+<li><p>self.r[‘q_del’]: delivered</p></li>
+<li><p>self.r[‘gas_use’]: gas consumed</p></li>
+</ul>
 </dd>
 </dl>
 </div></blockquote>
@@ -948,10 +986,14 @@ provided system type.</p>
 <p>Parameters:</p>
 <blockquote>
 <div><dl class="simple">
-<dt>type: string</dt><dd><p>gas_tank_wh
-solar_thermal_retrofit (gas tank backup at each household)
-solar_thermal_new (gas tankless backup at each household)
-solar_electric</p>
+<dt>type: string</dt><dd><ul class="simple">
+<li><p>‘gas_tank_wh’</p></li>
+<li><p>‘solar_thermal_retrofit’
+(gas tank backup at each household)</p></li>
+<li><p>‘solar_thermal_new’
+(gas tankless backup at each household)</p></li>
+<li><p>‘solar_electric’</p></li>
+</ul>
 </dd>
 </dl>
 </div></blockquote>
@@ -1068,23 +1110,20 @@ timestep averaging.</p>
 <p>Generates timeseries that are inputs to the simulation
 model and are known prior to the simulation, such as
 outdoor air temperature and end use load profiles.</p>
-<p>Parameters</p>
+<p>Parameters:</p>
 <blockquote>
-<div><p>input_dfs: a dict of pd dfs</p>
-<blockquote>
-<div><p>Dictionary of input dataframes
-as read in from the input db by the Sql class
-(see example in
-<cite>test_source_and_sink.SourceAndSinkTests.setUp</cite>)</p>
-</div></blockquote>
-<p>random_state: numpy random state object or an integer</p>
-<blockquote>
-<div><p>numpy random state object : if there is a need
+<div><dl>
+<dt>input_dfs: a dict of pd dfs</dt><dd><p>Dictionary of input dataframes
+as read in from the input db by the <code class="xref py py-func docutils literal notranslate"><span class="pre">Sql</span></code> class
+(see example in <code class="xref py py-func docutils literal notranslate"><span class="pre">test_source_and_sink.SourceAndSinkTests.setUp</span></code>)</p>
+</dd>
+<dt>random_state: numpy random state object or an integer</dt><dd><p>numpy random state object : if there is a need
 to maintain the same random seed throughout the
 analysis.</p>
 <p>integer : a new random state object gets
 instanteated at init</p>
-</div></blockquote>
+</dd>
+</dl>
 </div></blockquote>
 <dl class="staticmethod">
 <dt id="mswh.system.source_and_sink.SourceAndSink.demand_estimate">
@@ -1095,7 +1134,7 @@ installations with a known occupancy</p>
 <p>Parameters:</p>
 <blockquote>
 <div><dl class="simple">
-<dt>occ<span class="classifier">float</span></dt><dd><p>Number of individual household occupants</p>
+<dt>occ: float</dt><dd><p>Number of individual household occupants</p>
 </dd>
 </dl>
 </div></blockquote>
