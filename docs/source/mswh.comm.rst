@@ -2,13 +2,6 @@ Database Communication
 ======================
 
 
-.. toctree::
-
-    mswh.comm
-
-Submodules
-----------
-
 mswh.comm.sql module
 --------------------
 

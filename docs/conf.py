@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# SWH documentation build configuration file, created by
+# MSWH documentation build configuration file, created by
 # sphinx-quickstart on Thu Sep 13 16:11:52 2018.
 #
 # This file is execfile()d with the current directory set to its
@@ -50,9 +50,26 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = u'Solar Water Heating System Models for Individual and Community Projects'
-copyright = u'LBNL/CEC'
-author = u'Milica Grahovac/Robert Hosbach/Hannes Bohnemgel/Katie Coughlin/Mohan Ganeshalingam'
+project = u'Multiscale Solar Water Heating'
+copyright = u'''
+Multiscale Solar Water Heating (MSWH) Copyright (c) 2019, The
+Regents of the University of California, through Lawrence Berkeley National
+Laboratory (subject to receipt of any required approvals from the U.S.
+Dept. of Energy).  All rights reserved.
+
+If you have questions about your rights to use or distribute this software,
+please contact Berkeley Lab's Intellectual Property Office at
+IPO@lbl.gov.
+
+NOTICE.  This Software was developed under funding from the U.S. Department
+of Energy and the U.S. Government consequently retains certain rights.  As
+such, the U.S. Government has been granted for itself and others acting on
+its behalf a paid-up, nonexclusive, irrevocable, worldwide license in the
+Software to reproduce, distribute copies to the public, prepare derivative
+works, and perform publicly and display publicly, and to permit other to do
+so.
+'''
+author = u'Milica Grahovac/Robert Hosbach/Katie Coughlin/Mohan Ganeshalingam/Hannes Gerhart'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -227,8 +244,8 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    (master_doc, 'MSWH.tex', u'Multiscale Solar Water Heating - Draft Code Documentation',
-     u'Milica Grahovac \\\\ Robert Hosbach \\\\ Hannes Gerhart \\\\ Katie Coughlin \\\\ Mohan Ganeshalingam \\\\ Vagelis Vossos', 'manual', True),
+    (master_doc, 'MSWH.tex', u'Multiscale Solar Water Heating - Code Documentation',
+     u'Milica Grahovac \\\\ Robert Hosbach \\\\ Hannes Gerhart \\\\ Katie Coughlin \\\\ Mohan Ganeshalingam \\\\ Vagelis Vossos \\\\ Hannes Gerhart', 'manual', True),
 ]
 
 # The name of an image file (relative to this directory) to place at the
@@ -270,8 +287,8 @@ latex_documents = [
 # Grouping the document tree into Texinfo files. List of tuples
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
-texinfo_documents = [
-    (master_doc, 'MSWH', u'Multiscale Solar Water Heating - Draft Code Documentation', author, 'MSWH', '', 'Miscellaneous'),]
+# texinfo_documents = [
+#     (master_doc, 'MSWH', u'Multiscale Solar Water Heating - Code Documentation', author, 'MSWH', '', 'Miscellaneous'),]
 
 # Documents to append as an appendix to all manuals.
 #texinfo_appendices = []

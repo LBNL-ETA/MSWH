@@ -4,4 +4,11 @@ Python Code Documentation
 .. toctree::
    :maxdepth: 4
 
-   mswh
+Subpackages
+-----------
+
+.. toctree::
+
+    mswh.system
+    mswh.tools
+    mswh.comm

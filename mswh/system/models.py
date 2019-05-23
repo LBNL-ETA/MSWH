@@ -50,7 +50,7 @@ class System(object):
 
             Oakland climate zone in CEC weather data is '03':
 
-            >>> self.weather = source.irradiation_and_water_main('03', method='isotropic diffuse', use_in_test = True)
+            >>> self.weather = source.irradiation_and_water_main('03', method='isotropic diffuse')
 
         loads: pd df
             A dataframe with loads for all individual household

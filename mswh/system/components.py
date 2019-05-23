@@ -835,7 +835,7 @@ class Converter(object):
         """
         try:
             panel_size = self.size[self.s['pv']]
-            #log.info('Got panel size: {}'.format(panel_size))
+
         except:
             # default to 1000. kW_peak or it's equivalent in m2 for
             # default efficiency
@@ -2414,7 +2414,7 @@ class Storage(object):
         # the required load. Enthalpy balance,
         # assuming c and ro constant
         if T_tank > (T_draw_nom + dT_loss):
-            V_tap = (V_draw_load * 
+            V_tap = (V_draw_load *
                      (T_draw_nom + dT_loss - T_feed) / (T_tank - T_feed))
 
         # draw the demand volume if the tank temperature
@@ -2752,7 +2752,7 @@ class Storage(object):
                 Dumped demand
         """
         state_of_charge = (
-            pre_state_of_charge * eff_sta + 
+            pre_state_of_charge * eff_sta +
             (charge * eff_ch - discharge / eff_disch) * timestep)
 
         # charged more than possible

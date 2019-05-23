@@ -8,15 +8,12 @@ Multiscale Solar Water Heating System Modeling
 
 
 
-   Contents
-   ========
-
-
 .. toctree::
    :maxdepth: 3
 
    source/models
    source/modules
-   source/mswh
+
+   source/legal
 
 .. role:: note

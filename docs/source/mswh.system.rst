@@ -1,8 +1,6 @@
 System and Component Models
 ===========================
 
-Submodules
-----------
 
 mswh.system.components module
 ------------------------------

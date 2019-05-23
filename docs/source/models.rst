@@ -40,6 +40,3 @@ The energy sources we consider are solar irradiation, gas and electricity. The s
 Upon assembling the components into systems, we perform an annual simulation with hourly timesteps. We solve any differential equations for each time step using an explicit forward Euler method, a first order technique that provides a good approximation given the dynamics of the process observed and the level of detail required in our analysis.
 
 We configure and size each MSWH thermal configuration so that it complies with the CSI-thermal rebate program sizing requirements. The system model assumes appropriate flow and temperature controls and includes freeze and stagnation protection.
-
-
-Funded by CEC as PIR-16-022

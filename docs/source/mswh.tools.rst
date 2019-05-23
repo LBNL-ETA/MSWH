@@ -1,12 +1,6 @@
 Tools
 =====
 
-.. toctree::
-
-    tools
-
-Submodules
-----------
 
 mswh.tools.plots module
 -----------------------
