@@ -102,7 +102,7 @@ check out [code documentation](https://lbnl-eta.github.io/MSWH/) for guidance.
 
 To run tests:
 
-    python -m unittest swh.{my_module}.tests.{test_my_module}.{MyModuleTests}.{test_my_method}
+    python -m unittest mswh.{my_module}.tests.{test_my_module}.{MyModuleTests}.{test_my_method}
 
 ## Publications
 
