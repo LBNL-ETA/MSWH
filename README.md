@@ -100,7 +100,7 @@ To add new system types (such as `Solar Thermal Retrofit`) one would need to map
 Anyone may contribute features with the appropriate tests using the issue tracker, forks and pull requests. Please 
 check out [code documentation](https://lbnl-eta.github.io/MSWH/) for guidance.
 
-To run tests:
+To run tests, from the `MSWH` folder:
 
     python -m unittest mswh.{my_module}.tests.{test_my_module}.{MyModuleTests}.{test_my_method}
 
