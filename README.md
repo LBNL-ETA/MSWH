@@ -20,7 +20,7 @@ If you opt to use the web framework the shortest path to explore the simulaton r
 * Click on `Simulate` for any of the example preconfigured systems (`Solar Thermal New` or `Solar Electric`). This leads the user to a visualization page with hourly timeseries results for a representative year. 
 * Play with sizes and performance parameters of preconfigured components.
 
-To add new system types (such as `Solar Thermal Retrofit`) one would need to map it through the backend analogously to the preconfigured systems.
+To configure new system types in the web framework (such as `Solar Thermal Retrofit`) one would need to map it through the backend analogously to the currently preconfigured systems.
 
 ## Setup and Installation
 
