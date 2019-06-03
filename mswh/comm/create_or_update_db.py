@@ -10,7 +10,8 @@ log.setLevel(logging.DEBUG)
 # Create a system input db by running this file as a python script
 
 # ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-# This file contains the sql code to create the swh database:
+# This file contains the sql code to create the a database used
+# in running the MSWH code:
 # - code to create or update the database, including all the
 #   values to populate the tables
 # The database structure defines:
@@ -18,7 +19,7 @@ log.setLevel(logging.DEBUG)
 # - how the code handles the tables (through naming conventions)
 
 # CEC weather data, alongside with the TMY3 data for CA are
-# preloaded in the template db (swh_input_weather_cons.db).
+# preloaded in the template db (mswh_input_weather_cons.db).
 # There are example loads for 128 households with various
 # occupancies in the template db as well.
 # ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -322,10 +323,10 @@ os.rename(weather_cons_db_name_fulpath,
 shutil.copy(template_db_fulpath, weather_cons_db_name_fulpath)
 
 # open the connection with the db
-swh_input_template = Sql(template_db_fulpath)
+mswh_input_template = Sql(template_db_fulpath)
 
 # write to db
 
 # from above sql scripts
 for script in sql_scripts:
-    swh_input_template.commit(script)
+    mswh_input_template.commit(script)

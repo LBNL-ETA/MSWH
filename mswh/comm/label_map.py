@@ -11,7 +11,7 @@ class SwhLabels(object):
         pass
 
     def set_hous_labels(self):
-        """Household-related labels
+        """Household related labels
         """
 
         self.cons_l = {
@@ -61,7 +61,7 @@ class SwhLabels(object):
         return self.cons_l
 
     def set_prod_labels(self):
-        """SWH system-related labels
+        """Solar water heating system related labels
         """
 
         self.sys_l = {
@@ -95,11 +95,6 @@ class SwhLabels(object):
             'solar_electric': 'solar electric',
             'bckp': 'backup',
             'solar': 'solar',
-            # cost categories
-            'maint_cost': 'Maintenance Cost',
-            'repair_cost': 'Repair Cost',
-            'instal_cost': 'Installation Cost',
-            'msp': 'Retail Price',  # mapped to msp, no markup
             # sizing
             'cap': 'Component Size',
             'cap_unit': 'Component Size Unit',

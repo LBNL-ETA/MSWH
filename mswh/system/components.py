@@ -52,8 +52,8 @@ class Converter(object):
 
     Examples:
 
-        See :func:`swh.system.tests.test_components <swh.system.tests.test_components>` module and
-        :func:`scripts/Project Level SWH System Tool.ipynb <scripts/Project Level SWH System Tool.ipynb>`
+        See :func:`mswh.system.tests.test_components <mswh.system.tests.test_components>` module and
+        :func:`scripts/Project Level MSWH System Tool.ipynb <scripts/Project Level MSWH System Tool.ipynb>`
         for examples on how to use the methods as stand alone and
         in a system model simulation.
     """
@@ -985,7 +985,7 @@ class Storage(object):
 
         type: string
             Type of storage component. Options:
-        
+
             * 'sol_tank' - indirect tank WH with a coil to circulate
               fluid heated by a solar collector
             * 'hp_tank' - tank with an inbuilt heat pump
@@ -1010,8 +1010,8 @@ class Storage(object):
 
     Examples:
 
-        See :func:`swh.system.tests.test_components <swh.system.tests.test_components>` module and
-        :func:`scripts/Project Level SWH System Tool.ipynb <scripts/Project Level SWH System Tool.ipynb>`
+        See :func:`mswh.system.tests.test_components <mswh.system.tests.test_components>` module and
+        :func:`scripts/Project Level SWH System Tool.ipynb <scripts/Project Level MSWH System Tool.ipynb>`
         for examples on how to use the methods as stand alone and
         in a system model simulation.
     """
@@ -2583,7 +2583,7 @@ class Distribution(object):
 
     Examples:
 
-        See :func:`swh.system.tests.test_components <swh.system.tests.test_components>` module and
+        See :func:`mswh.system.tests.test_components <mswh.system.tests.test_components>` module and
         for examples on how to use the methods.
     """
     def __init__(self, params=None, sizes=1., fluid_medium='water',

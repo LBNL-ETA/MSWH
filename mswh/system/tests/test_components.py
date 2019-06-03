@@ -1,4 +1,4 @@
-import logging 
+import logging
 import os
 import unittest
 
@@ -44,7 +44,7 @@ class ConverterTests(unittest.TestCase):
         # with orientation (tilt, azimuth) = (latitude, 0)
         # for representative climate zones
         # read in data from the database
-        # assuming test are run from ```swh``` directory
+        # assuming test are run from ```MSWH``` directory
         weather_db_path = os.path.join(
             os.getcwd(), 'mswh/comm/weather_and_loads.db')
 
@@ -61,19 +61,22 @@ class ConverterTests(unittest.TestCase):
 
         self.weather = SourceAndSink(input_dfs=inputs)
 
+        # Arcata
         cold = self.weather.irradiation_and_water_main(
-            '16',
+            '01',
             method='isotropic diffuse')
 
         self.cold = cold[[self.c['irrad_on_tilt'], self.c['t_amb_C']]]
 
+        # LBNL
         mild = self.weather.irradiation_and_water_main(
             '03',
             method='isotropic diffuse')
         self.mild = mild[[self.c['irrad_on_tilt'], self.c['t_amb_C']]]
 
+        # Palm Springs
         hot = self.weather.irradiation_and_water_main(
-            '14',
+            '15',
             method='isotropic diffuse')
         self.hot = hot[[self.c['irrad_on_tilt'], self.c['t_amb_C']]]
 
@@ -205,7 +208,8 @@ class ConverterTests(unittest.TestCase):
         array_electric_resistance = self.el_res.electric_resistance(demand)
 
         self.assertTrue(
-            (array_electric_resistance[self.r['q_del_bckp']] == delivery).all())
+            (array_electric_resistance[
+            self.r['q_del_bckp']] == delivery).all())
 
     def test__heat_pump(self):
         """Single timestep performance
@@ -509,10 +513,9 @@ class ConverterTests(unittest.TestCase):
                 self.inc_rad)))
 
         self.assertAlmostEqual(
-            self.comp._hwb_solar_collector(self.gross_area, self.inc_rad,
-                                           self.t_amb, self.t_col_in)[0],
-            gain,
-            places=2)
+            self.comp._hwb_solar_collector(
+                self.gross_area, self.inc_rad,
+                self.t_amb, self.t_col_in)[0], gain, places=2)
 
     def test__cd_solar_collector(self):
         """Single timestep performance
@@ -553,7 +556,7 @@ class ConverterTests(unittest.TestCase):
                  outpath=self.outpath,
                  save_image=self.plot_results,
                  title=\
-            'HWB and CD model results duration curve for CZ 16 (cold)',
+            'HWB and CD model results duration curve for CZ01 (cold)',
                  label_v='Solar gain [W/m^2]',
                  duration_curve=True).series(
                      [self.hwb_col.sol_col_gain, self.cd_col.sol_col_gain],
@@ -586,7 +589,7 @@ class ConverterTests(unittest.TestCase):
                  outpath=self.outpath,
                  save_image=self.plot_results,
                  title=\
-            'HWB and CD model results duration curve for CZ 16 (mild)',
+            'HWB and CD model results duration curve for CZ03 (mild)',
                  label_v='Solar gain [W/m^2]',
                  duration_curve=True).series(
                      [self.hwb_col.sol_col_gain, self.cd_col.sol_col_gain],
@@ -620,7 +623,7 @@ class ConverterTests(unittest.TestCase):
                  outpath=self.outpath,
                  save_image=self.plot_results,
                  title=\
-            'HWB and CD model results duration curve for CZ 16 (hot)',
+            'HWB and CD model results duration curve for CZ15 (hot)',
                  label_v='Solar gain [W/m^2]',
                  duration_curve=True).series(
                      [self.hwb_col.sol_col_gain, self.cd_col.sol_col_gain],
@@ -671,9 +674,8 @@ class ConverterTests(unittest.TestCase):
             p_peak=p_peak)['ac'], power)
 
     def test_sol_col_validate_with_SAM(self):
-        """See V:/Non-APS/CEC PIER/PIER Solar Water Heating/
-        Analysis/Model Validation" for SAM simulation parameters.
-        SAM simulation results are stored in a CSV file in this
+        """Solar collector validation with SAM simulation
+        results, which are stored in a CSV file in this
         test folder.
         """
 
@@ -690,7 +692,8 @@ class ConverterTests(unittest.TestCase):
         sam_data = pd.read_csv(os.path.join(
             self.outpath, 'data/sam_sol_col.csv'))
 
-        t_col_in = UnitConv(sam_data['T_cold_C'].values).degC_K(unit_in='degC')
+        t_col_in = UnitConv(
+            sam_data['T_cold_C'].values).degC_K(unit_in='degC')
 
         self.hwb_col.weather = self.sf
         self.hwb_col.solar_collector(t_col_in)
@@ -698,7 +701,8 @@ class ConverterTests(unittest.TestCase):
         self.hwb_col.sol_col_gain[np.isnan(self.hwb_col.sol_col_gain)] = 0.
 
         self.sf.loc[:, 'sol_gain'] = self.hwb_col.sol_col_gain
-        self.sf.to_csv(os.path.join(self.outpath, 'data/swh_hwb_sol_col.csv'))
+        self.sf.to_csv(os.path.join(
+            self.outpath, 'data/validation_sol_col_mswh_hwb.csv'))
 
         err = abs((self.sf.sum()['sol_gain'] / 1000. -
                    sam_data.sum()['solar net gain SAM']) /
@@ -744,10 +748,10 @@ class ConverterTests(unittest.TestCase):
         """
 
         # Set output file name bases
-        dur_file = 'pv_swh_vs_sam_validation_duration_'
+        dur_file = 'pv_mswh_vs_sam_validation_duration_'
         cor_kWpeak_file = 'pv_vs_sam_validation_correlation_kWpeak_'
         cor_area_file = 'pv_vs_sam_validation_correlation_area_'
-        csv_file = 'swh_pv_'
+        csv_file = 'mswh_pv_'
 
         # Validate for an example smaller (peak power = 1 kWdc)
         # and an example bigger (peak power = 4 kWdc) PV system,
@@ -793,12 +797,12 @@ class ConverterTests(unittest.TestCase):
 
             # Calculate SWH PV peak power based model yield, in kW
             self.simple_pv_kWpeak.weather = weather
-            pv_yields['swh_kWpeak_pv'] = self.simple_pv_kWpeak.photovoltaic(
+            pv_yields['mswh_kWpeak_pv'] = self.simple_pv_kWpeak.photovoltaic(
                 use_p_peak=True)['ac'] / 1000.
 
             # Calculate SWH PV area based model yield, in kW
             self.simple_pv_area.weather = weather
-            pv_yields['swh_area_pv'] = self.simple_pv_area.photovoltaic(
+            pv_yields['mswh_area_pv'] = self.simple_pv_area.photovoltaic(
                 use_p_peak=False)['ac'] / 1000.
 
             # write to csv file
@@ -810,16 +814,16 @@ class ConverterTests(unittest.TestCase):
             perc = 10.
 
             err_kWpeak = abs(
-                (pv_yields['swh_kWpeak_pv'].sum() - pv_yields['sam'].sum()) /
-                (pv_yields['swh_kWpeak_pv'].sum()))
+                (pv_yields['mswh_kWpeak_pv'].sum() - pv_yields['sam'].sum()) /
+                (pv_yields['mswh_kWpeak_pv'].sum()))
 
             self.assertTrue(err_kWpeak < perc / 100.,
                 'Relative Error on the annual cumulative is {}%!'.format(
                     err_kWpeak * 100.))
 
             err_area = abs(
-                (pv_yields['swh_area_pv'].sum() - pv_yields['sam'].sum()) /
-                (pv_yields['swh_area_pv'].sum()))
+                (pv_yields['mswh_area_pv'].sum() - pv_yields['sam'].sum()) /
+                (pv_yields['mswh_area_pv'].sum()))
 
             self.assertTrue(err_area < perc / 100.,
                 'Relative Error on the annual cumulative is {}%!'.format(
@@ -834,8 +838,8 @@ class ConverterTests(unittest.TestCase):
                      label_v='Generated Power [kW]',
                      duration_curve=True).series(
                          [pv_yields['sam'].values,
-                          pv_yields['swh_kWpeak_pv'].values,
-                          pv_yields['swh_area_pv'].values],
+                          pv_yields['mswh_kWpeak_pv'].values,
+                          pv_yields['mswh_area_pv'].values],
                          outfile='img/' + dur_file  + case + '.png',
                          modes='markers')
 
@@ -847,7 +851,7 @@ class ConverterTests(unittest.TestCase):
                      label_v='SAM model generated PV power [kW]',
                      label_h='SWH PV simple model PV power [kW]',
                      duration_curve=True).scatter(
-                         [pv_yields['swh_kWpeak_pv'], pv_yields['sam']],
+                         [pv_yields['mswh_kWpeak_pv'], pv_yields['sam']],
                          outfile='img/' + cor_kWpeak_file  + case + '.png',
                          modes='markers')
 
@@ -859,7 +863,7 @@ class ConverterTests(unittest.TestCase):
                      label_v='SAM model generated PV power [kW]',
                      label_h='SWH PV simple model PV power [kW]',
                      duration_curve=True).scatter(
-                         [pv_yields['swh_area_pv'], pv_yields['sam']],
+                         [pv_yields['mswh_area_pv'], pv_yields['sam']],
                          outfile='img/' + cor_area_file  + case + '.png',
                          modes='markers')
 
@@ -1292,17 +1296,17 @@ class StorageTests(unittest.TestCase):
         res_default = self.tank.thermal_tank()
         res_no_gain = self.tank.thermal_tank(pre_Q_in=0.)
 
-        self.assertTrue(
-            res_default[self.r['t_tank_up']] > res_no_gain[self.r['t_tank_up']])
+        self.assertTrue(res_default[
+            self.r['t_tank_up']] > res_no_gain[self.r['t_tank_up']])
 
         res_no_gain_and_colder_than_set = self.tank.thermal_tank(
             pre_T_upper=310.15,
             pre_T_lower=305.15,
             pre_Q_in=0.)
 
-        self.assertAlmostEqual(
-            res_default[self.r['q_del_tank']],
-            res_no_gain[self.r['q_del_tank']] + res_no_gain[self.r['q_unmet_tank']],
+        self.assertAlmostEqual(res_default[self.r['q_del_tank']],
+            res_no_gain[
+                self.r['q_del_tank']] + res_no_gain[self.r['q_unmet_tank']],
             places=5)
 
         # tests parameter extraction, includes the distribution
@@ -1319,7 +1323,8 @@ class StorageTests(unittest.TestCase):
                   [self.s['piping'], self.s['pipe_ins_thick'], .008],
                   [self.s['piping'], self.s['flow_factor'], .5],
                   [self.s['piping'], self.s['dia_len_exp'], .5],
-                  [self.s['piping'], self.s['dia_len_sca'], .007332348418708248],
+                  [self.s['piping'], self.s[
+                    'dia_len_sca'], .007332348418708248],
                   [self.s['piping'], self.s['discr_diam_m'],
                   '[0.0127, 0.01905, 0.0254, 0.03175, 0.0381, 0.0508, 0.0635, 0.0762, 0.1016]'],
                   [self.s['piping'], self.s['circ'], False],
@@ -1361,7 +1366,8 @@ class StorageTests(unittest.TestCase):
                   [self.s['piping'], self.s['pipe_ins_thick'], .008],
                   [self.s['piping'], self.s['flow_factor'], .5],
                   [self.s['piping'], self.s['dia_len_exp'], .5],
-                  [self.s['piping'], self.s['dia_len_sca'], .007332348418708248],
+                  [self.s['piping'], self.s[
+                    'dia_len_sca'], .007332348418708248],
                   [self.s['piping'], self.s['discr_diam_m'],
                   '[0.0127, 0.01905, 0.0254, 0.03175, 0.0381, 0.0508, 0.0635, 0.0762, 0.1016]'],
                   [self.s['piping'], self.s['circ'], False],
