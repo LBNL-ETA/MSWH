@@ -114,7 +114,7 @@ The code was used for the following publications:
 
 ## About
 
-[![License](https://img.shields.io/badge/License-BSD%203--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause) The software may be distributed under the copyright and license provided in [legal.md](legal.md).
+The software may be distributed under the copyright and a BSD license provided in [legal.md](legal.md).
 
 Milica Grahovac, Robert Hosbach, Katie Coughlin, Mohan Ganeshalingam and Hannes Gerhart created the contents of this repo
 in the scope of the CEC "Costs and Benefits of Community vs. Individual End-Use Infrastructure for Solar Water Heating" project.
