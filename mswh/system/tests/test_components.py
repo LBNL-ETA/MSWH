@@ -15,11 +15,6 @@ from mswh.comm.sql import Sql
 log = logging.getLogger(__name__)
 logging.basicConfig(level=logging.DEBUG)
 
-# WH - gas - validate
-# *against CEC cert data - thermal and standby efficiency
-# or against CCMS EF/RE (take examples from the lcc, daily averages)
-# or against WH rule
-
 
 class ConverterTests(unittest.TestCase):
     """Unit tests for the system component models.
@@ -1210,8 +1205,7 @@ class StorageTests(unittest.TestCase):
                      hourly_load_df['End-Use Load'].values[0].sum())
 
         # create reference hourly temperature profiles
-        df_T =  pd.DataFrame({'dry bulb': [57.4, 55.6, 76.6, 34.1],
-                             'water_main_t_F': [61.4, 51.8, 66.6, 46.2],
+        df_T =  pd.DataFrame({'water_main_t_F': [61.4, 51.8, 66.6, 46.2],
                              't_around_tank_F': [70.3, 70.3, 71.1, 70.3],
                              'season': ['fall', 'spring', 'summer', 'winter']})
 
@@ -1229,6 +1223,7 @@ class StorageTests(unittest.TestCase):
             how='left')
 
         # get hourly month column from the weather data
+        # (climate zone is just a placeholder)
         month_index_hourly = pd.DataFrame()
         month_index_hourly['month'] = SourceAndSink(
             input_dfs=inputs).irradiation_and_water_main(
@@ -1240,8 +1235,10 @@ class StorageTests(unittest.TestCase):
             how='left')
 
         # convert units
-        average_T_feed = UnitConv(temps.water_main_t_F).degF_degC(unit_in='degF') + 273.15
-        T_around_tank = UnitConv(temps.t_around_tank_F).degF_degC(unit_in='degF') + 273.15
+        average_T_feed = UnitConv(
+            temps.water_main_t_F).degF_degC(unit_in='degF') + 273.15
+        T_around_tank = UnitConv(
+            temps.t_around_tank_F).degF_degC(unit_in='degF') + 273.15
 
         # set up a tank
 
@@ -1290,8 +1287,8 @@ class StorageTests(unittest.TestCase):
                 V_draw=hourly_m3,
                 T_feed=average_T_feed,
                 T_amb =T_around_tank)[self.r['gas_use']].sum() / 1000.,
-            3360.12,
-            places=2)
+                3360.12,
+                places=2)
 
     def test_thermal_tank(self):
         """Tests as a solar thermal tank
