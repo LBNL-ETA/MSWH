@@ -795,12 +795,12 @@ class ConverterTests(unittest.TestCase):
                 self.simple_pv_kWpeak.size = lg_pv_peakpower
                 self.simple_pv_area.size = lg_pv_area
 
-            # Calculate SWH PV peak power based model yield, in kW
+            # Calculate MSWH PV peak power based model yield, in kW
             self.simple_pv_kWpeak.weather = weather
             pv_yields['mswh_kWpeak_pv'] = self.simple_pv_kWpeak.photovoltaic(
                 use_p_peak=True)['ac'] / 1000.
 
-            # Calculate SWH PV area based model yield, in kW
+            # Calculate MSWH PV area based model yield, in kW
             self.simple_pv_area.weather = weather
             pv_yields['mswh_area_pv'] = self.simple_pv_area.photovoltaic(
                 use_p_peak=False)['ac'] / 1000.
@@ -831,11 +831,13 @@ class ConverterTests(unittest.TestCase):
 
             if self.plot_results:
                 # plot duration curves
-                Plot(data_headers=['SAM', 'SWH PV - kWPeak', 'SWH PV - Area'],
+                Plot(data_headers=[
+                    'SAM', 'MSWH PV - kWPeak', 'MSWH PV - Area'],
                      outpath=self.outpath,
                      save_image=self.plot_results,
-                     title=('SWH PV and SAM dur. curves for Ppeak = ' + case),
-                     label_v='Generated Power [kW]',
+                     title=(
+                     'MSWH PV vs. SAM duration curves for Ppeak = ' + case),
+                     label_v='Generated power [kW]',
                      duration_curve=True).series(
                          [pv_yields['sam'].values,
                           pv_yields['mswh_kWpeak_pv'].values,
@@ -847,9 +849,9 @@ class ConverterTests(unittest.TestCase):
                 Plot(data_headers=['-', 'Correlation'],
                      outpath=self.outpath,
                      save_image=self.plot_results,
-                     title=('Simple PV vs. SAM for Ppeak = ' + case),
-                     label_v='SAM model generated PV power [kW]',
-                     label_h='SWH PV simple model PV power [kW]',
+                     title=('MSWH PV vs. SAM for Ppeak = ' + case),
+                     label_v='SAM model, generated power [kW]',
+                     label_h='MSWH PV model, generated power [kW]',
                      duration_curve=True).scatter(
                          [pv_yields['mswh_kWpeak_pv'], pv_yields['sam']],
                          outfile='img/' + cor_kWpeak_file  + case + '.png',
@@ -860,8 +862,8 @@ class ConverterTests(unittest.TestCase):
                      outpath=self.outpath,
                      save_image=self.plot_results,
                      title=('Simple PV vs. SAM for Area = ' + case),
-                     label_v='SAM model generated PV power [kW]',
-                     label_h='SWH PV simple model PV power [kW]',
+                     label_v='SAM model, generated power [kW]',
+                     label_h='MSWH PV model, generated power [kW]',
                      duration_curve=True).scatter(
                          [pv_yields['mswh_area_pv'], pv_yields['sam']],
                          outfile='img/' + cor_area_file  + case + '.png',
@@ -1169,10 +1171,10 @@ class StorageTests(unittest.TestCase):
             places=5)
 
     def test_gas_tank_wh(self):
-        """Tests instantiation with db extracted and default parameters and
-        validates the model using 2013 energy conservation standard analysis
+        """Tests instantiation with db extracted and default parameters.
+        Validates the model using 2010 energy conservation standard analysis
         for household water heaters
-        (https://www.regulations.gov/docket?D=EERE-2012-BT-STD-0022).
+        (https://www.regulations.gov/docket?D=EERE-2006-STD-0129).
         """
         # read in input db
         weather_db_path = os.path.join(os.getcwd(),
@@ -1194,7 +1196,8 @@ class StorageTests(unittest.TestCase):
         occ = [2]
         at_home = ['n']
 
-        hourly_load_df, loadid_peakload = SourceAndSink._make_example_loading_inputs(
+        hourly_load_df, loadid_peakload = \
+        SourceAndSink._make_example_loading_inputs(
             inputs, self.c, self.random_state,
             occupancy=occ, at_home=at_home)
 
