@@ -76,7 +76,7 @@ class Plot(object):
                  legend=True, outpath='',
                  duration_curve=False, boxmode='group',
                  notebook_mode=False, width=1200, height=800,
-                 fontsize=18, legend_x=0.4, legend_y=1.,
+                 fontsize=28, legend_x=0.4, legend_y=1.,
                  margin_l=200., margin_b=200.):
 
         self.data_headers = data_headers
