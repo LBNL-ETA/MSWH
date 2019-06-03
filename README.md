@@ -118,3 +118,5 @@ The software may be distributed under the copyright and license provided in [leg
 
 Milica Grahovac, Robert Hosbach, Katie Coughlin, Mohan Ganeshalingam and Hannes Gerhart created the contents of this repo
 in the scope of the CEC "Costs and Benefits of Community vs. Individual End-Use Infrastructure for Solar Water Heating" project.
+
+To cite use format provided at the [DOE CODE](https://www.osti.gov/doecode/biblio/26000) MSWH record.
