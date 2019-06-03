@@ -14,7 +14,7 @@ long_description = \
 setup(
     name='mswh',
 
-    version='0.1',
+    version='1.0',
 
     description='Multiscale solar water heating',
 
@@ -34,6 +34,8 @@ setup(
 
     packages=find_packages(exclude=['docs', 'scripts']),
 
+    # to run tests and use plotting capabilities one 
+    # also needs Orca (https://github.com/plotly/orca)
     install_requires=[
         'pandas>=0.24.1',
         'numpy>=1.16.1'

@@ -20,7 +20,7 @@ If you opt to use the web framework the shortest path to explore the simulaton r
 * Click on `Simulate` for any of the example preconfigured systems (`Solar Thermal New` or `Solar Electric`). This leads the user to a visualization page with hourly timeseries results for a representative year. 
 * Play with sizes and performance parameters of preconfigured components.
 
-To add new system types (such as `Solar Thermal Retrofit`) one would need to map it through the backend analogously to the preconfigured systems.
+To configure new system types in the web framework (such as `Solar Thermal Retrofit`) one would need to map it through the backend analogously to the currently preconfigured systems.
 
 ## Setup and Installation
 
@@ -76,6 +76,8 @@ To add new system types (such as `Solar Thermal Retrofit`) one would need to map
         pip install -e .
 
     The `-e` flag is only necessary if one would like changes to the source code be reflected immediately (without having to rerun the `setup.py` script with every change to the source code). If you just want to run the project application, you can omit the `-e` flag.
+    
+    To use the plotting capabilities, also required when running tests, please install [`orca`](https://github.com/plotly/orca).
 
 ## Django Web Framework Deployment
 
@@ -112,7 +114,9 @@ The code was used for the following publications:
 
 ## About
 
-The software may be distributed under the copyright and license provided in [legal.md](legal.md).
+The software may be distributed under the copyright and a BSD license provided in [legal.md](legal.md).
 
 Milica Grahovac, Robert Hosbach, Katie Coughlin, Mohan Ganeshalingam and Hannes Gerhart created the contents of this repo
 in the scope of the CEC "Costs and Benefits of Community vs. Individual End-Use Infrastructure for Solar Water Heating" project.
+
+To cite use format provided at the [DOE CODE](https://www.osti.gov/doecode/biblio/26000) MSWH record.
