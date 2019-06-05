@@ -1135,7 +1135,8 @@ class System(object):
         # project level backup delivered, gas use and unmet
         ts_proj = {self.r['q_del_bckp']: np.zeros(self.num_timesteps + 1),
                    self.r['gas_use']: np.zeros(self.num_timesteps + 1),
-                   self.r['gas_use_no_dist']: np.zeros(self.num_timesteps + 1),
+                   self.r['gas_use_no_dist']: np.zeros(
+                   self.num_timesteps + 1),
                    self.r['q_unmet']: np.zeros(self.num_timesteps + 1)}
 
         ts_cons = dict()
