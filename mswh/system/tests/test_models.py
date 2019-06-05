@@ -23,6 +23,8 @@ logging.basicConfig(level=logging.INFO)
 log = logging.getLogger(__name__)
 log.setLevel(logging.DEBUG)
 
+from pdb import set_trace as bp
+
 
 class SystemTests(unittest.TestCase):
     """Unit tests for the project level
@@ -792,6 +794,8 @@ class SystemTests(unittest.TestCase):
         # Basecase gas tank wh
         bc_cons_total, bc_proj_total, bc_ts_proj = \
             self.conv_wh_val.conventional_gas_tank()
+
+        bp()
 
         self.assertTrue(
             abs(((bc_cons_total[self.r['gas_use']] -

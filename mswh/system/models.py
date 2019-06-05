@@ -75,8 +75,8 @@ class System(object):
 
     Examples:
 
-        See :func:`swh.system.tests.test_components <swh.system.tests.test_components>` module and
-        :func:`scripts/Project Level SWH System Tool.ipynb <scripts/Project Level SWH System Tool.ipynb>`
+        See :func:`mswh.system.tests.test_components <mswh.system.tests.test_components>` module and
+        :func:`scripts/Project Level SWH System Tool.ipynb <scripts/Project Level MSWH System Tool.ipynb>`
         for examples on how to use the methods as stand alone and
         in a system model simulation.
     """
@@ -194,10 +194,12 @@ class System(object):
             self.t_amb = UnitConv(
                 self.weather[self.c['t_amb_C']].values).degC_K(unit_in='degC')
             self.t_wet_bulb = UnitConv(
-                self.weather[self.c['t_wet_bulb_C']].values).degC_K(unit_in='degC')
+                self.weather[self.c['t_wet_bulb_C']].values).degC_K(
+                unit_in='degC')
             self.inc_rad = self.weather[self.c['irrad_on_tilt']].values
             self.t_main = UnitConv(
-                self.weather[self.c['t_main_C']].values).degC_K(unit_in='degC')
+                self.weather[self.c['t_main_C']].values).degC_K(
+                unit_in='degC')
             self.month = np.append(1, self.weather[self.c['month']].values)
             self.season = np.append(
                 'winter',
@@ -388,7 +390,7 @@ class System(object):
                 self._gas_tank_backup(
                     (np.append(0., T_upper_sol_tank[:self.num_timesteps]) -
                      np.append(0., dT_dist_loss[:self.num_timesteps])),
-                    np.append(0., T_upper_sol_tank[:self.num_timesteps]))
+                     np.append(0., T_upper_sol_tank[:self.num_timesteps]))
         else:
             msg = 'Backup types supported are gas or retrofit. '\
                   'Please provide one of the supported types.'
@@ -509,7 +511,8 @@ class System(object):
             # water main pressure
             dist_pump_on_timestep_frac = None
 
-        pump_ts_el_use, pump_el_use, pump_op_hour = self._get_pump_energy_use(
+        pump_ts_el_use, pump_el_use, pump_op_hour = \
+            self._get_pump_energy_use(
             dist_pump_on_timestep_frac=dist_pump_on_timestep_frac,
             gain_from_collector=Q_coil_sol_tank)
 
@@ -607,7 +610,6 @@ class System(object):
             proj_total.round(2).to_dict(), sol_fra, pump_el_use,
             pump_op_hour, ts_res,
             backup_ts_cons, rel_err]
-
 
 
     def solar_electric(self, backup='electric'):
@@ -1067,8 +1069,8 @@ class System(object):
 
                 en_use: dict
                     Total energy use for the analysis period:
-                    'gas', Wh
-                    'electricity', Wh
+                    * 'gas', Wh
+                    * 'electricity', Wh
 
                 sys_res: list
                     List containing detailed system level
@@ -1426,7 +1428,8 @@ class System(object):
 
         ts_proj = {self.r['q_del_bckp']: np.zeros(self.num_timesteps + 1),
                    self.r['gas_use']: np.zeros(self.num_timesteps + 1),
-                   self.r['gas_use_no_dist']: np.zeros(self.num_timesteps + 1),
+                   self.r['gas_use_no_dist']: np.zeros(
+                       self.num_timesteps + 1),
                    self.r['q_unmet']: np.zeros(self.num_timesteps + 1)}
 
         ts_proj[self.c['season']] = self.season
@@ -1448,8 +1451,7 @@ class System(object):
 
             # assuming the tank is indoors and using default
             # tank surrounding temperature
-            ind_load = np.append(
-                0,
+            ind_load = np.append(0,
                 self.loads.loc[self.loads[self.c['id']] == cons_id,
                                self.c['load_m3']].values[0])
 
