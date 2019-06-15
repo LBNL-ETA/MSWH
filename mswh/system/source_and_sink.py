@@ -13,6 +13,9 @@ log = logging.getLogger(__name__)
 log.setLevel(logging.DEBUG)
 
 
+from pdb import set_trace as bp
+
+
 class SourceAndSink(object):
     """Generates timeseries that are inputs to the simulation
     model and are known prior to the simulation, such as
@@ -757,8 +760,6 @@ class SourceAndSink(object):
 
         selected_load_ids = []
 
-        cons_id = 1
-
         for cons in range(len(occupancy)):
 
             occ = occupancy[cons]
@@ -783,7 +784,8 @@ class SourceAndSink(object):
             load_row = pick_from.loc[
                 pick_from[labels['ld_id']] == load_id, :].reset_index()
 
-            cons_id += 1
+        # identify indexes drawn. Note that the Load ID is
+        # the same value as the index
 
         indxs = available_example_cons.loc[
             available_example_cons[labels['ld_id']].isin(
@@ -796,6 +798,18 @@ class SourceAndSink(object):
         loading_input = loading_input.drop(
             columns='index',
             axis=1)
+
+        # sort by drawn loads to have the the loading_inputs dataframe
+        # rows be in order of the occupancy list. For example, first
+        # number in the occupancy list corresponds the first row
+        # in the loading_input dataframe.
+
+        loading_input['Load ID'] = pd.CategoricalIndex(
+            loading_input[labels['ld_id']], ordered=True,
+            categories=selected_load_ids)
+
+        loading_input = loading_input.sort_values(
+            labels['ld_id']).reset_index()
 
         loading_input[labels['id']] = range(1, loading_input.shape[0] + 1)
 
