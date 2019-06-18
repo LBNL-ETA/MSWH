@@ -227,8 +227,8 @@
 
 <span class="sd">    Examples:</span>
 
-<span class="sd">        See :func:`swh.system.tests.test_components &lt;swh.system.tests.test_components&gt;` module and</span>
-<span class="sd">        :func:`scripts/Project Level SWH System Tool.ipynb &lt;scripts/Project Level SWH System Tool.ipynb&gt;`</span>
+<span class="sd">        See :func:`mswh.system.tests.test_components &lt;mswh.system.tests.test_components&gt;` module and</span>
+<span class="sd">        :func:`scripts/Project Level SWH System Tool.ipynb &lt;scripts/Project Level MSWH System Tool.ipynb&gt;`</span>
 <span class="sd">        for examples on how to use the methods as stand alone and</span>
 <span class="sd">        in a system model simulation.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -346,10 +346,12 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">t_amb</span> <span class="o">=</span> <span class="n">UnitConv</span><span class="p">(</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">weather</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">c</span><span class="p">[</span><span class="s1">&#39;t_amb_C&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">values</span><span class="p">)</span><span class="o">.</span><span class="n">degC_K</span><span class="p">(</span><span class="n">unit_in</span><span class="o">=</span><span class="s1">&#39;degC&#39;</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">t_wet_bulb</span> <span class="o">=</span> <span class="n">UnitConv</span><span class="p">(</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">weather</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">c</span><span class="p">[</span><span class="s1">&#39;t_wet_bulb_C&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">values</span><span class="p">)</span><span class="o">.</span><span class="n">degC_K</span><span class="p">(</span><span class="n">unit_in</span><span class="o">=</span><span class="s1">&#39;degC&#39;</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">weather</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">c</span><span class="p">[</span><span class="s1">&#39;t_wet_bulb_C&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">values</span><span class="p">)</span><span class="o">.</span><span class="n">degC_K</span><span class="p">(</span>
+                <span class="n">unit_in</span><span class="o">=</span><span class="s1">&#39;degC&#39;</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">inc_rad</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">weather</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">c</span><span class="p">[</span><span class="s1">&#39;irrad_on_tilt&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">values</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">t_main</span> <span class="o">=</span> <span class="n">UnitConv</span><span class="p">(</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">weather</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">c</span><span class="p">[</span><span class="s1">&#39;t_main_C&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">values</span><span class="p">)</span><span class="o">.</span><span class="n">degC_K</span><span class="p">(</span><span class="n">unit_in</span><span class="o">=</span><span class="s1">&#39;degC&#39;</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">weather</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">c</span><span class="p">[</span><span class="s1">&#39;t_main_C&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">values</span><span class="p">)</span><span class="o">.</span><span class="n">degC_K</span><span class="p">(</span>
+                <span class="n">unit_in</span><span class="o">=</span><span class="s1">&#39;degC&#39;</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">month</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">weather</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">c</span><span class="p">[</span><span class="s1">&#39;month&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">season</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
                 <span class="s1">&#39;winter&#39;</span><span class="p">,</span>
@@ -540,7 +542,7 @@
                 <span class="bp">self</span><span class="o">.</span><span class="n">_gas_tank_backup</span><span class="p">(</span>
                     <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="n">T_upper_sol_tank</span><span class="p">[:</span><span class="bp">self</span><span class="o">.</span><span class="n">num_timesteps</span><span class="p">])</span> <span class="o">-</span>
                      <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="n">dT_dist_loss</span><span class="p">[:</span><span class="bp">self</span><span class="o">.</span><span class="n">num_timesteps</span><span class="p">])),</span>
-                    <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="n">T_upper_sol_tank</span><span class="p">[:</span><span class="bp">self</span><span class="o">.</span><span class="n">num_timesteps</span><span class="p">]))</span>
+                     <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="n">T_upper_sol_tank</span><span class="p">[:</span><span class="bp">self</span><span class="o">.</span><span class="n">num_timesteps</span><span class="p">]))</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">msg</span> <span class="o">=</span> <span class="s1">&#39;Backup types supported are gas or retrofit. &#39;</span>\
                   <span class="s1">&#39;Please provide one of the supported types.&#39;</span>
@@ -661,7 +663,8 @@
             <span class="c1"># water main pressure</span>
             <span class="n">dist_pump_on_timestep_frac</span> <span class="o">=</span> <span class="kc">None</span>
 
-        <span class="n">pump_ts_el_use</span><span class="p">,</span> <span class="n">pump_el_use</span><span class="p">,</span> <span class="n">pump_op_hour</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_pump_energy_use</span><span class="p">(</span>
+        <span class="n">pump_ts_el_use</span><span class="p">,</span> <span class="n">pump_el_use</span><span class="p">,</span> <span class="n">pump_op_hour</span> <span class="o">=</span> \
+            <span class="bp">self</span><span class="o">.</span><span class="n">_get_pump_energy_use</span><span class="p">(</span>
             <span class="n">dist_pump_on_timestep_frac</span><span class="o">=</span><span class="n">dist_pump_on_timestep_frac</span><span class="p">,</span>
             <span class="n">gain_from_collector</span><span class="o">=</span><span class="n">Q_coil_sol_tank</span><span class="p">)</span>
 
@@ -759,7 +762,6 @@
             <span class="n">proj_total</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">to_dict</span><span class="p">(),</span> <span class="n">sol_fra</span><span class="p">,</span> <span class="n">pump_el_use</span><span class="p">,</span>
             <span class="n">pump_op_hour</span><span class="p">,</span> <span class="n">ts_res</span><span class="p">,</span>
             <span class="n">backup_ts_cons</span><span class="p">,</span> <span class="n">rel_err</span><span class="p">]</span></div>
-
 
 
 <div class="viewcode-block" id="System.solar_electric"><a class="viewcode-back" href="../../../source/mswh.system.html#mswh.system.models.System.solar_electric">[docs]</a>    <span class="k">def</span> <span class="nf">solar_electric</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">backup</span><span class="o">=</span><span class="s1">&#39;electric&#39;</span><span class="p">):</span>
@@ -1219,8 +1221,8 @@
 
 <span class="sd">                en_use: dict</span>
 <span class="sd">                    Total energy use for the analysis period:</span>
-<span class="sd">                    &#39;gas&#39;, Wh</span>
-<span class="sd">                    &#39;electricity&#39;, Wh</span>
+<span class="sd">                    * &#39;gas&#39;, Wh</span>
+<span class="sd">                    * &#39;electricity&#39;, Wh</span>
 
 <span class="sd">                sys_res: list</span>
 <span class="sd">                    List containing detailed system level</span>
@@ -1285,7 +1287,8 @@
         <span class="c1"># project level backup delivered, gas use and unmet</span>
         <span class="n">ts_proj</span> <span class="o">=</span> <span class="p">{</span><span class="bp">self</span><span class="o">.</span><span class="n">r</span><span class="p">[</span><span class="s1">&#39;q_del_bckp&#39;</span><span class="p">]:</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">num_timesteps</span> <span class="o">+</span> <span class="mi">1</span><span class="p">),</span>
                    <span class="bp">self</span><span class="o">.</span><span class="n">r</span><span class="p">[</span><span class="s1">&#39;gas_use&#39;</span><span class="p">]:</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">num_timesteps</span> <span class="o">+</span> <span class="mi">1</span><span class="p">),</span>
-                   <span class="bp">self</span><span class="o">.</span><span class="n">r</span><span class="p">[</span><span class="s1">&#39;gas_use_no_dist&#39;</span><span class="p">]:</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">num_timesteps</span> <span class="o">+</span> <span class="mi">1</span><span class="p">),</span>
+                   <span class="bp">self</span><span class="o">.</span><span class="n">r</span><span class="p">[</span><span class="s1">&#39;gas_use_no_dist&#39;</span><span class="p">]:</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span>
+                   <span class="bp">self</span><span class="o">.</span><span class="n">num_timesteps</span> <span class="o">+</span> <span class="mi">1</span><span class="p">),</span>
                    <span class="bp">self</span><span class="o">.</span><span class="n">r</span><span class="p">[</span><span class="s1">&#39;q_unmet&#39;</span><span class="p">]:</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">num_timesteps</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)}</span>
 
         <span class="n">ts_cons</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
@@ -1578,7 +1581,8 @@
 
         <span class="n">ts_proj</span> <span class="o">=</span> <span class="p">{</span><span class="bp">self</span><span class="o">.</span><span class="n">r</span><span class="p">[</span><span class="s1">&#39;q_del_bckp&#39;</span><span class="p">]:</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">num_timesteps</span> <span class="o">+</span> <span class="mi">1</span><span class="p">),</span>
                    <span class="bp">self</span><span class="o">.</span><span class="n">r</span><span class="p">[</span><span class="s1">&#39;gas_use&#39;</span><span class="p">]:</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">num_timesteps</span> <span class="o">+</span> <span class="mi">1</span><span class="p">),</span>
-                   <span class="bp">self</span><span class="o">.</span><span class="n">r</span><span class="p">[</span><span class="s1">&#39;gas_use_no_dist&#39;</span><span class="p">]:</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">num_timesteps</span> <span class="o">+</span> <span class="mi">1</span><span class="p">),</span>
+                   <span class="bp">self</span><span class="o">.</span><span class="n">r</span><span class="p">[</span><span class="s1">&#39;gas_use_no_dist&#39;</span><span class="p">]:</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span>
+                       <span class="bp">self</span><span class="o">.</span><span class="n">num_timesteps</span> <span class="o">+</span> <span class="mi">1</span><span class="p">),</span>
                    <span class="bp">self</span><span class="o">.</span><span class="n">r</span><span class="p">[</span><span class="s1">&#39;q_unmet&#39;</span><span class="p">]:</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">num_timesteps</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)}</span>
 
         <span class="n">ts_proj</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">c</span><span class="p">[</span><span class="s1">&#39;season&#39;</span><span class="p">]]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">season</span>
@@ -1600,8 +1604,7 @@
 
             <span class="c1"># assuming the tank is indoors and using default</span>
             <span class="c1"># tank surrounding temperature</span>
-            <span class="n">ind_load</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
-                <span class="mi">0</span><span class="p">,</span>
+            <span class="n">ind_load</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">loads</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">loads</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">c</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]]</span> <span class="o">==</span> <span class="n">cons_id</span><span class="p">,</span>
                                <span class="bp">self</span><span class="o">.</span><span class="n">c</span><span class="p">[</span><span class="s1">&#39;load_m3&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
 

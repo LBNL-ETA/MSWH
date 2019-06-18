@@ -165,6 +165,9 @@
 <span class="n">log</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">)</span>
 
 
+<span class="kn">from</span> <span class="nn">pdb</span> <span class="k">import</span> <span class="n">set_trace</span> <span class="k">as</span> <span class="n">bp</span>
+
+
 <div class="viewcode-block" id="SourceAndSink"><a class="viewcode-back" href="../../../source/mswh.system.html#mswh.system.source_and_sink.SourceAndSink">[docs]</a><span class="k">class</span> <span class="nc">SourceAndSink</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Generates timeseries that are inputs to the simulation</span>
 <span class="sd">    model and are known prior to the simulation, such as</span>
@@ -909,8 +912,6 @@
 
         <span class="n">selected_load_ids</span> <span class="o">=</span> <span class="p">[]</span>
 
-        <span class="n">cons_id</span> <span class="o">=</span> <span class="mi">1</span>
-
         <span class="k">for</span> <span class="n">cons</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">occupancy</span><span class="p">)):</span>
 
             <span class="n">occ</span> <span class="o">=</span> <span class="n">occupancy</span><span class="p">[</span><span class="n">cons</span><span class="p">]</span>
@@ -935,7 +936,8 @@
             <span class="n">load_row</span> <span class="o">=</span> <span class="n">pick_from</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span>
                 <span class="n">pick_from</span><span class="p">[</span><span class="n">labels</span><span class="p">[</span><span class="s1">&#39;ld_id&#39;</span><span class="p">]]</span> <span class="o">==</span> <span class="n">load_id</span><span class="p">,</span> <span class="p">:]</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
 
-            <span class="n">cons_id</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="c1"># identify indexes drawn. Note that the Load ID is</span>
+        <span class="c1"># the same value as the index</span>
 
         <span class="n">indxs</span> <span class="o">=</span> <span class="n">available_example_cons</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span>
             <span class="n">available_example_cons</span><span class="p">[</span><span class="n">labels</span><span class="p">[</span><span class="s1">&#39;ld_id&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span>
@@ -948,6 +950,18 @@
         <span class="n">loading_input</span> <span class="o">=</span> <span class="n">loading_input</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span>
             <span class="n">columns</span><span class="o">=</span><span class="s1">&#39;index&#39;</span><span class="p">,</span>
             <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+        <span class="c1"># sort by drawn loads to have the the loading_inputs dataframe</span>
+        <span class="c1"># rows be in order of the occupancy list. For example, first</span>
+        <span class="c1"># number in the occupancy list corresponds the first row</span>
+        <span class="c1"># in the loading_input dataframe.</span>
+
+        <span class="n">loading_input</span><span class="p">[</span><span class="s1">&#39;Load ID&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">CategoricalIndex</span><span class="p">(</span>
+            <span class="n">loading_input</span><span class="p">[</span><span class="n">labels</span><span class="p">[</span><span class="s1">&#39;ld_id&#39;</span><span class="p">]],</span> <span class="n">ordered</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+            <span class="n">categories</span><span class="o">=</span><span class="n">selected_load_ids</span><span class="p">)</span>
+
+        <span class="n">loading_input</span> <span class="o">=</span> <span class="n">loading_input</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span>
+            <span class="n">labels</span><span class="p">[</span><span class="s1">&#39;ld_id&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
 
         <span class="n">loading_input</span><span class="p">[</span><span class="n">labels</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]]</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">loading_input</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
 
