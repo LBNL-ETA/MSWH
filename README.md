@@ -16,7 +16,7 @@ The fastest way to explore the preset simulations is to use the [`MSWH System To
 
 If you opt to use the web framework the shortest path to explore the simulaton results after [setting up a local server](#django-web-framework-deployment) is to:
 
-* Click on `Configurations` on the landing page
+* Click on `Configurations` on the landing page.
 * Click on `Simulate` for any of the example preconfigured systems (`Solar Thermal New` or `Solar Electric`). This leads the user to a visualization page with hourly timeseries results for a representative year.
 * Play with sizes and performance parameters of preconfigured components.
 
