@@ -45,10 +45,6 @@ To configure new system types in the web framework (such as `Solar Thermal Retro
 
           (on MacOS) python3 -m venv <path_to_env>/mswh
 
-     To ensure the same python kernel can be used in a jupyter notebook:
-
-          python -m ipykernel install --name mswh
-
 3. Now the virtual environment needs to be activated, by running one of the following commands:
 
     When using `virtualenv` (on Linux or Mac):
@@ -70,8 +66,12 @@ To configure new system types in the web framework (such as `Solar Thermal Retro
     After having activated the virtual environment, the name of it should appear before the prompt in the terminal.
 
     For deactivating use `conda deactivate` or `deactivate`.
+    
+4.  To ensure the same python kernel can be used in a jupyter notebook, activate the virtual environment and run:
 
-4.  To install the necessary Python packages navigate to the `setup.py` directory and run:
+          python -m ipykernel install --name mswh
+
+5.  To install the necessary Python packages navigate to the `setup.py` directory and run:
 
         pip install -e .
 
