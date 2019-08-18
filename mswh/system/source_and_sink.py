@@ -186,10 +186,13 @@ class SourceAndSink(object):
             ' ensure the climate zone is a number from 1-16, represented' \
             ' as a string.'
             log.error(msg.format(climate_zone))
+
             raise ValueError
 
-        if (climate_zone_int > 16) | (climate_zone_int < 1):
-            msg = 'Climate zone must be a number from 1-16.'
+        if (climate_zone_int > 16) | (climate_zone_int < 0):
+            msg = 'Climate zone in CA must be a number from 1-16.' \
+                  ' Further available climate zone codes are: 0 '\
+                  ' for Banja Luka, BIH.'
             log.error(msg)
             raise ValueError
 
@@ -254,6 +257,7 @@ class SourceAndSink(object):
 
             # Map CEC climate zone to proper tmy3 weather file
             climate_zone_to_tmy3 = {
+                # California, USA
                 '01': '725945',
                 '02': '724957',
                 '03': '724930',
@@ -269,7 +273,9 @@ class SourceAndSink(object):
                 '13': '723890',
                 '14': '723820',
                 '15': '722868',
-                '16': '725845'
+                '16': '725845',
+                # Banja Luka, BIH
+                '00': '145420'
             }
 
             key = climate_zone_to_tmy3[climate_zone] + 'TY'
@@ -536,9 +542,17 @@ class SourceAndSink(object):
 
         # Fill the climate zone forward
         # Only get water mains data for the climate zone we are analyzing
+        # for all climate zones is CA
+        if (climate_zone_int <= 16) and (climate_zone_int >= 1):
+            climate_zone_water_main = climate_zone
+        # for any additional climate zones of interest
+        elif climate_zone == '00':
+            climate_zone_water_main = '11'
+
         water_mains_data = water_mains_data.fillna(method='ffill')
         water_mains_data = water_mains_data.loc[
-            water_mains_data.climate_zone_water == 'WaterMainCZ' + climate_zone]
+            water_mains_data.climate_zone_water == \
+            'WaterMainCZ' + climate_zone_water_main]
 
         # Convert calendar abbreviation to calendar number
         water_mains_data['month_num'] = water_mains_data.apply(
