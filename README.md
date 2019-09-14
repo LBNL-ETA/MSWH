@@ -24,13 +24,9 @@ To configure new system types in the web framework (such as `Solar Thermal Retro
 
 ## Setup and Installation
 
-1. Download this repository with:
+1. Since the repo comes with database files, please download, install and see the documentation for [`git large file storage`](https://git-lfs.github.com/). After that download this repository with:
 
-        git clone https://github.com/LBNL-ETA/MSWH.git
-
-     Since the repo comes with database files, please download, install [`git large file storage`](https://git-lfs.github.com/) and set up respective hooks with:
-
-        git lfs install
+        git lfs clone https://github.com/LBNL-ETA/MSWH.git
 
 2. It is recommended to create a new Python environment in order to avoid interference with the system-wide Python installation, for example by using `virtualenv` (see [here](https://packaging.python.org/guides/installing-using-pip-and-virtualenv/)) or `Anaconda` (see [here](https://docs.anaconda.com/anaconda/install/)). After having installed one of the mentioned tools, run one of the following commands in the terminal to create a new environment (with the name `mswh`).
 
