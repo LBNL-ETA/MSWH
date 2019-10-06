@@ -413,6 +413,7 @@ class Utility(object):
 
             unit_out: string
                 Desired output unit
+                Options: 'm3', 'cf', 'therm', 'MMBtu'
 
         Returns:
 
@@ -424,11 +425,10 @@ class Utility(object):
                 self.quantity_in,
                 scale_in='k',
                 scale_out='k').Wh_J(unit_in='Wh')
-            self.quantity_in = gas_use
+            self.quantity_in = gas_use + 0.
             unit_in = 'kJ'
 
         if unit_in == 'kJ':
-
             if unit_out == 'm3':
                 gas_use = self.quantity_in / (self.hea_val_gas * 1000.)
             elif unit_out == 'cf':
@@ -443,5 +443,12 @@ class Utility(object):
                     self.quantity_in,
                     scale_in='k',
                     scale_out='MM').Btu_J(unit_in='J')
+            else:
+                raise ValueError(\
+                    '{} is not yet supported as output unit'.format(unit_out))
+
+        if unit_in != 'kWh' and unit_in != 'kJ':
+            raise ValueError(\
+                '{} is not yet supported as input unit.'.format(unit_in))
 
         return gas_use
