@@ -34,13 +34,14 @@ setup(
 
     packages=find_packages(exclude=['docs', 'scripts']),
 
-    # to run tests and use plotting capabilities one 
+    # to run tests and use plotting capabilities one
     # also needs Orca (https://github.com/plotly/orca)
     install_requires=[
         'pandas>=0.24.1',
         'numpy>=1.16.1'
         'future',
         'plotly>=3.2.0',
+        'nbformat>=5.0.4',
         'psutil>=5.4.7',
         'django>=2.1.7',
         'sphinx_rtd_theme'],
