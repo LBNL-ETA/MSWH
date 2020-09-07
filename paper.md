@@ -75,7 +75,7 @@ the Django based GUI.
 
 The application of the models can be to explore the benefits of grouping multiple households to be served by a single solar water heating system in comparison to a system installed in a single household. An another application of the model is to calculate gas savings when changing from a gas water heater to a solar water heater in a single household.
 
-More on the hot water demand model, solar radiation, component and system models can be found in [ref Report] project report for which this software was developed. The software found its application in and enable the development of [ACEEE ref] and [Hannes theses ref].
+More on the hot water demand model, solar radiation, component and system models can be found in [ref Report] project report for which this software was developed. The software found its application in and enable the development of [ACEEE ref] and [Hannes theses ref]. The code is also available as DOE code, see [ref code].
 
 # Statement of Need
 
