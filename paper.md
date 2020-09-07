@@ -1,3 +1,44 @@
+<!-- ---
+title: 'Multiscale Solar Water Heating'
+tags:
+  - Python
+  - system
+  - component
+  - simulation
+  - solar thermal water heating
+  - solar electric water heating
+  - heat pump water heating
+  - natural gas water heating
+  - photovoltaic
+  - flat plate solar collector
+  - evacuated tubes solar collector
+  - hot water demand
+  - solar radiation
+  - thermal storage
+  - solar water heating
+authors:
+  - name: Milica Grahovac^[corresponding author]
+    orcid: @milicag
+    affiliation: "1"
+  - name: Hannes Gerhart^[at the time of code creation was at affiliation 1, now is at affiliation 2]
+    affiliation: "1, 2"
+  - name: Robert Hosbach
+    affiliation: "1"
+  - name: Katie Coughlin
+    affiliation: "1"
+  - name: Vagelis Vossos
+    affiliation: "1"
+  - name: Mohan Ganeshalingam
+    affiliation: "1"
+
+affiliations:
+  - name: Lawrence Berkeley National Laboratory, Berkeley, CA
+    index: 1
+  - name: Cloudflare
+    index: 2
+--- -->
+
+
 # Summary
 
 We developed the Multiscale Solar Water Heating (MSWH) software to enable users to model energy use for individual and community scale solar water heating projects and compare it with the performance of conventional natural gas tank water heaters. The package contains a [Jupyter notebook with examples](https://github.com/LBNL-ETA/MSWH/blob/master/scripts/MSWH%20System%20Tool.ipynb), a GUI developed using Django Framework and both functional and unit tests. In addition, the package is structured so that it can be extended with further technologies, applications and locations as needed.
@@ -9,12 +50,12 @@ We use simplified fast performing energy balance based models. We connect the mo
 We built a simple simulation solver that uses explicit forward Euler method to solve the balance equations in each simulation time-step.
 
 The component models we either identified in the existing literature and created a custom Python implementation, or we developed new models. In our implementation we implemented the following existing or new models:
-* Solar irradiation on a tilted surface model is based on [ref duffy beckman]
-* Solar collector models and model parameters are based on [ref SRCC] and [ASHRAE]
-* We converted natural gas tank water heater model from [ref WHAM] into a hourly time-step model implementation
-* Photovoltaic model based on a simplified model found in [modelica buildings library]
-* Heat pump water heater tank was modeled based on [ref NREL]
-* Solar thermal tank is a phenomenology based model based on ideas similar to model used in [ref NREL SAM]
+* Solar irradiation on a tilted surface model is based on `@Duffie:1993`
+* Solar collector models and model parameters are based on `@Srcc:2013` and `@Ashrae:2013`
+* We converted natural gas tank water heater model from `@Lutz:1998` into a hourly time-step model implementation
+* Photovoltaic model based on a simplified model found in `@Wetter:2014`
+* Heat pump water heater tank was modeled based on `@Sparn:2014`
+* Solar thermal tank is a phenomenology based model based on ideas similar to model used in NREL's SAM [`@Blair:2014`]
 * Simplified performance data based gas burner model to represent instantaneous gas water heater
 * Simple electric resistance model to represent instantaneous electric gas
 water heater
@@ -40,10 +81,12 @@ More on the hot water demand model, solar radiation, component and system models
 
 The project that prompted the development of this software, described in [ref Report] was enquiring whether there are any economic benefits in grouping households to be served by a single solar water heating installation, in comparison to single household solar water heating installations on the state of California level.
 
-Our primary motivation to develop a new software rather than to rely on existing tools such as [ref Modelica] ref [SAM] was the combination of the following factors:
+Our primary motivation to develop a new software was the combination of the following factors:
 * the level of detail
 * the required simulation time
 * simplicity of integration within the larger life-cycle cost framework [ref ACEEE]
+
+Modelica buildings library `@Wetter:2014` satisfies and exceeds the level of detail but proves too detailed and thus slow for our particular application. SAM tool [`@Blair:2014`] has a good level of detail, provides most of the system models that we needed but for our purposes proves not flexible enough in terms of modifying the system configuration, automating the size scaling and embedding it into our custom life-cycle cost framework.
 
 Namely, in order to capture sufficient level of detail of the California demographics, such as variability in climate zones, household types, and household occupancy, we wanted to be able to simulate a few alternative water heating systems in each of the California sample households. Secondly, to get a more realistic picture of the effect of thermal storage and distribution system losses, we opted to perform a simulation with relatively short time-steps of 1h for a duration of one representative year. We were not able to identify an open source tool that is capable of firstly satisfying the simulation speed requirement combined with the necessary level of detail for our analysis and secondly providing the flexibility for us to customize various integral parts of the analysis such as automate the component and system size scaling, specify hot water load profiles and solar radiation for each household or group of households in the sample.
 
