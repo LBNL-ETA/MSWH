@@ -34,13 +34,18 @@ the Django based GUI.
 
 The application of the models can be to explore the benefits of grouping multiple households to be served by a single solar water heating system in comparison to a system installed in a single household. An another application of the model is to calculate gas savings when changing from a gas water heater to a solar water heater in a single household.
 
-More on the hot water demand model, solar radiation, component and system models can be found in [ref Report] project report for which this software was developed. The software found its application in [ACEEE ref] and [Hannes theses ref].
+More on the hot water demand model, solar radiation, component and system models can be found in [ref Report] project report for which this software was developed. The software found its application in and enable the development of [ACEEE ref] and [Hannes theses ref].
 
 # Statement of Need
 
 The project that prompted the development of this software, described in [ref Report] was enquiring whether there are any economic benefits in grouping households to be served by a single solar water heating installation, in comparison to single household solar water heating installations on the state of California level.
 
-Our primary motivation to develop this software was the combination of the level of detail and the required simulation time. Namely, in order to capture sufficient level of detail of the California demographics, such as variability in climate zones, household types, and household occupancy, we wanted to be able to simulate a few alternative water heating systems in each of the California sample households. Secondly, to get a more realistic picture of the effect of thermal storage and distribution system losses, we opted to perform a simulation with relatively short time-steps of 1h for a duration of one representative year. We were not able to identify an open source tool that is capable of firstly satisfying the simulation speed requirement combined with the necessary level of detail for our analysis and secondly providing the flexibility for us to customize various integral parts of the analysis such as automate the component and system size scaling, specify hot water load profiles and solar radiation for each household or group of households in the sample.
+Our primary motivation to develop a new software rather than to rely on existing tools such as [ref Modelica] ref [SAM] was the combination of the following factors:
+* the level of detail
+* the required simulation time
+* simplicity of integration within the larger life-cycle cost framework [ref ACEEE]
+
+Namely, in order to capture sufficient level of detail of the California demographics, such as variability in climate zones, household types, and household occupancy, we wanted to be able to simulate a few alternative water heating systems in each of the California sample households. Secondly, to get a more realistic picture of the effect of thermal storage and distribution system losses, we opted to perform a simulation with relatively short time-steps of 1h for a duration of one representative year. We were not able to identify an open source tool that is capable of firstly satisfying the simulation speed requirement combined with the necessary level of detail for our analysis and secondly providing the flexibility for us to customize various integral parts of the analysis such as automate the component and system size scaling, specify hot water load profiles and solar radiation for each household or group of households in the sample.
 
 To satisfy our research need we thus opted to develop lightweight simulation models for all involved systems that would allow for around 120 thousand simulation runs together with the component sizing and life-cycle cost analysis to be performed on a PC with 12 cores in about 8h. The users can expect a single solar water heater simulation model to run for about 0.16 seconds, providing an almost instantaneous experience for a user only seeking to design and investigate a single system.
 
