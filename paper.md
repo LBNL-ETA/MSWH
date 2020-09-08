@@ -1,4 +1,4 @@
-<!-- ---
+---
 title: 'Multiscale Solar Water Heating'
 tags:
   - Python
@@ -36,7 +36,7 @@ affiliations:
     index: 1
   - name: Cloudflare
     index: 2
---- -->
+---
 
 
 # Summary
