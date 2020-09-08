@@ -47,7 +47,7 @@ bibliography: paper.bib
 
 # Summary
 
-We developed the Multiscale Solar Water Heating (MSWH) software with a primary intent to enable users to model energy use for individual and community scale solar water heating projects and compare it with the performance of conventional natural gas tank water heaters. The package contains a [Jupyter notebook with examples](https://github.com/LBNL-ETA/MSWH/blob/master/scripts/MSWH%20System%20Tool.ipynb), a GUI developed using Django Framework and both functional and unit tests. In addition, the package is structured so that it can be extended with further technologies, applications and locations as needed.
+We developed the Multiscale Solar Water Heating (MSWH) software with a primary intent to enable users to model energy use for individual and community scale solar water heating projects and compare it with the performance of conventional natural gas tank water heaters. The package contains a [Jupyter notebook with examples](https://github.com/LBNL-ETA/MSWH/blob/master/scripts/MSWH%20System%20Tool.ipynb), a GUI (graphical user interface) developed using Django Framework and both functional and unit tests. In addition, the package is structured so that it can be extended with further technologies, applications and locations as needed.
 
 We developed and implemented simplified fast performing energy balance based models. We connected the models into two preconfigured solar water heating systems that are provided with MSWH software:
 
@@ -82,7 +82,7 @@ Performance visualization is available both in example notebooks and through the
 
 The application of the models can be to explore the benefits of grouping multiple households to be served by a single solar water heating system in comparison to a system installed in a single household. An another application of the model is to calculate gas savings when changing from a gas water heater to a solar water heater in a single household.
 
-More details on the hot water demand model, solar radiation, component and system models can be found in @Coughlin:2020 project report for which this software was developed. The software found its application in and enable the development of @Grahovac:2020 and @Gerhart:2019. The code is also available as DOE code, see @Doecode:2019.
+More details on the hot water demand model used in creating the database of sample hot water use load profiles freely available with the software and the software's solar radiation, component and system models for conventional natural gas and solar thermal water heating can be found in @Coughlin:2020 project report for which this software was developed. The software found its application in performing the engineering analysis to estimate energy consumption and savings in the project report, as well as in @Grahovac:2020. @Gerhart:2019 explains the development of the GUI and provides details on the solar electric system model development. The code is also available as DOE code, see @Doecode:2019.
 
 # Statement of Need
 
