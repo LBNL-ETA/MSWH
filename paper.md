@@ -18,7 +18,6 @@ tags:
   - solar water heating
 authors:
   - name: Milica Grahovac^[corresponding author]
-    orcid: @milicag
     affiliation: "1"
   - name: Hannes Gerhart^[at the time of code creation was at affiliation 1, now is at affiliation 2]
     affiliation: "1, 2"
