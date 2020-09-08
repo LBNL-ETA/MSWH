@@ -68,14 +68,13 @@ To evaluate a potential solar water heating project by looking at its simulation
 * The project location by choosing one of the climate zones for which data is available in our database. The database includes 16 CA climate zone files and can be extended for other regions.
 * For each household: count of people supplied by the system and whether there is any daytime occupancy.
 
-We developed component sizing rules and size scaling rules to account for household occupancy and project scale, respectively. The rules are readily available in the example notebooks and can easily be modified for exploratory purposes. For example,  users who already have a solar water heating system and are planning to increase the occupancy, are retrofitting an existing system or already poses one of the components and are looking to appropriately size the others can simulate alternatives and compare their the energy consumption and solar fraction results.
+We developed component sizing rules and size scaling rules to account for household occupancy and project scale, respectively. The rules are readily available in the example notebooks and can easily be modified for exploratory purposes. For example, users who already have a solar water heating system and are planning to increase the occupancy, are retrofitting an existing system or already poses one of the components and are looking to appropriately size the others can simulate alternatives and compare their the energy consumption and solar fraction results. As data sources for the sizing and scaling rules we used expert knowledge, web-scraped data with the help of a tool described in `@Gerke:2017` and freely available certification databases such as `@Ccms:2018` and `@Cec_appliance:2019` as well as sizing rules available in `@Csi_thermal:2016`.
 
-Performance visualization is available both in example notebooks and through
-the Django based GUI.
+Performance visualization is available both in example notebooks and through the Django based GUI.
 
 The application of the models can be to explore the benefits of grouping multiple households to be served by a single solar water heating system in comparison to a system installed in a single household. An another application of the model is to calculate gas savings when changing from a gas water heater to a solar water heater in a single household.
 
-More on the hot water demand model, solar radiation, component and system models can be found in [ref Report] project report for which this software was developed. The software found its application in and enable the development of [ACEEE ref] and [Hannes theses ref]. The code is also available as DOE code, see [ref code].
+More details on the hot water demand model, solar radiation, component and system models can be found in `@Coughlin:2020` project report for which this software was developed. The software found its application in and enable the development of `@Grahovac:2020` and `@Gerhart:2019`. The code is also available as DOE code, see `@Doecode:2019`.
 
 # Statement of Need
 
@@ -84,7 +83,7 @@ The project that prompted the development of this software, described in [ref Re
 Our primary motivation to develop a new software was the combination of the following factors:
 * the level of detail
 * the required simulation time
-* simplicity of integration within the larger life-cycle cost framework [ref ACEEE]
+* simplicity of integration within the larger life-cycle cost framework as presented in `@Grahovac:2020` and `@Coughlin:2020`
 
 Modelica buildings library `@Wetter:2014` satisfies and exceeds the level of detail but proves too detailed and thus slow for our particular application. SAM tool [`@Blair:2014`] has a good level of detail, provides most of the system models that we needed but for our purposes proves not flexible enough in terms of modifying the system configuration, automating the size scaling and embedding it into our custom life-cycle cost framework.
 
@@ -97,14 +96,3 @@ To satisfy our research need we thus opted to develop lightweight simulation mod
 This work was supported by the California Energy Commission, Public Interest Energy Research Program, under Contract No. PIR-16-022.
 
 # References
-
-ACEEE
-Report in press
-Hannes thesis
-Modelica Buildings library
-IDEA data collection framework paper
-Solar engineering
-SRCC certification data
-
-
-- go through refs of the report
