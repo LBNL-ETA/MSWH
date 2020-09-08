@@ -35,6 +35,9 @@ affiliations:
     index: 1
   - name: Cloudflare
     index: 2
+
+date: September 7, 2020
+bibliography: paper.bib
 ---
 
 
