@@ -16,18 +16,20 @@ tags:
   - solar radiation
   - thermal storage
   - solar water heating
+  - sizing
+
 authors:
   - name: Milica Grahovac^[corresponding author]
+    affiliation: "1"
+  - name: Katie Coughlin
+    affiliation: "1"
+  - name: Mohan Ganeshalingam
     affiliation: "1"
   - name: Hannes Gerhart^[at the time of code creation was at affiliation 1 and 2, now is at affiliation 3]
     affiliation: "1, 2, 3"
   - name: Robert Hosbach
     affiliation: "1"
-  - name: Katie Coughlin
-    affiliation: "1"
   - name: Vagelis Vossos
-    affiliation: "1"
-  - name: Mohan Ganeshalingam
     affiliation: "1"
 
 affiliations:
@@ -49,8 +51,8 @@ We developed the Multiscale Solar Water Heating (MSWH) software with a primary i
 
 We developed and implemented simplified fast performing energy balance based models. We connected the models into two preconfigured solar water heating systems that are provided with MSWH software:
 
-* Solar thermal collector, hot water thermal storage tank, with a selection of backups: gas storage water heater or an instantaneous gas water heater
-* Photovoltaic panel, heat pump water heater hot water thermal storage tank, with an electric resistance water heater as backup
+* Solar thermal collector, hot water thermal storage tank, with a selection of backups: gas storage water heater or an instantaneous gas water heater.
+* Photovoltaic panel, heat pump water heater hot water thermal storage tank, with an electric resistance water heater as backup.
 
 We built a simple simulation solver that uses explicit forward Euler method to solve the balance equations in each simulation time-step.
 
@@ -63,9 +65,8 @@ The component models we either identified in the existing literature and created
 * Heat pump water heater tank is based on @Sparn:2014.
 * Solar thermal tank is a phenomenology based model based on ideas very similar to model developed for in NREL's SAM [@Blair:2014].
 * Simplified performance data based gas burner model is implemented to represent instantaneous gas water heater.
-* Simple electric resistance model was implemented to represent instantaneous electric gas
-water heater
-*  We developed a simplified data based solar and distribution pump model.
+* Simple electric resistance model was implemented to represent instantaneous electric gas water heater.
+* We developed a simplified data based solar and distribution pump model.
 * To model the distribution piping network we developed a simplified model that is capable of accounting for thermal losses at stagnation and flows on demand with correction factors available to help account for the relatively long time-step of 1h.
 
 We performed extensive validation of [component models](https://github.com/LBNL-ETA/MSWH/blob/master/mswh/system/tests/test_components.py) and [system models](https://github.com/LBNL-ETA/MSWH/blob/master/mswh/system/tests/test_models.py) against performance results obtained using freely available open source tools and certification data generated using commercial tools. The validation models are a part of the test suite and show good agreement in all test comparisons.
@@ -89,9 +90,9 @@ The project that prompted the development of this software, described in @Coughl
 
 Our primary motivation to develop a new software was the combination of the following factors:
 
-* the level of detail
-* the required simulation time
-* simplicity of integration within the larger life-cycle cost framework as presented in @Grahovac:2020 and @Coughlin:2020
+* The level of detail
+* The required simulation time
+* Simplicity of integration within the larger life-cycle cost framework as presented in @Grahovac:2020 and @Coughlin:2020
 
 Modelica buildings library @Wetter:2014 satisfies and exceeds the level of detail but proves too detailed and thus slow for our particular application. SAM tool [@Blair:2014] has a good level of detail, provides most of the system models that we needed but for our purposes proves not flexible enough in terms of modifying the system configuration, automating the size scaling and embedding it into our custom life-cycle cost framework.
 
