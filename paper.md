@@ -23,13 +23,9 @@ authors:
     affiliation: "1"
   - name: Katie Coughlin
     affiliation: "1"
-  - name: Mohan Ganeshalingam
-    affiliation: "1"
   - name: Hannes Gerhart^[at the time of code creation was at affiliation 1 and 2, now is at affiliation 3]
     affiliation: "1, 2, 3"
   - name: Robert Hosbach
-    affiliation: "1"
-  - name: Vagelis Vossos
     affiliation: "1"
 
 affiliations:
@@ -59,12 +55,12 @@ We built a simple simulation solver that uses explicit forward Euler method to s
 The component models we either identified in the existing literature and created a custom Python implementation, or we developed new models. In our implementation we implemented the following existing or new models:
 
 * Solar irradiation on a tilted surface model is based on equations found in @Duffie:2013.
-* Solar collector models and model parameters are based on @Srcc:2013 and @Ashrae:2013.
+* Solar collector models and model parameters are based on @Ashrae:2013 and @Srcc:2013.
 * We converted natural gas tank water heater model from @Lutz:1998 into a hourly time-step model implementation.
 * Photovoltaic model is based on a simplified model found in @Wetter:2014.
 * Heat pump water heater tank is based on @Sparn:2014.
-* Solar thermal tank is a phenomenology based model based on ideas very similar to model developed for in NREL's SAM [@Blair:2014].
-* Simplified performance data based gas burner model is implemented to represent instantaneous gas water heater.
+* Solar thermal tank is a phenomenological model based on ideas very similar to model developed for in NREL's SAM software [@Blair:2014].
+* Simplified performance data based gas burner model was implemented to represent instantaneous gas water heater.
 * Simple electric resistance model was implemented to represent instantaneous electric gas water heater.
 * We developed a simplified data based solar and distribution pump model.
 * To model the distribution piping network we developed a simplified model that is capable of accounting for thermal losses at stagnation and flows on demand with correction factors available to help account for the relatively long time-step of 1h.
@@ -92,7 +88,7 @@ Our primary motivation to develop a new software was the combination of the foll
 
 * The level of detail
 * The required simulation time
-* Simplicity of integration within the larger life-cycle cost framework as presented in @Grahovac:2020 and @Coughlin:2020
+* Simplicity of integration within the larger life-cycle cost framework as presented in @Coughlin:2020 and @Grahovac:2020
 
 Modelica buildings library @Wetter:2014 satisfies and exceeds the level of detail but proves too detailed and thus slow for our particular application. SAM tool [@Blair:2014] has a good level of detail, provides most of the system models that we needed but for our purposes proves not flexible enough in terms of modifying the system configuration, automating the size scaling and embedding it into our custom life-cycle cost framework.
 
@@ -102,6 +98,6 @@ To satisfy our research need we thus opted to develop lightweight simulation mod
 
 # Acknowledgments
 
-This work was supported by the California Energy Commission, Public Interest Energy Research Program, under Contract No. PIR-16-022.
+This work was supported by the California Energy Commission, Public Interest Energy Research Program, under Contract No. PIR-16-022. We thank Vagelis Vossos and Mohan Ganeshalingam for their contributions and support.
 
 # References
