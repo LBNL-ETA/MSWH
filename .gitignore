@@ -20,4 +20,5 @@
 Thumbs.db
 *.pyc
 *.pyo
-docs/build
+docs/_build
+*.ipynb_checkpoints
