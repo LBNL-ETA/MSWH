@@ -456,8 +456,8 @@ class System(object):
         proj_total[t_columns] = ts_res[t_columns].mean()
         proj_total[self.r['proj_load']] = ts_res[self.r['proj_load']].mean()
 
-        if not proj_total[self.r['gas_use']] == \
-            backup_proj_total[self.r['gas_use']]:
+        if not round(proj_total[self.r['gas_use']], 4) == \
+            round(backup_proj_total[self.r['gas_use']], 4):
             msg = 'Check project output of the backup - timestep '\
                   'sum preformed in this method and the total are '\
                   'not equal.'

@@ -62,7 +62,7 @@ To configure new system types in the web framework (such as `Solar Thermal Retro
     After having activated the virtual environment, the name of it should appear before the prompt in the terminal.
 
     For deactivating use `conda deactivate` or `deactivate`.
-    
+
 4.  To ensure the same python kernel can be used in a jupyter notebook, activate the virtual environment and run:
 
           python -m ipykernel install --name mswh
@@ -105,8 +105,10 @@ To run tests, from the `MSWH` folder:
 ## Publications
 
 The code was used for the following publications:
-* CEC Report (link will be posted upon publishing)
-* Master Thesis (link will be posted upon publishing)
+* CEC report (in press)
+* [ACEEE paper and video presentation](https://aceee2020.conferencespot.org/event-data/pdf/catalyst_activity_10923/catalyst_activity_paper_20200812133157248_498ce455_3a9c_4278_9088_6e3fdce5745b)
+
+* Hannes' Master Thesis (in press)
 
 ## About
 
