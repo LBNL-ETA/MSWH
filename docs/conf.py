@@ -245,7 +245,7 @@ latex_elements = {
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
     (master_doc, 'MSWH.tex', u'Multiscale Solar Water Heating - Code Documentation',
-     u'Milica Grahovac \\\\ Robert Hosbach \\\\ Hannes Gerhart \\\\ Katie Coughlin \\\\ Mohan Ganeshalingam \\\\ Vagelis Vossos \\\\ Hannes Gerhart', 'manual', True),
+     u'Milica Grahovac \\\\ Robert Hosbach \\\\ Katie Coughlin \\\\ Mohan Ganeshalingam \\\\ Vagelis Vossos \\\\ Hannes Gerhart', 'manual', True),
 ]
 
 # The name of an image file (relative to this directory) to place at the
