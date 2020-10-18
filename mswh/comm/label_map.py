@@ -251,7 +251,6 @@ class SwhLabels(object):
             't_wet_bulb': 'Temperature - Ambient Air (Wet Bulb)',
             'q_loss_up': 'Heat Loss - Upper Tank Volume',
             'q_loss_low': 'Heat Loss - Lower Tank Volume',
-            'q_err_tank': 'Tank Balancing Error (Heat Rate)',
             'q_ovrcool_tank': 'Tank Overcool (Heat Rate)',
             'q_dem_balance': 'Demand Balancing Error (Heat Rate)',
             'dt_dist': 'Temperature Drop in Distribution Pipes',
