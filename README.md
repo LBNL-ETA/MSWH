@@ -46,7 +46,7 @@ To configure new system types in the web framework (such as `Solar Thermal Retro
 
         conda create -n mswh python=3.8
 
-    If you use `virtualenv`:
+    If you use `virtualenv`, for example on `Linux`:
 
         python3 -m virtualenv -p /usr/bin/python3.8 <path_to_env>/mswh
 
@@ -69,7 +69,7 @@ To configure new system types in the web framework (such as `Solar Thermal Retro
 
 6.  To ensure the same python kernel can be used in a jupyter notebook, activate the virtual environment and run:
 
-          python -m ipykernel install --name mswh
+        python -m ipykernel install --name mswh
 
 7. Clone the repository with:
 
