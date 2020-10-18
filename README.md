@@ -69,7 +69,9 @@ To configure new system types in the web framework (such as `Solar Thermal Retro
 
 6.  To ensure the same Python kernel can be used in a Jupyter notebook, activate the virtual environment and run:
 
-        python -m ipykernel install --name mswh
+        python -m ipykernel install --user --name mswh
+
+ Users with admin privileges can skip the `--user` flag.
 
 7. Clone the repository with:
 
