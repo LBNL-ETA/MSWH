@@ -1011,7 +1011,7 @@ class Storage(object):
     Examples:
 
         See :func:`mswh.system.tests.test_components <mswh.system.tests.test_components>` module and
-        :func:`scripts/Project Level SWH System Tool.ipynb <scripts/Project Level MSWH System Tool.ipynb>`
+        :func:`scripts/MSWH System Tool.ipynb <scripts/MSWH System Tool.ipynb>`
         for examples on how to use the methods as stand alone and
         in a system model simulation.
     """
