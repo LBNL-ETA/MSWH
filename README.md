@@ -24,20 +24,18 @@ To configure new system types in the web framework (such as `Solar Thermal Retro
 
 ## Setup and Installation
 
-1. Since the repo comes with database files, please download, install and see the documentation for [`git large file storage`](https://git-lfs.github.com/). After that download this repository with:
-
-        git clone https://github.com/LBNL-ETA/MSWH.git
+1. Since the repo comes with database files, please download, install and see the documentation for [`git large file storage`](https://git-lfs.github.com/).
 
 2. Make sure that `pip` is installed. For info and installation help take
    a look at this [webpage](https://pip.pypa.io/en/stable/installing/).
 
 3. If you are familiar with `conda` and experienced with virtual environments
- you can perform the package installation using the following commands and go directly to step 8 after that:
+ you can perform the package installation using the following commands and go directly to step 9 after that:
 
-        conda create -n mswh -c conda-forge python=3.6 pip git-lfs
+        conda create -n mswh -c conda-forge python=3.8 pip git-lfs
         conda activate mswh
         git lfs install
-        git clone ...
+        git clone https://github.com/LBNL-ETA/MSWH.git
         pip install -e .
 
 4. This is for users that are relatively new to virtual environments or `Python` in general, or for users who had any issues with instructions in step 3.
@@ -73,13 +71,17 @@ To configure new system types in the web framework (such as `Solar Thermal Retro
 
           python -m ipykernel install --name mswh
 
-7.  To install the necessary Python packages navigate to the `setup.py` directory and run:
+7. Clone the repository with:
+
+        git clone https://github.com/LBNL-ETA/MSWH.git
+
+8.  To install the necessary Python packages navigate to the `setup.py` directory and run:
 
         pip install -e .
 
     The `-e` flag is only necessary if one would like changes to the source code be reflected immediately (without having to rerun the `setup.py` script with every change to the source code). If you just want to run the project application, you can omit the `-e` flag.
 
-8. To use the plotting capabilities, also required when running tests, please install [`orca`](https://github.com/plotly/orca).
+9. To use the plotting capabilities, also required when running tests, please install [`orca`](https://github.com/plotly/orca).
 
 ## Django Web Framework Deployment
 
