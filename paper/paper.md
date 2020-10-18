@@ -96,6 +96,8 @@ Namely, in order to capture sufficient level of detail of the California demogra
 
 To satisfy our research need we thus opted to develop lightweight simulation models for all involved systems that would allow for around 120 thousand simulation runs together with the component sizing and life-cycle cost analysis to be performed on a PC with 12 cores in about 8 hours. The users can expect a single solar water heater simulation model to run for about 0.16 seconds, providing an almost instantaneous experience for a user only seeking to design and investigate a single system.
 
+Apart from the various research applications, the MSWH package can be interesting for homeowners, planners, designers, policy developers or even solar water heating contractors, just to list a few.
+
 # Acknowledgments
 
 This work was supported by the California Energy Commission, Public Interest Energy Research Program, under Contract No. PIR-16-022. We thank Vagelis Vossos and Mohan Ganeshalingam for their contributions and support.
