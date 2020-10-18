@@ -26,32 +26,35 @@ To configure new system types in the web framework (such as `Solar Thermal Retro
 
 1. Since the repo comes with database files, please download, install and see the documentation for [`git large file storage`](https://git-lfs.github.com/). After that download this repository with:
 
-        git lfs clone https://github.com/LBNL-ETA/MSWH.git
+        git clone https://github.com/LBNL-ETA/MSWH.git
 
-2. It is recommended to create a new Python environment in order to avoid interference with the system-wide Python installation, for example by using `virtualenv` (see [here](https://packaging.python.org/guides/installing-using-pip-and-virtualenv/)) or `Anaconda` (see [here](https://docs.anaconda.com/anaconda/install/)). After having installed one of the mentioned tools, run one of the following commands in the terminal to create a new environment (with the name `mswh`).
+2. If you are familiar with `conda` and experienced with virtual environments
+ you can perform the package installation using the following commands and go directly to step 7 after that:
 
-    When using `Anaconda` (the environment is stored under the home directory in `~/anaconda3/envs/`):
+        conda create -n mswh -c conda-forge python=3.6 pip git-lfs
+        conda activate mswh
+        git lfs install
+        git clone ...
+        pip install -e .
 
-          conda create -n mswh python=3.6
+3. This is for users that are relatively new to virtual environments or `Python` in general, or for users who had any issues with instructions in step 2.
 
-    When using `virtualenv` (the environment is stored in `<path_to_env>`). The environment will simply use the system Python3 subversion:
+    It is recommended to create a new Python environment in order to avoid interference with the system-wide Python installation, for example by using [`virtualenv`](https://packaging.python.org/guides/installing-using-pip-and-virtualenv/), the lightweight [`Miniconda`](https://docs.conda.io/en/latest/miniconda.html) or [`Anaconda`](https://docs.anaconda.com/anaconda/install/) software. Depending on the approach you take, pick one of the commands below and run it in a terminal to create a new environment named, for instance,  `mswh`.
 
-          (on Linux) python3 -m virtualenv <path_to_env>/mswh,
-                     or with a specific python version: virtualenv -p /usr/bin/python3.6 <path_to_env>/mswh
+    If you use `Miniconda` or `Anaconda` from the repo clone folder run:
 
-          (on MacOS) python3 -m venv <path_to_env>/mswh
+            conda create -n mswh python=3.8
 
-3. Now the virtual environment needs to be activated, by running one of the following commands:
+    If you use `virtualenv`:
 
-    When using `virtualenv` (on Linux or Mac):
+            python3 -m virtualenv -p /usr/bin/python3.8 <path_to_env>/mswh
 
-        source <path_to_env>/mswh/bin/activate
+    With ``<path_to_env>`` as your selected folder path to store virtual
+    environments.
 
-    When using `virtualenv` (on Windows):
+4. Now the virtual environment needs to be activated, by running one of the following commands:
 
-        <path_to_env>\Scripts\activate.bat
-
-    When using `Anaconda`:
+    When using `Anaconda` or `Miniconda`:
 
         conda activate mswh
 
@@ -63,17 +66,20 @@ To configure new system types in the web framework (such as `Solar Thermal Retro
 
     For deactivating use `conda deactivate` or `deactivate`.
 
-4.  To ensure the same python kernel can be used in a jupyter notebook, activate the virtual environment and run:
+5.  To ensure the same python kernel can be used in a jupyter notebook, activate the virtual environment and run:
 
           python -m ipykernel install --name mswh
 
-5.  To install the necessary Python packages navigate to the `setup.py` directory and run:
+6.  To install the necessary Python packages navigate to the `setup.py` directory and run:
 
         pip install -e .
 
+    Make sure that `pip` is installed. For info and installation help take
+    a look at this (webpage)[https://pip.pypa.io/en/stable/installing/].
+
     The `-e` flag is only necessary if one would like changes to the source code be reflected immediately (without having to rerun the `setup.py` script with every change to the source code). If you just want to run the project application, you can omit the `-e` flag.
 
-    To use the plotting capabilities, also required when running tests, please install [`orca`](https://github.com/plotly/orca).
+7. To use the plotting capabilities, also required when running tests, please install [`orca`](https://github.com/plotly/orca).
 
 ## Django Web Framework Deployment
 
