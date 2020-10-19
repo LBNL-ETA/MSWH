@@ -67,7 +67,7 @@ To configure new system types in the web framework (such as `Solar Thermal Retro
 
     For deactivating use `conda deactivate` or `deactivate`.
 
-6.  To ensure the same Python kernel can be used in a Jupyter notebook, activate the virtual environment and run:
+6.  To make use of example Jupyter notebooks one should have Jupyter installed or follow [the instruction here to install it](https://jupyter.org/install). To ensure the same Python kernel can be used in a Jupyter notebook, activate the virtual environment and run:
 
         python -m ipykernel install --user --name mswh
 
