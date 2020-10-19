@@ -280,10 +280,11 @@ class Plot(object):
                 Provide an array or a list if plotting a single
                 variable. If plotting multiple variables provide
                 a list of arrays or a pandas dataframe.
+                
                 Horizontal axis corresponds to:
 
                     * if pd df: the index of the dataframe or the first columns of the dataframe
-                    * if list or arrays/lists: a range or array lenth or the first array/list in the list
+                    * if list or arrays/lists: a range of array length of the first array/list in the list
 
                 All arrays in the list need to have the same length.
 

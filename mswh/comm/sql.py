@@ -41,7 +41,7 @@ class Sql(object):
         Returns:
 
             data: dict of pandas dataframes
-                Saves each of the sql tabels as a
+                Saves each of the sql tables as a
                 pandas dataframe under a sql table
                 name as a key
         """
@@ -157,7 +157,7 @@ class Sql(object):
         Parameters:
 
             sql_command: string
-                sql_command to exectute
+                sql_command to execute
 
         Returns:
 

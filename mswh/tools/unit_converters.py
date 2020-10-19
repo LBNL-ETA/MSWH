@@ -14,13 +14,13 @@ class UnitConv(object):
     scale_in: str or 1.
         Scale of the input value, options: 'k', 'kilo',
         'mega', 'million', 'M', 'MM', 'giga', 'G', 'tera', 'T',
-        'peta', 'P', 'mili', 'micro'.
+        'peta', 'P', 'milli', 'micro'.
         Default: 1.
 
     scale_out: str or 1.
         Scale of the input value, options: 'k', 'kilo',
         'mega', 'million', 'M', 'MM', 'giga', 'G', 'tera', 'T',
-        'peta', 'P', 'mili', 'm', 'micro'.
+        'peta', 'P', 'milli', 'm', 'micro'.
         Default: 1.
 
     Examples:
@@ -44,7 +44,7 @@ class UnitConv(object):
 
         if (scale_in == 'k') or (scale_in == 'kilo'):
             self.scale_in = 1000.
-        elif ((scale_in == 'milion') or (scale_in == 'M') or
+        elif ((scale_in == 'million') or (scale_in == 'M') or
             (scale_in == 'MM') or (scale_in == 'mega')):
             self.scale_in = 1e6
         elif (scale_in == 'giga') or (scale_in == 'G'):
@@ -53,9 +53,9 @@ class UnitConv(object):
             self.scale_in = 1e12
         elif (scale_in == 'peta') or (scale_in == 'P'):
             self.scale_in = 1e15
-        elif (scale_in == 'mili') or (scale_in == 'm'):
+        elif (scale_in == 'milli') or (scale_in == 'm'):
             self.scale_in = 1e-3
-        elif scale_in == 'mikro':
+        elif scale_in == 'micro':
             self.scale_in = 1e-6
         else:
             self.scale_in = scale_in
@@ -63,7 +63,7 @@ class UnitConv(object):
 
         if (scale_out == 'k') or (scale_out == 'kilo'):
             self.scale_out = 1000.
-        elif ((scale_out == 'milion') or (scale_out == 'M') or
+        elif ((scale_out == 'million') or (scale_out == 'M') or
             (scale_out == 'MM') or (scale_out == 'mega')):
             self.scale_out = 1e6
         elif (scale_out == 'giga') or (scale_out == 'G'):
@@ -72,9 +72,9 @@ class UnitConv(object):
             self.scale_out = 1e12
         elif (scale_out == 'peta')  or (scale_out == 'P'):
             self.scale_out = 1e15
-        elif (scale_out == 'mili') or (scale_out == 'm'):
+        elif (scale_out == 'milli') or (scale_out == 'm'):
             self.scale_out = 1e-3
-        elif scale_out == 'mikro':
+        elif scale_out == 'micro':
             self.scale_out = 1e-6
         else:
             self.scale_out = scale_out

@@ -18,7 +18,7 @@ class SwhLabels(object):
             'id': 'Consumer ID',
             'ld_id': 'Load ID',
             'occ': 'Occupancy',
-            'pr_occ': 'Project Occupany',
+            'pr_occ': 'Project Occupancy',
             'at_hm': 'At Home',
             'housing_typ': 'Housing Type',
             'tilt_mean': 'Tilt Mean',

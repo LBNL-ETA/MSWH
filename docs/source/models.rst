@@ -26,7 +26,7 @@ This software package contains the following Python modules:
 
 * Simplified component models for Converter (solar collectors, electric resistance heater, gas burner, photovoltaic panels, heat pump), Storage (solar thermal tank, heat pump thermal tank, conventional gas tank water heater), and Distribution (distribution and solar pump, piping losses) components
 
-* Preconfigured system simulation models for: base case gas tank water heaters, solar thermal water heaters (solar collector feeding a storage tank, with a tankeless gas water heater backup in a new installation cases and a basecase gas tank water heater in a retrofit case) and solar electric water heaters (heat pump storage tank with an electric resistance backup)
+* Preconfigured system simulation models for: base case gas tank water heaters, solar thermal water heaters (solar collector feeding a storage tank, with a tankless gas water heater backup in a new installation cases and a basecase gas tank water heater in a retrofit case) and solar electric water heaters (heat pump storage tank with an electric resistance backup)
 
 * Database with component performance parameters, California specific weather data and domestic hot water end-use load profiles
 
@@ -39,4 +39,4 @@ The energy sources we consider are solar irradiation, gas and electricity. The s
 
 Upon assembling the components into systems, we perform an annual simulation with hourly timesteps. We solve any differential equations for each time step using an explicit forward Euler method, a first order technique that provides a good approximation given the dynamics of the process observed and the level of detail required in our analysis.
 
-We configure and size each MSWH thermal configuration so that it complies with the CSI-thermal rebate program sizing requirements. The system model assumes appropriate flow and temperature controls and includes freeze and stagnation protection.
+We configure and size each MSWH thermal configuration so that it complies with the CSI-T (California Solar Initiative - Thermal) rebate program sizing requirements. The system model assumes appropriate flow and temperature controls and includes freeze and stagnation protection.
