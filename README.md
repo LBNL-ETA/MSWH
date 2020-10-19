@@ -108,7 +108,9 @@ To configure new system types in the web framework (such as `Solar Thermal Retro
 Anyone may contribute features with the appropriate tests using the issue tracker, forks and pull requests. Please
 check out [code documentation](https://lbnl-eta.github.io/MSWH/) for guidance.
 
-To run tests, from the `MSWH` folder:
+### Automated tests
+
+To run tests, from the `MSWH` folder use the following command modified according to the test module and method you intend to run:
 
     python -m unittest mswh.{my_module}.tests.{test_my_module}.{MyModuleTests}.{test_my_method}
 
