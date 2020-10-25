@@ -817,7 +817,7 @@ class SystemTests(unittest.TestCase):
         if self.plot_results:
             Plot(
                 data_headers=['Demand', 'HP del', 'Aux del',
-                              'Tank del', 'Unmet', 'Error',
+                              'Tank del', 'Unmet',
                               'PV', 'HP el. use', 'Aux el. use'],
                 outpath=self.outpath,
                 save_image=self.plot_results,
@@ -828,7 +828,6 @@ class SystemTests(unittest.TestCase):
                     self.r['q_del_bckp'],
                     self.r['q_del_tank'],
                     self.r['q_unmet_tank'],
-                    self.r['q_err_tank'],
                     self.r['p_pv_ac'],
                     self.r['p_hp_el_use'],
                     self.r['p_el_res_use']]],

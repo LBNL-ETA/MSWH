@@ -52,7 +52,7 @@ We developed and implemented simplified fast performing energy balance based mod
 
 We built a simple simulation solver that uses explicit forward Euler method to solve the balance equations in each simulation time-step.
 
-The component models we either identified in the existing literature and created a custom Python implementation, or we developed new models. In our implementation we implemented the following existing or new models:
+The component models were either developed from scratch or implemented in Python based on existing models identified in literature. We implemented the following existing or new models:
 
 * Solar irradiation on a tilted surface model is based on equations found in @Duffie:2013.
 * Solar collector models and model parameters are based on @Ashrae:2013 and @Srcc:2013.
@@ -63,13 +63,13 @@ The component models we either identified in the existing literature and created
 * Simplified performance data based gas burner model was implemented to represent instantaneous gas water heater.
 * Simple electric resistance model was implemented to represent instantaneous electric gas water heater.
 * We developed a simplified data based solar and distribution pump model.
-* To model the distribution piping network we developed a simplified model that is capable of accounting for thermal losses at stagnation and flows on demand with correction factors available to help account for the relatively long time-step of 1h.
+* To model the distribution piping network we developed a simplified model that is capable of accounting for thermal losses at stagnation and flows on demand with correction factors available to help account for the relatively long time-step of one hour.
 
 We performed extensive validation of [component models](https://github.com/LBNL-ETA/MSWH/blob/master/mswh/system/tests/test_components.py) and [system models](https://github.com/LBNL-ETA/MSWH/blob/master/mswh/system/tests/test_models.py) against performance results obtained using freely available open source tools and certification data generated using commercial tools. The validation models are a part of the test suite and show good agreement in all test comparisons.
 
 To evaluate a potential solar water heating project at design phase by looking at its simulation performance the user should create an instance of each system. For this, as is done in the detailed examples we provided in [example notebooks](https://github.com/LBNL-ETA/MSWH/tree/master/scripts), the user needs to specify the following:
 
-* The project location by choosing one of the climate zones for which data is available in our database. The database includes 16 CA climate zone files and can be extended for other regions.
+* The project location by choosing one of the climate zones for which data is available in our database. The database includes 16 California climate zone files and can be extended for other regions.
 * For each household: count of people supplied by the system and whether there is any daytime occupancy.
 
 We developed component sizing rules and size scaling rules to account for household occupancy and project scale, respectively. The rules are readily available in the example notebooks and can easily be modified for exploratory purposes. For example, users who already have a solar water heating system and are planning to increase the occupancy, are retrofitting an existing system or already possess one of the components and are looking to appropriately size the others can simulate alternatives and compare their energy consumption and solar fraction results. As data sources for the sizing and scaling rules we used expert knowledge, web-scraped data with the help of a tool described in @Gerke:2017 and freely available certification databases such as @Ccms:2018 and @Cec_appliance:2019 as well as sizing rules available in @Csi_thermal:2016.
@@ -78,7 +78,7 @@ Performance visualization is available both in example notebooks and through the
 
 The application of the models can be to explore the benefits of grouping multiple households to be served by a single solar water heating system in comparison to a system installed in a single household. Another application of the model is to calculate gas savings when changing from a gas water heater to a solar water heater in a single household.
 
-More details on the hot water demand model used in creating the database of sample hot water use load profiles are freely available with the software. The software's solar radiation, component and system models for conventional natural gas and solar thermal water heating can be found in @Coughlin:2020 project report for which this software was developed. The software found its application in performing the engineering analysis to estimate energy consumption and savings in the project report, as well as in @Grahovac:2020. @Gerhart:2019 explains in his master thesis the development of the GUI and provides details on the solar electric system model development. The code is also available as DOE code, see @Doecode:2019.
+More details on the hot water demand model used in creating the database of sample hot water use load profiles are freely available with the software. The software's solar radiation, component and system models for conventional natural gas and solar thermal water heating can be found in @Coughlin:2020 project report for which this software was developed. The software found its application in performing the engineering analysis to estimate energy consumption and savings in the project report, as well as in @Grahovac:2020. @Gerhart:2019 explains in his master's thesis the development of the GUI and provides details on the solar electric system model development. The code is also available as DOE CODE, see @Doecode:2019.
 
 # Statement of Need
 
@@ -90,11 +90,13 @@ Our primary motivation to develop a new software was the combination of the foll
 * The required simulation time
 * Simplicity of integration within the larger life-cycle cost framework as presented in @Coughlin:2020 and @Grahovac:2020
 
-Modelica buildings library @Wetter:2014 satisfies and exceeds the level of detail but proves too detailed and thus slow for our particular application. SAM tool [@Blair:2014] has a good level of detail, provides most of the system models that we needed but for our purposes proves not flexible enough in terms of modifying the system configuration, automating the size scaling and embedding it into our custom life-cycle cost framework.
+Modelica buildings library by @Wetter:2014 satisfies and exceeds the level of detail but proves too detailed and thus slow for our particular application. SAM tool [@Blair:2014] has a good level of detail, provides most of the system models that we needed but for our purposes proves not flexible enough in terms of modifying the system configuration, automating the size scaling and embedding it into our custom life-cycle cost framework.
 
 Namely, in order to capture sufficient level of detail of the California demographics, such as variability in climate zones, household types, and household occupancy, we wanted to be able to simulate a few alternative water heating systems in each of the California sample households. Secondly, to get a more realistic picture of the effect of thermal storage and distribution system losses, we opted to perform a simulation with relatively short time-steps of 1 hour for a duration of one representative year. We were not able to identify an open source tool that is capable of firstly satisfying the simulation speed requirement combined with the necessary level of detail for our analysis and secondly providing the flexibility for us to customize various integral parts of the analysis such as automate the component and system size scaling, specify hot water load profiles and solar radiation for each household or group of households in the sample.
 
-To satisfy our research need we thus opted to develop lightweight simulation models for all involved systems that would allow for around 120 thousand simulation runs together with the component sizing and life-cycle cost analysis to be performed on a PC with 12 cores in about 8 hours. The users can expect a single solar water heater simulation model to run for about 0.16 seconds, providing an almost instantaneous experience for a user only seeking to design and investigate a single system.
+To satisfy our research need we thus opted to develop lightweight simulation models for all involved systems that would allow for around 120 thousand simulation runs together with the component sizing and life-cycle cost analysis to be performed on a computer with a 12-core processor in about 8 hours. The users can expect a single solar water heater simulation model to run for about 0.16 seconds, providing an almost instantaneous experience for a user only seeking to design and investigate a single system.
+
+Apart from the various research applications, the MSWH package can be interesting for homeowners, planners, designers, policy developers or even solar water heating contractors, just to list a few.
 
 # Acknowledgments
 

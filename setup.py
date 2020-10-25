@@ -14,7 +14,7 @@ long_description = \
 setup(
     name='mswh',
 
-    version='1.0',
+    version='1.1',
 
     description='Multiscale solar water heating',
 
@@ -27,7 +27,7 @@ setup(
 
 
     classifiers=[
-        'Programming Language :: Python :: 3.6',
+        'Programming Language :: Python :: 3.8',
     ],
 
     keywords='swh scale system model simulation',

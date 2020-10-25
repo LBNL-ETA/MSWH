@@ -24,7 +24,7 @@ class Converter(object):
             Default: None (default model parameters will get used)
 
         weather: pd df
-            Weather data timeseeries with columns: amb. temp,
+            Weather data timeseries with columns: amb. temp,
             solar irradiation. Number of rows equals the number of timesteps.
             Default: None (constant values will be set - use for
             a single timestep calculation, or if passing arguments
@@ -926,7 +926,7 @@ class Converter(object):
                 (default: 1000 W/m2) [W/m2]
 
             f_act: float
-                Fraction of the aperature panel with active cells
+                Fraction of the panel surface area with active cells
 
             eta_pv: float
                 Panel efficiency
@@ -1011,7 +1011,7 @@ class Storage(object):
     Examples:
 
         See :func:`mswh.system.tests.test_components <mswh.system.tests.test_components>` module and
-        :func:`scripts/Project Level SWH System Tool.ipynb <scripts/Project Level MSWH System Tool.ipynb>`
+        :func:`scripts/MSWH System Tool.ipynb <scripts/MSWH System Tool.ipynb>`
         for examples on how to use the methods as stand alone and
         in a system model simulation.
     """
@@ -1494,7 +1494,7 @@ class Storage(object):
         # temperature above the upper
         if T_lower > T_upper:
             msg = 'Upper tank temperature is below the lower '\
-                  'tank tamperature.'
+                  'tank temperature.'
             log.error(msg)
             raise Exception
 
@@ -1751,7 +1751,7 @@ class Storage(object):
         If the upper tank temperature exceeds the maximum
         tank temperature limit, charge the lower
         tank volume up to the temperature of the upper less the
-        predifined tempearture difference if possible and
+        predefined temperature difference if possible and
         dump any remaining heat.
 
         Parameters:
@@ -2260,7 +2260,7 @@ class Storage(object):
         Returns:
 
             therm_transm_coef: float, W/m2K
-                Heat flow through a meter sqare of
+                Heat flow through a meter square of
                 the tank wall for each kelvin
                 of temperature difference
         """
@@ -2961,7 +2961,7 @@ class Distribution(object):
             flow_factor: float
                 Multiplier to account for:
 
-                    * Intial peak sizing. If equal 1. the pipe is sized such
+                    * Initial peak sizing. If equal 1. the pipe is sized such
                       that maximum hourly flow in a representative year equals
                       pipe design flow. Values < 1. represent oversizing.
 
@@ -2971,8 +2971,8 @@ class Distribution(object):
                       pipe after a draw
 
             longest_branch_length_ratio: float or None
-                If the network has a number of paralel branches rather than
-                one main pipe or a circulaton pipe, provide the ratio between
+                If the network has a number of parallel branches rather than
+                one main pipe or a circulation pipe, provide the ratio between
                 the length of the longest pipe and the total pipe length. It
                 gets used in the average pipe temperature and temperature
                 drop estimation.

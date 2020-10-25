@@ -137,8 +137,8 @@ else:
 sql_scripts.append('''INSERT INTO `sys_3_components` (`Component ID`, `Component`, `Component Technology`, `Component Size Unit`) VALUES
 (1, 'solar collector', 'flat plate', 'm2'),
 (2, 'solar collector', 'tubular', 'm2'),
-(3, 'pv', 'monochrystalline', 'W'),
-(4, 'pv', 'polychrystalline', 'W'),
+(3, 'pv', 'monocrystalline', 'W'),
+(4, 'pv', 'polycrystalline', 'W'),
 (5, 'gas tank WH', 'conventional gas tank water heater', 'm3'),
 (6, 'electric resistance tank WH', 'conventional electric resistance tank water heater', 'm3'),
 (7, 'thermal storage tank', 'thermal storage tank with an in-tank coil', 'm3'),

@@ -5,10 +5,10 @@
 
 Folder | Content
 ------ | ------
-[mswh](mswh) | Python module to calculate solar irradiation on a tilted surface ([mswh/system/source_and_sink.py](mswh/system/source_and_sink.py)) <br><br> Python module with simplified component models ([mswh/system/components.py](mswh/system/components.py)) for Converter (solar collectors, electric resistance heater, gas burner, photovoltaic panels, heat pump), Storage (solar thermal tank, heat pump thermal tank, conventional gas tank water heater), and Distribution (distribution and solar pump, piping losses) components <br><br> Python module with preconfigured system simulation models ([mswh/system/models.py](mswh/system/models.py)) for: base case gas tank water heaters, solar thermal water heaters (solar collector feeding a storage tank, with a tankeless gas water heater backup in a new installation cases and a base case gas tank water heater in a retrofit case) and solar electric water heaters (heat pump storage tank with an electric resistance backup) <br><br> Database with component performance parameters, California specific weather data and domestic hot water end-use load profiles ([mswh/comm/swh_system_input.db](mswh/comm/swh_system_input.db)) <br><br> Modules to communicate with the database ([mswh/comm/sql.py](mswh/comm/sql.py)), unit conversion and plotting modules in [mswh/tools](mswh/tools)
+[mswh](mswh) | Python module to calculate solar irradiation on a tilted surface ([mswh/system/source_and_sink.py](mswh/system/source_and_sink.py)) <br><br> Python module with simplified component models ([mswh/system/components.py](mswh/system/components.py)) for Converter (solar collectors, electric resistance heater, gas burner, photovoltaic panels, heat pump), Storage (solar thermal tank, heat pump thermal tank, conventional gas tank water heater), and Distribution (distribution and solar pump, piping losses) components <br><br> Python module with preconfigured system simulation models ([mswh/system/models.py](mswh/system/models.py)) for: base case gas tank water heaters, solar thermal water heaters (solar collector feeding a storage tank, with a tankless gas water heater backup in a new installation cases and a base case gas tank water heater in a retrofit case) and solar electric water heaters (heat pump storage tank with an electric resistance backup) <br><br> Database with component performance parameters, California specific weather data and domestic hot water end-use load profiles ([mswh/comm/swh_system_input.db](mswh/comm/mswh_system_input.db)) <br><br> Modules to communicate with the database ([mswh/comm/sql.py](mswh/comm/sql.py)), unit conversion and plotting modules in [mswh/tools](mswh/tools)
 [scripts](scripts) | Jupyter notebooks with preconfigured models and any side analysis if applicable
 [web](web) | Django web framework to configure project, parametrize components and run simulation from a web browser
-[docs](docs) | [Sphinx documentation](https://lbnl-eta.github.io/MSWH/). To build html or latex use `make html` or `make latex`
+[docs](docs) | [Sphinx documentation](https://lbnl-eta.github.io/MSWH/). To build HTML or LaTeX use `make html` or `make latex`
 
 ## Usage
 
@@ -24,34 +24,47 @@ To configure new system types in the web framework (such as `Solar Thermal Retro
 
 ## Setup and Installation
 
-1. Since the repo comes with database files, please download, install and see the documentation for [`git large file storage`](https://git-lfs.github.com/). After that download this repository with:
+1. Since the repo comes with database files, please download, install and see the documentation for [`git large file storage`](https://git-lfs.github.com/).
 
-        git lfs clone https://github.com/LBNL-ETA/MSWH.git
+2. Make sure that `pip` is installed. For info and installation help take
+   a look at this [webpage](https://pip.pypa.io/en/stable/installing/).
 
-2. It is recommended to create a new Python environment in order to avoid interference with the system-wide Python installation, for example by using `virtualenv` (see [here](https://packaging.python.org/guides/installing-using-pip-and-virtualenv/)) or `Anaconda` (see [here](https://docs.anaconda.com/anaconda/install/)). After having installed one of the mentioned tools, run one of the following commands in the terminal to create a new environment (with the name `mswh`).
+### Simple Installation Using `Conda`
 
-    When using `Anaconda` (the environment is stored under the home directory in `~/anaconda3/envs/`):
+1. If you are familiar with `conda` and experienced with virtual environments
+ you can perform the package installation using the following set of commands:
 
-          conda create -n mswh python=3.6
+        conda create -n mswh -c conda-forge -c plotly python=3.8 pip git-lfs jupyterlab plotly-orca
+        conda activate mswh
+        git lfs install
+        git clone https://github.com/LBNL-ETA/MSWH.git
+        pip install -e .
 
-    When using `virtualenv` (the environment is stored in `<path_to_env>`). The environment will simply use the system Python3 subversion:
+The examples are best explored using `JupyterLab`. Please check out the
+[JupyterLab documentation](https://jupyterlab.readthedocs.io/en/latest/)
+for further help as needed.
 
-          (on Linux) python3 -m virtualenv <path_to_env>/mswh,
-                     or with a specific python version: virtualenv -p /usr/bin/python3.6 <path_to_env>/mswh
+### Detailed Installation Steps
 
-          (on MacOS) python3 -m venv <path_to_env>/mswh
+This section is intended for technical users that are relatively new to virtual environments or `Python` in general, or for users who had any issues with the simple installation instructions from the previous section. Apart from using [`conda`](https://docs.conda.io/en/latest/) this section
+will show users how to utilize an alternative package management system in `Python`, [`virtualenv`](https://packaging.python.org/guides/installing-using-pip-and-virtualenv/).
 
-3. Now the virtual environment needs to be activated, by running one of the following commands:
+1. It is recommended to create a new `Python` environment in order to avoid interference with the system-wide Python installation, for example by using [`virtualenv`](https://packaging.python.org/guides/installing-using-pip-and-virtualenv/), the lightweight [`Miniconda`](https://docs.conda.io/en/latest/miniconda.html) or [`Anaconda`](https://docs.anaconda.com/anaconda/install/) software. Depending on the approach you take, pick one of the commands below and run it in a terminal to create a new environment named, for instance, `mswh`.
 
-    When using `virtualenv` (on Linux or Mac):
+    If you use `Miniconda` or `Anaconda` from the repo clone folder run:
 
-        source <path_to_env>/mswh/bin/activate
+        conda create -n mswh python=3.8
 
-    When using `virtualenv` (on Windows):
+    If you use `virtualenv`, for example on `Linux`:
 
-        <path_to_env>\Scripts\activate.bat
+        python3 -m virtualenv -p /usr/bin/python3.8 <path_to_env>/mswh
 
-    When using `Anaconda`:
+    With ``<path_to_env>`` as your selected folder path to store virtual
+    environments.
+
+5. Now the virtual environment needs to be activated, by running one of the following commands:
+
+    When using `Anaconda` or `Miniconda`:
 
         conda activate mswh
 
@@ -63,17 +76,23 @@ To configure new system types in the web framework (such as `Solar Thermal Retro
 
     For deactivating use `conda deactivate` or `deactivate`.
 
-4.  To ensure the same python kernel can be used in a jupyter notebook, activate the virtual environment and run:
+6.  To make use of example `Jupyter notebooks` one should have ()`JupyterLab`)[https://jupyter.org/install] installed. To ensure the same Python kernel can be used in a `Jupyter notebook`, activate the virtual environment and run:
 
-          python -m ipykernel install --name mswh
+        python -m ipykernel install --user --name mswh
 
-5.  To install the necessary Python packages navigate to the `setup.py` directory and run:
+ Users with admin privileges can skip the `--user` flag.
+
+7. Clone the repository with:
+
+        git clone https://github.com/LBNL-ETA/MSWH.git
+
+8.  To install the necessary Python packages navigate to the `setup.py` directory and run:
 
         pip install -e .
 
     The `-e` flag is only necessary if one would like changes to the source code be reflected immediately (without having to rerun the `setup.py` script with every change to the source code). If you just want to run the project application, you can omit the `-e` flag.
 
-    To use the plotting capabilities, also required when running tests, please install [`orca`](https://github.com/plotly/orca).
+9. To use the plotting capabilities, also required when running tests, please install [`orca`](https://github.com/plotly/orca).
 
 ## Django Web Framework Deployment
 
@@ -83,9 +102,9 @@ To configure new system types in the web framework (such as `Solar Thermal Retro
 
    Now you can open your browser and type in `localhost:8000` (or `127.0.0.1:8000` if you are on a Windows machine) to start the web interface.
 
-   Note that to build python extensions one needs to have `python3.x-dev` installed.
+   Note that to build Python extensions one needs to have `python3.x-dev` installed.
 
-2. To deploy publicly create a file `local_settings.py` and store it in the same directory as the `settings.py`. Then add a constant called `SECRET_KEY = '<random_string>'`. The random string should be 50 characters long and can created (on Linux) by using the following command as super user:
+2. To deploy publicly create a file `local_settings.py` and store it in the same directory as the `settings.py`. Then add a constant called `SECRET_KEY = '<random_string>'`. The random string should be 50 characters long and can be  created (on Linux) by using the following command as super user:
 
         </dev/urandom tr -dc '1234567890!#$?*#-.,+qwertyuiopQWERTYUIOPasdfghjklASDFGHJKLzxcvbnmZXCVBNM' | head -c50; echo ""
 
@@ -98,7 +117,9 @@ To configure new system types in the web framework (such as `Solar Thermal Retro
 Anyone may contribute features with the appropriate tests using the issue tracker, forks and pull requests. Please
 check out [code documentation](https://lbnl-eta.github.io/MSWH/) for guidance.
 
-To run tests, from the `MSWH` folder:
+### Automated tests
+
+To run tests, from the `MSWH` folder use the following command modified according to the test module and method you intend to run:
 
     python -m unittest mswh.{my_module}.tests.{test_my_module}.{MyModuleTests}.{test_my_method}
 
