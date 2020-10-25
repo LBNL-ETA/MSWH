@@ -741,7 +741,7 @@ class Converter(object):
                 inc_rad_mod = inc_rad
         else:
             msg = 'Solar irradiation data type {} seems not supported.'
-            log.error(msg.format(type(Q_dem)))
+            log.error(msg.format(type(inc_rad)))
             raise ValueError
 
         # instantaneous collector efficiency, [-]
@@ -807,7 +807,7 @@ class Converter(object):
                 inc_rad_mod = inc_rad
         else:
             msg = 'Solar irradiation data type {} seems not supported.'
-            log.error(msg.format(type(Q_dem)))
+            log.error(msg.format(type(inc_rad)))
             raise ValueError
 
         # instantaneous collector efficiency, [-]

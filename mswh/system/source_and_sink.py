@@ -10,7 +10,6 @@ import pandas as pd
 from mswh.tools.unit_converters import UnitConv
 
 log = logging.getLogger(__name__)
-log.setLevel(logging.DEBUG)
 
 
 from pdb import set_trace as bp
@@ -35,8 +34,23 @@ class SourceAndSink(object):
 
              integer : a new random state object gets
              instanteated at init
+
+        log_level: None or python logger logging level,
+            Default: logging.DEBUG
+            This applies for a subset of the class functionality, mostly
+            used to deprecate logger messages for certain calculations.
+            For Example: log_level = logging.ERROR will only throw error
+            messages and ignore INFO, DEBUG and WARNING.
     """
-    def __init__(self, input_dfs=None, random_state=123):
+    def __init__(self,
+                 input_dfs=None,
+                 random_state=123,
+                 log_level=logging.DEBUG):
+
+        # log level (e.g. only partial functionality of the class
+        # is being used and one does not desire to see all infos)
+        self.log_level = log_level
+        logging.getLogger().setLevel(log_level)
 
         self.data = input_dfs
 
