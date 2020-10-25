@@ -1347,6 +1347,11 @@ class Storage(object):
             medimum: string
                 Storage medium (for thermal defaults to 'water')
 
+            split_tank: boolean
+                If true, the tank is observed as two volumes,
+                upper and lower tank volume. If false,
+                the tank is observed as a single tank
+
             vol_fra_upper: float
                 Fraction of storage volume assigned to the upper
                 tank volume (applies to 'thermal' only)
@@ -1372,6 +1377,16 @@ class Storage(object):
                 Draw temperature used in the
                 load calculation, defaults to
                 120 degF = 322.04 K = 48.89 degC
+
+            insul_thickness: float, m
+                Insulation thickness
+                Default: .04 m (1-2 inch gas,
+                2-3 inch electric, :from:`DOE WH rule`)
+
+            spec_hea_cond: float, W/mK
+                Specific heat conductivity
+                of the insulation
+                Default: .04 W/mK (:from library:`ModelicaBuidlings`)
 
             coil_eff: float
                 Simplified efficiency of the coil heat exchanger
@@ -2443,12 +2458,12 @@ class Storage(object):
             insul_thickness: float, m
                 Insulation thickness
                 Default: .04 m (1-2 inch gas,
-                2-3 inch electric, :cite:`WH rule`)
+                2-3 inch electric, :from:`DOE WH rule`)
 
             spec_hea_cond: float, W/mK
                 Specific heat conductivity
                 of the insulation
-                Default: .04 W/mK (:cite:`ModelicaBuidlings`)
+                Default: .04 W/mK (:from library:`ModelicaBuidlings`)
 
         Returns:
 
