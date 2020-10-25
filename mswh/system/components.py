@@ -1117,7 +1117,7 @@ class Storage(object):
                 gas_heater_autosize = True
             else:
                 msg = "The thermal storage tank type {}" "is not implemented."
-                log.error(mgs.format(self.type))
+                log.error(msg.format(self.type))
                 raise Exception
 
             self.setup_thermal(
@@ -1200,7 +1200,7 @@ class Storage(object):
                         "The thermal storage tank type {}"
                         "is not implemented."
                     )
-                    log.error(mgs.format(self.type))
+                    log.error(msg.format(self.type))
                     raise Exception
 
                 self.size = size

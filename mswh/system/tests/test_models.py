@@ -53,12 +53,10 @@ class SystemTests(unittest.TestCase):
         db = Sql(weather_db_path)
 
         try:
-            # read table names for all tables in a
-            # {table name : sheet name} form
             inputs = db.tables2dict(close=True)
         except:
-            msg = "Failed to read input tables from {}."
-            log.error(msg.format(inpath))
+            msg = "Failed to read inputs from {}."
+            log.error(msg.format(weather_db_path))
 
         source_and_sink = SourceAndSink(input_dfs=inputs)
 
