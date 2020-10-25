@@ -29,18 +29,27 @@ To configure new system types in the web framework (such as `Solar Thermal Retro
 2. Make sure that `pip` is installed. For info and installation help take
    a look at this [webpage](https://pip.pypa.io/en/stable/installing/).
 
-3. If you are familiar with `conda` and experienced with virtual environments
- you can perform the package installation using the following commands and go directly to step 9 after that:
+### Simple Installation Using `Conda`
 
-        conda create -n mswh -c conda-forge python=3.8 pip git-lfs
+1. If you are familiar with `conda` and experienced with virtual environments
+ you can perform the package installation using the following set of commands:
+
+        conda create -n mswh -c conda-forge -c plotly python=3.8 pip git-lfs jupyterlab plotly-orca
         conda activate mswh
         git lfs install
         git clone https://github.com/LBNL-ETA/MSWH.git
         pip install -e .
 
-4. This is for users that are relatively new to virtual environments or `Python` in general, or for users who had any issues with instructions in step 3.
+The examples are best explored using `JupyterLab`. Please check out the
+[JupyterLab documentation](https://jupyterlab.readthedocs.io/en/latest/)
+for further help as needed.
 
-    It is recommended to create a new `Python` environment in order to avoid interference with the system-wide Python installation, for example by using [`virtualenv`](https://packaging.python.org/guides/installing-using-pip-and-virtualenv/), the lightweight [`Miniconda`](https://docs.conda.io/en/latest/miniconda.html) or [`Anaconda`](https://docs.anaconda.com/anaconda/install/) software. Depending on the approach you take, pick one of the commands below and run it in a terminal to create a new environment named, for instance,  `mswh`.
+### Detailed Installation Steps
+
+This section is intended for technical users that are relatively new to virtual environments or `Python` in general, or for users who had any issues with the simple installation instructions from previous section. Apart from using [`conda`](https://docs.conda.io/en/latest/) this section
+will show users how to utilize an alternative package management system in `Python`, [`virtualenv`](https://packaging.python.org/guides/installing-using-pip-and-virtualenv/).
+
+1. It is recommended to create a new `Python` environment in order to avoid interference with the system-wide Python installation, for example by using [`virtualenv`](https://packaging.python.org/guides/installing-using-pip-and-virtualenv/), the lightweight [`Miniconda`](https://docs.conda.io/en/latest/miniconda.html) or [`Anaconda`](https://docs.anaconda.com/anaconda/install/) software. Depending on the approach you take, pick one of the commands below and run it in a terminal to create a new environment named, for instance, `mswh`.
 
     If you use `Miniconda` or `Anaconda` from the repo clone folder run:
 
@@ -67,7 +76,7 @@ To configure new system types in the web framework (such as `Solar Thermal Retro
 
     For deactivating use `conda deactivate` or `deactivate`.
 
-6.  To make use of example Jupyter notebooks one should have Jupyter installed or follow [the instruction here to install it](https://jupyter.org/install). To ensure the same Python kernel can be used in a Jupyter notebook, activate the virtual environment and run:
+6.  To make use of example `Jupyter notebooks` one should have ()`JupyterLab`)[https://jupyter.org/install] installed. To ensure the same Python kernel can be used in a `Jupyter notebook`, activate the virtual environment and run:
 
         python -m ipykernel install --user --name mswh
 
