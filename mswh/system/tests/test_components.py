@@ -51,7 +51,7 @@ class ConverterTests(unittest.TestCase):
             inputs = db.tables2dict(close=True)
         except:
             msg = "Failed to read input tables from {}."
-            log.error(msg.format(inpath))
+            log.error(msg.format(weather_db_path))
 
         self.weather = SourceAndSink(input_dfs=inputs)
 
@@ -1351,7 +1351,7 @@ class StorageTests(unittest.TestCase):
             inputs = db.tables2dict(close=True)
         except:
             msg = "Failed to read input tables from {}."
-            log.error(msg.format(inpath))
+            log.error(msg.format(weather_db_path))
 
         # validation
 
