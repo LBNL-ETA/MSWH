@@ -52,7 +52,7 @@ We developed and implemented simplified fast performing energy balance based mod
 
 We built a simple simulation solver that uses explicit forward Euler method to solve the balance equations in each simulation time-step.
 
-The component models we either identified in the existing literature and created a custom Python implementation, or we developed new models. In our implementation we implemented the following existing or new models:
+The component models were either developed from scratch or implemented in Python based on existing models identified in literature. We implemented the following existing or new models:
 
 * Solar irradiation on a tilted surface model is based on equations found in @Duffie:2013.
 * Solar collector models and model parameters are based on @Ashrae:2013 and @Srcc:2013.

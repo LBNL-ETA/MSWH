@@ -46,7 +46,7 @@ for further help as needed.
 
 ### Detailed Installation Steps
 
-This section is intended for technical users that are relatively new to virtual environments or `Python` in general, or for users who had any issues with the simple installation instructions from previous section. Apart from using [`conda`](https://docs.conda.io/en/latest/) this section
+This section is intended for technical users that are relatively new to virtual environments or `Python` in general, or for users who had any issues with the simple installation instructions from the previous section. Apart from using [`conda`](https://docs.conda.io/en/latest/) this section
 will show users how to utilize an alternative package management system in `Python`, [`virtualenv`](https://packaging.python.org/guides/installing-using-pip-and-virtualenv/).
 
 1. It is recommended to create a new `Python` environment in order to avoid interference with the system-wide Python installation, for example by using [`virtualenv`](https://packaging.python.org/guides/installing-using-pip-and-virtualenv/), the lightweight [`Miniconda`](https://docs.conda.io/en/latest/miniconda.html) or [`Anaconda`](https://docs.anaconda.com/anaconda/install/) software. Depending on the approach you take, pick one of the commands below and run it in a terminal to create a new environment named, for instance, `mswh`.
