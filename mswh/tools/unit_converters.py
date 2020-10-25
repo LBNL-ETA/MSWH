@@ -3,7 +3,7 @@ import pandas as pd
 
 
 class UnitConv(object):
-    '''Unit conversions using conversion parameters from
+    """Unit conversions using conversion parameters from
     ASHRAE Fundamentals 2017.
 
     Parameters:
@@ -36,52 +36,58 @@ class UnitConv(object):
     To convert energy from GJ to MMBtu:
 
     >>> e_MMBtu = UnitConv(e_GJ, scale_in='G', scale_out='MM').Btu_J(unit_in='J')
-    '''
+    """
 
-    def __init__(self, x_in, scale_in=1., scale_out=1.):
+    def __init__(self, x_in, scale_in=1.0, scale_out=1.0):
 
         self.x_in = x_in
 
-        if (scale_in == 'k') or (scale_in == 'kilo'):
-            self.scale_in = 1000.
-        elif ((scale_in == 'million') or (scale_in == 'M') or
-            (scale_in == 'MM') or (scale_in == 'mega')):
+        if (scale_in == "k") or (scale_in == "kilo"):
+            self.scale_in = 1000.0
+        elif (
+            (scale_in == "million")
+            or (scale_in == "M")
+            or (scale_in == "MM")
+            or (scale_in == "mega")
+        ):
             self.scale_in = 1e6
-        elif (scale_in == 'giga') or (scale_in == 'G'):
+        elif (scale_in == "giga") or (scale_in == "G"):
             self.scale_in = 1e9
-        elif (scale_in == 'tera') or (scale_in == 'T'):
+        elif (scale_in == "tera") or (scale_in == "T"):
             self.scale_in = 1e12
-        elif (scale_in == 'peta') or (scale_in == 'P'):
+        elif (scale_in == "peta") or (scale_in == "P"):
             self.scale_in = 1e15
-        elif (scale_in == 'milli') or (scale_in == 'm'):
+        elif (scale_in == "milli") or (scale_in == "m"):
             self.scale_in = 1e-3
-        elif scale_in == 'micro':
+        elif scale_in == "micro":
             self.scale_in = 1e-6
         else:
             self.scale_in = scale_in
 
-
-        if (scale_out == 'k') or (scale_out == 'kilo'):
-            self.scale_out = 1000.
-        elif ((scale_out == 'million') or (scale_out == 'M') or
-            (scale_out == 'MM') or (scale_out == 'mega')):
+        if (scale_out == "k") or (scale_out == "kilo"):
+            self.scale_out = 1000.0
+        elif (
+            (scale_out == "million")
+            or (scale_out == "M")
+            or (scale_out == "MM")
+            or (scale_out == "mega")
+        ):
             self.scale_out = 1e6
-        elif (scale_out == 'giga') or (scale_out == 'G'):
+        elif (scale_out == "giga") or (scale_out == "G"):
             self.scale_out = 1e9
-        elif (scale_out == 'tera') or (scale_out == 'T'):
+        elif (scale_out == "tera") or (scale_out == "T"):
             self.scale_out = 1e12
-        elif (scale_out == 'peta')  or (scale_out == 'P'):
+        elif (scale_out == "peta") or (scale_out == "P"):
             self.scale_out = 1e15
-        elif (scale_out == 'milli') or (scale_out == 'm'):
+        elif (scale_out == "milli") or (scale_out == "m"):
             self.scale_out = 1e-3
-        elif scale_out == 'micro':
+        elif scale_out == "micro":
             self.scale_out = 1e-6
         else:
             self.scale_out = scale_out
 
-
-    def degF_degC(self, unit_in='degF'):
-        '''Converts temperature between degree Fahrenheit and Celsius
+    def degF_degC(self, unit_in="degF"):
+        """Converts temperature between degree Fahrenheit and Celsius
 
         Parameters:
 
@@ -92,15 +98,15 @@ class UnitConv(object):
 
             x_out: float, array
                 Output value
-        '''
+        """
         self.x_in *= self.scale_in
 
-        if unit_in == 'degF':
-            x_out = (self.x_in - 32.) * (5. / 9.)
-        elif unit_in == 'degC':
-            x_out = (self.x_in * 9. / 5.) + 32.
+        if unit_in == "degF":
+            x_out = (self.x_in - 32.0) * (5.0 / 9.0)
+        elif unit_in == "degC":
+            x_out = (self.x_in * 9.0 / 5.0) + 32.0
         else:
-            msg = 'User provided an unsupported input unit {}.'
+            msg = "User provided an unsupported input unit {}."
             log.error(msg.format(unit_in))
             raise ValueError
 
@@ -108,8 +114,8 @@ class UnitConv(object):
 
         return x_out
 
-    def degC_K(self, unit_in='degC'):
-        '''Converts temperature between degree Celsius and Kelvin
+    def degC_K(self, unit_in="degC"):
+        """Converts temperature between degree Celsius and Kelvin
 
         Parameters:
 
@@ -120,17 +126,17 @@ class UnitConv(object):
 
             x_out: float, array
                 Output value
-        '''
+        """
         self.x_in *= self.scale_in
 
         abs_zero = 273.15
 
-        if unit_in == 'K':
+        if unit_in == "K":
             x_out = self.x_in - abs_zero
-        elif unit_in == 'degC':
+        elif unit_in == "degC":
             x_out = self.x_in + abs_zero
         else:
-            msg = 'User provided an unsupported input unit {}.'
+            msg = "User provided an unsupported input unit {}."
             log.error(msg.format(unit_in))
             raise ValueError
 
@@ -138,8 +144,8 @@ class UnitConv(object):
 
         return x_out
 
-    def m3_gal(self, unit_in='gal'):
-        '''Converts volume between cubic meter and gallon
+    def m3_gal(self, unit_in="gal"):
+        """Converts volume between cubic meter and gallon
 
         Parameters:
 
@@ -150,20 +156,20 @@ class UnitConv(object):
 
             x_out: float, array
                 Output value
-        '''
+        """
         self.x_in *= self.scale_in
 
-        if unit_in == 'gal':
-            x_out =  self.x_in * 0.003785412
-        elif unit_in == 'm3':
-            x_out = self.x_in * (1. / 0.003785412)
+        if unit_in == "gal":
+            x_out = self.x_in * 0.003785412
+        elif unit_in == "m3":
+            x_out = self.x_in * (1.0 / 0.003785412)
 
         x_out /= self.scale_out
 
         return x_out
 
-    def hp_W(self, unit_in='hp'):
-        '''Converts power between watt and horsepower
+    def hp_W(self, unit_in="hp"):
+        """Converts power between watt and horsepower
 
         Parameters:
 
@@ -174,15 +180,15 @@ class UnitConv(object):
 
             x_out: float, array
                 Output value
-        '''
+        """
         self.x_in *= self.scale_in
 
-        if unit_in == 'hp':
-            x_out =  self.x_in * 745.7
-        elif unit_in == 'W':
-            x_out = self.x_in * 1. / 745.7
+        if unit_in == "hp":
+            x_out = self.x_in * 745.7
+        elif unit_in == "W":
+            x_out = self.x_in * 1.0 / 745.7
         else:
-            msg = 'User provided an unsupported input unit {}.'
+            msg = "User provided an unsupported input unit {}."
             log.error(msg.format(unit_in))
             raise ValueError
 
@@ -190,8 +196,8 @@ class UnitConv(object):
 
         return x_out
 
-    def Btu_J(self, unit_in='Btu'):
-        '''Converts work / energy / heat content between Btu and joule
+    def Btu_J(self, unit_in="Btu"):
+        """Converts work / energy / heat content between Btu and joule
 
         Parameters:
 
@@ -205,15 +211,15 @@ class UnitConv(object):
 
             x_out: float, array
                 Output value
-        '''
+        """
         self.x_in *= self.scale_in
 
-        if unit_in == 'Btu':
-            x_out =  self.x_in * 1055.056
-        elif unit_in == 'J':
-            x_out = self.x_in * (1. / 1055.056)
+        if unit_in == "Btu":
+            x_out = self.x_in * 1055.056
+        elif unit_in == "J":
+            x_out = self.x_in * (1.0 / 1055.056)
         else:
-            msg = 'User provided an unsupported input unit {}.'
+            msg = "User provided an unsupported input unit {}."
             log.error(msg.format(unit_in))
             raise ValueError
 
@@ -221,8 +227,8 @@ class UnitConv(object):
 
         return x_out
 
-    def therm_J(self, unit_in='therm'):
-        '''Converts work / energy / heat content between therm and joule
+    def therm_J(self, unit_in="therm"):
+        """Converts work / energy / heat content between therm and joule
 
         Parameters:
 
@@ -236,15 +242,15 @@ class UnitConv(object):
 
             x_out: float, array
                 Output value
-        '''
+        """
         self.x_in *= self.scale_in
 
-        if unit_in == 'therm':
-            x_out =  self.x_in * 105.5 * 1e6
-        elif unit_in == 'J':
+        if unit_in == "therm":
+            x_out = self.x_in * 105.5 * 1e6
+        elif unit_in == "J":
             x_out = self.x_in / (1e6 * 105.5)
         else:
-            msg = 'User provided an unsupported input unit {}.'
+            msg = "User provided an unsupported input unit {}."
             log.error(msg.format(unit_in))
             raise ValueError
 
@@ -252,8 +258,8 @@ class UnitConv(object):
 
         return x_out
 
-    def Wh_J(self, unit_in='J'):
-        '''Converts work / energy / heat content between watthour and joule
+    def Wh_J(self, unit_in="J"):
+        """Converts work / energy / heat content between watthour and joule
 
         Parameters:
 
@@ -267,15 +273,15 @@ class UnitConv(object):
 
             x_out: float, array
                 Output value
-        '''
+        """
         self.x_in *= self.scale_in
 
-        if unit_in == 'Wh':
-            x_out =  self.x_in * 3600.
-        elif unit_in == 'J':
-            x_out = self.x_in / 3600.
+        if unit_in == "Wh":
+            x_out = self.x_in * 3600.0
+        elif unit_in == "J":
+            x_out = self.x_in / 3600.0
         else:
-            msg = 'User provided an unsupported input unit {}.'
+            msg = "User provided an unsupported input unit {}."
             log.error(msg.format(unit_in))
             raise ValueError
 
@@ -283,8 +289,8 @@ class UnitConv(object):
 
         return x_out
 
-    def m3perh_m3pers(self, unit_in='m3perh'):
-        '''Converts volume flow between cubic meter
+    def m3perh_m3pers(self, unit_in="m3perh"):
+        """Converts volume flow between cubic meter
         per hour and cubic meter per second
 
         Parameters:
@@ -299,15 +305,15 @@ class UnitConv(object):
 
             x_out: float, array
                 Output value
-        '''
+        """
         self.x_in *= self.scale_in
 
-        if unit_in == 'm3perh':
-            x_out =  self.x_in / 3600.
-        elif unit_in == 'm3pers':
-            x_out = self.x_in * 3600.
+        if unit_in == "m3perh":
+            x_out = self.x_in / 3600.0
+        elif unit_in == "m3pers":
+            x_out = self.x_in * 3600.0
         else:
-            msg = 'User provided an unsupported input unit {}.'
+            msg = "User provided an unsupported input unit {}."
             log.error(msg.format(unit_in))
             raise ValueError
 
@@ -315,8 +321,8 @@ class UnitConv(object):
 
         return x_out
 
-    def sqft_m2(self, unit_in='sqft'):
-        '''Converts area between square foot
+    def sqft_m2(self, unit_in="sqft"):
+        """Converts area between square foot
         and square meter
 
         Parameters:
@@ -331,15 +337,15 @@ class UnitConv(object):
 
             x_out: float, array
                 Output value
-        '''
+        """
         self.x_in *= self.scale_in
 
-        if unit_in == 'sqft':
+        if unit_in == "sqft":
             x_out = self.x_in * (0.3048 ** 2)
-        elif unit_in == 'm2':
+        elif unit_in == "m2":
             x_out = self.x_in / (0.3048 ** 2)
         else:
-            msg = 'User provided an unsupported input unit {}.'
+            msg = "User provided an unsupported input unit {}."
             log.error(msg.format(unit_in))
             raise ValueError
 
@@ -347,8 +353,8 @@ class UnitConv(object):
 
         return x_out
 
-    def ft_m(self, unit_in='ft'):
-        '''Converts length between foot
+    def ft_m(self, unit_in="ft"):
+        """Converts length between foot
         and meter
 
         Parameters:
@@ -363,15 +369,15 @@ class UnitConv(object):
 
             x_out: float, array
                 Output value
-        '''
+        """
         self.x_in *= self.scale_in
 
-        if unit_in == 'ft':
+        if unit_in == "ft":
             x_out = self.x_in * 0.3048
-        elif unit_in == 'm':
+        elif unit_in == "m":
             x_out = self.x_in / 0.3048
         else:
-            msg = 'User provided an unsupported input unit {}.'
+            msg = "User provided an unsupported input unit {}."
             log.error(msg.format(unit_in))
             raise ValueError
 
@@ -398,10 +404,9 @@ class Utility(object):
         # heating value ASHRAE fundamentals 28.3.
         # usual range is 37.3 to 39.1 MJ/m3 at sea level
         # table 3: methane= 37.7, ethane 66.1 [MJ/m3]
-        self.hea_val_gas = 38.  # [MJ/m3]
+        self.hea_val_gas = 38.0  # [MJ/m3]
 
-
-    def gas(self, unit_in='kJ', unit_out='MMBtu'):
+    def gas(self, unit_in="kJ", unit_out="MMBtu"):
         """Converts gas consumption.
 
         Parameters:
@@ -420,35 +425,36 @@ class Utility(object):
             gas_use: float
                 Gas use in output units
         """
-        if unit_in == 'kWh':
+        if unit_in == "kWh":
             gas_use = UnitConv(
-                self.quantity_in,
-                scale_in='k',
-                scale_out='k').Wh_J(unit_in='Wh')
-            self.quantity_in = gas_use + 0.
-            unit_in = 'kJ'
+                self.quantity_in, scale_in="k", scale_out="k"
+            ).Wh_J(unit_in="Wh")
+            self.quantity_in = gas_use + 0.0
+            unit_in = "kJ"
 
-        if unit_in == 'kJ':
-            if unit_out == 'm3':
-                gas_use = self.quantity_in / (self.hea_val_gas * 1000.)
-            elif unit_out == 'cf':
+        if unit_in == "kJ":
+            if unit_out == "m3":
+                gas_use = self.quantity_in / (self.hea_val_gas * 1000.0)
+            elif unit_out == "cf":
                 gas_use = self.quantity_in / (
-                    0.02832 * self.hea_val_gas * 1000.)
-            elif unit_out == 'therm':
+                    0.02832 * self.hea_val_gas * 1000.0
+                )
+            elif unit_out == "therm":
+                gas_use = UnitConv(self.quantity_in, scale_in="k").therm_J(
+                    unit_in="J"
+                )
+            elif unit_out == "MMBtu":
                 gas_use = UnitConv(
-                    self.quantity_in,
-                    scale_in='k').therm_J(unit_in='J')
-            elif unit_out == 'MMBtu':
-                gas_use = UnitConv(
-                    self.quantity_in,
-                    scale_in='k',
-                    scale_out='MM').Btu_J(unit_in='J')
+                    self.quantity_in, scale_in="k", scale_out="MM"
+                ).Btu_J(unit_in="J")
             else:
-                raise ValueError(\
-                    '{} is not yet supported as output unit'.format(unit_out))
+                raise ValueError(
+                    "{} is not yet supported as output unit".format(unit_out)
+                )
 
-        if unit_in != 'kWh' and unit_in != 'kJ':
-            raise ValueError(\
-                '{} is not yet supported as input unit.'.format(unit_in))
+        if unit_in != "kWh" and unit_in != "kJ":
+            raise ValueError(
+                "{} is not yet supported as input unit.".format(unit_in)
+            )
 
         return gas_use

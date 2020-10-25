@@ -6,13 +6,20 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('system', '0002_remove_configuration_result'),
+        ("system", "0002_remove_configuration_result"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='configuration',
-            name='type',
-            field=models.CharField(choices=[['solar_electric', 'solar electric'], ['solar_thermal_retrofit', 'solar thermal retrofit']], default='undefined', max_length=255),
+            model_name="configuration",
+            name="type",
+            field=models.CharField(
+                choices=[
+                    ["solar_electric", "solar electric"],
+                    ["solar_thermal_retrofit", "solar thermal retrofit"],
+                ],
+                default="undefined",
+                max_length=255,
+            ),
         ),
     ]

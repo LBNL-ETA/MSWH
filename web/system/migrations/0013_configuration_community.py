@@ -7,13 +7,18 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('system', '0012_community'),
+        ("system", "0012_community"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='configuration',
-            name='community',
-            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, to='system.Community'),
+            model_name="configuration",
+            name="community",
+            field=models.ForeignKey(
+                blank=True,
+                null=True,
+                on_delete=django.db.models.deletion.SET_NULL,
+                to="system.Community",
+            ),
         ),
     ]

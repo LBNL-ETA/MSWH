@@ -84,6 +84,16 @@ class System(object):
             weather=None, sys_sizes=1., backup_sizes=1., \
         loads=None, timestep=1., log_level=logging.DEBUG):
 
+        # this is to defend from using the models wihtout
+        # setting up the inputs as recommended
+        if (sys_params is None) and (backup_params is None) and \
+        (weather is None) and (loads is None):
+            msg = "Please consult example setup either in the "\
+            "test suite or in the example notebooks to "\
+            "appropriatelly set up a System instance."
+            log.error(msg)
+            raise ValueError
+
         # log level (e.g. only partial functionality of the class
         # is being used and one does not desire to see all infos)
         self.log_level = log_level

@@ -24,8 +24,10 @@ class Sql(object):
         elif type(path_OR_dbconn) == sqlite3.Connection:
             self.db = path_OR_dbconn
         else:
-            log.error('Neither a path to a db file, '
-                      'nor a database connection got passed.')
+            log.error(
+                "Neither a path to a db file, "
+                "nor a database connection got passed."
+            )
             raise ValueError
 
     def tables2dict(self, close=True):
@@ -53,7 +55,8 @@ class Sql(object):
         for table_name in tables:
             table_name = table_name[0]
             data[table_name] = pd.read_sql_query(
-                ''' SELECT * FROM '{}' '''.format(table_name), self.db)
+                """ SELECT * FROM '{}' """.format(table_name), self.db
+            )
 
         if close:
             self.db.close()
@@ -78,9 +81,10 @@ class Sql(object):
                 Sql table read in as a pandas df.
         """
         df = pd.read_sql(
-            ''' SELECT * FROM '{}' '''.format(table_name),
+            """ SELECT * FROM '{}' """.format(table_name),
             self.db,
-            index_col=None)
+            index_col=None,
+        )
 
         return df
 
@@ -97,19 +101,21 @@ class Sql(object):
                 If True, closes the connection to db
         """
 
-        df.to_sql(table_name,
-                  self.db,
-                  if_exists='replace',
-                  index=False)
+        df.to_sql(table_name, self.db, if_exists="replace", index=False)
 
         if close:
             self.db.close()
 
         return True
 
-    def csv2table(self, path_to_csv, table_name,
-                  column_label_row=0,
-                  converters=None, close=False):
+    def csv2table(
+        self,
+        path_to_csv,
+        table_name,
+        column_label_row=0,
+        converters=None,
+        close=False,
+    ):
         """Use to update bulk price or performance data.
         If same named table exists, it gets replaced
 
@@ -136,15 +142,10 @@ class Sql(object):
         """
 
         csv = pd.read_csv(
-            path_to_csv,
-            converters=converters,
-            header=column_label_row)
+            path_to_csv, converters=converters, header=column_label_row
+        )
 
-        csv.to_sql(
-            table_name,
-            self.db,
-            if_exists='replace',
-            index=False)
+        csv.to_sql(table_name, self.db, if_exists="replace", index=False)
 
         if close:
             self.db.close()

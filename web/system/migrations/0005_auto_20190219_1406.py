@@ -6,18 +6,18 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('system', '0004_auto_20190214_1506'),
+        ("system", "0004_auto_20190214_1506"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='configuration',
-            name='simulation_step',
+            model_name="configuration",
+            name="simulation_step",
             field=models.FloatField(default=1.0),
         ),
         migrations.AddField(
-            model_name='configuration',
-            name='simulation_time',
+            model_name="configuration",
+            name="simulation_time",
             field=models.PositiveIntegerField(default=8760),
         ),
     ]

@@ -6,13 +6,13 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('system', '0013_configuration_community'),
+        ("system", "0013_configuration_community"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='community',
-            name='size',
+            model_name="community",
+            name="size",
             field=models.PositiveSmallIntegerField(default=1),
         ),
     ]

@@ -6,18 +6,29 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('system', '0011_auto_20190304_1447'),
+        ("system", "0011_auto_20190304_1447"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Community',
+            name="Community",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(default='undefined', max_length=255)),
-                ('occupancy', models.TextField(default='undefined')),
-                ('at_home', models.TextField(default='undefined')),
-                ('data', models.TextField(default='undefined')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "name",
+                    models.CharField(default="undefined", max_length=255),
+                ),
+                ("occupancy", models.TextField(default="undefined")),
+                ("at_home", models.TextField(default="undefined")),
+                ("data", models.TextField(default="undefined")),
             ],
         ),
     ]

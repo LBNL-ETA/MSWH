@@ -70,14 +70,26 @@ class Plot(object):
               else True
     """
 
-    def __init__(self, title='', label_h='Time [h]',
-                 label_v='Component performance',
-                 data_headers=None, save_image=True,
-                 legend=True, outpath='',
-                 duration_curve=False, boxmode='group',
-                 notebook_mode=False, width=1200, height=800,
-                 fontsize=28, legend_x=0.4, legend_y=1.,
-                 margin_l=200., margin_b=200.):
+    def __init__(
+        self,
+        title="",
+        label_h="Time [h]",
+        label_v="Component performance",
+        data_headers=None,
+        save_image=True,
+        legend=True,
+        outpath="",
+        duration_curve=False,
+        boxmode="group",
+        notebook_mode=False,
+        width=1200,
+        height=800,
+        fontsize=28,
+        legend_x=0.4,
+        legend_y=1.0,
+        margin_l=200.0,
+        margin_b=200.0,
+    ):
 
         self.data_headers = data_headers
         self.save_image = save_image
@@ -88,71 +100,69 @@ class Plot(object):
         # plot formatting, see
         # https://plot.ly/python/reference/#layout-titlefont
         self.layout = go.Layout(
-            font=dict(
-                size=fontsize,
-                family='arial'),
+            font=dict(size=fontsize, family="arial"),
             title=title,
-            titlefont=dict(
-                size=fontsize * 1.,
-                family='arial'),
+            titlefont=dict(size=fontsize * 1.0, family="arial"),
             xaxis=dict(
                 title=label_h,
                 titlefont=dict(
-                    #family='Courier New, monospace',
+                    # family='Courier New, monospace',
                     size=fontsize,
-                    color='#7f7f7f'),
-                tickfont=dict(
-                    size=fontsize * .8),
+                    color="#7f7f7f",
                 ),
+                tickfont=dict(size=fontsize * 0.8),
+            ),
             yaxis=dict(
                 title=label_v,
                 titlefont=dict(
-                    #family='Courier New, monospace',
+                    # family='Courier New, monospace',
                     size=fontsize,
-                    color='#7f7f7f'),
-                tickfont=dict(
-                    size=fontsize * .6)),
+                    color="#7f7f7f",
+                ),
+                tickfont=dict(size=fontsize * 0.6),
+            ),
             showlegend=legend,
             width=width,
             height=height,
             margin=dict(l=margin_l, b=margin_b),
-            legend=dict(x=legend_x, y=legend_y, font=dict(
-                family='arial',
-                size=fontsize * 0.8)))
+            legend=dict(
+                x=legend_x,
+                y=legend_y,
+                font=dict(family="arial", size=fontsize * 0.8),
+            ),
+        )
 
         self.boxlayout = go.Layout(
-            font=dict(
-                size=fontsize,
-                family='arial'),
+            font=dict(size=fontsize, family="arial"),
             title=title,
-            titlefont=dict(
-                size=fontsize * 1.2,
-                family='arial'),
+            titlefont=dict(size=fontsize * 1.2, family="arial"),
             xaxis=dict(
                 title=label_h,
                 titlefont=dict(
-                    #family='Courier New, monospace',
+                    # family='Courier New, monospace',
                     size=fontsize,
-                    color='#7f7f7f'),
-                tickfont=dict(
-                    size=fontsize*.8)),
+                    color="#7f7f7f",
+                ),
+                tickfont=dict(size=fontsize * 0.8),
+            ),
             yaxis=dict(
                 title=label_v,
                 titlefont=dict(
-                    #family='Courier New, monospace',
+                    # family='Courier New, monospace',
                     size=fontsize,
-                    color='#7f7f7f'),
-                tickfont=dict(
-                    size=fontsize * .8)),
+                    color="#7f7f7f",
+                ),
+                tickfont=dict(size=fontsize * 0.8),
+            ),
             showlegend=legend,
             width=width,
             height=height,
             margin=dict(l=margin_l, b=margin_b),
             legend=dict(x=legend_x, y=legend_y),
-            boxmode=boxmode)
+            boxmode=boxmode,
+        )
 
-    def scatter(self, data, outfile='scatter.png',
-                modes='lines+markers'):
+    def scatter(self, data, outfile="scatter.png", modes="lines+markers"):
         """Creates a scatter plot
 
         Parameters:
@@ -181,17 +191,22 @@ class Plot(object):
         """
         # some input format error handling, not exhaustive
         if (isinstance(data, list)) and (len(data) < 2):
-            msg = 'Provide at least two arrays or columns to' \
-                  'create a scatter plot. Or try Series plot ' \
-                  'for a single column of data versus its index.'
+            msg = (
+                "Provide at least two arrays or columns to"
+                "create a scatter plot. Or try Series plot "
+                "for a single column of data versus its index."
+            )
             log.error(msg)
             raise Exception
 
-        if (isinstance(data, pd.Series)) or \
-            ((isinstance(data, pd.DataFrame)) and (data.shape[1] == 1)):
-            msg = 'Provide a dataframe with no less than two' \
-                  'columns. Series plot can plot a single column' \
-                  'against its index.'
+        if (isinstance(data, pd.Series)) or (
+            (isinstance(data, pd.DataFrame)) and (data.shape[1] == 1)
+        ):
+            msg = (
+                "Provide a dataframe with no less than two"
+                "columns. Series plot can plot a single column"
+                "against its index."
+            )
             log.error(msg)
             raise Exception
 
@@ -200,8 +215,14 @@ class Plot(object):
         # filled with np.nan
         if isinstance(data, list):
             df_data = pd.DataFrame(
-                data=np.empty((len(max(data, key=len)),
-                               len(data),)) * np.nan)
+                data=np.empty(
+                    (
+                        len(max(data, key=len)),
+                        len(data),
+                    )
+                )
+                * np.nan
+            )
 
             col_inx = 0
             for i in data:
@@ -209,17 +230,19 @@ class Plot(object):
                     i_list = i
                 else:
                     i_list = i.tolist()
-                df_data[col_inx] = i_list + \
-                    (np.empty(df_data.shape[0] - len(i)) * np.nan).tolist()
+                df_data[col_inx] = (
+                    i_list
+                    + (np.empty(df_data.shape[0] - len(i)) * np.nan).tolist()
+                )
                 col_inx += 1
 
             data = df_data.copy()
 
         if self.duration_curve:
             for col_index in range(0, df_data.shape[1]):
-                data.iloc[:, col_index] = \
-                    data.iloc[:,col_index].sort_values(
-                    ascending=False).values
+                data.iloc[:, col_index] = (
+                    data.iloc[:, col_index].sort_values(ascending=False).values
+                )
 
         if self.data_headers:
             data.columns = self.data_headers
@@ -232,20 +255,24 @@ class Plot(object):
             list_modes = modes
 
         if num_columns % 2 != 0:
-            msg = 'Provide an even number of columns,' \
-                  'e.g. [x1, y1, x2, y2, ...]'
+            msg = (
+                "Provide an even number of columns,"
+                "e.g. [x1, y1, x2, y2, ...]"
+            )
             log.error(msg)
             raise Exception
 
         plot_data = []
 
         for col_index in range(0, num_columns, 2):
-            plot_data.append(go.Scatter(
-                x=data.iloc[:, col_index],
-                y=data.iloc[:, col_index + 1],
-                mode=list_modes[int(col_index / 2.)],
-                name=data.columns[col_index + 1]))
-
+            plot_data.append(
+                go.Scatter(
+                    x=data.iloc[:, col_index],
+                    y=data.iloc[:, col_index + 1],
+                    mode=list_modes[int(col_index / 2.0)],
+                    name=data.columns[col_index + 1],
+                )
+            )
 
         fig = go.Figure(data=plot_data, layout=self.layout)
 
@@ -257,20 +284,23 @@ class Plot(object):
                 os.makedirs(self.outpath)
             pio.write_image(fig, os.path.join(self.outpath, outfile))
 
-
         if self.interactive:
             try:
                 iplot(fig)
                 return fig
             except:
-                log.error('Interactive mode failed.')
+                log.error("Interactive mode failed.")
                 raise Exception
 
         return True
 
-
-    def series(self, data, index_in_a_column=None,
-               outfile='series.png', modes='lines+markers'):
+    def series(
+        self,
+        data,
+        index_in_a_column=None,
+        outfile="series.png",
+        modes="lines+markers",
+    ):
         """Plots all series data against either the index or the first
         provided series. It can sort the data and plot the duration_curve.
 
@@ -280,7 +310,7 @@ class Plot(object):
                 Provide an array or a list if plotting a single
                 variable. If plotting multiple variables provide
                 a list of arrays or a pandas dataframe.
-                
+
                 Horizontal axis corresponds to:
 
                     * if pd df: the index of the dataframe or the first columns of the dataframe
@@ -312,20 +342,36 @@ class Plot(object):
         # if some of the lists/arrays are shorter, the gaps are
         # filled with np.nan
         if isinstance(data, list):
-            df_data = pd.DataFrame(\
-                data = np.empty((len(max(data, key=len)),
-                                 len(data),)) * np.nan)
+            df_data = pd.DataFrame(
+                data=np.empty(
+                    (
+                        len(max(data, key=len)),
+                        len(data),
+                    )
+                )
+                * np.nan
+            )
 
             col_inx = 0
             for i in data:
                 if isinstance(i, np.ndarray):
-                    df_data[col_inx] =  np.concatenate(
-                        (i, (np.empty(
-                            (1, df_data.shape[0] - len(i))) * np.nan)[0]))
+                    df_data[col_inx] = np.concatenate(
+                        (
+                            i,
+                            (
+                                np.empty((1, df_data.shape[0] - len(i)))
+                                * np.nan
+                            )[0],
+                        )
+                    )
 
                 if isinstance(i, list):
-                    df_data[col_inx] = i + (np.empty(
-                        (1, df_data.shape[0] - len(i))) * np.nan)[0].tolist()
+                    df_data[col_inx] = (
+                        i
+                        + (np.empty((1, df_data.shape[0] - len(i))) * np.nan)[
+                            0
+                        ].tolist()
+                    )
                 col_inx += 1
 
             data = df_data.copy()
@@ -348,18 +394,21 @@ class Plot(object):
 
         if self.duration_curve:
             for col_index in range(0, num_columns):
-                data.iloc[:, col_index] = \
-                    data.iloc[:, col_index].sort_values(\
-                    ascending=False).values
+                data.iloc[:, col_index] = (
+                    data.iloc[:, col_index].sort_values(ascending=False).values
+                )
 
         plot_data = []
 
         for col_index in range(num_columns):
-            plot_data.append(go.Scatter(
-                x=labels_h_axis,
-                y=data.iloc[:, col_index],
-                mode=list_modes[col_index],
-                name=data.columns[col_index]))
+            plot_data.append(
+                go.Scatter(
+                    x=labels_h_axis,
+                    y=data.iloc[:, col_index],
+                    mode=list_modes[col_index],
+                    name=data.columns[col_index],
+                )
+            )
 
         fig = go.Figure(data=plot_data, layout=self.layout)
 
@@ -376,16 +425,23 @@ class Plot(object):
                 iplot(fig)
                 return fig
             except:
-                log.error('Interactive mode failed.')
+                log.error("Interactive mode failed.")
                 raise Exception
 
         return True
 
-    def box(self, dfs, plot_cols=None, groupby_cols=None,
-            df_cat=None, outfile='box.png', boxmean=False,
-            colors=['#3D9970', '#FF4136', '#FF851B'],
-            title='Energy Use',
-            boxpoints='outliers'):
+    def box(
+        self,
+        dfs,
+        plot_cols=None,
+        groupby_cols=None,
+        df_cat=None,
+        outfile="box.png",
+        boxmean=False,
+        colors=["#3D9970", "#FF4136", "#FF851B"],
+        title="Energy Use",
+        boxpoints="outliers",
+    ):
         """Creates box plots for the chosen `plot_col` and can
         group plots by the `groupby_col`.
 
@@ -426,8 +482,7 @@ class Plot(object):
 
             y[i] = df[plot_cols[i]].values.tolist()
 
-            if ((groupby_cols is not None) and
-                (groupby_cols[i] is not None)):
+            if (groupby_cols is not None) and (groupby_cols[i] is not None):
                 x[i] = df[groupby_cols[i]].values.tolist()
             else:
                 x[i] = None
@@ -435,15 +490,16 @@ class Plot(object):
             if df_cat[i] is not None:
                 df_ctg[i] = df_cat[i]
             else:
-                df_ctg[i] = ''
+                df_ctg[i] = ""
 
             trace[i] = go.Box(
                 y=y[i],
                 x=x[i],
-                name=plot_cols[i] + ' - ' + df_ctg[i],
+                name=plot_cols[i] + " - " + df_ctg[i],
                 boxpoints=boxpoints,
                 marker=dict(color=colors[i]),
-                boxmean=boxmean)
+                boxmean=boxmean,
+            )
 
             data.append(trace[i])
             i += 1
@@ -463,7 +519,7 @@ class Plot(object):
                 iplot(fig)
                 return fig
             except:
-                log.error('Interactive mode failed.')
+                log.error("Interactive mode failed.")
                 raise Exception
 
         return True

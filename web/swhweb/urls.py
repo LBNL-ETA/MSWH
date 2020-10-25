@@ -22,7 +22,7 @@ from . import views
 # The name parameter is to reference a page in html
 # The first string is the actual url directory
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('', views.home, name='home'),
-    path('system/', include('system.urls')),
+    path("admin/", admin.site.urls),
+    path("", views.home, name="home"),
+    path("system/", include("system.urls")),
 ]

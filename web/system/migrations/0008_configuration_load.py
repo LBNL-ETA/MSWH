@@ -7,13 +7,18 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('system', '0007_auto_20190304_1253'),
+        ("system", "0007_auto_20190304_1253"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='configuration',
-            name='Load',
-            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, to='system.Load'),
+            model_name="configuration",
+            name="Load",
+            field=models.ForeignKey(
+                blank=True,
+                null=True,
+                on_delete=django.db.models.deletion.SET_NULL,
+                to="system.Load",
+            ),
         ),
     ]

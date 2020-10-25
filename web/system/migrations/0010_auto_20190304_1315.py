@@ -7,23 +7,39 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('system', '0009_auto_20190304_1311'),
+        ("system", "0009_auto_20190304_1311"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Household',
+            name="Household",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(default='undefined', max_length=255)),
-                ('occupancy', models.PositiveSmallIntegerField(default=4)),
-                ('at_home', models.BooleanField(default=False)),
-                ('data', models.TextField(default='undefined')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "name",
+                    models.CharField(default="undefined", max_length=255),
+                ),
+                ("occupancy", models.PositiveSmallIntegerField(default=4)),
+                ("at_home", models.BooleanField(default=False)),
+                ("data", models.TextField(default="undefined")),
             ],
         ),
         migrations.AddField(
-            model_name='configuration',
-            name='Household',
-            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, to='system.Household'),
+            model_name="configuration",
+            name="Household",
+            field=models.ForeignKey(
+                blank=True,
+                null=True,
+                on_delete=django.db.models.deletion.SET_NULL,
+                to="system.Household",
+            ),
         ),
     ]
