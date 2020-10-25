@@ -3,36 +3,96 @@
 from django.db import migrations, models
 import django.db.models.deletion
 
+
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('system', '0003_configuration_type'),
+        ("system", "0003_configuration_type"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Climate',
+            name="Climate",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(default='undefined', max_length=255)),
-                ('climate_zone', models.CharField(default='undefined', max_length=255)),
-                ('data_source', models.CharField(default='undefined', max_length=255)),
-                ('data', models.TextField(default='undefined')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "name",
+                    models.CharField(default="undefined", max_length=255),
+                ),
+                (
+                    "climate_zone",
+                    models.CharField(default="undefined", max_length=255),
+                ),
+                (
+                    "data_source",
+                    models.CharField(default="undefined", max_length=255),
+                ),
+                ("data", models.TextField(default="undefined")),
             ],
         ),
         migrations.AlterField(
-            model_name='component',
-            name='type',
-            field=models.CharField(choices=[['converter', [['hp', 'heat pump'], ['pv', 'photovoltaic'], ['sol_col', 'solar collector'], ['el_res', 'electric resistance'], ['gas_burn', 'gas burner']]], ['storage', [['hp_tank', 'heat pump tank'], ['sol_tank', 'solar storage tank']]], ['distribution', [['inv', 'inverter'], ['dist_pump', 'circulator pump'], ['sol_pump', 'solar pump']]]], default='undefined', max_length=255),
+            model_name="component",
+            name="type",
+            field=models.CharField(
+                choices=[
+                    [
+                        "converter",
+                        [
+                            ["hp", "heat pump"],
+                            ["pv", "photovoltaic"],
+                            ["sol_col", "solar collector"],
+                            ["el_res", "electric resistance"],
+                            ["gas_burn", "gas burner"],
+                        ],
+                    ],
+                    [
+                        "storage",
+                        [
+                            ["hp_tank", "heat pump tank"],
+                            ["sol_tank", "solar storage tank"],
+                        ],
+                    ],
+                    [
+                        "distribution",
+                        [
+                            ["inv", "inverter"],
+                            ["dist_pump", "circulator pump"],
+                            ["sol_pump", "solar pump"],
+                        ],
+                    ],
+                ],
+                default="undefined",
+                max_length=255,
+            ),
         ),
         migrations.AlterField(
-            model_name='configuration',
-            name='type',
-            field=models.CharField(choices=[['solar_electric', 'solar electric'], ['solar_thermal_gas_backup', 'solar thermal gas backup']], default='undefined', max_length=255),
+            model_name="configuration",
+            name="type",
+            field=models.CharField(
+                choices=[
+                    ["solar_electric", "solar electric"],
+                    ["solar_thermal_gas_backup", "solar thermal gas backup"],
+                ],
+                default="undefined",
+                max_length=255,
+            ),
         ),
         migrations.AddField(
-            model_name='configuration',
-            name='climate',
-            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, to='system.Climate'),
+            model_name="configuration",
+            name="climate",
+            field=models.ForeignKey(
+                blank=True,
+                null=True,
+                on_delete=django.db.models.deletion.SET_NULL,
+                to="system.Climate",
+            ),
         ),
     ]

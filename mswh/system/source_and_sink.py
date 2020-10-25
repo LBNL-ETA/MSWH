@@ -42,10 +42,10 @@ class SourceAndSink(object):
             For Example: log_level = logging.ERROR will only throw error
             messages and ignore INFO, DEBUG and WARNING.
     """
-    def __init__(self,
-                 input_dfs=None,
-                 random_state=123,
-                 log_level=logging.DEBUG):
+
+    def __init__(
+        self, input_dfs=None, random_state=123, log_level=logging.DEBUG
+    ):
 
         # log level (e.g. only partial functionality of the class
         # is being used and one does not desire to see all infos)
@@ -57,26 +57,29 @@ class SourceAndSink(object):
         # define the random state object which enbles random draw
         # repeatability
         if isinstance(random_state, int):
-            msg = 'The user did not provide a numpy random state ' \
-                   'object. Initiating one with a provided or default' \
-                   ' seed value = {}.'
+            msg = (
+                "The user did not provide a numpy random state "
+                "object. Initiating one with a provided or default"
+                " seed value = {}."
+            )
             log.info(msg.format(random_state))
             self.random_state = np.random.RandomState(random_state)
         else:
             self.random_state = random_state
 
-
-    def irradiation_and_water_main(self,
-                                   climate_zone,
-                                   collector_tilt='latitude',
-                                   tilt_standard_deviation=None,
-                                   collector_azimuth=0.,
-                                   azimuth_standard_deviation=None,
-                                   location_ground_reflectance=0.16,
-                                   solar_constant_Wm2=1367.,
-                                   method='isotropic diffuse',
-                                   weather_data_source='cec',
-                                   single_row_with_arrays = False):
+    def irradiation_and_water_main(
+        self,
+        climate_zone,
+        collector_tilt="latitude",
+        tilt_standard_deviation=None,
+        collector_azimuth=0.0,
+        azimuth_standard_deviation=None,
+        location_ground_reflectance=0.16,
+        solar_constant_Wm2=1367.0,
+        method="isotropic diffuse",
+        weather_data_source="cec",
+        single_row_with_arrays=False,
+    ):
         """Calculates the hourly total incident radiation on a tilted surface
         for any climate zone in California. If weather data from the provided
         database are passed as `input_dfs`, the user can specify a single
@@ -189,23 +192,27 @@ class SourceAndSink(object):
         climate_zone = str(climate_zone)
 
         if len(climate_zone) == 1:
-            climate_zone = '0' + climate_zone
+            climate_zone = "0" + climate_zone
 
         # There are only 16 climate zones in CA, so ensure a valid zone
         # is provided.
         try:
             climate_zone_int = int(climate_zone)
         except:
-            msg = 'Climate zone value ({}) is not a number.  Please' \
-            ' ensure the climate zone is a number from 1-16, represented' \
-            ' as a string.'
+            msg = (
+                "Climate zone value ({}) is not a number.  Please"
+                " ensure the climate zone is a number from 1-16, represented"
+                " as a string."
+            )
             log.error(msg.format(climate_zone))
             raise ValueError
 
         if (climate_zone_int > 16) | (climate_zone_int < 0):
-            msg = 'Climate zone in CA must be a number from 1-16.' \
-                  ' Further available climate zone codes are: 0 '\
-                  ' for Banja Luka, BIH.'
+            msg = (
+                "Climate zone in CA must be a number from 1-16."
+                " Further available climate zone codes are: 0 "
+                " for Banja Luka, BIH."
+            )
             log.error(msg)
             raise ValueError
 
@@ -214,98 +221,107 @@ class SourceAndSink(object):
         if azimuth_standard_deviation:
             azimuth_mean = collector_azimuth
             collector_azimuth = self.random_state.normal(
-                azimuth_mean,
-                azimuth_standard_deviation)
+                azimuth_mean, azimuth_standard_deviation
+            )
 
         # Ensure collector_azimuth is between -180 (due east) and
         # +180 (due west)
-        if (collector_azimuth > 180.) | (collector_azimuth < -180.):
-            msg = 'Collector azimuth angle must be a number between' \
-            ' -180 degrees (due east) and +180 degrees (due west).'
+        if (collector_azimuth > 180.0) | (collector_azimuth < -180.0):
+            msg = (
+                "Collector azimuth angle must be a number between"
+                " -180 degrees (due east) and +180 degrees (due west)."
+            )
             log.error(msg)
             raise ValueError
 
         # Ensure location_ground_reflectance is between 0 and 1.
-        if ((location_ground_reflectance > 1.)
-            | (location_ground_reflectance < 0.)):
-            msg = 'The annual average location ground reflectance must' \
-            ' be a number between 0. (no reflectance) and 1 (perfect' \
-            ' reflectance).'
+        if (location_ground_reflectance > 1.0) | (
+            location_ground_reflectance < 0.0
+        ):
+            msg = (
+                "The annual average location ground reflectance must"
+                " be a number between 0. (no reflectance) and 1 (perfect"
+                " reflectance)."
+            )
             log.error(msg)
             raise ValueError
 
         # Ensure the provided solar constant is reasonable
-        if ((solar_constant_Wm2 > 1450.) | (solar_constant_Wm2 < 1300.)):
-            msg = 'The accepted solar constant is near 1367. W/m^2.' \
-            ' Please select a reasonable solar constant value that is' \
-            ' between 1300. and 1450. W/m^2.'
+        if (solar_constant_Wm2 > 1450.0) | (solar_constant_Wm2 < 1300.0):
+            msg = (
+                "The accepted solar constant is near 1367. W/m^2."
+                " Please select a reasonable solar constant value that is"
+                " between 1300. and 1450. W/m^2."
+            )
             log.error(msg)
             raise ValueError
 
         # Ensure selected method type is valid
-        if ((method != 'isotropic diffuse') &
-            (method != 'HDKR anisotropic sky')):
-            msg = 'This model only calculated results for two models:' \
-            ' \'isotropic diffuse\' and \'HDKR anisotropic sky\'.'
+        if (method != "isotropic diffuse") & (
+            method != "HDKR anisotropic sky"
+        ):
+            msg = (
+                "This model only calculated results for two models:"
+                " 'isotropic diffuse' and 'HDKR anisotropic sky'."
+            )
             log.error(msg)
             raise ValueError
 
         # Read in header data to get latitude and longitude of given
         # climate zone
-        if weather_data_source == 'cec':
+        if weather_data_source == "cec":
 
-            key = 'CTZ' + climate_zone + 'S13b'
-            header = pd.DataFrame(
-                data=self.data[key].iloc[:20, :2])
+            key = "CTZ" + climate_zone + "S13b"
+            header = pd.DataFrame(data=self.data[key].iloc[:20, :2])
             header_data = pd.Series(
-                data=header.iloc[:,1].values,
-                index=header.iloc[:,0])
+                data=header.iloc[:, 1].values, index=header.iloc[:, 0]
+            )
             # latitude in degrees, north = positive
-            latitude = float(header_data['Latitude'])
+            latitude = float(header_data["Latitude"])
             # longitude in degrees, west = positive
-            longitude = abs(float(header_data['Longitude']))
+            longitude = abs(float(header_data["Longitude"]))
 
-
-        elif weather_data_source == 'tmy3':
+        elif weather_data_source == "tmy3":
 
             # Map CEC climate zone to proper tmy3 weather file
             climate_zone_to_tmy3 = {
                 # California, USA
-                '01': '725945',
-                '02': '724957',
-                '03': '724930',
-                '04': '724945',
-                '05': '723940',
-                '06': '722970',
-                '07': '722900',
-                '08': '722976',
-                '09': '722880',
-                '10': '722869',
-                '11': '725910',
-                '12': '724830',
-                '13': '723890',
-                '14': '723820',
-                '15': '722868',
-                '16': '725845',
+                "01": "725945",
+                "02": "724957",
+                "03": "724930",
+                "04": "724945",
+                "05": "723940",
+                "06": "722970",
+                "07": "722900",
+                "08": "722976",
+                "09": "722880",
+                "10": "722869",
+                "11": "725910",
+                "12": "724830",
+                "13": "723890",
+                "14": "723820",
+                "15": "722868",
+                "16": "725845",
                 # Banja Luka, BIH
-                '00': '145420'
+                "00": "145420",
             }
 
-            key = climate_zone_to_tmy3[climate_zone] + 'TY'
+            key = climate_zone_to_tmy3[climate_zone] + "TY"
             # latitude in degrees, north = positive
             latitude = float(self.data[key].iloc[0, 4])
             # longitude in degrees, west = positive
             longitude = abs(float(self.data[key].iloc[0, 5]))
 
-
         # set the tilt to latitude if no custom tilt got provided
-        if collector_tilt == 'latitude':
+        if collector_tilt == "latitude":
             collector_tilt = latitude
 
         # check tilt data type
         elif not isinstance(collector_tilt, float):
-            msg = 'Collector tilt value ({}) is neither a float nor' \
-            ' \'latitude\'. Please use an allowed value.'
+            msg = (
+                "Collector tilt value ({}) is neither a float nor"
+                " 'latitude'. Please use an allowed value."
+            )
             log.error(msg.format(collector_tilt))
             raise ValueError
 
@@ -313,63 +329,74 @@ class SourceAndSink(object):
         if tilt_standard_deviation:
             tilt_mean = collector_tilt
             collector_tilt = self.random_state.normal(
-                tilt_mean,
-                tilt_standard_deviation)
+                tilt_mean, tilt_standard_deviation
+            )
 
         # Read in actual weather data for the given climate zone
-        if weather_data_source == 'cec':
+        if weather_data_source == "cec":
 
-            key = 'CTZ' + climate_zone + 'S13b'
+            key = "CTZ" + climate_zone + "S13b"
             solar_data = pd.DataFrame(
                 data=self.data[key].iloc[26:, :].values,
-                columns=self.data[key].iloc[25, :])
+                columns=self.data[key].iloc[25, :],
+            )
 
             solar_data.columns = [x.lower() for x in solar_data.columns]
 
             # deal with data formats as needed
             solar_data = solar_data.astype(float)
-            solar_data[solar_data.columns[:3]] = \
-                solar_data[solar_data.columns[:3]].astype(int)
+            solar_data[solar_data.columns[:3]] = solar_data[
+                solar_data.columns[:3]
+            ].astype(int)
 
             # Rename solar columns
-            solar_data.rename(columns={
-                'global horizontal radiation': 'global_horizontal_radiation_Wm2',
-                'direct normal radiation': 'direct_normal_radiation_Wm2',
-                'diffuse horiz radiation': 'diffuse_horizontal_radiation_Wm2'},
-                inplace=True)
+            solar_data.rename(
+                columns={
+                    "global horizontal radiation": "global_horizontal_radiation_Wm2",
+                    "direct normal radiation": "direct_normal_radiation_Wm2",
+                    "diffuse horiz radiation": "diffuse_horizontal_radiation_Wm2",
+                },
+                inplace=True,
+            )
             # Convert solar units from Btu/hr/ft^2 to W/m^2
             solar_data.global_horizontal_radiation_Wm2 *= 3.15459075
             solar_data.direct_normal_radiation_Wm2 *= 3.15459075
             solar_data.diffuse_horizontal_radiation_Wm2 *= 3.15459075
 
-            solar_data['climate_zone'] = climate_zone
+            solar_data["climate_zone"] = climate_zone
             # The hour data from the CEC is for the end of the hour;
             # we're setting it to be the start of the hour
             solar_data.hour -= 1
 
-        elif weather_data_source == 'tmy3':
+        elif weather_data_source == "tmy3":
 
             solar_data = self.data[key].iloc[2:, :]
-            solar_data = solar_data.apply(pd.to_numeric, errors='ignore')
+            solar_data = solar_data.apply(pd.to_numeric, errors="ignore")
             solar_data.columns = self.data[key].iloc[1, :]
 
             solar_data.columns = [x.lower() for x in solar_data.columns]
             # Rename solar columns
-            solar_data.rename(columns={
-                'etr (w/m^2)': 'extraterrestrial_horizontal_radiation_Wm2',
-                'etrn (w/m^2)': 'extraterrestrial_normal_radiation_Wm2',
-                'ghi (w/m^2)': 'global_horizontal_radiation_Wm2',
-                'dni (w/m^2)': 'direct_normal_radiation_Wm2',
-                'dhi (w/m^2)': 'diffuse_horizontal_radiation_Wm2',
-                'alb (unitless)': 'surface_albedo'},
-                inplace=True)
+            solar_data.rename(
+                columns={
+                    "etr (w/m^2)": "extraterrestrial_horizontal_radiation_Wm2",
+                    "etrn (w/m^2)": "extraterrestrial_normal_radiation_Wm2",
+                    "ghi (w/m^2)": "global_horizontal_radiation_Wm2",
+                    "dni (w/m^2)": "direct_normal_radiation_Wm2",
+                    "dhi (w/m^2)": "diffuse_horizontal_radiation_Wm2",
+                    "alb (unitless)": "surface_albedo",
+                },
+                inplace=True,
+            )
 
-            solar_data['month'] = solar_data.apply(
-                lambda x: int(x['date (mm/dd/yyyy)'][:2]), axis=1)
-            solar_data['day'] = solar_data.apply(
-                lambda x: int(x['date (mm/dd/yyyy)'][3:5]), axis=1)
-            solar_data['hour'] = solar_data.apply(
-                lambda x: int(x['time (hh:mm)'][:2])-1, axis=1)
+            solar_data["month"] = solar_data.apply(
+                lambda x: int(x["date (mm/dd/yyyy)"][:2]), axis=1
+            )
+            solar_data["day"] = solar_data.apply(
+                lambda x: int(x["date (mm/dd/yyyy)"][3:5]), axis=1
+            )
+            solar_data["hour"] = solar_data.apply(
+                lambda x: int(x["time (hh:mm)"][:2]) - 1, axis=1
+            )
 
             # The TMY3 data contain surface albedo values that can be used
             # Ensure missing values (coded as -9900) are replaced with the
@@ -377,17 +404,22 @@ class SourceAndSink(object):
             solar_data.surface_albedo = np.where(
                 solar_data.surface_albedo == -9900.0,
                 np.nan,
-                solar_data.surface_albedo)
+                solar_data.surface_albedo,
+            )
 
             solar_data.surface_albedo = np.where(
                 np.isnan(solar_data.surface_albedo),
                 solar_data.surface_albedo.mean(),
-                solar_data.surface_albedo)
+                solar_data.surface_albedo,
+            )
             location_ground_reflectance = solar_data.surface_albedo.values
 
-        solar_data['day_number_of_year'] = solar_data.apply(lambda x:
-            datetime.datetime(2018, x.month, x.day).timetuple().tm_yday,
-            axis=1)
+        solar_data["day_number_of_year"] = solar_data.apply(
+            lambda x: datetime.datetime(2018, x.month, x.day)
+            .timetuple()
+            .tm_yday,
+            axis=1,
+        )
 
         solar_data = self._add_season_column(solar_data)
 
@@ -397,131 +429,210 @@ class SourceAndSink(object):
         #    where: longitude_standard = 15 * (PST-GMT),
         # and PST-GMT is always -8 hours
         # Calculate E (equation of time, in minutes)
-        B = (solar_data.day_number_of_year - 1) * 360. / 365. # Equation 1.4.2
-        E_minutes = 229.2 * (0.000075 +
-            (0.001868 * np.cos(B)) -
-            (0.032077 * np.sin(B)) -
-            (0.014615 * np.cos(2 * B)) -
-            (0.04089 * np.sin(2 * B))) # Equation 1.5.3
+        B = (
+            (solar_data.day_number_of_year - 1) * 360.0 / 365.0
+        )  # Equation 1.4.2
+        E_minutes = 229.2 * (
+            0.000075
+            + (0.001868 * np.cos(B))
+            - (0.032077 * np.sin(B))
+            - (0.014615 * np.cos(2 * B))
+            - (0.04089 * np.sin(2 * B))
+        )  # Equation 1.5.3
 
         # REMEMBER: longitudes are in degrees West, meaning they should
         # both be positive here for California!
-        minutes_to_add = (4. * ((15. * 8.) - longitude)) + E_minutes
-        solar_time = solar_data.hour + minutes_to_add / 60. # in hours
+        minutes_to_add = (4.0 * ((15.0 * 8.0) - longitude)) + E_minutes
+        solar_time = solar_data.hour + minutes_to_add / 60.0  # in hours
 
         # Calculate the hour angle
         # hour_angle = 15 degrees per hour away from solar noon (12),
         # with morning being negative
-        hour_angle_start = 15. * (solar_time - 12.)
-        hour_angle_end = 15. * (solar_time + 1. - 12.)
+        hour_angle_start = 15.0 * (solar_time - 12.0)
+        hour_angle_end = 15.0 * (solar_time + 1.0 - 12.0)
 
         # Calculate the declination angle for the day (declination_angle)
-        declination_angle = (180. / np.pi) * (0.006918 -
-            (0.399912 * np.cos(np.radians(B))) +
-            (0.070257 * np.sin(np.radians(B))) -
-            (0.006758 * np.cos(2 * np.radians(B))) +
-            (0.000907 * np.sin(2 * np.radians(B))) -
-            (0.002697 * np.cos(3 * np.radians(B))) +
-            (0.001480 * np.sin(3 * np.radians(B)))) # Equation 1.6.1b
+        declination_angle = (180.0 / np.pi) * (
+            0.006918
+            - (0.399912 * np.cos(np.radians(B)))
+            + (0.070257 * np.sin(np.radians(B)))
+            - (0.006758 * np.cos(2 * np.radians(B)))
+            + (0.000907 * np.sin(2 * np.radians(B)))
+            - (0.002697 * np.cos(3 * np.radians(B)))
+            + (0.001480 * np.sin(3 * np.radians(B)))
+        )  # Equation 1.6.1b
 
         # Calculate the ratio of beam radiation to that on a horizontal
         # surface for the collector, averaged over the hour of consideration
         # (to avoid mathematical issues that can arise for hours in which
         # sunrise or sunset occurs)
         R_b_a = (
-            (((np.sin(np.radians(declination_angle)) *
-             np.sin(np.radians(latitude)) *
-             np.cos(np.radians(collector_tilt))) -
-            (np.sin(np.radians(declination_angle)) *
-             np.cos(np.radians(latitude)) *
-             np.sin(np.radians(collector_tilt)) *
-             np.cos(np.radians(collector_azimuth)))) *
-             np.radians(hour_angle_end - hour_angle_start)) +
-            (((np.cos(np.radians(declination_angle)) *
-             np.cos(np.radians(latitude)) *
-             np.cos(np.radians(collector_tilt))) +
-            (np.cos(np.radians(declination_angle)) *
-             np.sin(np.radians(latitude)) *
-             np.sin(np.radians(collector_tilt)) *
-             np.cos(np.radians(collector_azimuth)))) *
-            (np.sin(np.radians(hour_angle_end)) -
-             np.sin(np.radians(hour_angle_start)))) -
-            (np.cos(np.radians(declination_angle)) *
-             np.sin(np.radians(collector_tilt)) *
-             np.sin(np.radians(collector_azimuth)) *
-            (np.cos(np.radians(hour_angle_end)) -
-             np.cos(np.radians(hour_angle_start)))))
+            (
+                (
+                    (
+                        np.sin(np.radians(declination_angle))
+                        * np.sin(np.radians(latitude))
+                        * np.cos(np.radians(collector_tilt))
+                    )
+                    - (
+                        np.sin(np.radians(declination_angle))
+                        * np.cos(np.radians(latitude))
+                        * np.sin(np.radians(collector_tilt))
+                        * np.cos(np.radians(collector_azimuth))
+                    )
+                )
+                * np.radians(hour_angle_end - hour_angle_start)
+            )
+            + (
+                (
+                    (
+                        np.cos(np.radians(declination_angle))
+                        * np.cos(np.radians(latitude))
+                        * np.cos(np.radians(collector_tilt))
+                    )
+                    + (
+                        np.cos(np.radians(declination_angle))
+                        * np.sin(np.radians(latitude))
+                        * np.sin(np.radians(collector_tilt))
+                        * np.cos(np.radians(collector_azimuth))
+                    )
+                )
+                * (
+                    np.sin(np.radians(hour_angle_end))
+                    - np.sin(np.radians(hour_angle_start))
+                )
+            )
+            - (
+                np.cos(np.radians(declination_angle))
+                * np.sin(np.radians(collector_tilt))
+                * np.sin(np.radians(collector_azimuth))
+                * (
+                    np.cos(np.radians(hour_angle_end))
+                    - np.cos(np.radians(hour_angle_start))
+                )
+            )
+        )
         R_b_b = (
-            ((np.cos(np.radians(latitude)) *
-              np.cos(np.radians(declination_angle))) *
-             (np.sin(np.radians(hour_angle_end)) -
-              np.sin(np.radians(hour_angle_start)))) +
-            ((np.sin(np.radians(latitude)) *
-              np.sin(np.radians(declination_angle))) *
-             (np.radians(hour_angle_end - hour_angle_start))))
-        R_b_ave = R_b_a / R_b_b # Equation 2.14.6
-
+            (
+                np.cos(np.radians(latitude))
+                * np.cos(np.radians(declination_angle))
+            )
+            * (
+                np.sin(np.radians(hour_angle_end))
+                - np.sin(np.radians(hour_angle_start))
+            )
+        ) + (
+            (
+                np.sin(np.radians(latitude))
+                * np.sin(np.radians(declination_angle))
+            )
+            * (np.radians(hour_angle_end - hour_angle_start))
+        )
+        R_b_ave = R_b_a / R_b_b  # Equation 2.14.6
 
         # Calculate horizontal radiation in absense of atmosphere
         # (Equation 1.10.4, [J/m^2])
-        if weather_data_source == 'cec':
+        if weather_data_source == "cec":
             extraterrestrial_horizontal_radiation_Jm2 = (
-                12. * 3600. / np.pi * solar_constant_Wm2 *
-                (1. + 0.033 * np.cos(360. *
-                 solar_data.day_number_of_year / 365.)) *
-                ((np.cos(np.radians(latitude)) *
-                  np.cos(np.radians(declination_angle)) *
-                 (np.sin(np.radians(hour_angle_end)) -
-                  np.sin(np.radians(hour_angle_start)))) +
-                 (np.pi / 180. * (hour_angle_end - hour_angle_start) *
-                  np.sin(np.radians(latitude)) *
-                  np.sin(np.radians(declination_angle)))))
+                12.0
+                * 3600.0
+                / np.pi
+                * solar_constant_Wm2
+                * (
+                    1.0
+                    + 0.033
+                    * np.cos(360.0 * solar_data.day_number_of_year / 365.0)
+                )
+                * (
+                    (
+                        np.cos(np.radians(latitude))
+                        * np.cos(np.radians(declination_angle))
+                        * (
+                            np.sin(np.radians(hour_angle_end))
+                            - np.sin(np.radians(hour_angle_start))
+                        )
+                    )
+                    + (
+                        np.pi
+                        / 180.0
+                        * (hour_angle_end - hour_angle_start)
+                        * np.sin(np.radians(latitude))
+                        * np.sin(np.radians(declination_angle))
+                    )
+                )
+            )
             # Convert to W/m^2 and ensure the values aren't less than 0.
-            solar_data['extraterrestrial_horizontal_radiation_Wm2'] = (
-                extraterrestrial_horizontal_radiation_Jm2 * 0.000277777778)
+            solar_data["extraterrestrial_horizontal_radiation_Wm2"] = (
+                extraterrestrial_horizontal_radiation_Jm2 * 0.000277777778
+            )
             solar_data.extraterrestrial_horizontal_radiation_Wm2 = np.where(
-                solar_data.extraterrestrial_horizontal_radiation_Wm2 < 0.,
-                0.,
-                solar_data.extraterrestrial_horizontal_radiation_Wm2)
+                solar_data.extraterrestrial_horizontal_radiation_Wm2 < 0.0,
+                0.0,
+                solar_data.extraterrestrial_horizontal_radiation_Wm2,
+            )
 
         # Calculate beam radiation on a horizontal plane
-        solar_data['beam_horizontal_radiation_Wm2'] = (
-            solar_data.global_horizontal_radiation_Wm2 -
-            solar_data.diffuse_horizontal_radiation_Wm2)
+        solar_data["beam_horizontal_radiation_Wm2"] = (
+            solar_data.global_horizontal_radiation_Wm2
+            - solar_data.diffuse_horizontal_radiation_Wm2
+        )
 
         # Calculate total radiation on a tilted surface using the isotropic
         # diffuse model.
-        if method == 'isotropic diffuse':
-            solar_data['global_tilt_radiation_Wm2'] = (
-                (solar_data.beam_horizontal_radiation_Wm2 * R_b_ave) +
-                (solar_data.diffuse_horizontal_radiation_Wm2 * ((1 +
-                 np.cos(np.radians(collector_tilt))) / 2.0)) +
-                (solar_data.global_horizontal_radiation_Wm2 *
-                 location_ground_reflectance * ((1 -
-                 np.cos(np.radians(collector_tilt))) / 2.0)))
-                 # Equation 2.15.1
-        elif method == 'HDKR anisotropic sky':
+        if method == "isotropic diffuse":
+            solar_data["global_tilt_radiation_Wm2"] = (
+                (solar_data.beam_horizontal_radiation_Wm2 * R_b_ave)
+                + (
+                    solar_data.diffuse_horizontal_radiation_Wm2
+                    * ((1 + np.cos(np.radians(collector_tilt))) / 2.0)
+                )
+                + (
+                    solar_data.global_horizontal_radiation_Wm2
+                    * location_ground_reflectance
+                    * ((1 - np.cos(np.radians(collector_tilt))) / 2.0)
+                )
+            )
+            # Equation 2.15.1
+        elif method == "HDKR anisotropic sky":
             # Calculate the anisotropy index
-            anisotropy_index = (solar_data.beam_horizontal_radiation_Wm2 /
-            solar_data.extraterrestrial_horizontal_radiation_Wm2)
+            anisotropy_index = (
+                solar_data.beam_horizontal_radiation_Wm2
+                / solar_data.extraterrestrial_horizontal_radiation_Wm2
+            )
             # Equation 2.16.3
             # Calculate the modulating factor, f
-            f = (solar_data.beam_horizontal_radiation_Wm2 /
-                solar_data.global_horizontal_radiation_Wm2) ** 0.5
-                # Equation 2.16.6
-            solar_data['global_tilt_radiation_Wm2'] = (
-                ((solar_data.beam_horizontal_radiation_Wm2 +
-                (solar_data.diffuse_horizontal_radiation_Wm2 *
-                 anisotropy_index)) *
-                R_b_ave) + (solar_data.diffuse_horizontal_radiation_Wm2 *
-                (1 - anisotropy_index) *
-                ((1 + np.cos(np.radians(collector_tilt))) / 2.0)
-                * (1 + (f * (np.sin(np.radians(collector_tilt / 2.0)) **
-                3)))) +
-                (solar_data.global_horizontal_radiation_Wm2 *
-                location_ground_reflectance *
-                ((1 - np.cos(np.radians(collector_tilt))) / 2.0)))
-                # Equation 2.16.7
+            f = (
+                solar_data.beam_horizontal_radiation_Wm2
+                / solar_data.global_horizontal_radiation_Wm2
+            ) ** 0.5
+            # Equation 2.16.6
+            solar_data["global_tilt_radiation_Wm2"] = (
+                (
+                    (
+                        solar_data.beam_horizontal_radiation_Wm2
+                        + (
+                            solar_data.diffuse_horizontal_radiation_Wm2
+                            * anisotropy_index
+                        )
+                    )
+                    * R_b_ave
+                )
+                + (
+                    solar_data.diffuse_horizontal_radiation_Wm2
+                    * (1 - anisotropy_index)
+                    * ((1 + np.cos(np.radians(collector_tilt))) / 2.0)
+                    * (
+                        1
+                        + (f * (np.sin(np.radians(collector_tilt / 2.0)) ** 3))
+                    )
+                )
+                + (
+                    solar_data.global_horizontal_radiation_Wm2
+                    * location_ground_reflectance
+                    * ((1 - np.cos(np.radians(collector_tilt))) / 2.0)
+                )
+            )
+            # Equation 2.16.7
 
         # You can't get negative energy collection
         # It's also probably unreasonable to expect > 2000 W/m^2
@@ -529,29 +640,34 @@ class SourceAndSink(object):
         # > 2000 W/m^2, it is due to a mathematical
         # anomaly where the actual result should be closer to 0.
         solar_data.global_tilt_radiation_Wm2 = np.where(
-            (solar_data.global_tilt_radiation_Wm2 < 0.) |
-            (solar_data.global_tilt_radiation_Wm2 >= 2000.),
-            0.,
-            solar_data.global_tilt_radiation_Wm2)
+            (solar_data.global_tilt_radiation_Wm2 < 0.0)
+            | (solar_data.global_tilt_radiation_Wm2 >= 2000.0),
+            0.0,
+            solar_data.global_tilt_radiation_Wm2,
+        )
 
         # To avoid NaNs and other weird values, set the result to 0 if global
         # and diffuse horizontal are both 0
         solar_data.global_tilt_radiation_Wm2 = np.where(
-            (solar_data.global_horizontal_radiation_Wm2 == 0.) &
-            (solar_data.diffuse_horizontal_radiation_Wm2 == 0.),
-            0.,
-            solar_data.global_tilt_radiation_Wm2)
+            (solar_data.global_horizontal_radiation_Wm2 == 0.0)
+            & (solar_data.diffuse_horizontal_radiation_Wm2 == 0.0),
+            0.0,
+            solar_data.global_tilt_radiation_Wm2,
+        )
 
         # Read in water mains temperature data
         # We only need one hour's worth of data for each month and location
         # because the provided
         # temperatures are equal for each hour of the day.
-        water_mains_data = \
-            self.data['Appendix_54B_Schedules_WaterMain'].\
-            iloc[3:, 0:3]
+        water_mains_data = self.data["Appendix_54B_Schedules_WaterMain"].iloc[
+            3:, 0:3
+        ]
 
-        water_mains_data.columns = ['climate_zone_water', 'month_abb',
-                                    'water_main_t_F']
+        water_mains_data.columns = [
+            "climate_zone_water",
+            "month_abb",
+            "water_main_t_F",
+        ]
 
         # Fill the climate zone forward
         # Only get water mains data for the climate zone we are analyzing
@@ -559,52 +675,56 @@ class SourceAndSink(object):
         if (climate_zone_int <= 16) and (climate_zone_int >= 1):
             climate_zone_water_main = climate_zone
         # for any additional climate zones of interest
-        elif climate_zone == '00':
-            climate_zone_water_main = '11'
+        elif climate_zone == "00":
+            climate_zone_water_main = "11"
 
-        water_mains_data = water_mains_data.fillna(method='ffill')
+        water_mains_data = water_mains_data.fillna(method="ffill")
         water_mains_data = water_mains_data.loc[
-            water_mains_data.climate_zone_water == \
-            'WaterMainCZ' + climate_zone_water_main]
+            water_mains_data.climate_zone_water
+            == "WaterMainCZ" + climate_zone_water_main
+        ]
 
         # Convert calendar abbreviation to calendar number
-        water_mains_data['month_num'] = water_mains_data.apply(
-            lambda x: list(calendar.month_abbr).index(x.month_abb),
-            axis=1)
+        water_mains_data["month_num"] = water_mains_data.apply(
+            lambda x: list(calendar.month_abbr).index(x.month_abb), axis=1
+        )
 
         # Drop unused columns and merge with the weather data
         data = pd.merge(
             left=solar_data,
             right=water_mains_data,
-            how='left',
-            left_on='month',
-            right_on='month_num')
+            how="left",
+            left_on="month",
+            right_on="month_num",
+        )
 
         # convert temperatures from F to C
-        data['water_main_t_C'] = UnitConv(data['water_main_t_F']).degF_degC(
-             unit_in='degF')
-        if weather_data_source == 'cec':
-            data['dry_bulb_C'] = UnitConv(data['dry bulb']).degF_degC(
-            unit_in='degF')
-            data['wet_bulb_C'] = UnitConv(data['wet bulb']).degF_degC(
-            unit_in='degF')
-        elif weather_data_source == 'tmy3':
-            data['dry_bulb_C'] = data['dry-bulb (c)']
+        data["water_main_t_C"] = UnitConv(data["water_main_t_F"]).degF_degC(
+            unit_in="degF"
+        )
+        if weather_data_source == "cec":
+            data["dry_bulb_C"] = UnitConv(data["dry bulb"]).degF_degC(
+                unit_in="degF"
+            )
+            data["wet_bulb_C"] = UnitConv(data["wet bulb"]).degF_degC(
+                unit_in="degF"
+            )
+        elif weather_data_source == "tmy3":
+            data["dry_bulb_C"] = data["dry-bulb (c)"]
             # Derive wet bulb temperature from dry bulb temperature and
             # relative humidity
-            data['wet_bulb_C'] = self._wet_bulb_approx(
-                data['dry_bulb_C'],
-                data['rhum (%)'])
+            data["wet_bulb_C"] = self._wet_bulb_approx(
+                data["dry_bulb_C"], data["rhum (%)"]
+            )
 
         # add collector tilt value
-        data['Tilt'] = collector_tilt
-        data['Azimuth'] = collector_azimuth
+        data["Tilt"] = collector_tilt
+        data["Azimuth"] = collector_azimuth
 
         data.drop(
-            columns=['climate_zone_water',
-                     'month_abb',
-                     'month_num'],
-            inplace=True)
+            columns=["climate_zone_water", "month_abb", "month_num"],
+            inplace=True,
+        )
 
         if single_row_with_arrays:
             data = self._pack_timeseries(data)
@@ -633,12 +753,16 @@ class SourceAndSink(object):
                 Timeseries containing wet bulb temperature in Celcius [degC]
         """
         # Calculate wet bulb temperature
-        wet_bulb_C = (dry_bulb_C * np.arctan(
-            0.151977 * np.power((rel_hum + 8.313659),0.5)) +
-            np.arctan(dry_bulb_C + rel_hum) -
-            np.arctan(rel_hum - 1.676331) +
-            0.00391838 * np.power(rel_hum, 1.5) *
-            np.arctan(0.023101 * rel_hum) - 4.686035)
+        wet_bulb_C = (
+            dry_bulb_C
+            * np.arctan(0.151977 * np.power((rel_hum + 8.313659), 0.5))
+            + np.arctan(dry_bulb_C + rel_hum)
+            - np.arctan(rel_hum - 1.676331)
+            + 0.00391838
+            * np.power(rel_hum, 1.5)
+            * np.arctan(0.023101 * rel_hum)
+            - 4.686035
+        )
 
         return wet_bulb_C
 
@@ -666,9 +790,7 @@ class SourceAndSink(object):
                 Timeseries data packed as a list in each cell of
                 a single df row
         """
-        single_row_df = pd.DataFrame(
-            columns=df.columns,
-            index=[row_index])
+        single_row_df = pd.DataFrame(columns=df.columns, index=[row_index])
 
         for col in df.columns:
             single_row_df[col] = [df[col]]
@@ -685,21 +807,33 @@ class SourceAndSink(object):
             df : pd df
                 Timeseries data with a month column
         """
-        map = {1: 'winter', 2: 'winter',
-               3: 'winter', 4: 'winter',
-               5: 'summer', 6: 'summer',
-               7: 'summer', 8: 'summer',
-               9: 'summer', 10: 'winter',
-               11: 'winter', 12: 'winter'}
+        map = {
+            1: "winter",
+            2: "winter",
+            3: "winter",
+            4: "winter",
+            5: "summer",
+            6: "summer",
+            7: "summer",
+            8: "summer",
+            9: "summer",
+            10: "winter",
+            11: "winter",
+            12: "winter",
+        }
 
-        df['season'] = df['month'].apply(lambda x: map[x])
+        df["season"] = df["month"].apply(lambda x: map[x])
 
         return df
 
     @staticmethod
-    def _make_example_loading_inputs(inputs, labels, random_state,
-                                     occupancy = [4., 4., 4., 4.],
-                                     at_home = ['n', 'n', 'n', 'n']):
+    def _make_example_loading_inputs(
+        inputs,
+        labels,
+        random_state,
+        occupancy=[4.0, 4.0, 4.0, 4.0],
+        at_home=["n", "n", "n", "n"],
+    ):
         """Creates example end-use load profile inputs using the example
         load database (sample of 128 households).
 
@@ -734,41 +868,45 @@ class SourceAndSink(object):
                 sizing purposes.
         """
         # reformat the example end-use loads table
-        loads_df = inputs[labels['exmp_loads']].copy()
+        loads_df = inputs[labels["exmp_loads"]].copy()
         # drop hour column
-        loads_df = loads_df.drop(labels['hour'], axis=1)
+        loads_df = loads_df.drop(labels["hour"], axis=1)
         # convert loads into gallons
         loads_df_m3 = loads_df.apply(
-            lambda x: UnitConv(x).m3_gal(unit_in='gal'))
+            lambda x: UnitConv(x).m3_gal(unit_in="gal")
+        )
         single_row_loads = SourceAndSink._pack_timeseries(
-            loads_df_m3,
-            row_index=labels['load_m3'])
+            loads_df_m3, row_index=labels["load_m3"]
+        )
         example_cons = single_row_loads.transpose().reset_index()
-        example_cons[labels['ld_id']] = inputs[
-                labels['exmp_consload']].loc[:, labels['ld_id']]
-        example_cons[labels['occ']] = inputs[
-                labels['exmp_consload']].loc[:, labels['occ']]
-        example_cons[labels['at_hm']] = inputs[
-                labels['exmp_consload']].loc[:, labels['at_hm']]
-        example_cons[labels['max_load']] = loads_df.max(axis=0).values
+        example_cons[labels["ld_id"]] = inputs[labels["exmp_consload"]].loc[
+            :, labels["ld_id"]
+        ]
+        example_cons[labels["occ"]] = inputs[labels["exmp_consload"]].loc[
+            :, labels["occ"]
+        ]
+        example_cons[labels["at_hm"]] = inputs[labels["exmp_consload"]].loc[
+            :, labels["at_hm"]
+        ]
+        example_cons[labels["max_load"]] = loads_df.max(axis=0).values
 
-        example_cons = example_cons.drop(
-            columns='index',
-            axis=1)
+        example_cons = example_cons.drop(columns="index", axis=1)
 
         if len(occupancy) != len(at_home):
-            mg = 'Occupancy and at home arrays should have the same length.'
+            mg = "Occupancy and at home arrays should have the same length."
             log.error(msg)
             raise Exception
 
         if (np.array(occupancy) > 6).any():
             occ_arr = np.array(occupancy)
             max_occ = occ_arr.max()
-            occ_arr[occ_arr > 6] = 6.
+            occ_arr[occ_arr > 6] = 6.0
             occupancy = list(occ_arr)
-            msg = 'Any occupancy above 6 is considered as occupancy of 6.'\
-            ' Maximum provided is {}. Consider aggregating loads if this is'\
-            ' of concern.'
+            msg = (
+                "Any occupancy above 6 is considered as occupancy of 6."
+                " Maximum provided is {}. Consider aggregating loads if this is"
+                " of concern."
+            )
             log.warning(msg.format(max_occ))
 
         uniq_occupancy = set(occupancy)
@@ -776,12 +914,15 @@ class SourceAndSink(object):
         uniq_at_home = set(at_home)
 
         available_example_cons = example_cons.loc[
-            (example_cons[labels['occ']].isin(uniq_occupancy)) &
-            (example_cons[labels['at_hm']].isin(uniq_at_home))]
+            (example_cons[labels["occ"]].isin(uniq_occupancy))
+            & (example_cons[labels["at_hm"]].isin(uniq_at_home))
+        ]
 
         if available_example_cons.shape[0] == 0:
-            msg = 'We don\'t have any households matching your inputs in'\
-                  ' the database.'
+            msg = (
+                "We don't have any households matching your inputs in"
+                " the database."
+            )
             log.error(meg.format)
             raise Exception
 
@@ -793,61 +934,70 @@ class SourceAndSink(object):
             at_hm = at_home[cons]
 
             pick_from = available_example_cons.loc[
-                (example_cons[labels['occ']].isin([occ])) &
-                (example_cons[labels['at_hm']].isin([at_hm]))]
+                (example_cons[labels["occ"]].isin([occ]))
+                & (example_cons[labels["at_hm"]].isin([at_hm]))
+            ]
 
             load_id = random_state.choice(
-                pick_from[labels['ld_id']].values, 1)[0]
+                pick_from[labels["ld_id"]].values, 1
+            )[0]
 
-            while ((load_id in selected_load_ids) and
-                (len(selected_load_ids) < len(
-                    pick_from[labels['ld_id']].unique()))):
+            while (load_id in selected_load_ids) and (
+                len(selected_load_ids)
+                < len(pick_from[labels["ld_id"]].unique())
+            ):
 
                 load_id = random_state.choice(
-                    pick_from[labels['ld_id']].values, 1)[0]
+                    pick_from[labels["ld_id"]].values, 1
+                )[0]
 
             selected_load_ids.append(load_id)
 
             load_row = pick_from.loc[
-                pick_from[labels['ld_id']] == load_id, :].reset_index()
+                pick_from[labels["ld_id"]] == load_id, :
+            ].reset_index()
 
         # identify indexes drawn. Note that the Load ID is
         # the same value as the index
 
         indxs = available_example_cons.loc[
-            available_example_cons[labels['ld_id']].isin(
-                selected_load_ids)].index
+            available_example_cons[labels["ld_id"]].isin(selected_load_ids)
+        ].index
 
         loading_input = available_example_cons.loc[indxs, :].reset_index()
-        loading_input[labels['load_m3']] = \
-            loading_input[labels['load_m3']].apply(lambda x: x.values)
+        loading_input[labels["load_m3"]] = loading_input[
+            labels["load_m3"]
+        ].apply(lambda x: x.values)
 
-        loading_input = loading_input.drop(
-            columns='index',
-            axis=1)
+        loading_input = loading_input.drop(columns="index", axis=1)
 
         # sort by drawn loads to have the the loading_inputs dataframe
         # rows be in order of the occupancy list. For example, first
         # number in the occupancy list corresponds the first row
         # in the loading_input dataframe.
 
-        loading_input['Load ID'] = pd.CategoricalIndex(
-            loading_input[labels['ld_id']], ordered=True,
-            categories=selected_load_ids)
+        loading_input["Load ID"] = pd.CategoricalIndex(
+            loading_input[labels["ld_id"]],
+            ordered=True,
+            categories=selected_load_ids,
+        )
 
         loading_input = loading_input.sort_values(
-            labels['ld_id']).reset_index()
+            labels["ld_id"]
+        ).reset_index()
 
-        loading_input[labels['id']] = range(1, loading_input.shape[0] + 1)
+        loading_input[labels["id"]] = range(1, loading_input.shape[0] + 1)
 
-        columns_expected_by_system_model = \
-            [labels['id'], labels['occ'], labels['load_m3']]
+        columns_expected_by_system_model = [
+            labels["id"],
+            labels["occ"],
+            labels["load_m3"],
+        ]
 
-        info_columns = [labels['id'], labels['ld_id'], labels['max_load']]
+        info_columns = [labels["id"], labels["ld_id"], labels["max_load"]]
 
         household_info = loading_input.loc[:, info_columns]
-        loading_input = loading_input.loc[
-            :, columns_expected_by_system_model]
+        loading_input = loading_input.loc[:, columns_expected_by_system_model]
 
         return loading_input, household_info
 
@@ -863,8 +1013,8 @@ class SourceAndSink(object):
                 Number of individual household occupants
         """
         if occ == 1:
-            return 20.
+            return 20.0
         if occ == 2:
-            return 35.
+            return 35.0
         else:
-            return 35. + 10. * (occ - 2.)
+            return 35.0 + 10.0 * (occ - 2.0)
