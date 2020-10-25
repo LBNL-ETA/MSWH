@@ -200,7 +200,6 @@ class SourceAndSink(object):
             ' ensure the climate zone is a number from 1-16, represented' \
             ' as a string.'
             log.error(msg.format(climate_zone))
-
             raise ValueError
 
         if (climate_zone_int > 16) | (climate_zone_int < 0):
