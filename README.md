@@ -80,10 +80,10 @@ will show users how to utilize an alternative package management system in `Pyth
 
         python -m ipykernel install --user --name mswh
 
-  Users with admin privileges can skip the `--user` flag.
+   Users with admin privileges can skip the `--user` flag.
 
-  If you have any issues with plots not being displayed when running the example notebooks,
-  please install the following:
+   If you have any issues with plots not being displayed when running the example notebooks,
+   please install the following:
 
         jupyter labextension install jupyterlab-plotly
 
