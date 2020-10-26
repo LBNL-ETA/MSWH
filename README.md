@@ -62,7 +62,7 @@ will show users how to utilize an alternative package management system in `Pyth
     With ``<path_to_env>`` as your selected folder path to store virtual
     environments.
 
-5. Now the virtual environment needs to be activated, by running one of the following commands:
+2. Now the virtual environment needs to be activated, by running one of the following commands:
 
     When using `Anaconda` or `Miniconda`:
 
@@ -76,28 +76,28 @@ will show users how to utilize an alternative package management system in `Pyth
 
     For deactivating use `conda deactivate` or `deactivate`.
 
-6.  To make use of example `Jupyter notebooks` one should have [`JupyterLab`](https://jupyter.org/install) installed. To ensure the same Python kernel can be used in a `Jupyter notebook`, activate the virtual environment and run:
+3. To make use of example `Jupyter notebooks` one should have [`JupyterLab`](https://jupyter.org/install) installed. To ensure the same Python kernel can be used in a `Jupyter notebook`, activate the virtual environment and run:
 
         python -m ipykernel install --user --name mswh
 
- Users with admin privileges can skip the `--user` flag.
+  Users with admin privileges can skip the `--user` flag.
 
- If you have any issues with plots not being displayed when running the example notebooks,
- please install the following:
+  If you have any issues with plots not being displayed when running the example notebooks,
+  please install the following:
 
         jupyter labextension install jupyterlab-plotly
 
-7. Clone the repository with:
+4. Clone the repository with:
 
         git clone https://github.com/LBNL-ETA/MSWH.git
 
-8.  To install the necessary Python packages navigate to the `setup.py` directory and run:
+5.  To install the necessary Python packages navigate to the `setup.py` directory and run:
 
         pip install -e .
 
     The `-e` flag is only necessary if one would like changes to the source code be reflected immediately (without having to rerun the `setup.py` script with every change to the source code). If you just want to run the project application, you can omit the `-e` flag.
 
-9. To use the plotting capabilities, also required when running tests, please install [`orca`](https://github.com/plotly/orca).
+6. To use the plotting capabilities, also required when running tests, please install [`orca`](https://github.com/plotly/orca).
 
 ## Django Web Framework Deployment
 
