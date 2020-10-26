@@ -76,11 +76,16 @@ will show users how to utilize an alternative package management system in `Pyth
 
     For deactivating use `conda deactivate` or `deactivate`.
 
-6.  To make use of example `Jupyter notebooks` one should have (`JupyterLab`)[https://jupyter.org/install] installed. To ensure the same Python kernel can be used in a `Jupyter notebook`, activate the virtual environment and run:
+6.  To make use of example `Jupyter notebooks` one should have [`JupyterLab`](https://jupyter.org/install) installed. To ensure the same Python kernel can be used in a `Jupyter notebook`, activate the virtual environment and run:
 
         python -m ipykernel install --user --name mswh
 
  Users with admin privileges can skip the `--user` flag.
+
+ If you have any issues with plots not being displayed when running the example notebooks,
+ please install the following:
+
+        jupyter labextension install jupyterlab-plotly
 
 7. Clone the repository with:
 
