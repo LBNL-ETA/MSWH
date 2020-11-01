@@ -1,8 +1,7 @@
 
 
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8">
   
@@ -12,27 +11,29 @@
   
 
   
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+
+  
   
   
   
 
   
-  <script type="text/javascript" src="../../../_static/js/modernizr.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../../../_static/jquery.js"></script>
-        <script type="text/javascript" src="../../../_static/underscore.js"></script>
-        <script type="text/javascript" src="../../../_static/doctools.js"></script>
-        <script type="text/javascript" src="../../../_static/language_data.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/language_data.js"></script>
     
     <script type="text/javascript" src="../../../_static/js/theme.js"></script>
 
     
-
-  
-  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" /> 
 </head>
@@ -48,7 +49,7 @@
           
 
           
-            <a href="../../../index.html" class="icon icon-home"> Multiscale Solar Water Heating
+            <a href="../../../index.html" class="icon icon-home" alt="Documentation Home"> Multiscale Solar Water Heating
           
 
           
@@ -75,6 +76,7 @@
           
         </div>
 
+        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -83,6 +85,7 @@
             
             
               <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../source/installation.html">Package Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../source/models.html">Multiscale Solar Water Heating (MSWH)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../source/modules.html">Python Code Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../source/legal.html">Copyright Notice</a></li>
@@ -92,6 +95,7 @@
             
           
         </div>
+        
       </div>
     </nav>
 
@@ -130,7 +134,7 @@
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
         
           <li><a href="../../index.html">Module code</a> &raquo;</li>
         
@@ -155,9 +159,9 @@
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 
-<span class="kn">from</span> <span class="nn">mswh.system.components</span> <span class="k">import</span> <span class="n">Converter</span><span class="p">,</span> <span class="n">Storage</span><span class="p">,</span> <span class="n">Distribution</span>
-<span class="kn">from</span> <span class="nn">mswh.tools.unit_converters</span> <span class="k">import</span> <span class="n">UnitConv</span>
-<span class="kn">from</span> <span class="nn">mswh.comm.label_map</span> <span class="k">import</span> <span class="n">SwhLabels</span>
+<span class="kn">from</span> <span class="nn">mswh.system.components</span> <span class="kn">import</span> <span class="n">Converter</span><span class="p">,</span> <span class="n">Storage</span><span class="p">,</span> <span class="n">Distribution</span>
+<span class="kn">from</span> <span class="nn">mswh.tools.unit_converters</span> <span class="kn">import</span> <span class="n">UnitConv</span>
+<span class="kn">from</span> <span class="nn">mswh.comm.label_map</span> <span class="kn">import</span> <span class="n">SwhLabels</span>
 
 <span class="n">log</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
 
@@ -228,13 +232,23 @@
 <span class="sd">    Examples:</span>
 
 <span class="sd">        See :func:`mswh.system.tests.test_components &lt;mswh.system.tests.test_components&gt;` module and</span>
-<span class="sd">        :func:`scripts/Project Level SWH System Tool.ipynb &lt;scripts/Project Level MSWH System Tool.ipynb&gt;`</span>
+<span class="sd">        :func:`scripts/MSWH System Tool.ipynb &lt;scripts/MSWH System Tool.ipynb&gt;`</span>
 <span class="sd">        for examples on how to use the methods as stand alone and</span>
 <span class="sd">        in a system model simulation.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sys_params</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">backup_params</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> \
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sys_params</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">backup_params</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> \
             <span class="n">weather</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">sys_sizes</span><span class="o">=</span><span class="mf">1.</span><span class="p">,</span> <span class="n">backup_sizes</span><span class="o">=</span><span class="mf">1.</span><span class="p">,</span> \
         <span class="n">loads</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">timestep</span><span class="o">=</span><span class="mf">1.</span><span class="p">,</span> <span class="n">log_level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">):</span>
+
+        <span class="c1"># this is to defend from using the models wihtout</span>
+        <span class="c1"># setting up the inputs as recommended</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">sys_params</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">backup_params</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">)</span> <span class="ow">and</span> \
+        <span class="p">(</span><span class="n">weather</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">loads</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">):</span>
+            <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;Please consult example setup either in the &quot;</span>\
+            <span class="s2">&quot;test suite or in the example notebooks to &quot;</span>\
+            <span class="s2">&quot;appropriatelly set up a System instance.&quot;</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span>
 
         <span class="c1"># log level (e.g. only partial functionality of the class</span>
         <span class="c1"># is being used and one does not desire to see all infos)</span>
@@ -608,8 +622,8 @@
         <span class="n">proj_total</span><span class="p">[</span><span class="n">t_columns</span><span class="p">]</span> <span class="o">=</span> <span class="n">ts_res</span><span class="p">[</span><span class="n">t_columns</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
         <span class="n">proj_total</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">r</span><span class="p">[</span><span class="s1">&#39;proj_load&#39;</span><span class="p">]]</span> <span class="o">=</span> <span class="n">ts_res</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">r</span><span class="p">[</span><span class="s1">&#39;proj_load&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
 
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">proj_total</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">r</span><span class="p">[</span><span class="s1">&#39;gas_use&#39;</span><span class="p">]]</span> <span class="o">==</span> \
-            <span class="n">backup_proj_total</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">r</span><span class="p">[</span><span class="s1">&#39;gas_use&#39;</span><span class="p">]]:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">round</span><span class="p">(</span><span class="n">proj_total</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">r</span><span class="p">[</span><span class="s1">&#39;gas_use&#39;</span><span class="p">]],</span> <span class="mi">4</span><span class="p">)</span> <span class="o">==</span> \
+            <span class="nb">round</span><span class="p">(</span><span class="n">backup_proj_total</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">r</span><span class="p">[</span><span class="s1">&#39;gas_use&#39;</span><span class="p">]],</span> <span class="mi">4</span><span class="p">):</span>
             <span class="n">msg</span> <span class="o">=</span> <span class="s1">&#39;Check project output of the backup - timestep &#39;</span>\
                   <span class="s1">&#39;sum preformed in this method and the total are &#39;</span>\
                   <span class="s1">&#39;not equal.&#39;</span>
@@ -1826,6 +1840,7 @@
 
   <div role="contentinfo">
     <p>
+        
         &copy; Copyright 
 Multiscale Solar Water Heating (MSWH) Copyright (c) 2019, The
 Regents of the University of California, through Lawrence Berkeley National
@@ -1847,7 +1862,14 @@ so.
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -1858,7 +1880,6 @@ so.
 
   </div>
   
-
 
   <script type="text/javascript">
       jQuery(function () {

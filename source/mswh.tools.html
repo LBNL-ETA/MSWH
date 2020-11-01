@@ -1,8 +1,7 @@
 
 
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8">
   
@@ -12,27 +11,29 @@
   
 
   
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
   
   
   
 
   
-  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../_static/jquery.js"></script>
-        <script type="text/javascript" src="../_static/underscore.js"></script>
-        <script type="text/javascript" src="../_static/doctools.js"></script>
-        <script type="text/javascript" src="../_static/language_data.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
     
-
-  
-  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Database Communication" href="mswh.comm.html" />
@@ -50,7 +51,7 @@
           
 
           
-            <a href="../index.html" class="icon icon-home"> Multiscale Solar Water Heating
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> Multiscale Solar Water Heating
           
 
           
@@ -77,6 +78,7 @@
           
         </div>
 
+        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -106,6 +108,7 @@
             
           
         </div>
+        
       </div>
     </nav>
 
@@ -144,7 +147,7 @@
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="../index.html">Docs</a> &raquo;</li>
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
         
           <li><a href="modules.html">Python Code Documentation</a> &raquo;</li>
         
@@ -171,9 +174,9 @@
 <h1>Tools<a class="headerlink" href="#tools" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="module-mswh.tools.plots">
 <span id="mswh-tools-plots-module"></span><h2>mswh.tools.plots module<a class="headerlink" href="#module-mswh.tools.plots" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
+<dl class="py class">
 <dt id="mswh.tools.plots.Plot">
-<em class="property">class </em><code class="descclassname">mswh.tools.plots.</code><code class="descname">Plot</code><span class="sig-paren">(</span><em>title=''</em>, <em>label_h='Time [h]'</em>, <em>label_v='Component performance'</em>, <em>data_headers=None</em>, <em>save_image=True</em>, <em>legend=True</em>, <em>outpath=''</em>, <em>duration_curve=False</em>, <em>boxmode='group'</em>, <em>notebook_mode=False</em>, <em>width=1200</em>, <em>height=800</em>, <em>fontsize=28</em>, <em>legend_x=0.4</em>, <em>legend_y=1.0</em>, <em>margin_l=200.0</em>, <em>margin_b=200.0</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mswh/tools/plots.html#Plot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mswh.tools.plots.Plot" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">mswh.tools.plots.</code><code class="sig-name descname">Plot</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">title</span><span class="o">=</span><span class="default_value">''</span></em>, <em class="sig-param"><span class="n">label_h</span><span class="o">=</span><span class="default_value">'Time [h]'</span></em>, <em class="sig-param"><span class="n">label_v</span><span class="o">=</span><span class="default_value">'Component performance'</span></em>, <em class="sig-param"><span class="n">data_headers</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">save_image</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">legend</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">outpath</span><span class="o">=</span><span class="default_value">''</span></em>, <em class="sig-param"><span class="n">duration_curve</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">boxmode</span><span class="o">=</span><span class="default_value">'group'</span></em>, <em class="sig-param"><span class="n">notebook_mode</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">width</span><span class="o">=</span><span class="default_value">1200</span></em>, <em class="sig-param"><span class="n">height</span><span class="o">=</span><span class="default_value">800</span></em>, <em class="sig-param"><span class="n">fontsize</span><span class="o">=</span><span class="default_value">28</span></em>, <em class="sig-param"><span class="n">legend_x</span><span class="o">=</span><span class="default_value">0.4</span></em>, <em class="sig-param"><span class="n">legend_y</span><span class="o">=</span><span class="default_value">1.0</span></em>, <em class="sig-param"><span class="n">margin_l</span><span class="o">=</span><span class="default_value">200.0</span></em>, <em class="sig-param"><span class="n">margin_b</span><span class="o">=</span><span class="default_value">200.0</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mswh/tools/plots.html#Plot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mswh.tools.plots.Plot" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Creates and saves plots to visualize and
 correlate arrays, usually timeseries</p>
@@ -223,9 +226,9 @@ duration_curve metric as a real</p>
 </dd>
 </dl>
 </div></blockquote>
-<dl class="method">
+<dl class="py method">
 <dt id="mswh.tools.plots.Plot.box">
-<code class="descname">box</code><span class="sig-paren">(</span><em>dfs, plot_cols=None, groupby_cols=None, df_cat=None, outfile='box.png', boxmean=False, colors=['#3D9970', '#FF4136', '#FF851B'], title='Energy Use', boxpoints='outliers'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mswh/tools/plots.html#Plot.box"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mswh.tools.plots.Plot.box" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">box</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dfs</span></em>, <em class="sig-param"><span class="n">plot_cols</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">groupby_cols</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">df_cat</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">outfile</span><span class="o">=</span><span class="default_value">'box.png'</span></em>, <em class="sig-param"><span class="n">boxmean</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">colors</span><span class="o">=</span><span class="default_value">['#3D9970', '#FF4136', '#FF851B']</span></em>, <em class="sig-param"><span class="n">title</span><span class="o">=</span><span class="default_value">'Energy Use'</span></em>, <em class="sig-param"><span class="n">boxpoints</span><span class="o">=</span><span class="default_value">'outliers'</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mswh/tools/plots.html#Plot.box"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mswh.tools.plots.Plot.box" title="Permalink to this definition">¶</a></dt>
 <dd><p>Creates box plots for the chosen <cite>plot_col</cite> and can
 group plots by the <cite>groupby_col</cite>.</p>
 <p>Parameters:</p>
@@ -254,9 +257,9 @@ Use None if x axis category not used</p>
 </div></blockquote>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="mswh.tools.plots.Plot.scatter">
-<code class="descname">scatter</code><span class="sig-paren">(</span><em>data</em>, <em>outfile='scatter.png'</em>, <em>modes='lines+markers'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mswh/tools/plots.html#Plot.scatter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mswh.tools.plots.Plot.scatter" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">scatter</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">data</span></em>, <em class="sig-param"><span class="n">outfile</span><span class="o">=</span><span class="default_value">'scatter.png'</span></em>, <em class="sig-param"><span class="n">modes</span><span class="o">=</span><span class="default_value">'lines+markers'</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mswh/tools/plots.html#Plot.scatter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mswh.tools.plots.Plot.scatter" title="Permalink to this definition">¶</a></dt>
 <dd><p>Creates a scatter plot</p>
 <p>Parameters:</p>
 <blockquote>
@@ -286,9 +289,9 @@ a list of the above to assign to each plot
 </div></blockquote>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="mswh.tools.plots.Plot.series">
-<code class="descname">series</code><span class="sig-paren">(</span><em>data</em>, <em>index_in_a_column=None</em>, <em>outfile='series.png'</em>, <em>modes='lines+markers'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mswh/tools/plots.html#Plot.series"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mswh.tools.plots.Plot.series" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">series</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">data</span></em>, <em class="sig-param"><span class="n">index_in_a_column</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">outfile</span><span class="o">=</span><span class="default_value">'series.png'</span></em>, <em class="sig-param"><span class="n">modes</span><span class="o">=</span><span class="default_value">'lines+markers'</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mswh/tools/plots.html#Plot.series"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mswh.tools.plots.Plot.series" title="Permalink to this definition">¶</a></dt>
 <dd><p>Plots all series data against either the index or the first
 provided series. It can sort the data and plot the duration_curve.</p>
 <p>Parameters:</p>
@@ -296,12 +299,12 @@ provided series. It can sort the data and plot the duration_curve.</p>
 <div><dl>
 <dt>data: array/list, pd series, list of arrays/lists, pd df</dt><dd><p>Provide an array or a list if plotting a single
 variable. If plotting multiple variables provide
-a list of arrays or a pandas dataframe.
-Horizontal axis corresponds to:</p>
+a list of arrays or a pandas dataframe.</p>
+<p>Horizontal axis corresponds to:</p>
 <blockquote>
 <div><ul class="simple">
 <li><p>if pd df: the index of the dataframe or the first columns of the dataframe</p></li>
-<li><p>if list or arrays/lists: a range or array lenth or the first array/list in the list</p></li>
+<li><p>if list or arrays/lists: a range of array length of the first array/list in the list</p></li>
 </ul>
 </div></blockquote>
 <p>All arrays in the list need to have the same length.</p>
@@ -334,9 +337,9 @@ index_in_a_column is not None</p>
 </div>
 <div class="section" id="module-mswh.tools.unit_converters">
 <span id="mswh-tools-unit-converters-module"></span><h2>mswh.tools.unit_converters module<a class="headerlink" href="#module-mswh.tools.unit_converters" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
+<dl class="py class">
 <dt id="mswh.tools.unit_converters.UnitConv">
-<em class="property">class </em><code class="descclassname">mswh.tools.unit_converters.</code><code class="descname">UnitConv</code><span class="sig-paren">(</span><em>x_in</em>, <em>scale_in=1.0</em>, <em>scale_out=1.0</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mswh/tools/unit_converters.html#UnitConv"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mswh.tools.unit_converters.UnitConv" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">mswh.tools.unit_converters.</code><code class="sig-name descname">UnitConv</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">x_in</span></em>, <em class="sig-param"><span class="n">scale_in</span><span class="o">=</span><span class="default_value">1.0</span></em>, <em class="sig-param"><span class="n">scale_out</span><span class="o">=</span><span class="default_value">1.0</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mswh/tools/unit_converters.html#UnitConv"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mswh.tools.unit_converters.UnitConv" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Unit conversions using conversion parameters from
 ASHRAE Fundamentals 2017.</p>
@@ -346,31 +349,31 @@ ASHRAE Fundamentals 2017.</p>
 </dd>
 <dt>scale_in: str or 1.</dt><dd><p>Scale of the input value, options: ‘k’, ‘kilo’,
 ‘mega’, ‘million’, ‘M’, ‘MM’, ‘giga’, ‘G’, ‘tera’, ‘T’,
-‘peta’, ‘P’, ‘mili’, ‘micro’.
+‘peta’, ‘P’, ‘milli’, ‘micro’.
 Default: 1.</p>
 </dd>
 <dt>scale_out: str or 1.</dt><dd><p>Scale of the input value, options: ‘k’, ‘kilo’,
 ‘mega’, ‘million’, ‘M’, ‘MM’, ‘giga’, ‘G’, ‘tera’, ‘T’,
-‘peta’, ‘P’, ‘mili’, ‘m’, ‘micro’.
+‘peta’, ‘P’, ‘milli’, ‘m’, ‘micro’.
 Default: 1.</p>
 </dd>
 </dl>
 <p>Examples:</p>
 <p>To convert temperature from degF to degC</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">t_in_degC</span> <span class="o">=</span> <span class="n">UnitConv</span><span class="p">(</span><span class="n">t_in_degF</span><span class="p">)</span><span class="o">.</span><span class="n">degF_degC</span><span class="p">(</span><span class="n">unit_in</span><span class="o">=</span><span class="s1">&#39;degF&#39;</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">t_in_degC</span> <span class="o">=</span> <span class="n">UnitConv</span><span class="p">(</span><span class="n">t_in_degF</span><span class="p">)</span><span class="o">.</span><span class="n">degF_degC</span><span class="p">(</span><span class="n">unit_in</span><span class="o">=</span><span class="s1">&#39;degF&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>To convert power in hp to kW:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">p_in_kW</span> <span class="o">=</span> <span class="n">UnitConv</span><span class="p">(</span><span class="n">p_in_hp</span><span class="p">,</span> <span class="n">scale_out</span><span class="o">=</span><span class="s1">&#39;kilo&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">hp_W</span><span class="p">(</span><span class="n">unit_in</span><span class="o">=</span><span class="s1">&#39;hp&#39;</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">p_in_kW</span> <span class="o">=</span> <span class="n">UnitConv</span><span class="p">(</span><span class="n">p_in_hp</span><span class="p">,</span> <span class="n">scale_out</span><span class="o">=</span><span class="s1">&#39;kilo&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">hp_W</span><span class="p">(</span><span class="n">unit_in</span><span class="o">=</span><span class="s1">&#39;hp&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>To convert energy from GJ to MMBtu:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">e_MMBtu</span> <span class="o">=</span> <span class="n">UnitConv</span><span class="p">(</span><span class="n">e_GJ</span><span class="p">,</span> <span class="n">scale_in</span><span class="o">=</span><span class="s1">&#39;G&#39;</span><span class="p">,</span> <span class="n">scale_out</span><span class="o">=</span><span class="s1">&#39;MM&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">Btu_J</span><span class="p">(</span><span class="n">unit_in</span><span class="o">=</span><span class="s1">&#39;J&#39;</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">e_MMBtu</span> <span class="o">=</span> <span class="n">UnitConv</span><span class="p">(</span><span class="n">e_GJ</span><span class="p">,</span> <span class="n">scale_in</span><span class="o">=</span><span class="s1">&#39;G&#39;</span><span class="p">,</span> <span class="n">scale_out</span><span class="o">=</span><span class="s1">&#39;MM&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">Btu_J</span><span class="p">(</span><span class="n">unit_in</span><span class="o">=</span><span class="s1">&#39;J&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<dl class="method">
+<dl class="py method">
 <dt id="mswh.tools.unit_converters.UnitConv.Btu_J">
-<code class="descname">Btu_J</code><span class="sig-paren">(</span><em>unit_in='Btu'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mswh/tools/unit_converters.html#UnitConv.Btu_J"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mswh.tools.unit_converters.UnitConv.Btu_J" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">Btu_J</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">unit_in</span><span class="o">=</span><span class="default_value">'Btu'</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mswh/tools/unit_converters.html#UnitConv.Btu_J"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mswh.tools.unit_converters.UnitConv.Btu_J" title="Permalink to this definition">¶</a></dt>
 <dd><p>Converts work / energy / heat content between Btu and joule</p>
 <p>Parameters:</p>
 <blockquote>
@@ -390,9 +393,9 @@ Default: 1.</p>
 </div></blockquote>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="mswh.tools.unit_converters.UnitConv.Wh_J">
-<code class="descname">Wh_J</code><span class="sig-paren">(</span><em>unit_in='J'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mswh/tools/unit_converters.html#UnitConv.Wh_J"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mswh.tools.unit_converters.UnitConv.Wh_J" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">Wh_J</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">unit_in</span><span class="o">=</span><span class="default_value">'J'</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mswh/tools/unit_converters.html#UnitConv.Wh_J"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mswh.tools.unit_converters.UnitConv.Wh_J" title="Permalink to this definition">¶</a></dt>
 <dd><p>Converts work / energy / heat content between watthour and joule</p>
 <p>Parameters:</p>
 <blockquote>
@@ -412,9 +415,9 @@ Default: 1.</p>
 </div></blockquote>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="mswh.tools.unit_converters.UnitConv.degC_K">
-<code class="descname">degC_K</code><span class="sig-paren">(</span><em>unit_in='degC'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mswh/tools/unit_converters.html#UnitConv.degC_K"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mswh.tools.unit_converters.UnitConv.degC_K" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">degC_K</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">unit_in</span><span class="o">=</span><span class="default_value">'degC'</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mswh/tools/unit_converters.html#UnitConv.degC_K"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mswh.tools.unit_converters.UnitConv.degC_K" title="Permalink to this definition">¶</a></dt>
 <dd><p>Converts temperature between degree Celsius and Kelvin</p>
 <p>Parameters:</p>
 <blockquote>
@@ -432,9 +435,9 @@ Default: 1.</p>
 </div></blockquote>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="mswh.tools.unit_converters.UnitConv.degF_degC">
-<code class="descname">degF_degC</code><span class="sig-paren">(</span><em>unit_in='degF'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mswh/tools/unit_converters.html#UnitConv.degF_degC"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mswh.tools.unit_converters.UnitConv.degF_degC" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">degF_degC</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">unit_in</span><span class="o">=</span><span class="default_value">'degF'</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mswh/tools/unit_converters.html#UnitConv.degF_degC"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mswh.tools.unit_converters.UnitConv.degF_degC" title="Permalink to this definition">¶</a></dt>
 <dd><p>Converts temperature between degree Fahrenheit and Celsius</p>
 <p>Parameters:</p>
 <blockquote>
@@ -452,9 +455,9 @@ Default: 1.</p>
 </div></blockquote>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="mswh.tools.unit_converters.UnitConv.ft_m">
-<code class="descname">ft_m</code><span class="sig-paren">(</span><em>unit_in='ft'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mswh/tools/unit_converters.html#UnitConv.ft_m"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mswh.tools.unit_converters.UnitConv.ft_m" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">ft_m</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">unit_in</span><span class="o">=</span><span class="default_value">'ft'</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mswh/tools/unit_converters.html#UnitConv.ft_m"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mswh.tools.unit_converters.UnitConv.ft_m" title="Permalink to this definition">¶</a></dt>
 <dd><p>Converts length between foot
 and meter</p>
 <p>Parameters:</p>
@@ -475,9 +478,9 @@ and meter</p>
 </div></blockquote>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="mswh.tools.unit_converters.UnitConv.hp_W">
-<code class="descname">hp_W</code><span class="sig-paren">(</span><em>unit_in='hp'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mswh/tools/unit_converters.html#UnitConv.hp_W"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mswh.tools.unit_converters.UnitConv.hp_W" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">hp_W</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">unit_in</span><span class="o">=</span><span class="default_value">'hp'</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mswh/tools/unit_converters.html#UnitConv.hp_W"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mswh.tools.unit_converters.UnitConv.hp_W" title="Permalink to this definition">¶</a></dt>
 <dd><p>Converts power between watt and horsepower</p>
 <p>Parameters:</p>
 <blockquote>
@@ -495,9 +498,9 @@ and meter</p>
 </div></blockquote>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="mswh.tools.unit_converters.UnitConv.m3_gal">
-<code class="descname">m3_gal</code><span class="sig-paren">(</span><em>unit_in='gal'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mswh/tools/unit_converters.html#UnitConv.m3_gal"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mswh.tools.unit_converters.UnitConv.m3_gal" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">m3_gal</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">unit_in</span><span class="o">=</span><span class="default_value">'gal'</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mswh/tools/unit_converters.html#UnitConv.m3_gal"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mswh.tools.unit_converters.UnitConv.m3_gal" title="Permalink to this definition">¶</a></dt>
 <dd><p>Converts volume between cubic meter and gallon</p>
 <p>Parameters:</p>
 <blockquote>
@@ -515,9 +518,9 @@ and meter</p>
 </div></blockquote>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="mswh.tools.unit_converters.UnitConv.m3perh_m3pers">
-<code class="descname">m3perh_m3pers</code><span class="sig-paren">(</span><em>unit_in='m3perh'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mswh/tools/unit_converters.html#UnitConv.m3perh_m3pers"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mswh.tools.unit_converters.UnitConv.m3perh_m3pers" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">m3perh_m3pers</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">unit_in</span><span class="o">=</span><span class="default_value">'m3perh'</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mswh/tools/unit_converters.html#UnitConv.m3perh_m3pers"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mswh.tools.unit_converters.UnitConv.m3perh_m3pers" title="Permalink to this definition">¶</a></dt>
 <dd><p>Converts volume flow between cubic meter
 per hour and cubic meter per second</p>
 <p>Parameters:</p>
@@ -538,9 +541,9 @@ per hour and cubic meter per second</p>
 </div></blockquote>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="mswh.tools.unit_converters.UnitConv.sqft_m2">
-<code class="descname">sqft_m2</code><span class="sig-paren">(</span><em>unit_in='sqft'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mswh/tools/unit_converters.html#UnitConv.sqft_m2"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mswh.tools.unit_converters.UnitConv.sqft_m2" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">sqft_m2</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">unit_in</span><span class="o">=</span><span class="default_value">'sqft'</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mswh/tools/unit_converters.html#UnitConv.sqft_m2"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mswh.tools.unit_converters.UnitConv.sqft_m2" title="Permalink to this definition">¶</a></dt>
 <dd><p>Converts area between square foot
 and square meter</p>
 <p>Parameters:</p>
@@ -561,9 +564,9 @@ and square meter</p>
 </div></blockquote>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="mswh.tools.unit_converters.UnitConv.therm_J">
-<code class="descname">therm_J</code><span class="sig-paren">(</span><em>unit_in='therm'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mswh/tools/unit_converters.html#UnitConv.therm_J"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mswh.tools.unit_converters.UnitConv.therm_J" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">therm_J</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">unit_in</span><span class="o">=</span><span class="default_value">'therm'</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mswh/tools/unit_converters.html#UnitConv.therm_J"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mswh.tools.unit_converters.UnitConv.therm_J" title="Permalink to this definition">¶</a></dt>
 <dd><p>Converts work / energy / heat content between therm and joule</p>
 <p>Parameters:</p>
 <blockquote>
@@ -585,9 +588,9 @@ and square meter</p>
 
 </dd></dl>
 
-<dl class="class">
+<dl class="py class">
 <dt id="mswh.tools.unit_converters.Utility">
-<em class="property">class </em><code class="descclassname">mswh.tools.unit_converters.</code><code class="descname">Utility</code><span class="sig-paren">(</span><em>quantity_in</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mswh/tools/unit_converters.html#Utility"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mswh.tools.unit_converters.Utility" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">mswh.tools.unit_converters.</code><code class="sig-name descname">Utility</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">quantity_in</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mswh/tools/unit_converters.html#Utility"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mswh.tools.unit_converters.Utility" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Converts gas or electricity
 consumption into commonly used units.</p>
@@ -599,9 +602,9 @@ E.g. gas use in kJ</p>
 </dd>
 </dl>
 </div></blockquote>
-<dl class="method">
+<dl class="py method">
 <dt id="mswh.tools.unit_converters.Utility.gas">
-<code class="descname">gas</code><span class="sig-paren">(</span><em>unit_in='kJ'</em>, <em>unit_out='MMBtu'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mswh/tools/unit_converters.html#Utility.gas"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mswh.tools.unit_converters.Utility.gas" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">gas</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">unit_in</span><span class="o">=</span><span class="default_value">'kJ'</span></em>, <em class="sig-param"><span class="n">unit_out</span><span class="o">=</span><span class="default_value">'MMBtu'</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mswh/tools/unit_converters.html#Utility.gas"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mswh.tools.unit_converters.Utility.gas" title="Permalink to this definition">¶</a></dt>
 <dd><p>Converts gas consumption.</p>
 <p>Parameters:</p>
 <blockquote>
@@ -610,7 +613,8 @@ E.g. gas use in kJ</p>
 to be converted.
 Options: ‘kWh’, ‘kJ’</p>
 </dd>
-<dt>unit_out: string</dt><dd><p>Desired output unit</p>
+<dt>unit_out: string</dt><dd><p>Desired output unit
+Options: ‘m3’, ‘cf’, ‘therm’, ‘MMBtu’</p>
 </dd>
 </dl>
 </div></blockquote>
@@ -648,6 +652,7 @@ Options: ‘kWh’, ‘kJ’</p>
 
   <div role="contentinfo">
     <p>
+        
         &copy; Copyright 
 Multiscale Solar Water Heating (MSWH) Copyright (c) 2019, The
 Regents of the University of California, through Lawrence Berkeley National
@@ -669,7 +674,14 @@ so.
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -680,7 +692,6 @@ so.
 
   </div>
   
-
 
   <script type="text/javascript">
       jQuery(function () {

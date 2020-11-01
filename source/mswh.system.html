@@ -1,8 +1,7 @@
 
 
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8">
   
@@ -12,27 +11,29 @@
   
 
   
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
   
   
   
 
   
-  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../_static/jquery.js"></script>
-        <script type="text/javascript" src="../_static/underscore.js"></script>
-        <script type="text/javascript" src="../_static/doctools.js"></script>
-        <script type="text/javascript" src="../_static/language_data.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
     
-
-  
-  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Tools" href="mswh.tools.html" />
@@ -50,7 +51,7 @@
           
 
           
-            <a href="../index.html" class="icon icon-home"> Multiscale Solar Water Heating
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> Multiscale Solar Water Heating
           
 
           
@@ -77,6 +78,7 @@
           
         </div>
 
+        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -107,6 +109,7 @@
             
           
         </div>
+        
       </div>
     </nav>
 
@@ -145,7 +148,7 @@
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="../index.html">Docs</a> &raquo;</li>
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
         
           <li><a href="modules.html">Python Code Documentation</a> &raquo;</li>
         
@@ -172,9 +175,9 @@
 <h1>System and Component Models<a class="headerlink" href="#system-and-component-models" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="module-mswh.system.components">
 <span id="mswh-system-components-module"></span><h2>mswh.system.components module<a class="headerlink" href="#module-mswh.system.components" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
+<dl class="py class">
 <dt id="mswh.system.components.Converter">
-<em class="property">class </em><code class="descclassname">mswh.system.components.</code><code class="descname">Converter</code><span class="sig-paren">(</span><em>params=None</em>, <em>weather=None</em>, <em>sizes=1.0</em>, <em>log_level=10</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mswh/system/components.html#Converter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mswh.system.components.Converter" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">mswh.system.components.</code><code class="sig-name descname">Converter</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">params</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">weather</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">sizes</span><span class="o">=</span><span class="default_value">1.0</span></em>, <em class="sig-param"><span class="n">log_level</span><span class="o">=</span><span class="default_value">10</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mswh/system/components.html#Converter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mswh.system.components.Converter" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Contains energy converter models, such as
 solar collectors, electric resistance heaters, gas burners,
@@ -188,7 +191,7 @@ timestep of component performance.</p>
 <dt>params: pd df</dt><dd><p>Component performance parameters per project
 Default: None (default model parameters will get used)</p>
 </dd>
-<dt>weather: pd df</dt><dd><p>Weather data timeseeries with columns: amb. temp,
+<dt>weather: pd df</dt><dd><p>Weather data timeseries with columns: amb. temp,
 solar irradiation. Number of rows equals the number of timesteps.
 Default: None (constant values will be set - use for
 a single timestep calculation, or if passing arguments
@@ -220,9 +223,9 @@ can be used outside of this framework.</p>
 for examples on how to use the methods as stand alone and
 in a system model simulation.</p>
 </div></blockquote>
-<dl class="method">
+<dl class="py method">
 <dt id="mswh.system.components.Converter.electric_resistance">
-<code class="descname">electric_resistance</code><span class="sig-paren">(</span><em>Q_dem</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mswh/system/components.html#Converter.electric_resistance"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mswh.system.components.Converter.electric_resistance" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">electric_resistance</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">Q_dem</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mswh/system/components.html#Converter.electric_resistance"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mswh.system.components.Converter.electric_resistance" title="Permalink to this definition">¶</a></dt>
 <dd><p>Electric resistance heater model. Can be
 used both as an instantaneous electric WH and as
 an auxiliary heater within the thermal tank.</p>
@@ -249,9 +252,9 @@ array - unmet demand heat rate, [W]</p></li>
 </div></blockquote>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="mswh.system.components.Converter.gas_burner">
-<code class="descname">gas_burner</code><span class="sig-paren">(</span><em>Q_dem</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mswh/system/components.html#Converter.gas_burner"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mswh.system.components.Converter.gas_burner" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">gas_burner</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">Q_dem</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mswh/system/components.html#Converter.gas_burner"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mswh.system.components.Converter.gas_burner" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gas burner model. Used both
 as an instantaneous gas WH and as a
 gas backup for solar thermal.</p>
@@ -279,9 +282,9 @@ using unit_converters.Utility class</p>
 </div></blockquote>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="mswh.system.components.Converter.heat_pump">
-<code class="descname">heat_pump</code><span class="sig-paren">(</span><em>T_wet_bulb</em>, <em>T_tank</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mswh/system/components.html#Converter.heat_pump"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mswh.system.components.Converter.heat_pump" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">heat_pump</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">T_wet_bulb</span></em>, <em class="sig-param"><span class="n">T_tank</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mswh/system/components.html#Converter.heat_pump"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mswh.system.components.Converter.heat_pump" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the current heating performance and electricity usage
 in the current conditions depending on wet bulb temperature,
 average tank water temperature, and the rated heating performance.</p>
@@ -326,9 +329,9 @@ capacity curve [1/degC2]</p>
 </div></blockquote>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="mswh.system.components.Converter.photovoltaic">
-<code class="descname">photovoltaic</code><span class="sig-paren">(</span><em>use_p_peak=True</em>, <em>inc_rad=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mswh/system/components.html#Converter.photovoltaic"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mswh.system.components.Converter.photovoltaic" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">photovoltaic</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">use_p_peak</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">inc_rad</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mswh/system/components.html#Converter.photovoltaic"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mswh.system.components.Converter.photovoltaic" title="Permalink to this definition">¶</a></dt>
 <dd><p>Photovoltaic model</p>
 <p>Parameters:</p>
 <blockquote>
@@ -351,14 +354,14 @@ the pv panel (instead of area and efficiency)</p>
 </div></blockquote>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py method">
 <dt id="mswh.system.components.Converter.size">
-<code class="descname">size</code><a class="headerlink" href="#mswh.system.components.Converter.size" title="Permalink to this definition">¶</a></dt>
+<em class="property">property </em><code class="sig-name descname">size</code><a class="headerlink" href="#mswh.system.components.Converter.size" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="mswh.system.components.Converter.solar_collector">
-<code class="descname">solar_collector</code><span class="sig-paren">(</span><em>t_in</em>, <em>t_amb=None</em>, <em>inc_rad=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mswh/system/components.html#Converter.solar_collector"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mswh.system.components.Converter.solar_collector" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">solar_collector</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">t_in</span></em>, <em class="sig-param"><span class="n">t_amb</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">inc_rad</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mswh/system/components.html#Converter.solar_collector"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mswh.system.components.Converter.solar_collector" title="Permalink to this definition">¶</a></dt>
 <dd><p>Two commonly used empirical instantaneous collector
 efficiency models based on test data from standard
 test procedures (SRCC, ISO9806), found in
@@ -392,16 +395,16 @@ Default: None (to use data extracted from the weather df)</p>
 </div></blockquote>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py method">
 <dt id="mswh.system.components.Converter.weather">
-<code class="descname">weather</code><a class="headerlink" href="#mswh.system.components.Converter.weather" title="Permalink to this definition">¶</a></dt>
+<em class="property">property </em><code class="sig-name descname">weather</code><a class="headerlink" href="#mswh.system.components.Converter.weather" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
-<dl class="class">
+<dl class="py class">
 <dt id="mswh.system.components.Distribution">
-<em class="property">class </em><code class="descclassname">mswh.system.components.</code><code class="descname">Distribution</code><span class="sig-paren">(</span><em>params=None</em>, <em>sizes=1.0</em>, <em>fluid_medium='water'</em>, <em>timestep=1.0</em>, <em>log_level=10</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mswh/system/components.html#Distribution"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mswh.system.components.Distribution" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">mswh.system.components.</code><code class="sig-name descname">Distribution</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">params</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">sizes</span><span class="o">=</span><span class="default_value">1.0</span></em>, <em class="sig-param"><span class="n">fluid_medium</span><span class="o">=</span><span class="default_value">'water'</span></em>, <em class="sig-param"><span class="n">timestep</span><span class="o">=</span><span class="default_value">1.0</span></em>, <em class="sig-param"><span class="n">log_level</span><span class="o">=</span><span class="default_value">10</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mswh/system/components.html#Distribution"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mswh.system.components.Distribution" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Describes performance of distribution system components.</p>
 <dl class="simple">
@@ -431,9 +434,9 @@ can be used outside of this framework.</p>
 <div><p>See <code class="xref py py-func docutils literal notranslate"><span class="pre">mswh.system.tests.test_components</span></code> module and
 for examples on how to use the methods.</p>
 </div></blockquote>
-<dl class="method">
+<dl class="py method">
 <dt id="mswh.system.components.Distribution.pipe_losses">
-<code class="descname">pipe_losses</code><span class="sig-paren">(</span><em>T_in=333.15</em>, <em>T_amb=293.15</em>, <em>V_tap=0.05</em>, <em>max_V_tap=0.1514</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mswh/system/components.html#Distribution.pipe_losses"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mswh.system.components.Distribution.pipe_losses" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">pipe_losses</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">T_in</span><span class="o">=</span><span class="default_value">333.15</span></em>, <em class="sig-param"><span class="n">T_amb</span><span class="o">=</span><span class="default_value">293.15</span></em>, <em class="sig-param"><span class="n">V_tap</span><span class="o">=</span><span class="default_value">0.05</span></em>, <em class="sig-param"><span class="n">max_V_tap</span><span class="o">=</span><span class="default_value">0.1514</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mswh/system/components.html#Distribution.pipe_losses"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mswh.system.components.Distribution.pipe_losses" title="Permalink to this definition">¶</a></dt>
 <dd><p>Thermal losses from distribution pipes.</p>
 <p>Parameters:</p>
 <blockquote>
@@ -457,9 +460,9 @@ for examples on how to use the methods.</p>
 </div></blockquote>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="mswh.system.components.Distribution.pump">
-<code class="descname">pump</code><span class="sig-paren">(</span><em>on_array=array([1.</em>, <em>1.</em>, <em>1.</em>, <em>...</em>, <em>1.</em>, <em>1.</em>, <em>1.])</em>, <em>role='solar'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mswh/system/components.html#Distribution.pump"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mswh.system.components.Distribution.pump" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">pump</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">on_array</span><span class="o">=</span><span class="default_value">array([1.0, 1.0, 1.0, ..., 1.0, 1.0, 1.0])</span></em>, <em class="sig-param"><span class="n">role</span><span class="o">=</span><span class="default_value">'solar'</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mswh/system/components.html#Distribution.pump"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mswh.system.components.Distribution.pump" title="Permalink to this definition">¶</a></dt>
 <dd><p>Solar and distribution pump energy use.
 Assumes a fixed speed pump.</p>
 <p>Parameters:</p>
@@ -480,16 +483,16 @@ Default: np.ones(8760) - on for a year in hourly timesteps.</p>
 </div></blockquote>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py method">
 <dt id="mswh.system.components.Distribution.size">
-<code class="descname">size</code><a class="headerlink" href="#mswh.system.components.Distribution.size" title="Permalink to this definition">¶</a></dt>
+<em class="property">property </em><code class="sig-name descname">size</code><a class="headerlink" href="#mswh.system.components.Distribution.size" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
-<dl class="class">
+<dl class="py class">
 <dt id="mswh.system.components.Storage">
-<em class="property">class </em><code class="descclassname">mswh.system.components.</code><code class="descname">Storage</code><span class="sig-paren">(</span><em>params=None</em>, <em>size=1.0</em>, <em>type='sol_tank'</em>, <em>timestep=1.0</em>, <em>log_level=10</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mswh/system/components.html#Storage"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mswh.system.components.Storage" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">mswh.system.components.</code><code class="sig-name descname">Storage</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">params</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">size</span><span class="o">=</span><span class="default_value">1.0</span></em>, <em class="sig-param"><span class="n">type</span><span class="o">=</span><span class="default_value">'sol_tank'</span></em>, <em class="sig-param"><span class="n">timestep</span><span class="o">=</span><span class="default_value">1.0</span></em>, <em class="sig-param"><span class="n">log_level</span><span class="o">=</span><span class="default_value">10</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mswh/system/components.html#Storage"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mswh.system.components.Storage" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Describes performance of storage components, such as
 solar thermal tank, heat pump thermal tank, conventional gas
@@ -537,19 +540,19 @@ messages and ignore INFO, DEBUG and WARNING.</p>
 <p>Examples:</p>
 <blockquote>
 <div><p>See <code class="xref py py-func docutils literal notranslate"><span class="pre">mswh.system.tests.test_components</span></code> module and
-<code class="xref py py-func docutils literal notranslate"><span class="pre">scripts/Project</span> <span class="pre">Level</span> <span class="pre">SWH</span> <span class="pre">System</span> <span class="pre">Tool.ipynb</span></code>
+<code class="xref py py-func docutils literal notranslate"><span class="pre">scripts/MSWH</span> <span class="pre">System</span> <span class="pre">Tool.ipynb</span></code>
 for examples on how to use the methods as stand alone and
 in a system model simulation.</p>
 </div></blockquote>
-<dl class="method">
+<dl class="py method">
 <dt id="mswh.system.components.Storage.electric_tank_wh">
-<code class="descname">electric_tank_wh</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mswh/system/components.html#Storage.electric_tank_wh"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mswh.system.components.Storage.electric_tank_wh" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">electric_tank_wh</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mswh/system/components.html#Storage.electric_tank_wh"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mswh.system.components.Storage.electric_tank_wh" title="Permalink to this definition">¶</a></dt>
 <dd><p>Currently not implemented.</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="mswh.system.components.Storage.gas_tank_wh">
-<code class="descname">gas_tank_wh</code><span class="sig-paren">(</span><em>V_draw</em>, <em>T_feed</em>, <em>T_amb=291.48</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mswh/system/components.html#Storage.gas_tank_wh"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mswh.system.components.Storage.gas_tank_wh" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">gas_tank_wh</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">V_draw</span></em>, <em class="sig-param"><span class="n">T_feed</span></em>, <em class="sig-param"><span class="n">T_amb</span><span class="o">=</span><span class="default_value">291.48</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mswh/system/components.html#Storage.gas_tank_wh"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mswh.system.components.Storage.gas_tank_wh" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gas storage water heater model
 (<cite>_gas_tank_wh</cite>) wrapper.</p>
 <p>Parameters:</p>
@@ -588,15 +591,15 @@ tanks that are not appropriately sized.</p>
 </div></blockquote>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="mswh.system.components.Storage.setup_electric">
-<code class="descname">setup_electric</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mswh/system/components.html#Storage.setup_electric"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mswh.system.components.Storage.setup_electric" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">setup_electric</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mswh/system/components.html#Storage.setup_electric"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mswh.system.components.Storage.setup_electric" title="Permalink to this definition">¶</a></dt>
 <dd><p>Currently not implemented.</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="mswh.system.components.Storage.setup_thermal">
-<code class="descname">setup_thermal</code><span class="sig-paren">(</span><em>medium='water'</em>, <em>split_tank=True</em>, <em>vol_fra_upper=0.5</em>, <em>h_vs_r=6.0</em>, <em>dT_param=2.0</em>, <em>T_max=344.15</em>, <em>T_draw_set=322.04</em>, <em>insul_thickness=0.085</em>, <em>spec_hea_cond=0.04</em>, <em>coil_eff=0.84</em>, <em>tank_re=0.76</em>, <em>dT_err_max=2.0</em>, <em>gas_heater_autosize=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mswh/system/components.html#Storage.setup_thermal"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mswh.system.components.Storage.setup_thermal" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">setup_thermal</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">medium</span><span class="o">=</span><span class="default_value">'water'</span></em>, <em class="sig-param"><span class="n">split_tank</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">vol_fra_upper</span><span class="o">=</span><span class="default_value">0.5</span></em>, <em class="sig-param"><span class="n">h_vs_r</span><span class="o">=</span><span class="default_value">6.0</span></em>, <em class="sig-param"><span class="n">dT_param</span><span class="o">=</span><span class="default_value">2.0</span></em>, <em class="sig-param"><span class="n">T_max</span><span class="o">=</span><span class="default_value">344.15</span></em>, <em class="sig-param"><span class="n">T_draw_set</span><span class="o">=</span><span class="default_value">322.04</span></em>, <em class="sig-param"><span class="n">insul_thickness</span><span class="o">=</span><span class="default_value">0.085</span></em>, <em class="sig-param"><span class="n">spec_hea_cond</span><span class="o">=</span><span class="default_value">0.04</span></em>, <em class="sig-param"><span class="n">coil_eff</span><span class="o">=</span><span class="default_value">0.84</span></em>, <em class="sig-param"><span class="n">tank_re</span><span class="o">=</span><span class="default_value">0.76</span></em>, <em class="sig-param"><span class="n">dT_err_max</span><span class="o">=</span><span class="default_value">2.0</span></em>, <em class="sig-param"><span class="n">gas_heater_autosize</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mswh/system/components.html#Storage.setup_thermal"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mswh.system.components.Storage.setup_thermal" title="Permalink to this definition">¶</a></dt>
 <dd><p>Sets thermal storage variables related to:</p>
 <ul class="simple">
 <li><p>loss calculation</p></li>
@@ -607,6 +610,10 @@ tank volumes (upper and lower)</p></li>
 <blockquote>
 <div><dl class="simple">
 <dt>medimum: string</dt><dd><p>Storage medium (for thermal defaults to ‘water’)</p>
+</dd>
+<dt>split_tank: boolean</dt><dd><p>If true, the tank is observed as two volumes,
+upper and lower tank volume. If false,
+the tank is observed as a single tank</p>
 </dd>
 <dt>vol_fra_upper: float</dt><dd><p>Fraction of storage volume assigned to the upper
 tank volume (applies to ‘thermal’ only)
@@ -629,6 +636,14 @@ storage tank, defaults to 344.15 K = 71 degC.</p>
 load calculation, defaults to
 120 degF = 322.04 K = 48.89 degC</p>
 </dd>
+<dt>insul_thickness: float, m</dt><dd><p>Insulation thickness
+Default: .04 m (1-2 inch gas,
+2-3 inch electric, <a href="#id1"><span class="problematic" id="id2">:from:`DOE WH rule`</span></a>)</p>
+</dd>
+<dt>spec_hea_cond: float, W/mK</dt><dd><p>Specific heat conductivity
+of the insulation
+Default: .04 W/mK (:from library:<cite>ModelicaBuidlings</cite>)</p>
+</dd>
 <dt>coil_eff: float</dt><dd><p>Simplified efficiency of the coil heat exchanger
 Used in modeling of indirect coil-in-tank water heaters
 It excludes the approach temperature and represents
@@ -648,14 +663,14 @@ autosized based on the tank volume</p>
 </div></blockquote>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py method">
 <dt id="mswh.system.components.Storage.size">
-<code class="descname">size</code><a class="headerlink" href="#mswh.system.components.Storage.size" title="Permalink to this definition">¶</a></dt>
+<em class="property">property </em><code class="sig-name descname">size</code><a class="headerlink" href="#mswh.system.components.Storage.size" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="mswh.system.components.Storage.tap">
-<code class="descname">tap</code><span class="sig-paren">(</span><em>V_draw_load</em>, <em>T_tank</em>, <em>T_feed</em>, <em>dT_loss=0.0</em>, <em>T_draw_min=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mswh/system/components.html#Storage.tap"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mswh.system.components.Storage.tap" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">tap</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">V_draw_load</span></em>, <em class="sig-param"><span class="n">T_tank</span></em>, <em class="sig-param"><span class="n">T_feed</span></em>, <em class="sig-param"><span class="n">dT_loss</span><span class="o">=</span><span class="default_value">0.0</span></em>, <em class="sig-param"><span class="n">T_draw_min</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mswh/system/components.html#Storage.tap"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mswh.system.components.Storage.tap" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the water draw volume and
 heat content drawn from the top of an infinitely
 large adiabatic tank given the hot water demand,
@@ -720,9 +735,9 @@ than the water main.</p>
 </div></blockquote>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="mswh.system.components.Storage.thermal_tank">
-<code class="descname">thermal_tank</code><span class="sig-paren">(</span><em>pre_T_amb=293.15</em>, <em>pre_T_feed=291.15</em>, <em>pre_T_upper=328.15</em>, <em>pre_T_lower=323.15</em>, <em>pre_V_tap=0.00757</em>, <em>pre_Q_in=400.0</em>, <em>max_V_tap=0.1514</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mswh/system/components.html#Storage.thermal_tank"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mswh.system.components.Storage.thermal_tank" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">thermal_tank</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">pre_T_amb</span><span class="o">=</span><span class="default_value">293.15</span></em>, <em class="sig-param"><span class="n">pre_T_feed</span><span class="o">=</span><span class="default_value">291.15</span></em>, <em class="sig-param"><span class="n">pre_T_upper</span><span class="o">=</span><span class="default_value">328.15</span></em>, <em class="sig-param"><span class="n">pre_T_lower</span><span class="o">=</span><span class="default_value">323.15</span></em>, <em class="sig-param"><span class="n">pre_V_tap</span><span class="o">=</span><span class="default_value">0.00757</span></em>, <em class="sig-param"><span class="n">pre_Q_in</span><span class="o">=</span><span class="default_value">400.0</span></em>, <em class="sig-param"><span class="n">max_V_tap</span><span class="o">=</span><span class="default_value">0.1514</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mswh/system/components.html#Storage.thermal_tank"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mswh.system.components.Storage.thermal_tank" title="Permalink to this definition">¶</a></dt>
 <dd><p>Model of a thermal storage tank with:</p>
 <ul class="simple">
 <li><p>Coil heat exchanger for the solar gains</p></li>
@@ -771,7 +786,7 @@ or from a heat pump, depending on the type</p>
 <div><dl>
 <dt>res: dict</dt><dd><p>Single timestep input and output values for temperatures [K]
 and heat rates [W]:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="p">{</span><span class="n">net_gain_label</span> <span class="p">:</span> <span class="n">pre_Q_in_net</span><span class="p">,</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="p">{</span><span class="n">net_gain_label</span> <span class="p">:</span> <span class="n">pre_Q_in_net</span><span class="p">,</span>
 <span class="go">self.r[&#39;q_loss_low&#39;] : pre_Q_loss_lower,</span>
 <span class="go">self.r[&#39;q_loss_up&#39;] : pre_Q_loss_upper,</span>
 <span class="go"># demand, delivered and unmet heat</span>
@@ -799,9 +814,9 @@ and heat rates [W]:</p>
 </div></blockquote>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="mswh.system.components.Storage.thermal_tank_dynamics">
-<code class="descname">thermal_tank_dynamics</code><span class="sig-paren">(</span><em>pre_T_amb</em>, <em>pre_T_upper</em>, <em>pre_T_lower</em>, <em>pre_Q_in</em>, <em>pre_Q_loss_upper</em>, <em>pre_Q_loss_lower</em>, <em>pre_T_feed</em>, <em>pre_Q_tap</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mswh/system/components.html#Storage.thermal_tank_dynamics"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mswh.system.components.Storage.thermal_tank_dynamics" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">thermal_tank_dynamics</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">pre_T_amb</span></em>, <em class="sig-param"><span class="n">pre_T_upper</span></em>, <em class="sig-param"><span class="n">pre_T_lower</span></em>, <em class="sig-param"><span class="n">pre_Q_in</span></em>, <em class="sig-param"><span class="n">pre_Q_loss_upper</span></em>, <em class="sig-param"><span class="n">pre_Q_loss_lower</span></em>, <em class="sig-param"><span class="n">pre_T_feed</span></em>, <em class="sig-param"><span class="n">pre_Q_tap</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mswh/system/components.html#Storage.thermal_tank_dynamics"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mswh.system.components.Storage.thermal_tank_dynamics" title="Permalink to this definition">¶</a></dt>
 <dd><p>Partial model of a thermal storage tank.
 Applies first order forward marching Euler method and updates
 the tank state for the current timestep
@@ -862,9 +877,9 @@ tank temperature limit assumption in each timestep</p></li>
 </div></blockquote>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="mswh.system.components.Storage.volume_to_power">
-<code class="descname">volume_to_power</code><span class="sig-paren">(</span><em>tank_volume</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mswh/system/components.html#Storage.volume_to_power"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mswh.system.components.Storage.volume_to_power" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">volume_to_power</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">tank_volume</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mswh/system/components.html#Storage.volume_to_power"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mswh.system.components.Storage.volume_to_power" title="Permalink to this definition">¶</a></dt>
 <dd><p>Method to convert a gas water heater’s volume input power
 based on a linear regression of Prospector data.
 Look in the X drive Data/Water Heaters/Regressions folder
@@ -890,9 +905,9 @@ Parameters:</p>
 </div>
 <div class="section" id="module-mswh.system.models">
 <span id="mswh-system-models-module"></span><h2>mswh.system.models module<a class="headerlink" href="#module-mswh.system.models" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
+<dl class="py class">
 <dt id="mswh.system.models.System">
-<em class="property">class </em><code class="descclassname">mswh.system.models.</code><code class="descname">System</code><span class="sig-paren">(</span><em>sys_params=None</em>, <em>backup_params=None</em>, <em>weather=None</em>, <em>sys_sizes=1.0</em>, <em>backup_sizes=1.0</em>, <em>loads=None</em>, <em>timestep=1.0</em>, <em>log_level=10</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mswh/system/models.html#System"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mswh.system.models.System" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">mswh.system.models.</code><code class="sig-name descname">System</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">sys_params</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">backup_params</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">weather</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">sys_sizes</span><span class="o">=</span><span class="default_value">1.0</span></em>, <em class="sig-param"><span class="n">backup_sizes</span><span class="o">=</span><span class="default_value">1.0</span></em>, <em class="sig-param"><span class="n">loads</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">timestep</span><span class="o">=</span><span class="default_value">1.0</span></em>, <em class="sig-param"><span class="n">log_level</span><span class="o">=</span><span class="default_value">10</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mswh/system/models.html#System"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mswh.system.models.System" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Project level system models:</p>
 <ul class="simple">
@@ -923,11 +938,11 @@ Number of rows equals the number of timesteps. Can be
 generated using the Source.irradiation_and_water_main
 method</p>
 <p>Example:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">sourceASource</span><span class="p">(</span><span class="n">read_from_input_dataframes</span> <span class="o">=</span> <span class="n">inputs</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">sourceASource</span><span class="p">(</span><span class="n">read_from_input_dataframes</span> <span class="o">=</span> <span class="n">inputs</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Oakland climate zone in CEC weather data is ‘03’:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="bp">self</span><span class="o">.</span><span class="n">weather</span> <span class="o">=</span> <span class="n">source</span><span class="o">.</span><span class="n">irradiation_and_water_main</span><span class="p">(</span><span class="s1">&#39;03&#39;</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;isotropic diffuse&#39;</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="bp">self</span><span class="o">.</span><span class="n">weather</span> <span class="o">=</span> <span class="n">source</span><span class="o">.</span><span class="n">irradiation_and_water_main</span><span class="p">(</span><span class="s1">&#39;03&#39;</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;isotropic diffuse&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </dd>
@@ -936,7 +951,7 @@ served by the project level system. It should
 contain 3 columns: household id, occupancy and a column
 with a load array in m3 for each household.</p>
 <p>Example:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">loads_com</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="n">occ_indiv</span> <span class="o">-</span> <span class="mf">1.</span><span class="p">,</span> <span class="mf">0.8</span> <span class="o">*</span> <span class="n">load_array</span><span class="p">],[</span><span class="mi">2</span><span class="p">,</span> <span class="n">occ_indiv</span><span class="p">,</span> <span class="mf">1.</span> <span class="o">*</span> <span class="n">load_array</span><span class="p">],[</span><span class="mi">3</span><span class="p">,</span> <span class="n">occ_indiv</span><span class="p">,</span> <span class="mf">1.2</span> <span class="o">*</span> <span class="n">load_array</span><span class="p">],[</span><span class="mi">4</span><span class="p">,</span> <span class="n">occ_indiv</span> <span class="o">+</span> <span class="mf">1.</span><span class="p">,</span> <span class="mf">1.4</span> <span class="o">*</span> <span class="n">load_array</span><span class="p">]],</span> <span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">c</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">c</span><span class="p">[</span><span class="s1">&#39;occ&#39;</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">c</span><span class="p">[</span><span class="s1">&#39;load_m3&#39;</span><span class="p">]])</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">loads_com</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="n">occ_indiv</span> <span class="o">-</span> <span class="mf">1.</span><span class="p">,</span> <span class="mf">0.8</span> <span class="o">*</span> <span class="n">load_array</span><span class="p">],[</span><span class="mi">2</span><span class="p">,</span> <span class="n">occ_indiv</span><span class="p">,</span> <span class="mf">1.</span> <span class="o">*</span> <span class="n">load_array</span><span class="p">],[</span><span class="mi">3</span><span class="p">,</span> <span class="n">occ_indiv</span><span class="p">,</span> <span class="mf">1.2</span> <span class="o">*</span> <span class="n">load_array</span><span class="p">],[</span><span class="mi">4</span><span class="p">,</span> <span class="n">occ_indiv</span> <span class="o">+</span> <span class="mf">1.</span><span class="p">,</span> <span class="mf">1.4</span> <span class="o">*</span> <span class="n">load_array</span><span class="p">]],</span> <span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">c</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">c</span><span class="p">[</span><span class="s1">&#39;occ&#39;</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">c</span><span class="p">[</span><span class="s1">&#39;load_m3&#39;</span><span class="p">]])</span>
 </pre></div>
 </div>
 </dd>
@@ -954,13 +969,13 @@ messages and ignore INFO, DEBUG and WARNING.</p>
 <p>Examples:</p>
 <blockquote>
 <div><p>See <code class="xref py py-func docutils literal notranslate"><span class="pre">mswh.system.tests.test_components</span></code> module and
-<code class="xref py py-func docutils literal notranslate"><span class="pre">scripts/Project</span> <span class="pre">Level</span> <span class="pre">SWH</span> <span class="pre">System</span> <span class="pre">Tool.ipynb</span></code>
+<code class="xref py py-func docutils literal notranslate"><span class="pre">scripts/MSWH</span> <span class="pre">System</span> <span class="pre">Tool.ipynb</span></code>
 for examples on how to use the methods as stand alone and
 in a system model simulation.</p>
 </div></blockquote>
-<dl class="method">
+<dl class="py method">
 <dt id="mswh.system.models.System.conventional_gas_tank">
-<code class="descname">conventional_gas_tank</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mswh/system/models.html#System.conventional_gas_tank"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mswh.system.models.System.conventional_gas_tank" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">conventional_gas_tank</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mswh/system/models.html#System.conventional_gas_tank"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mswh.system.models.System.conventional_gas_tank" title="Permalink to this definition">¶</a></dt>
 <dd><p>Basecase conventional gas tank water heater.
 Make sure to size the tank according to the recommended
 sizing rules, since the WHAM model does not apply to
@@ -978,9 +993,9 @@ tanks that are not appropriately sized.</p>
 </div></blockquote>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="mswh.system.models.System.simulate">
-<code class="descname">simulate</code><span class="sig-paren">(</span><em>type='gas_tank_wh'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mswh/system/models.html#System.simulate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mswh.system.models.System.simulate" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">simulate</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">type</span><span class="o">=</span><span class="default_value">'gas_tank_wh'</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mswh/system/models.html#System.simulate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mswh.system.models.System.simulate" title="Permalink to this definition">¶</a></dt>
 <dd><p>Runs a 8760. hourly simulation of the
 provided system type.</p>
 <p>Parameters:</p>
@@ -1011,9 +1026,9 @@ output. See dedicated methods for details</p>
 </div></blockquote>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="mswh.system.models.System.solar_electric">
-<code class="descname">solar_electric</code><span class="sig-paren">(</span><em>backup='electric'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mswh/system/models.html#System.solar_electric"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mswh.system.models.System.solar_electric" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">solar_electric</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">backup</span><span class="o">=</span><span class="default_value">'electric'</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mswh/system/models.html#System.solar_electric"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mswh.system.models.System.solar_electric" title="Permalink to this definition">¶</a></dt>
 <dd><p>Connects the components of the
 solar electric system and enables simulation.</p>
 <p>Parameters:</p>
@@ -1050,9 +1065,9 @@ as the lower between the water main and the ambient.</p>
 </div></blockquote>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="mswh.system.models.System.solar_thermal">
-<code class="descname">solar_thermal</code><span class="sig-paren">(</span><em>backup='gas'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mswh/system/models.html#System.solar_thermal"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mswh.system.models.System.solar_thermal" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">solar_thermal</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">backup</span><span class="o">=</span><span class="default_value">'gas'</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mswh/system/models.html#System.solar_thermal"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mswh.system.models.System.solar_thermal" title="Permalink to this definition">¶</a></dt>
 <dd><p>Connects the components of the solar thermal system and
 simulates it in discrete timesteps.</p>
 <p>Parameters:</p>
@@ -1093,9 +1108,9 @@ timestep averaging.</p>
 </div></blockquote>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py method">
 <dt id="mswh.system.models.System.weather">
-<code class="descname">weather</code><a class="headerlink" href="#mswh.system.models.System.weather" title="Permalink to this definition">¶</a></dt>
+<em class="property">property </em><code class="sig-name descname">weather</code><a class="headerlink" href="#mswh.system.models.System.weather" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -1103,9 +1118,9 @@ timestep averaging.</p>
 </div>
 <div class="section" id="module-mswh.system.source_and_sink">
 <span id="mswh-system-source-and-sink-module"></span><h2>mswh.system.source_and_sink module<a class="headerlink" href="#module-mswh.system.source_and_sink" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
+<dl class="py class">
 <dt id="mswh.system.source_and_sink.SourceAndSink">
-<em class="property">class </em><code class="descclassname">mswh.system.source_and_sink.</code><code class="descname">SourceAndSink</code><span class="sig-paren">(</span><em>input_dfs=None</em>, <em>random_state=123</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mswh/system/source_and_sink.html#SourceAndSink"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mswh.system.source_and_sink.SourceAndSink" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">mswh.system.source_and_sink.</code><code class="sig-name descname">SourceAndSink</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">input_dfs</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">random_state</span><span class="o">=</span><span class="default_value">123</span></em>, <em class="sig-param"><span class="n">log_level</span><span class="o">=</span><span class="default_value">10</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mswh/system/source_and_sink.html#SourceAndSink"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mswh.system.source_and_sink.SourceAndSink" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Generates timeseries that are inputs to the simulation
 model and are known prior to the simulation, such as
@@ -1123,11 +1138,17 @@ analysis.</p>
 <p>integer : a new random state object gets
 instanteated at init</p>
 </dd>
+<dt>log_level: None or python logger logging level,</dt><dd><p>Default: logging.DEBUG
+This applies for a subset of the class functionality, mostly
+used to deprecate logger messages for certain calculations.
+For Example: log_level = logging.ERROR will only throw error
+messages and ignore INFO, DEBUG and WARNING.</p>
+</dd>
 </dl>
 </div></blockquote>
-<dl class="staticmethod">
+<dl class="py method">
 <dt id="mswh.system.source_and_sink.SourceAndSink.demand_estimate">
-<em class="property">static </em><code class="descname">demand_estimate</code><span class="sig-paren">(</span><em>occ</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mswh/system/source_and_sink.html#SourceAndSink.demand_estimate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mswh.system.source_and_sink.SourceAndSink.demand_estimate" title="Permalink to this definition">¶</a></dt>
+<em class="property">static </em><code class="sig-name descname">demand_estimate</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">occ</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mswh/system/source_and_sink.html#SourceAndSink.demand_estimate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mswh.system.source_and_sink.SourceAndSink.demand_estimate" title="Permalink to this definition">¶</a></dt>
 <dd><p>Estimates gal/day demand as provided in the
 CSI-Thermal Program Handbook, April 2016 for
 installations with a known occupancy</p>
@@ -1140,9 +1161,9 @@ installations with a known occupancy</p>
 </div></blockquote>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="mswh.system.source_and_sink.SourceAndSink.irradiation_and_water_main">
-<code class="descname">irradiation_and_water_main</code><span class="sig-paren">(</span><em>climate_zone</em>, <em>collector_tilt='latitude'</em>, <em>tilt_standard_deviation=None</em>, <em>collector_azimuth=0.0</em>, <em>azimuth_standard_deviation=None</em>, <em>location_ground_reflectance=0.16</em>, <em>solar_constant_Wm2=1367.0</em>, <em>method='isotropic diffuse'</em>, <em>weather_data_source='cec'</em>, <em>single_row_with_arrays=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mswh/system/source_and_sink.html#SourceAndSink.irradiation_and_water_main"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mswh.system.source_and_sink.SourceAndSink.irradiation_and_water_main" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">irradiation_and_water_main</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">climate_zone</span></em>, <em class="sig-param"><span class="n">collector_tilt</span><span class="o">=</span><span class="default_value">'latitude'</span></em>, <em class="sig-param"><span class="n">tilt_standard_deviation</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">collector_azimuth</span><span class="o">=</span><span class="default_value">0.0</span></em>, <em class="sig-param"><span class="n">azimuth_standard_deviation</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">location_ground_reflectance</span><span class="o">=</span><span class="default_value">0.16</span></em>, <em class="sig-param"><span class="n">solar_constant_Wm2</span><span class="o">=</span><span class="default_value">1367.0</span></em>, <em class="sig-param"><span class="n">method</span><span class="o">=</span><span class="default_value">'isotropic diffuse'</span></em>, <em class="sig-param"><span class="n">weather_data_source</span><span class="o">=</span><span class="default_value">'cec'</span></em>, <em class="sig-param"><span class="n">single_row_with_arrays</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mswh/system/source_and_sink.html#SourceAndSink.irradiation_and_water_main"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mswh.system.source_and_sink.SourceAndSink.irradiation_and_water_main" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the hourly total incident radiation on a tilted surface
 for any climate zone in California. If weather data from the provided
 database are passed as <cite>input_dfs</cite>, the user can specify a single
@@ -1276,6 +1297,7 @@ the equator, this model is suggested.</p>
 
   <div role="contentinfo">
     <p>
+        
         &copy; Copyright 
 Multiscale Solar Water Heating (MSWH) Copyright (c) 2019, The
 Regents of the University of California, through Lawrence Berkeley National
@@ -1297,7 +1319,14 @@ so.
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -1308,7 +1337,6 @@ so.
 
   </div>
   
-
 
   <script type="text/javascript">
       jQuery(function () {

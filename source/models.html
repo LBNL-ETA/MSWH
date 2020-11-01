@@ -1,8 +1,7 @@
 
 
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8">
   
@@ -12,27 +11,29 @@
   
 
   
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
   
   
   
 
   
-  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../_static/jquery.js"></script>
-        <script type="text/javascript" src="../_static/underscore.js"></script>
-        <script type="text/javascript" src="../_static/doctools.js"></script>
-        <script type="text/javascript" src="../_static/language_data.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
     
-
-  
-  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Python Code Documentation" href="modules.html" />
@@ -50,7 +51,7 @@
           
 
           
-            <a href="../index.html" class="icon icon-home"> Multiscale Solar Water Heating
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> Multiscale Solar Water Heating
           
 
           
@@ -77,6 +78,7 @@
           
         </div>
 
+        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -100,6 +102,7 @@
             
           
         </div>
+        
       </div>
     </nav>
 
@@ -138,7 +141,7 @@
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="../index.html">Docs</a> &raquo;</li>
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
         
       <li>Multiscale Solar Water Heating (MSWH)</li>
     
@@ -177,7 +180,7 @@
 <ul class="simple">
 <li><p>Solar irradiation on a tilted surface</p></li>
 <li><p>Simplified component models for Converter (solar collectors, electric resistance heater, gas burner, photovoltaic panels, heat pump), Storage (solar thermal tank, heat pump thermal tank, conventional gas tank water heater), and Distribution (distribution and solar pump, piping losses) components</p></li>
-<li><p>Preconfigured system simulation models for: base case gas tank water heaters, solar thermal water heaters (solar collector feeding a storage tank, with a tankeless gas water heater backup in a new installation cases and a basecase gas tank water heater in a retrofit case) and solar electric water heaters (heat pump storage tank with an electric resistance backup)</p></li>
+<li><p>Preconfigured system simulation models for: base case gas tank water heaters, solar thermal water heaters (solar collector feeding a storage tank, with a tankless gas water heater backup in a new installation cases and a basecase gas tank water heater in a retrofit case) and solar electric water heaters (heat pump storage tank with an electric resistance backup)</p></li>
 <li><p>Database with component performance parameters, California specific weather data and domestic hot water end-use load profiles</p></li>
 <li><p>Django web framework to configure project, parametrize components and run simulation from a web browser</p></li>
 </ul>
@@ -186,7 +189,7 @@
 <h2>Approach to System Modeling and Simulation<a class="headerlink" href="#approach-to-system-modeling-and-simulation" title="Permalink to this headline">¶</a></h2>
 <p>The energy sources we consider are solar irradiation, gas and electricity. The source energy is converted, if needed stored, and distributed to meet the end-use loads for each household.</p>
 <p>Upon assembling the components into systems, we perform an annual simulation with hourly timesteps. We solve any differential equations for each time step using an explicit forward Euler method, a first order technique that provides a good approximation given the dynamics of the process observed and the level of detail required in our analysis.</p>
-<p>We configure and size each MSWH thermal configuration so that it complies with the CSI-thermal rebate program sizing requirements. The system model assumes appropriate flow and temperature controls and includes freeze and stagnation protection.</p>
+<p>We configure and size each MSWH thermal configuration so that it complies with the CSI-T (California Solar Initiative - Thermal) rebate program sizing requirements. The system model assumes appropriate flow and temperature controls and includes freeze and stagnation protection.</p>
 </div>
 </div>
 
@@ -210,6 +213,7 @@
 
   <div role="contentinfo">
     <p>
+        
         &copy; Copyright 
 Multiscale Solar Water Heating (MSWH) Copyright (c) 2019, The
 Regents of the University of California, through Lawrence Berkeley National
@@ -231,7 +235,14 @@ so.
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -242,7 +253,6 @@ so.
 
   </div>
   
-
 
   <script type="text/javascript">
       jQuery(function () {

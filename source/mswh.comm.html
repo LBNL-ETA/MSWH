@@ -1,8 +1,7 @@
 
 
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8">
   
@@ -12,27 +11,29 @@
   
 
   
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
   
   
   
 
   
-  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../_static/jquery.js"></script>
-        <script type="text/javascript" src="../_static/underscore.js"></script>
-        <script type="text/javascript" src="../_static/doctools.js"></script>
-        <script type="text/javascript" src="../_static/language_data.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
     
-
-  
-  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Copyright Notice" href="legal.html" />
@@ -50,7 +51,7 @@
           
 
           
-            <a href="../index.html" class="icon icon-home"> Multiscale Solar Water Heating
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> Multiscale Solar Water Heating
           
 
           
@@ -77,6 +78,7 @@
           
         </div>
 
+        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -105,6 +107,7 @@
             
           
         </div>
+        
       </div>
     </nav>
 
@@ -143,7 +146,7 @@
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="../index.html">Docs</a> &raquo;</li>
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
         
           <li><a href="modules.html">Python Code Documentation</a> &raquo;</li>
         
@@ -170,9 +173,9 @@
 <h1>Database Communication<a class="headerlink" href="#database-communication" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="module-mswh.comm.sql">
 <span id="mswh-comm-sql-module"></span><h2>mswh.comm.sql module<a class="headerlink" href="#module-mswh.comm.sql" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
+<dl class="py class">
 <dt id="mswh.comm.sql.Sql">
-<em class="property">class </em><code class="descclassname">mswh.comm.sql.</code><code class="descname">Sql</code><span class="sig-paren">(</span><em>path_OR_dbconn</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mswh/comm/sql.html#Sql"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mswh.comm.sql.Sql" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">mswh.comm.sql.</code><code class="sig-name descname">Sql</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path_OR_dbconn</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mswh/comm/sql.html#Sql"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mswh.comm.sql.Sql" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Performs python-sqlite db communication.</p>
 <p>Parameters:</p>
@@ -183,14 +186,14 @@ instantiated connection object</p>
 </dd>
 </dl>
 </div></blockquote>
-<dl class="method">
+<dl class="py method">
 <dt id="mswh.comm.sql.Sql.commit">
-<code class="descname">commit</code><span class="sig-paren">(</span><em>sql_command</em>, <em>close=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mswh/comm/sql.html#Sql.commit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mswh.comm.sql.Sql.commit" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">commit</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">sql_command</span></em>, <em class="sig-param"><span class="n">close</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mswh/comm/sql.html#Sql.commit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mswh.comm.sql.Sql.commit" title="Permalink to this definition">¶</a></dt>
 <dd><p>Execute a custom sql command</p>
 <p>Parameters:</p>
 <blockquote>
 <div><dl class="simple">
-<dt>sql_command: string</dt><dd><p>sql_command to exectute</p>
+<dt>sql_command: string</dt><dd><p>sql_command to execute</p>
 </dd>
 </dl>
 </div></blockquote>
@@ -203,9 +206,9 @@ instantiated connection object</p>
 </div></blockquote>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="mswh.comm.sql.Sql.csv2table">
-<code class="descname">csv2table</code><span class="sig-paren">(</span><em>path_to_csv</em>, <em>table_name</em>, <em>column_label_row=0</em>, <em>converters=None</em>, <em>close=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mswh/comm/sql.html#Sql.csv2table"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mswh.comm.sql.Sql.csv2table" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">csv2table</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path_to_csv</span></em>, <em class="sig-param"><span class="n">table_name</span></em>, <em class="sig-param"><span class="n">column_label_row</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">converters</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">close</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mswh/comm/sql.html#Sql.csv2table"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mswh.comm.sql.Sql.csv2table" title="Permalink to this definition">¶</a></dt>
 <dd><p>Use to update bulk price or performance data.
 If same named table exists, it gets replaced</p>
 <p>Parameters:</p>
@@ -229,9 +232,9 @@ or column labels.</p>
 </div></blockquote>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="mswh.comm.sql.Sql.pd2table">
-<code class="descname">pd2table</code><span class="sig-paren">(</span><em>df</em>, <em>table_name</em>, <em>close=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mswh/comm/sql.html#Sql.pd2table"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mswh.comm.sql.Sql.pd2table" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">pd2table</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">df</span></em>, <em class="sig-param"><span class="n">table_name</span></em>, <em class="sig-param"><span class="n">close</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mswh/comm/sql.html#Sql.pd2table"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mswh.comm.sql.Sql.pd2table" title="Permalink to this definition">¶</a></dt>
 <dd><p>Write a dataframe out to the database.
 If same named table exists, it gets replaced</p>
 <p>Parameters:</p>
@@ -245,9 +248,9 @@ If same named table exists, it gets replaced</p>
 </div></blockquote>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="mswh.comm.sql.Sql.table2pd">
-<code class="descname">table2pd</code><span class="sig-paren">(</span><em>table_name</em>, <em>column_label_row=0</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mswh/comm/sql.html#Sql.table2pd"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mswh.comm.sql.Sql.table2pd" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">table2pd</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">table_name</span></em>, <em class="sig-param"><span class="n">column_label_row</span><span class="o">=</span><span class="default_value">0</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mswh/comm/sql.html#Sql.table2pd"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mswh.comm.sql.Sql.table2pd" title="Permalink to this definition">¶</a></dt>
 <dd><p>Reads in a single sql table.</p>
 <p>Parameters:</p>
 <blockquote>
@@ -268,9 +271,9 @@ converted into column labels</p>
 </div></blockquote>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="mswh.comm.sql.Sql.tables2dict">
-<code class="descname">tables2dict</code><span class="sig-paren">(</span><em>close=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mswh/comm/sql.html#Sql.tables2dict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mswh.comm.sql.Sql.tables2dict" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">tables2dict</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">close</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mswh/comm/sql.html#Sql.tables2dict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mswh.comm.sql.Sql.tables2dict" title="Permalink to this definition">¶</a></dt>
 <dd><p>Reads all tables contained in a
 sql database and converts them to a
 pandas dataframe.</p>
@@ -284,7 +287,7 @@ pandas dataframe.</p>
 <p>Returns:</p>
 <blockquote>
 <div><dl class="simple">
-<dt>data: dict of pandas dataframes</dt><dd><p>Saves each of the sql tabels as a
+<dt>data: dict of pandas dataframes</dt><dd><p>Saves each of the sql tables as a
 pandas dataframe under a sql table
 name as a key</p>
 </dd>
@@ -317,6 +320,7 @@ name as a key</p>
 
   <div role="contentinfo">
     <p>
+        
         &copy; Copyright 
 Multiscale Solar Water Heating (MSWH) Copyright (c) 2019, The
 Regents of the University of California, through Lawrence Berkeley National
@@ -338,7 +342,14 @@ so.
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -349,7 +360,6 @@ so.
 
   </div>
   
-
 
   <script type="text/javascript">
       jQuery(function () {

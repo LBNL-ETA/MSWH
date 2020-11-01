@@ -1,8 +1,7 @@
 
 
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8">
   
@@ -12,27 +11,29 @@
   
 
   
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+
+  
   
   
   
 
   
-  <script type="text/javascript" src="../../../_static/js/modernizr.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../../../_static/jquery.js"></script>
-        <script type="text/javascript" src="../../../_static/underscore.js"></script>
-        <script type="text/javascript" src="../../../_static/doctools.js"></script>
-        <script type="text/javascript" src="../../../_static/language_data.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/language_data.js"></script>
     
     <script type="text/javascript" src="../../../_static/js/theme.js"></script>
 
     
-
-  
-  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" /> 
 </head>
@@ -48,7 +49,7 @@
           
 
           
-            <a href="../../../index.html" class="icon icon-home"> Multiscale Solar Water Heating
+            <a href="../../../index.html" class="icon icon-home" alt="Documentation Home"> Multiscale Solar Water Heating
           
 
           
@@ -75,6 +76,7 @@
           
         </div>
 
+        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -83,6 +85,7 @@
             
             
               <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../source/installation.html">Package Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../source/models.html">Multiscale Solar Water Heating (MSWH)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../source/modules.html">Python Code Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../source/legal.html">Copyright Notice</a></li>
@@ -92,6 +95,7 @@
             
           
         </div>
+        
       </div>
     </nav>
 
@@ -130,7 +134,7 @@
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
         
           <li><a href="../../index.html">Module code</a> &raquo;</li>
         
@@ -169,15 +173,17 @@
 <span class="sd">            instantiated connection object</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path_OR_dbconn</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path_OR_dbconn</span><span class="p">):</span>
         <span class="c1"># recognize or create the connection object</span>
         <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">path_OR_dbconn</span><span class="p">)</span> <span class="o">==</span> <span class="nb">str</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">db</span> <span class="o">=</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">path_OR_dbconn</span><span class="p">)</span>
         <span class="k">elif</span> <span class="nb">type</span><span class="p">(</span><span class="n">path_OR_dbconn</span><span class="p">)</span> <span class="o">==</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">Connection</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">db</span> <span class="o">=</span> <span class="n">path_OR_dbconn</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">log</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s1">&#39;Neither a path to a db file, &#39;</span>
-                      <span class="s1">&#39;nor a database connection got passed.&#39;</span><span class="p">)</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">error</span><span class="p">(</span>
+                <span class="s2">&quot;Neither a path to a db file, &quot;</span>
+                <span class="s2">&quot;nor a database connection got passed.&quot;</span>
+            <span class="p">)</span>
             <span class="k">raise</span> <span class="ne">ValueError</span>
 
 <div class="viewcode-block" id="Sql.tables2dict"><a class="viewcode-back" href="../../../source/mswh.comm.html#mswh.comm.sql.Sql.tables2dict">[docs]</a>    <span class="k">def</span> <span class="nf">tables2dict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">close</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
@@ -193,7 +199,7 @@
 <span class="sd">        Returns:</span>
 
 <span class="sd">            data: dict of pandas dataframes</span>
-<span class="sd">                Saves each of the sql tabels as a</span>
+<span class="sd">                Saves each of the sql tables as a</span>
 <span class="sd">                pandas dataframe under a sql table</span>
 <span class="sd">                name as a key</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -205,7 +211,8 @@
         <span class="k">for</span> <span class="n">table_name</span> <span class="ow">in</span> <span class="n">tables</span><span class="p">:</span>
             <span class="n">table_name</span> <span class="o">=</span> <span class="n">table_name</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
             <span class="n">data</span><span class="p">[</span><span class="n">table_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_sql_query</span><span class="p">(</span>
-                <span class="sd">&#39;&#39;&#39; SELECT * FROM &#39;{}&#39; &#39;&#39;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">table_name</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="p">)</span>
+                <span class="sd">&quot;&quot;&quot; SELECT * FROM &#39;{}&#39; &quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">table_name</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">db</span>
+            <span class="p">)</span>
 
         <span class="k">if</span> <span class="n">close</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
@@ -230,9 +237,10 @@
 <span class="sd">                Sql table read in as a pandas df.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_sql</span><span class="p">(</span>
-            <span class="sd">&#39;&#39;&#39; SELECT * FROM &#39;{}&#39; &#39;&#39;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">table_name</span><span class="p">),</span>
+            <span class="sd">&quot;&quot;&quot; SELECT * FROM &#39;{}&#39; &quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">table_name</span><span class="p">),</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="p">,</span>
-            <span class="n">index_col</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+            <span class="n">index_col</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="p">)</span>
 
         <span class="k">return</span> <span class="n">df</span></div>
 
@@ -249,19 +257,21 @@
 <span class="sd">                If True, closes the connection to db</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
-        <span class="n">df</span><span class="o">.</span><span class="n">to_sql</span><span class="p">(</span><span class="n">table_name</span><span class="p">,</span>
-                  <span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="p">,</span>
-                  <span class="n">if_exists</span><span class="o">=</span><span class="s1">&#39;replace&#39;</span><span class="p">,</span>
-                  <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="n">df</span><span class="o">.</span><span class="n">to_sql</span><span class="p">(</span><span class="n">table_name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="p">,</span> <span class="n">if_exists</span><span class="o">=</span><span class="s2">&quot;replace&quot;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">close</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 
         <span class="k">return</span> <span class="kc">True</span></div>
 
-<div class="viewcode-block" id="Sql.csv2table"><a class="viewcode-back" href="../../../source/mswh.comm.html#mswh.comm.sql.Sql.csv2table">[docs]</a>    <span class="k">def</span> <span class="nf">csv2table</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path_to_csv</span><span class="p">,</span> <span class="n">table_name</span><span class="p">,</span>
-                  <span class="n">column_label_row</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
-                  <span class="n">converters</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">close</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<div class="viewcode-block" id="Sql.csv2table"><a class="viewcode-back" href="../../../source/mswh.comm.html#mswh.comm.sql.Sql.csv2table">[docs]</a>    <span class="k">def</span> <span class="nf">csv2table</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">path_to_csv</span><span class="p">,</span>
+        <span class="n">table_name</span><span class="p">,</span>
+        <span class="n">column_label_row</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+        <span class="n">converters</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">close</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Use to update bulk price or performance data.</span>
 <span class="sd">        If same named table exists, it gets replaced</span>
 
@@ -288,15 +298,10 @@
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="n">csv</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span>
-            <span class="n">path_to_csv</span><span class="p">,</span>
-            <span class="n">converters</span><span class="o">=</span><span class="n">converters</span><span class="p">,</span>
-            <span class="n">header</span><span class="o">=</span><span class="n">column_label_row</span><span class="p">)</span>
+            <span class="n">path_to_csv</span><span class="p">,</span> <span class="n">converters</span><span class="o">=</span><span class="n">converters</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="n">column_label_row</span>
+        <span class="p">)</span>
 
-        <span class="n">csv</span><span class="o">.</span><span class="n">to_sql</span><span class="p">(</span>
-            <span class="n">table_name</span><span class="p">,</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="p">,</span>
-            <span class="n">if_exists</span><span class="o">=</span><span class="s1">&#39;replace&#39;</span><span class="p">,</span>
-            <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="n">csv</span><span class="o">.</span><span class="n">to_sql</span><span class="p">(</span><span class="n">table_name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="p">,</span> <span class="n">if_exists</span><span class="o">=</span><span class="s2">&quot;replace&quot;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">close</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
@@ -309,7 +314,7 @@
 <span class="sd">        Parameters:</span>
 
 <span class="sd">            sql_command: string</span>
-<span class="sd">                sql_command to exectute</span>
+<span class="sd">                sql_command to execute</span>
 
 <span class="sd">        Returns:</span>
 
@@ -335,6 +340,7 @@
 
   <div role="contentinfo">
     <p>
+        
         &copy; Copyright 
 Multiscale Solar Water Heating (MSWH) Copyright (c) 2019, The
 Regents of the University of California, through Lawrence Berkeley National
@@ -356,7 +362,14 @@ so.
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -367,7 +380,6 @@ so.
 
   </div>
   
-
 
   <script type="text/javascript">
       jQuery(function () {
