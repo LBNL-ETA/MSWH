@@ -1,0 +1,305 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Package Installation &mdash; Multiscale Solar Water Heating 1.0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Multiscale Solar Water Heating (MSWH)" href="models.html" />
+    <link rel="prev" title="Multiscale Solar Water Heating System Modeling" href="../index.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> Multiscale Solar Water Heating
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Package Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="models.html">Multiscale Solar Water Heating (MSWH)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modules.html">Python Code Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="legal.html">Copyright Notice</a></li>
+<li class="toctree-l1"><a class="reference internal" href="legal.html#license-agreement">License Agreement</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Multiscale Solar Water Heating</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Package Installation</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/source/installation.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="package-installation">
+<span id="sec-pkg-ins"></span><h1>Package Installation<a class="headerlink" href="#package-installation" title="Permalink to this headline">¶</a></h1>
+<p>Most users should be able to install the package by following the
+<a class="reference external" href="https://github.com/LBNL-ETA/MSWH#setup-and-installation">Setup and Installation and Simple Installation Using Conda</a>
+section of the MSWH repo <cite>README</cite> file.</p>
+<p>The set of instructions presented here are intended for technical users that are relatively new to virtual environments or <cite>Python</cite> in general, or for users who encountered issues with the
+simple installation instructions available in the <cite>README</cite> file. Here we also show to the users how to utilize an alternative
+package management system in <cite>Python</cite>, <a class="reference external" href="https://docs.python.org/3.8/library/venv.html">venv</a>.</p>
+<p>Please make sure to install <cite>pip</cite> and, in case you are not using <cite>venv</cite>, <cite>conda</cite> as instructed
+in <a class="reference external" href="https://github.com/LBNL-ETA/MSWH#setup-and-installation">Setup and Installation on the readme file</a>.</p>
+<p>Here are the detailed steps to install the <a class="reference external" href="https://github.com/LBNL-ETA/MSWH">MSWH Python package</a>:</p>
+<ol class="arabic">
+<li><p>Since the repo comes with database files, please download, install and see the documentation for <a class="reference external" href="https://git-lfs.github.com/">git large file storage</a>.</p></li>
+<li><p>It is recommended to create a new <cite>Python</cite> environment in order to avoid interference with the system-wide Python installation,
+for example by using <a class="reference external" href="(https://docs.conda.io/en/latest/">conda</a> or <a class="reference external" href="https://docs.python.org/3.8/library/venv.html">venv</a>.
+Depending on the approach you take, pick one of the commands below and run it in a terminal to create a new environment named, for instance, <cite>mswh</cite>.</p>
+<blockquote>
+<div><p>If you use <cite>conda</cite> from the repo clone folder run:</p>
+<blockquote>
+<div><p><cite>conda create -n mswh python=3.8</cite></p>
+</div></blockquote>
+<p>If you use <cite>venv</cite>, for example on <cite>Linux</cite>:</p>
+<blockquote>
+<div><p>python3.8 -m venv &lt;path_to_env&gt;/mswh</p>
+</div></blockquote>
+<p>With <code class="docutils literal notranslate"><span class="pre">&lt;path_to_env&gt;</span></code> as your selected folder path to store virtual
+environments.</p>
+</div></blockquote>
+</li>
+<li><p>Now the virtual environment needs to be activated, by running one of the following commands:</p>
+<blockquote>
+<div><p>When using <cite>Anaconda</cite> or <cite>Miniconda</cite>:</p>
+<blockquote>
+<div><p>conda activate mswh</p>
+</div></blockquote>
+<p>When using <cite>venv</cite>:</p>
+<blockquote>
+<div><p>source &lt;path_to_env&gt;/mswh/bin/activate</p>
+</div></blockquote>
+<p>After having activated the virtual environment, the name of it should appear before the prompt in the terminal.</p>
+<p>For deactivating use <cite>conda deactivate</cite> or <cite>deactivate</cite>.</p>
+</div></blockquote>
+</li>
+<li><p>To make use of example <cite>Jupyter notebooks</cite> one should have <a class="reference external" href="https://jupyter.org/install">JupyterLab</a> installed.
+To ensure the same Python kernel can be used in a <cite>Jupyter notebook</cite>, activate the virtual environment and run:</p>
+<blockquote>
+<div><p>python -m ipykernel install –user –name mswh</p>
+</div></blockquote>
+<p>Users with admin privileges can skip the <cite>–user</cite> flag.</p>
+<p>If you have any issues with plots not being displayed when running the example notebooks,
+please install the following:</p>
+<blockquote>
+<div><p>jupyter labextension install jupyterlab-plotly</p>
+</div></blockquote>
+</li>
+<li><p>Clone the repository with:</p>
+<blockquote>
+<div><p>git clone <a class="reference external" href="https://github.com/LBNL-ETA/MSWH.git">https://github.com/LBNL-ETA/MSWH.git</a></p>
+</div></blockquote>
+</li>
+<li><p>To install the necessary Python packages navigate to the <cite>setup.py</cite> directory and run:</p>
+<blockquote>
+<div><p>pip install -e .</p>
+</div></blockquote>
+<p>The <cite>-e</cite> flag is only necessary if one would like changes to the source code be reflected immediately
+(without having to rerun the <cite>setup.py</cite> script with every change to the source code).
+If you just want to run the project application, you can omit the <cite>-e</cite> flag.</p>
+</li>
+<li><p>To use the plotting capabilities, also required when running tests, please install [<cite>orca</cite>](<a class="reference external" href="https://github.com/plotly/orca">https://github.com/plotly/orca</a>).</p></li>
+</ol>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="models.html" class="btn btn-neutral float-right" title="Multiscale Solar Water Heating (MSWH)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../index.html" class="btn btn-neutral float-left" title="Multiscale Solar Water Heating System Modeling" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 
+Multiscale Solar Water Heating (MSWH) Copyright (c) 2019, The
+Regents of the University of California, through Lawrence Berkeley National
+Laboratory (subject to receipt of any required approvals from the U.S.
+Dept. of Energy).  All rights reserved.
+
+If you have questions about your rights to use or distribute this software,
+please contact Berkeley Lab&#39;s Intellectual Property Office at
+IPO@lbl.gov.
+
+NOTICE.  This Software was developed under funding from the U.S. Department
+of Energy and the U.S. Government consequently retains certain rights.  As
+such, the U.S. Government has been granted for itself and others acting on
+its behalf a paid-up, nonexclusive, irrevocable, worldwide license in the
+Software to reproduce, distribute copies to the public, prepare derivative
+works, and perform publicly and display publicly, and to permit other to do
+so.
+
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
