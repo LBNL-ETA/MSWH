@@ -895,7 +895,7 @@ class SourceAndSink(object):
         example_cons = example_cons.drop(columns="index", axis=1)
 
         if len(occupancy) != len(at_home):
-            mg = "Occupancy and at home arrays should have the same length."
+            msg = "Occupancy and at home arrays should have the same length."
             log.error(msg)
             raise Exception
 
@@ -925,7 +925,7 @@ class SourceAndSink(object):
                 "We don't have any households matching your inputs in"
                 " the database."
             )
-            log.error(meg.format)
+            log.error(msg.format)
             raise Exception
 
         selected_load_ids = []
