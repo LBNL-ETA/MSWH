@@ -28,6 +28,8 @@ To configure new system types in the web framework (such as `Solar Thermal Retro
 
 2. Make sure that `pip` is installed. For info and installation help take
    a look at this [webpage](https://pip.pypa.io/en/stable/installing/).
+   
+3. Unless you already have [`conda`](https://docs.conda.io/en/latest/) installed, please install the lightweight option [`Miniconda`](https://docs.conda.io/en/latest/miniconda.html) or [`Anaconda`](https://docs.anaconda.com/anaconda/install/) software.
 
 ### Simple Installation Using `Conda`
 
@@ -47,18 +49,18 @@ for further help as needed.
 
 ### Detailed Installation Steps
 
-This section is intended for technical users that are relatively new to virtual environments or `Python` in general, or for users who had any issues with the simple installation instructions from the previous section. Apart from using [`conda`](https://docs.conda.io/en/latest/) this section
+This section is intended for technical users that are relatively new to virtual environments or `Python` in general, or for users who had any issues with the simple installation instructions from the previous section. This section
 will show users how to utilize an alternative package management system in `Python`, [`virtualenv`](https://packaging.python.org/guides/installing-using-pip-and-virtualenv/).
 
-1. It is recommended to create a new `Python` environment in order to avoid interference with the system-wide Python installation, for example by using [`virtualenv`](https://packaging.python.org/guides/installing-using-pip-and-virtualenv/), the lightweight [`Miniconda`](https://docs.conda.io/en/latest/miniconda.html) or [`Anaconda`](https://docs.anaconda.com/anaconda/install/) software. Depending on the approach you take, pick one of the commands below and run it in a terminal to create a new environment named, for instance, `mswh`.
+1. It is recommended to create a new `Python` environment in order to avoid interference with the system-wide Python installation, for example by using [`conda`](https://docs.conda.io/en/latest/) or [`venv`](https://docs.python.org/3.8/library/venv.html). Depending on the approach you take, pick one of the commands below and run it in a terminal to create a new environment named, for instance, `mswh`.
 
-    If you use `Miniconda` or `Anaconda` from the repo clone folder run:
+    If you use `conda` from the repo clone folder run:
 
         conda create -n mswh python=3.8
 
-    If you use `virtualenv`, for example on `Linux`:
+    If you use `venv`, for example on `Linux`:
 
-        python3 -m virtualenv -p /usr/bin/python3.8 <path_to_env>/mswh
+        python3.8 -m venv <path_to_env>/mswh
 
     With ``<path_to_env>`` as your selected folder path to store virtual
     environments.
