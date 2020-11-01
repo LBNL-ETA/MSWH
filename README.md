@@ -47,7 +47,7 @@ for further help as needed.
 ### Detailed Installation Steps
 
 If for any reason a user encounters difficulties with the simple installation 
-instructions, we suggest to consult a more detailed installation guide that is 
+instructions, the user is encouraged to consult a more detailed installation guide that is 
 posted with the [code documentation](https://lbnl-eta.github.io/MSWH/).
 
 ## Django Web Framework Deployment
