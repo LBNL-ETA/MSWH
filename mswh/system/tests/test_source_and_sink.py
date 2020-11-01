@@ -9,7 +9,9 @@ from mswh.comm.sql import Sql
 from mswh.system.source_and_sink import SourceAndSink
 from mswh.comm.label_map import SwhLabels
 
-logging.basicConfig(level=logging.DEBUG)
+logging.basicConfig(level=logging.INFO)
+log = logging.getLogger(__name__)
+log.setLevel(logging.DEBUG)
 
 
 class SourceAndSinkTests(unittest.TestCase):
@@ -38,7 +40,7 @@ class SourceAndSinkTests(unittest.TestCase):
             inputs = db.tables2dict(close=True)
         except:
             msg = "Failed to read input tables from {}."
-            log.error(msg.format(inpath))
+            log.error(msg.format(weather_db_path))
 
         self.weather = SourceAndSink(input_dfs=inputs)
 

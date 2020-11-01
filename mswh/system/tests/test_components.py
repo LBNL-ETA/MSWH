@@ -12,8 +12,9 @@ from mswh.tools.plots import Plot
 from mswh.tools.unit_converters import UnitConv
 from mswh.comm.sql import Sql
 
+logging.basicConfig(level=logging.INFO)
 log = logging.getLogger(__name__)
-logging.basicConfig(level=logging.DEBUG)
+log.setLevel(logging.DEBUG)
 
 
 class ConverterTests(unittest.TestCase):
