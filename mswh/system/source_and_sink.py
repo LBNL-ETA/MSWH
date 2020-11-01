@@ -14,9 +14,6 @@ from mswh.tools.unit_converters import UnitConv
 log = logging.getLogger(__name__)
 
 
-from pdb import set_trace as bp
-
-
 class SourceAndSink(object):
     """Generates timeseries that are inputs to the simulation
     model and are known prior to the simulation, such as
