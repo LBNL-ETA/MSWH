@@ -3,13 +3,16 @@
 Package Installation
 --------------------
 
-Most users should be able to install the package by following the 
+Most users will be able to install the MSWH Python package by following the 
 `Setup and Installation and Simple Installation Using Conda <https://github.com/LBNL-ETA/MSWH#setup-and-installation>`_ 
-section of the MSWH repo `README` file. 
+section of the README.md file that is displayed at the landing page of the MSWH repository. Please use those instructions
+as the primary approach to MSWH package installation.
 
-The set of instructions presented here are intended for technical users that are relatively new to virtual environments or `Python` in general, or for users who encountered issues with the 
-simple installation instructions available in the `README` file. Here we also show to the users how to utilize an alternative 
-package management system in `Python`, `venv <https://docs.python.org/3.8/library/venv.html>`_.
+The set of instructions presented here is intended for technical users that are relatively new to virtual environments 
+or Python in general, for users who encountered issues with the 
+simple installation instructions available in the `README.md <https://github.com/LBNL-ETA/MSWH>`_ file, or any other 
+users looking for a reminder on some of the installation steps. These instructions also show to the users how to 
+utilize an alternative Python package management system, `venv <https://docs.python.org/3.8/library/venv.html>`_.
 
 Please make sure to install `pip` and, in case you are not using `venv`, `conda` as instructed 
 in `Setup and Installation on the readme file <https://github.com/LBNL-ETA/MSWH#setup-and-installation>`_.
@@ -24,7 +27,7 @@ Here are the detailed steps to install the `MSWH Python package <https://github.
 
     If you use `conda` from the repo clone folder run:
 
-        `conda create -n mswh python=3.8`
+        conda create -n mswh python=3.8
 
     If you use `venv`, for example on `Linux`:
 
@@ -71,4 +74,4 @@ Here are the detailed steps to install the `MSWH Python package <https://github.
     (without having to rerun the `setup.py` script with every change to the source code). 
     If you just want to run the project application, you can omit the `-e` flag.
 
-#. To use the plotting capabilities, also required when running tests, please install [`orca`](https://github.com/plotly/orca).
+#. To use the plotting capabilities, also required when running tests, please install `orca <https://github.com/plotly/orca>`_.
