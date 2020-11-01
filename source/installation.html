@@ -159,12 +159,15 @@
             
   <div class="section" id="package-installation">
 <span id="sec-pkg-ins"></span><h1>Package Installation<a class="headerlink" href="#package-installation" title="Permalink to this headline">¶</a></h1>
-<p>Most users should be able to install the package by following the
+<p>Most users will be able to install the MSWH Python package by following the
 <a class="reference external" href="https://github.com/LBNL-ETA/MSWH#setup-and-installation">Setup and Installation and Simple Installation Using Conda</a>
-section of the MSWH repo <cite>README</cite> file.</p>
-<p>The set of instructions presented here are intended for technical users that are relatively new to virtual environments or <cite>Python</cite> in general, or for users who encountered issues with the
-simple installation instructions available in the <cite>README</cite> file. Here we also show to the users how to utilize an alternative
-package management system in <cite>Python</cite>, <a class="reference external" href="https://docs.python.org/3.8/library/venv.html">venv</a>.</p>
+section of the README.md file that is displayed at the landing page of the MSWH repository. Please use those instructions
+as the primary approach to MSWH package installation.</p>
+<p>The set of instructions presented here is intended for technical users that are relatively new to virtual environments
+or Python in general, for users who encountered issues with the
+simple installation instructions available in the <a class="reference external" href="https://github.com/LBNL-ETA/MSWH">README.md</a> file, or any other
+users looking for a reminder on some of the installation steps. These instructions also show to the users how to
+utilize an alternative Python package management system, <a class="reference external" href="https://docs.python.org/3.8/library/venv.html">venv</a>.</p>
 <p>Please make sure to install <cite>pip</cite> and, in case you are not using <cite>venv</cite>, <cite>conda</cite> as instructed
 in <a class="reference external" href="https://github.com/LBNL-ETA/MSWH#setup-and-installation">Setup and Installation on the readme file</a>.</p>
 <p>Here are the detailed steps to install the <a class="reference external" href="https://github.com/LBNL-ETA/MSWH">MSWH Python package</a>:</p>
@@ -176,7 +179,7 @@ Depending on the approach you take, pick one of the commands below and run it in
 <blockquote>
 <div><p>If you use <cite>conda</cite> from the repo clone folder run:</p>
 <blockquote>
-<div><p><cite>conda create -n mswh python=3.8</cite></p>
+<div><p>conda create -n mswh python=3.8</p>
 </div></blockquote>
 <p>If you use <cite>venv</cite>, for example on <cite>Linux</cite>:</p>
 <blockquote>
@@ -225,7 +228,7 @@ please install the following:</p>
 (without having to rerun the <cite>setup.py</cite> script with every change to the source code).
 If you just want to run the project application, you can omit the <cite>-e</cite> flag.</p>
 </li>
-<li><p>To use the plotting capabilities, also required when running tests, please install [<cite>orca</cite>](<a class="reference external" href="https://github.com/plotly/orca">https://github.com/plotly/orca</a>).</p></li>
+<li><p>To use the plotting capabilities, also required when running tests, please install <a class="reference external" href="https://github.com/plotly/orca">orca</a>.</p></li>
 </ol>
 </div>
 
