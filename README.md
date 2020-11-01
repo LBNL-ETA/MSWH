@@ -24,12 +24,9 @@ To configure new system types in the web framework (such as `Solar Thermal Retro
 
 ## Setup and Installation
 
-1. Since the repo comes with database files, please download, install and see the documentation for [`git large file storage`](https://git-lfs.github.com/).
-
-2. Make sure that `pip` is installed. For info and installation help take
-   a look at this [webpage](https://pip.pypa.io/en/stable/installing/).
+1. Make sure that `pip` [is installed](https://pip.pypa.io/en/stable/installing/).
    
-3. Unless you already have [`conda`](https://docs.conda.io/en/latest/) installed, please install the lightweight option [`Miniconda`](https://docs.conda.io/en/latest/miniconda.html) or [`Anaconda`](https://docs.anaconda.com/anaconda/install/) software.
+2. Unless you already have [`conda`](https://docs.conda.io/en/latest/) installed, please install the lightweight option [`Miniconda`](https://docs.conda.io/en/latest/miniconda.html) or [`Anaconda`](https://docs.anaconda.com/anaconda/install/) software.
 
 ### Simple Installation Using `Conda`
 
@@ -52,7 +49,9 @@ for further help as needed.
 This section is intended for technical users that are relatively new to virtual environments or `Python` in general, or for users who had any issues with the simple installation instructions from the previous section. This section
 will show users how to utilize an alternative package management system in `Python`, [`venv`](https://docs.python.org/3.8/library/venv.html).
 
-1. It is recommended to create a new `Python` environment in order to avoid interference with the system-wide Python installation, for example by using [`conda`](https://docs.conda.io/en/latest/) or [`venv`](https://docs.python.org/3.8/library/venv.html). Depending on the approach you take, pick one of the commands below and run it in a terminal to create a new environment named, for instance, `mswh`.
+1. Since the repo comes with database files, please download, install and see the documentation for [`git large file storage`](https://git-lfs.github.com/).
+
+2. It is recommended to create a new `Python` environment in order to avoid interference with the system-wide Python installation, for example by using [`conda`](https://docs.conda.io/en/latest/) or [`venv`](https://docs.python.org/3.8/library/venv.html). Depending on the approach you take, pick one of the commands below and run it in a terminal to create a new environment named, for instance, `mswh`.
 
     If you use `conda` from the repo clone folder run:
 
@@ -65,7 +64,7 @@ will show users how to utilize an alternative package management system in `Pyth
     With ``<path_to_env>`` as your selected folder path to store virtual
     environments.
 
-2. Now the virtual environment needs to be activated, by running one of the following commands:
+3. Now the virtual environment needs to be activated, by running one of the following commands:
 
     When using `Anaconda` or `Miniconda`:
 
@@ -79,7 +78,7 @@ will show users how to utilize an alternative package management system in `Pyth
 
     For deactivating use `conda deactivate` or `deactivate`.
 
-3. To make use of example `Jupyter notebooks` one should have [`JupyterLab`](https://jupyter.org/install) installed. To ensure the same Python kernel can be used in a `Jupyter notebook`, activate the virtual environment and run:
+4. To make use of example `Jupyter notebooks` one should have [`JupyterLab`](https://jupyter.org/install) installed. To ensure the same Python kernel can be used in a `Jupyter notebook`, activate the virtual environment and run:
 
         python -m ipykernel install --user --name mswh
 
@@ -90,17 +89,17 @@ will show users how to utilize an alternative package management system in `Pyth
 
         jupyter labextension install jupyterlab-plotly
 
-4. Clone the repository with:
+5. Clone the repository with:
 
         git clone https://github.com/LBNL-ETA/MSWH.git
 
-5.  To install the necessary Python packages navigate to the `setup.py` directory and run:
+6.  To install the necessary Python packages navigate to the `setup.py` directory and run:
 
         pip install -e .
 
     The `-e` flag is only necessary if one would like changes to the source code be reflected immediately (without having to rerun the `setup.py` script with every change to the source code). If you just want to run the project application, you can omit the `-e` flag.
 
-6. To use the plotting capabilities, also required when running tests, please install [`orca`](https://github.com/plotly/orca).
+7. To use the plotting capabilities, also required when running tests, please install [`orca`](https://github.com/plotly/orca).
 
 ## Django Web Framework Deployment
 
