@@ -178,13 +178,13 @@ for example by using <a class="reference external" href="(https://docs.conda.io/
 Depending on the approach you take, pick one of the commands below and run it in a terminal to create a new environment named, for instance, <cite>mswh</cite>.</p>
 <blockquote>
 <div><p>If you use <cite>conda</cite> from the repo clone folder run:</p>
-<blockquote>
-<div><p>conda create -n mswh python=3.8</p>
-</div></blockquote>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">conda create -n mswh python=3.8</span>
+</pre></div>
+</div>
 <p>If you use <cite>venv</cite>, for example on <cite>Linux</cite>:</p>
-<blockquote>
-<div><p>python3.8 -m venv &lt;path_to_env&gt;/mswh</p>
-</div></blockquote>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">python3.8 -m venv &lt;path_to_env&gt;/mswh</span>
+</pre></div>
+</div>
 <p>With <code class="docutils literal notranslate"><span class="pre">&lt;path_to_env&gt;</span></code> as your selected folder path to store virtual
 environments.</p>
 </div></blockquote>
@@ -192,38 +192,47 @@ environments.</p>
 <li><p>Now the virtual environment needs to be activated, by running one of the following commands:</p>
 <blockquote>
 <div><p>When using <cite>Anaconda</cite> or <cite>Miniconda</cite>:</p>
-<blockquote>
-<div><p>conda activate mswh</p>
-</div></blockquote>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">conda activate mswh</span>
+</pre></div>
+</div>
 <p>When using <cite>venv</cite>:</p>
-<blockquote>
-<div><p>source &lt;path_to_env&gt;/mswh/bin/activate</p>
-</div></blockquote>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">source &lt;path_to_env&gt;/mswh/bin/activate</span>
+</pre></div>
+</div>
 <p>After having activated the virtual environment, the name of it should appear before the prompt in the terminal.</p>
-<p>For deactivating use <cite>conda deactivate</cite> or <cite>deactivate</cite>.</p>
+<p>For deactivating use:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">conda deactivate</span>
+</pre></div>
+</div>
 </div></blockquote>
 </li>
 <li><p>To make use of example <cite>Jupyter notebooks</cite> one should have <a class="reference external" href="https://jupyter.org/install">JupyterLab</a> installed.
 To ensure the same Python kernel can be used in a <cite>Jupyter notebook</cite>, activate the virtual environment and run:</p>
 <blockquote>
-<div><p>python -m ipykernel install –user –name mswh</p>
+<div><div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">python -m ipykernel install --user --name mswh</span>
+</pre></div>
+</div>
 </div></blockquote>
 <p>Users with admin privileges can skip the <cite>–user</cite> flag.</p>
 <p>If you have any issues with plots not being displayed when running the example notebooks,
 please install the following:</p>
 <blockquote>
-<div><p>jupyter labextension install jupyterlab-plotly</p>
+<div><div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">jupyter labextension install jupyterlab-plotly</span>
+</pre></div>
+</div>
 </div></blockquote>
 </li>
 <li><p>Clone the repository with:</p>
 <blockquote>
-<div><p>git clone <a class="reference external" href="https://github.com/LBNL-ETA/MSWH.git">https://github.com/LBNL-ETA/MSWH.git</a></p>
+<div><div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">git clone https://github.com/LBNL-ETA/MSWH.git</span>
+</pre></div>
+</div>
 </div></blockquote>
 </li>
 <li><p>To install the necessary Python packages navigate to the <cite>setup.py</cite> directory and run:</p>
-<blockquote>
-<div><p>pip install -e .</p>
-</div></blockquote>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">pip install -e .</span>
+</pre></div>
+</div>
 <p>The <cite>-e</cite> flag is only necessary if one would like changes to the source code be reflected immediately
 (without having to rerun the <cite>setup.py</cite> script with every change to the source code).
 If you just want to run the project application, you can omit the <cite>-e</cite> flag.</p>

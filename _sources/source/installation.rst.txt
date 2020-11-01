@@ -27,9 +27,13 @@ Here are the detailed steps to install the `MSWH Python package <https://github.
 
     If you use `conda` from the repo clone folder run:
 
+    .. code-block:: console
+
         conda create -n mswh python=3.8
 
     If you use `venv`, for example on `Linux`:
+
+    .. code-block:: console
 
         python3.8 -m venv <path_to_env>/mswh
 
@@ -40,18 +44,28 @@ Here are the detailed steps to install the `MSWH Python package <https://github.
 
     When using `Anaconda` or `Miniconda`:
 
+    .. code-block:: console
+
         conda activate mswh
 
     When using `venv`:
+
+    .. code-block:: console
 
         source <path_to_env>/mswh/bin/activate
 
     After having activated the virtual environment, the name of it should appear before the prompt in the terminal.
 
-    For deactivating use `conda deactivate` or `deactivate`.
+    For deactivating use:
+    
+    .. code-block:: console
+    
+        conda deactivate
 
 #. To make use of example `Jupyter notebooks` one should have `JupyterLab <https://jupyter.org/install>`_ installed. 
    To ensure the same Python kernel can be used in a `Jupyter notebook`, activate the virtual environment and run:
+
+    .. code-block:: console
         
         python -m ipykernel install --user --name mswh
 
@@ -60,13 +74,19 @@ Here are the detailed steps to install the `MSWH Python package <https://github.
    If you have any issues with plots not being displayed when running the example notebooks,
    please install the following:
 
+    .. code-block:: console
+
         jupyter labextension install jupyterlab-plotly
 
 #. Clone the repository with:
+    
+    .. code-block:: console
         
         git clone https://github.com/LBNL-ETA/MSWH.git
 
 #.  To install the necessary Python packages navigate to the `setup.py` directory and run:
+
+    .. code-block:: console
         
         pip install -e .
 
