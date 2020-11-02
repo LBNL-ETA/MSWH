@@ -22,6 +22,9 @@ If you opt to use the web framework the shortest path to explore the simulaton r
 
 To configure new system types in the web framework (such as `Solar Thermal Retrofit`) one would need to map it through the backend analogously to the currently preconfigured systems.
 
+An example demonstrating usage of the tool for an additional climate outside 
+of California, Banja Luka in Bosnia & Herzegovina, is provided in [this notebook](scripts/MSWH&#32;System&#32;Tool&#32;-&#32;Additional&#32;Climate.ipynb)
+
 ## Setup and Installation
 
 1. Make sure that `pip` [is installed](https://pip.pypa.io/en/stable/installing/).
