@@ -48,7 +48,7 @@ We developed the Multiscale Solar Water Heating (MSWH) software with a primary i
 We developed and implemented simplified fast performing energy balance based models. We connected the models into two preconfigured solar water heating systems that are provided with MSWH software:
 
 * Solar thermal collector, hot water thermal storage tank, with a selection of backups: gas storage water heater or an instantaneous gas water heater.
-* Photovoltaic panel, heat pump water heater hot water thermal storage tank, with an electric resistance water heater as backup.
+* Photovoltaic panel, heat pump tank water heater, with an electric resistance water heater as backup.
 
 We built a simple simulation solver that uses explicit forward Euler method to solve the balance equations in each simulation time-step.
 
@@ -59,9 +59,9 @@ The component models were either developed from scratch or implemented in Python
 * We converted natural gas tank water heater model from @Lutz:1998 into a hourly time-step model implementation.
 * Photovoltaic model is based on a simplified model found in @Wetter:2014.
 * Heat pump water heater tank is based on @Sparn:2014.
-* Solar thermal tank is a phenomenological model based on ideas very similar to model developed for in NREL's SAM software [@Blair:2014].
+* Solar thermal tank is a phenomenological model based on ideas very similar to model developed for NREL's SAM software [@Blair:2014].
 * Simplified performance data based gas burner model was implemented to represent instantaneous gas water heater.
-* Simple electric resistance model was implemented to represent instantaneous electric gas water heater.
+* Simple electric resistance model was implemented to represent instantaneous electric water heater.
 * We developed a simplified data based solar and distribution pump model.
 * To model the distribution piping network we developed a simplified model that is capable of accounting for thermal losses at stagnation and flows on demand with correction factors available to help account for the relatively long time-step of one hour.
 
@@ -78,7 +78,7 @@ Performance visualization is available both in example notebooks and through the
 
 The application of the models can be to explore the benefits of grouping multiple households to be served by a single solar water heating system in comparison to a system installed in a single household. Another application of the model is to calculate gas savings when changing from a gas water heater to a solar water heater in a single household.
 
-More details on the hot water demand model used in creating the database of sample hot water use load profiles are freely available with the software. The software's solar radiation, component and system models for conventional natural gas and solar thermal water heating can be found in @Coughlin:2020 project report for which this software was developed. The software found its application in performing the engineering analysis to estimate energy consumption and savings in the project report, as well as in @Grahovac:2020. @Gerhart:2019 explains in his master's thesis the development of the GUI and provides details on the solar electric system model development. The code is also available as DOE CODE, see @Doecode:2019.
+More details on the hot water demand model used in creating the database of sample hot water use load profiles are freely available with the software. The software's solar radiation, component and system models for conventional natural gas and solar thermal water heating can be found in the project report by @Coughlin:2020 for which this software was developed. The software found its application in performing the engineering analysis to estimate energy consumption and savings in the project report, as well as in @Grahovac:2020. @Gerhart:2019 explains in his master's thesis the development of the GUI and provides details on the solar electric system model development. The code is also available as DOE CODE, see @Doecode:2019.
 
 # Statement of Need
 
@@ -98,7 +98,7 @@ To satisfy our research need we thus opted to develop lightweight simulation mod
 
 Apart from the various research applications, the MSWH package can be interesting for homeowners, planners, designers, policy developers or even solar water heating contractors, just to list a few.
 
-# Acknowledgments
+# Acknowledgements
 
 This work was supported by the California Energy Commission, Public Interest Energy Research Program, under Contract No. PIR-16-022. We thank Vagelis Vossos and Mohan Ganeshalingam for their contributions and support.
 
