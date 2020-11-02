@@ -41,8 +41,12 @@ of California, that is Banja Luka in Bosnia & Herzegovina, is provided in [this 
         git lfs install
         git clone https://github.com/LBNL-ETA/MSWH.git
         cd MSWH
-        python -m ipykernel install --user --name mswh
         pip install -e .
+
+    To ensure functionality of the example notebooks install the following:
+
+        python -m ipykernel install --user --name mswh
+        jupyter labextension install jupyterlab-plotly
 
 The examples are best explored using `JupyterLab`. Please check out the
 [JupyterLab documentation](https://jupyterlab.readthedocs.io/en/latest/)
