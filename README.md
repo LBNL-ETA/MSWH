@@ -38,6 +38,7 @@ To configure new system types in the web framework (such as `Solar Thermal Retro
         git lfs install
         git clone https://github.com/LBNL-ETA/MSWH.git
         cd MSWH
+        python -m ipykernel install --user --name mswh
         pip install -e .
 
 The examples are best explored using `JupyterLab`. Please check out the
