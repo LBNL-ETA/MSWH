@@ -94,10 +94,10 @@ A project that prompted the development of this software is described in @Coughl
 Our primary motivation to develop a new software was the combination of the following needs:
 
 * The level of detail sufficient to allow for an investigation of transient effects of thermal storage.
-* The simulation time for a single system short enough to allow for over 100 thousand simulations to be performed on a personal computer in a single analysis run.
+* The simulation time for a single system short enough to allow for over 100 thousand simulations to be performed on a personal computer within a reasonable amount of time, as this is how many we needed performed in a single state-level analysis run.
 * Simplicity of integration within the larger life-cycle cost framework as presented in @Coughlin:2020 and @Grahovac:2020.
 
-Modelica buildings library by @Wetter:2014 satisfies and exceeds the level of detail but proves too detailed and thus slow for our particular application. SAM tool [@Blair:2014] has a good level of detail, provides most of the system models that we needed but for our purposes proves not flexible enough in terms of modifying the system configuration, automating the size scaling and embedding it into our custom life-cycle cost framework.
+Modelica buildings library by @Wetter:2014 exceeds the level of detail but proves too detailed and thus somewhat slow for our particular application. SAM tool [@Blair:2014] has a fitting level of detail, provides most of the system models that we needed but for our purposes proves not flexible enough in terms of modifying the system configuration, automating the size scaling and embedding it into our custom life-cycle cost framework.
 
 Namely, in order to capture a sufficient level of detail of the California demographics, such as variability in climate zones, household types, and household occupancy, we wanted to be able to simulate a few alternative water heating systems in each of the California sample households. Secondly, to get a more realistic picture of the effect of thermal storage and distribution system losses, we opted to perform a simulation with relatively short time-steps of 1 hour for a duration of one representative year. We were not able to identify an open source tool that is capable of firstly satisfying the simulation speed requirement combined with the necessary level of detail for our analysis and secondly providing the flexibility for us to customize various integral parts of the analysis such as automate the component and system size scaling, specify hot water load profiles and solar radiation for each household or group of households in the sample.
 
@@ -114,11 +114,10 @@ If the features the existing MSWH software are sufficient for their application,
 
 For those who in their professional life deal with planning, designing and contracting of the solar thermal water heating systems it might be useful to have an access to a freely available simulation tool, such as the MSWH software, that they can use to evaluate various system designs. The design parameters that such users can easily modify are household occupancies, climate zone, collector and tank sizes, component performance parameters such as insulation level of any thermal storage tanks, and types of solar collectors. The MSWH software relies on standard collector rating data readily available for most designs found on the market today. For each proposed design the MSWH software will output, among other results, the solar fraction and the backup energy use on an annual level, the two variables allowing for a quick cross-comparison for the proposed designs.
 
-Similarly to the previous category, the homeowners considering transitioning to a solar water heating system may be interested in doing the math before seeking further professional help, or just for their own education and curiosity about both solar water heating systems and system simulation in general. An another use case would be to enable the occupants of households that:
+Similarly to the previous category, the homeowners considering transitioning to a solar water heating system may be interested in doing the math before seeking further professional help, or just for their own education and curiosity about both solar water heating systems and system simulation in general. Another example use case would be to enable the occupants of households that:
 
-* Already utilize a solar water heating system and might be planning to increase the occupancy.
-* Are retrofitting an existing system.
-* Already possess one of the components and are looking to appropriately size the others.
+* Are retrofitting an existing system due to an increase or decrease the occupancy, or
+* Already possess one of the components and are looking to appropriately size the others
 
 to simulate alternatives and compare the obtained energy consumption and solar fraction results for any alternative designs they like to define.
 
