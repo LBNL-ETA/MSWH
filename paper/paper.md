@@ -48,7 +48,7 @@ The Multiscale Solar Water Heating (MSWH) is a software package to simulate indi
 
 The package was initially developed in the scope of a California Energy Commission (CEC) funded project looking at costs and benefits of using community versus individual scale solar thermal water heating systems. For this reason the database included in the MSWH software focuses primarily on California specific hot water use profiles and climate data, but can structurally accommodate any further climate zones. Scale here refers to the number of households served by a single system. Therefore, an application of the models can be to explore the benefits of grouping multiple households to be served by a single solar water heating system in comparison to a system installed in a single household. Another example application of the models is to enable calculation of gas savings when switching from a gas water heater to a solar water heater in a single household.
 
-To evaluate a solar water heating project at design phase by looking at its simulation performance the user should create an instance of each system. For this, as is done in the detailed examples we provided in [example notebooks](https://github.com/LBNL-ETA/MSWH/tree/master/scripts), the user needs to specify the following:
+To evaluate a solar water heating project at design phase by looking at its simulation performance the user should create an instance of each of systems being compared. For this, as is done in the detailed examples we provided in [example notebooks](https://github.com/LBNL-ETA/MSWH/tree/master/scripts), the user needs to specify the following:
 
 * The project location by choosing one of the climate zones for which data is available in our database. The database includes 16 California climate zone files and can be extended for other regions.
 * For each household: count of people supplied by the system and whether there is any daytime household occupancy.
@@ -91,10 +91,10 @@ The code is also available as DOE CODE, see @Doecode:2019.
 
 A project that prompted the development of this software is described in @Coughlin:2020. The project enquired whether, on the state level in California, there exist any economic benefits from grouping households to be served by one community-level solar water heating installation, in comparison to having a single solar water heating installation in each household.
 
-Our primary motivation to develop a new software was the combination of the following factors:
+Our primary motivation to develop a new software was the combination of the following needs:
 
-* The level of detail.
-* The required simulation time.
+* The level of detail sufficient to allow for an investigation of transient effects of thermal storage.
+* The simulation time for a single system short enough to allow for over 100 thousand simulations to be performed on a personal computer in a single analysis run.
 * Simplicity of integration within the larger life-cycle cost framework as presented in @Coughlin:2020 and @Grahovac:2020.
 
 Modelica buildings library by @Wetter:2014 satisfies and exceeds the level of detail but proves too detailed and thus slow for our particular application. SAM tool [@Blair:2014] has a good level of detail, provides most of the system models that we needed but for our purposes proves not flexible enough in terms of modifying the system configuration, automating the size scaling and embedding it into our custom life-cycle cost framework.
@@ -103,7 +103,7 @@ Namely, in order to capture a sufficient level of detail of the California demog
 
 To satisfy our research need we thus opted to develop lightweight simulation models for all involved systems that would allow for around 120 thousand simulation runs together with the component sizing and life-cycle cost analysis to be performed on a computer with a 12-core processor in about 8 hours. The users can expect a single solar water heater simulation model to run for about 0.16 seconds, providing an almost instantaneous experience for a user only seeking to design and investigate a single system.
 
-When it comes to future application of the MSWH software, we can envision three main groups of users:
+When it comes to future application of the MSWH software, we can envision four main groups of users:
 
 * Researchers and policy developers.
 * Solar water heating planners, designers and contractors.
@@ -112,7 +112,7 @@ When it comes to future application of the MSWH software, we can envision three 
 
 If the features the existing MSWH software are sufficient for their application, the policy developers and researchers could utilize the existing MSWH software by embedding it into some larger analysis framework they construct such that it provides answers to their specific research questions. Should they have a need for additional system configurations and even additional components, the existing framework should be expanded in line with the structure made available to the user in the MSWH software. When systems are added following the structure of the existing systems, an addition of such new system to the GUI is made possible by using the flexible web framework. 
 
-For those who in their professional life deal with planning, designing and contracting of the solar thermal water heating systems it might be useful to have an access to a freely available simulation tool that they can use to evaluate various system designs. The design parameters that such users can easily modify are household occupancies, climate zone, collector and tank sizes, component performance parameters such as insulation level of any thermal storage tanks, and types of solar collectors. The MSWH software relies on standard collector rating data readily available for most designs found on the market today. For each proposed design the MSWH software will output, among other, the solar fraction and the backup energy use on an annual level, the two variables allowing for a quick cross-comparison for the proposed designs.
+For those who in their professional life deal with planning, designing and contracting of the solar thermal water heating systems it might be useful to have an access to a freely available simulation tool, such as the MSWH software, that they can use to evaluate various system designs. The design parameters that such users can easily modify are household occupancies, climate zone, collector and tank sizes, component performance parameters such as insulation level of any thermal storage tanks, and types of solar collectors. The MSWH software relies on standard collector rating data readily available for most designs found on the market today. For each proposed design the MSWH software will output, among other results, the solar fraction and the backup energy use on an annual level, the two variables allowing for a quick cross-comparison for the proposed designs.
 
 Similarly to the previous category, the homeowners considering transitioning to a solar water heating system may be interested in doing the math before seeking further professional help, or just for their own education and curiosity about both solar water heating systems and system simulation in general. An another use case would be to enable the occupants of households that:
 
@@ -122,7 +122,7 @@ Similarly to the previous category, the homeowners considering transitioning to 
 
 to simulate alternatives and compare the obtained energy consumption and solar fraction results for any alternative designs they like to define.
 
-Often simulation tools are largely inaccessible to non-technical users both in terms of usage and the ability to understanding the underlying codebase. With a combination of code, example notebooks and GUI the MSWH software provides a unique insight in what actually happens in a relatively simple mezzo-level simulation model.
+Lastly, simulation tools tend to be inaccessible to non-technical users, both in terms of usage and the chance for the user to understand the underlying codebase just by reading through it. The MSWH software provides a unique insight in what actually happens in a relatively simple mezzo-level simulation model due to the usage of relatively well readable Python code, while the example notebooks and GUI allow for instant utilization of the models. These features make the code well suitable also for educators.
 
 # Acknowledgements
 
