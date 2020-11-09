@@ -73,7 +73,7 @@ The component models were either developed from scratch or implemented in Python
 * We converted natural gas tank water heater model from @Lutz:1998 into a hourly time-step model implementation.
 * Photovoltaic model is based on a simplified model found in @Wetter:2014.
 * Heat pump water heater tank is based on @Sparn:2014.
-* Solar thermal tank is a phenomenological model based on ideas very similar to the model developed for NREL's SAM software [@Blair:2014].
+* Solar thermal tank is a phenomenological model based on ideas very similar to the model developed for NREL's SAM software (@Blair:2014), as described in @DiOrio:2014.
 * Simplified performance data based gas burner model was implemented to represent instantaneous gas water heater.
 * Simple electric resistance model was implemented to represent instantaneous electric water heater.
 * We developed a simplified data based solar and distribution pump model.
@@ -81,7 +81,7 @@ The component models were either developed from scratch or implemented in Python
 
 More details on the hot water demand model used in creating the database of sample hot water use load profiles, as well as extensive detail on the software's solar radiation, component and system models can be found in the project report by @Coughlin:2020. @Gerhart:2019 thesis provides additional details on the solar electric system model development.
 
-Note that the weather data are currently mostly limited to California and can be extended to other climate zones. An example climate zone outside of California was added for Banja Luka, Bosnia and Herzegovina, through an [additional example Jupyter notebook](scripts/MSWH&#32;System&#32;Tool&#32;-&#32;Additional&#32;Climate.ipynb). As the water consumption profiles are highly location specific and their development for additional climate zones would require new research efforts, a quick approximation may be made with caution by scaling the California profiles to match the location specific estimate of the average annual water use.
+Note that the weather data are currently mostly limited to California and can be extended to other climate zones. An example climate zone outside of California was added for Banja Luka, Bosnia and Herzegovina, through an [additional example Jupyter notebook](scripts/MSWH&#32;System&#32;Tool&#32;-&#32;Additional&#32;Climate.ipynb). The water consumption profiles can be highly location specific and their development for additional climate zones would require new research efforts, although a quick approximation may be made with caution by scaling the California profiles to match the location specific estimate of the average annual water use.
 
 The MSWH software is both accessible to a user and functionally robust. We performed extensive validation of [component models](https://github.com/LBNL-ETA/MSWH/blob/master/mswh/system/tests/test_components.py) and [system models](https://github.com/LBNL-ETA/MSWH/blob/master/mswh/system/tests/test_models.py) against performance results obtained using freely available open source tools and certification data generated using commercial tools. The validation models are a part of the test suite and show good agreement in all test comparisons.
 
@@ -93,9 +93,9 @@ A project that prompted the development of this software is described in @Coughl
 
 Our primary motivation to develop a new software was the combination of the following factors:
 
-* The level of detail
-* The required simulation time
-* Simplicity of integration within the larger life-cycle cost framework as presented in @Coughlin:2020 and @Grahovac:2020
+* The level of detail.
+* The required simulation time.
+* Simplicity of integration within the larger life-cycle cost framework as presented in @Coughlin:2020 and @Grahovac:2020.
 
 Modelica buildings library by @Wetter:2014 satisfies and exceeds the level of detail but proves too detailed and thus slow for our particular application. SAM tool [@Blair:2014] has a good level of detail, provides most of the system models that we needed but for our purposes proves not flexible enough in terms of modifying the system configuration, automating the size scaling and embedding it into our custom life-cycle cost framework.
 
@@ -105,10 +105,10 @@ To satisfy our research need we thus opted to develop lightweight simulation mod
 
 When it comes to future application of the MSWH software, we can envision three main groups of users:
 
-* Researchers and policy developers
-* Solar water heating planners, designers and contractors
-* Homeowners
-* Educators
+* Researchers and policy developers.
+* Solar water heating planners, designers and contractors.
+* Homeowners.
+* Educators.
 
 If the features the existing MSWH software are sufficient for their application, the policy developers and researchers could utilize the existing MSWH software by embedding it into some larger analysis framework they construct such that it provides answers to their specific research questions. Should they have a need for additional system configurations and even additional components, the existing framework should be expanded in line with the structure made available to the user in the MSWH software. When systems are added following the structure of the existing systems, an addition of such new system to the GUI is made possible by using the flexible web framework. 
 
