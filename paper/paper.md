@@ -116,9 +116,9 @@ For those who in their professional life deal with planning, designing and contr
 
 Similarly to the previous category, the homeowners considering transitioning to a solar water heating system may be interested in doing the math before seeking further professional help, or just for their own education and curiosity about both solar water heating systems and system simulation in general. An another use case would be to enable the occupants of households that:
 
-* Already utilize a solar water heating system and might be planning to increase the occupancy
-* Are retrofitting an existing system
-* Already possess one of the components and are looking to appropriately size the others 
+* Already utilize a solar water heating system and might be planning to increase the occupancy.
+* Are retrofitting an existing system.
+* Already possess one of the components and are looking to appropriately size the others.
 
 to simulate alternatives and compare the obtained energy consumption and solar fraction results for any alternative designs they like to define.
 
