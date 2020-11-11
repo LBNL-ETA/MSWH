@@ -58,10 +58,13 @@ def comp_list(request):
     # Retrieve a list of all Component objects in the DB
     components = Component.objects.all()
 
+    # Define data to be passed to the template
+    data = {"footer": settings.FOOTER, "components": components, "types": types}
+
     return render(
         request,
         "system/component/list.html",
-        {"components": components, "types": types},
+        data,
     )
 
 
@@ -69,8 +72,12 @@ def comp_list(request):
 def comp_detail(request, component_id):
     # Retrieve the requested component from the DB
     component = get_object_or_404(Component, pk=component_id)
+
+    # Define data to be passed to the template
+    data = {"footer": settings.FOOTER, "component": component}
+
     return render(
-        request, "system/component/detail.html", {"component": component}
+        request, "system/component/detail.html", data
     )
 
 
@@ -78,8 +85,12 @@ def comp_detail(request, component_id):
 def comp_edit(request, component_id):
     # Retrieve the requested component from the DB
     component = get_object_or_404(Component, pk=component_id)
+
+    # Define data to be passed to the template
+    data = {"footer": settings.FOOTER, "component": component}
+
     return render(
-        request, "system/component/edit.html", {"component": component}
+        request, "system/component/edit.html", data
     )
 
 
@@ -322,7 +333,10 @@ def proj_list(request):
     # Retrieve a list of all Project objects in the DB
     projects = Project.objects.all()
 
-    return render(request, "system/project/list.html", {"projects": projects})
+    # Define data to be passed to the template
+    data = {"footer": settings.FOOTER, "projects": projects}
+
+    return render(request, "system/project/list.html", data)
 
 
 # Create new project
@@ -379,7 +393,11 @@ def proj_set_name(request, project_id):
 def proj_edit(request, project_id):
     # Retrieve the requested project from the DB
     project = get_object_or_404(Project, pk=project_id)
-    return render(request, "system/project/edit.html", {"project": project})
+
+    # Define data to be passed to the template
+    data = {"footer": settings.FOOTER, "project": project}
+
+    return render(request, "system/project/edit.html", data)
 
 
 # Process the input from the form
@@ -437,16 +455,17 @@ def config_home(request):
     # Retrieve a list of all Model objects in the DB
     components = Component.objects.all()
 
-    # Assemble the list of arguments to pass to template
-    args = {
+    # Define data to be passed to the template
+    data = {
+        "footer": settings.FOOTER,
         "configs": configs,
         "climates": climates,
         "projects": projects,
         "components": components,
-        "types": types,
+        "types": types
     }
 
-    return render(request, "system/configuration/home.html", args)
+    return render(request, "system/configuration/home.html", data)
 
 
 # Create new configuration
@@ -650,7 +669,10 @@ def vi_list(request):
             except Exception as ex:
                 log.error(ex)
 
-    return render(request, "system/visualization/list.html", {"plots": plots})
+    # Define data to be passed to the template
+    data = {"footer": settings.FOOTER, "plots": plots}
+
+    return render(request, "system/visualization/list.html", data)
 
 
 # Show only the results for a given configuration
@@ -669,4 +691,7 @@ def vi_plot(request, configuration_id):
     except Exception as ex:
         log.error(ex)
 
-    return render(request, "system/visualization/plot.html", {"plot": plot})
+    # Define data to be passed to the template
+    data = {"footer": settings.FOOTER, "plot": plot}
+
+    return render(request, "system/visualization/plot.html", data)
