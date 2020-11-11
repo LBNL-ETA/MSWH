@@ -1,5 +1,6 @@
 from django.http import HttpResponse
 from django.shortcuts import render
+from django.conf import settings
 
 from datetime import date, datetime
 
@@ -11,11 +12,8 @@ def time_format(date_time):
 # Show the home page
 def home(request):
 
-    # Just some sample date to pass through
-    now = datetime.today()
-
-    # Dictionary
-    data = {"date_today": date.today(), "time_now": time_format(now)}
+    # Define data to be passed to the template
+    data = {"footer": settings.FOOTER}
 
     # Return the html page as view including optional data
     return render(request, "home.html", data)

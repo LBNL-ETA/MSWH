@@ -163,6 +163,10 @@ logging.basicConfig(
     datefmt="[%d/%b/%Y %H:%M:%S]",
 )
 
+###
+# Project specific settings below here
+###
+
 # Define path to SWH database
 SWH_DATABASE = os.path.join(
     BASE_DIR, "..", "mswh", "comm", "swh_system_input.db"
@@ -170,3 +174,9 @@ SWH_DATABASE = os.path.join(
 
 # Define data source to use for climate objects, valid values are 'cec' and 'tmy3'
 CLIMATE_DATA_SOURCE = "cec"
+
+# Repository URL
+REPO_URL = "https://github.com/LBNL-ETA/MSWH"
+
+# Footer text (html formatted)
+FOOTER = 'Source code available <a href="{}">here</a>'.format(REPO_URL)
