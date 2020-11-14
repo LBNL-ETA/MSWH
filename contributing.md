@@ -19,7 +19,7 @@ The contribution can be a bug fix, an improvement to existing features, or a ful
 
 Alternatively you may also fork our repository and develop the new feature there. If you believe that we might be interested in your new feature you can follow the same steps, with a difference in step 4. Namely, you will create a new branch on the fork of our repository and propose a PR using that branch.
 
-In addition, if you have question on how to best apply the existing code for your particular purpose, you may pose that question using the [MSWH issue tracker](https://github.com/LBNL-ETA/MSWH/issues).
+In addition, if you have questions on how to best apply the existing code for your particular purpose, you may pose that question using the [MSWH issue tracker](https://github.com/LBNL-ETA/MSWH/issues).
 
 Thank you for your interest in contributing to our open source MSWH repository!
 
