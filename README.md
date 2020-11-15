@@ -78,8 +78,7 @@ posted with the code documentation](https://lbnl-eta.github.io/MSWH/source/insta
     
 ## Contributing
 
-Anyone may contribute features with the appropriate tests using the issue tracker, forks and pull requests. Please
-check out [code documentation](https://lbnl-eta.github.io/MSWH/) for guidance.
+All are invited to contribute to the MSWH software through following the [Guidelines for Contributors](contributing.md).
 
 ### Automated tests
 
