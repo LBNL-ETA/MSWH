@@ -5,7 +5,7 @@ The MSWH software is open to contributions from the coder community around the w
 The contributors should comply with the 
 [University of California Standards of Ethical Conduct](https://policy.ucop.edu/doc/1100172/EthicalValuesandConduct).
 
-The contribution can be a bug fix, an improvement to existing features, or a fully new feature. If you wish to contribute any of those please follow this workflow:
+The contribution can be a bug fix, an improvement to an existing feature, or a fully new feature. If you wish to contribute any of those please follow this workflow:
 
 1. Fork the MSWH repository.
 1. Create a new issue using the [MSWH issue tracker](https://github.com/LBNL-ETA/MSWH/issues) which briefly describes your intended contribution.
