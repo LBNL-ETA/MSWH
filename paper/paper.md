@@ -59,7 +59,7 @@ The MSWH software found its application in performing the engineering analysis t
 
 System performance visualization in form of time-series is available both in example notebooks and through the GUI, either spun off locally or [using a web deployed version](https://solar.floweragenda.org/).
 
-Now we would like to address some of the characteristics of the underlying models and simulation that made possible the above briefly described usage of the MSWH software. We developed and implemented simplified fast performing energy balance based component models. We connected the component models into two preconfigured solar water heating systems, that are both provided with the MSWH software. Those models are:
+In this section we briefly introduce the characteristics of the underlying models and simulation. We developed and implemented simplified fast performing energy balance based component models. We connected the component models into two preconfigured solar water heating systems, that are both provided with the MSWH software. Those models are:
 
 * Solar thermal collector, hot water thermal storage tank, with a selection of backups: gas storage water heater or an instantaneous gas water heater.
 * Photovoltaic panel, heat pump tank water heater, with an electric resistance water heater as backup.
