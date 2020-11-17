@@ -21,11 +21,11 @@ We envision four main groups of users for the MSWH software:
 
 The policy developers and researchers could utilize the existing MSWH software by embedding it into some larger analysis framework they construct such that it provides answers to their specific research questions.
 
-The professional planers, designers, and contractors of solar thermal water heating systems might find it useful to have access to a freely available simulation tool such as the MSWH software, that they can use to evaluate alternative system designs.
+The professional planners, designers, and contractors of solar thermal water heating systems might find it useful to have access to a freely available simulation tool such as the MSWH software, that they can use to evaluate alternative system designs.
 
 Homeowners considering transitioning to a solar water heating system may be interested in doing the math before seeking further professional help, or just for their own education and curiosity about both solar water heating systems and system simulation in general.
 
-Educators may wish and find it useful to utilize the MSWH simulation tool in the classroom when conveying basics of energy simulation.
+Educators may wish and find it useful to utilize the MSWH simulation tool in the classroom when teaching the basics of energy simulation.
 
 ## Usage
 
