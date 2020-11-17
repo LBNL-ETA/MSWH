@@ -10,6 +10,23 @@ Folder | Content
 [web](web) | Django web framework to configure project, parametrize components and run simulation from a web browser
 [docs](docs) | [Sphinx documentation](https://lbnl-eta.github.io/MSWH/). To build HTML or LaTeX use `make html` or `make latex`
 
+## Statement of Need
+
+We envision four main groups of users for the MSWH software:
+
+* Researchers and policy developers.
+* Solar water heating planners, designers and contractors.
+* Homeowners.
+* Educators.
+
+The policy developers and researchers could utilize the existing MSWH software by embedding it into some larger analysis framework they construct such that it provides answers to their specific research questions.
+
+The professional planners, designers, and contractors of solar thermal water heating systems might find it useful to have access to a freely available simulation tool such as the MSWH software, that they can use to evaluate alternative system designs.
+
+Homeowners considering transitioning to a solar water heating system may be interested in doing the math before seeking further professional help, or just for their own education and curiosity about both solar water heating systems and system simulation in general.
+
+Educators may wish and find it useful to utilize the MSWH simulation tool in the classroom when teaching the basics of energy simulation.
+
 ## Usage
 
 The fastest way to explore the preset simulations is to use the [`MSWH System Tool`](scripts/MSWH&#32;System&#32;Tool.ipynb) notebook. In the notebook the user provides a climate zone for a project, an occupancy for each household and whether any of the occupants stay at home during the day. The notebook can then load a set of example California specific hourly domestic hot water end-use load profiles from a database, size and locate the systems. The user can now simulate the hourly system performance over a period of one representative year, visualize and explore the simulation results using time-series plots for temperature profiles, heat and power rates, or look at annual summaries. Similarly the user can model individual household solar water heating projects and base case conventional gas tank water heater systems, such that the results can be compared between the individual, community and base case systems. All simulation and sizing parameters are exposed in the notebook and the user can easily change them if needed.
@@ -78,8 +95,7 @@ posted with the code documentation](https://lbnl-eta.github.io/MSWH/source/insta
     
 ## Contributing
 
-Anyone may contribute features with the appropriate tests using the issue tracker, forks and pull requests. Please
-check out [code documentation](https://lbnl-eta.github.io/MSWH/) for guidance.
+All are invited to contribute to the MSWH software through following the [Guidelines for Contributors](contributing.md).
 
 ### Automated tests
 
