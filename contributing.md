@@ -9,9 +9,9 @@ The contribution can be a bug fix, an improvement to an existing feature, or a f
 
 1. Fork the MSWH repository.
 1. Create a new issue using the [MSWH issue tracker](https://github.com/LBNL-ETA/MSWH/issues) which briefly describes your intended contribution.
-1. Await response from a person responsible for code maintenance.
+1. Await a response from a person responsible for code maintenance.
 1. Discuss whether there is a need to address this issue and ways in which the issue could be best addressed.
-1. Once agreement is reached on how to address the issue, develop the code on a new branch on your forked repository. It is highly recommended that the branch includes the MSWH software repo issue number for easier tracking.
+1. Once an agreement is reached on how to address the issue, develop the code on a new branch on your forked repository. It is highly recommended that the branch includes the MSWH software repo issue number for easier tracking.
 1. When you are happy with your code that addresses the issue, and after you confirm that all tests are passing, create a [pull request](https://github.com/LBNL-ETA/MSWH/compare) against the `master` branch of the MSWH repository.
 1. Notify the person that was discussing the issue with you using `@githubname` that the feature/fix/improvement is now ready for review.
 1. Conduct iterations of receiving review and addressing it until the reviewer approves the PR.
