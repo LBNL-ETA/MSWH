@@ -1079,6 +1079,7 @@ class System(object):
 
                 en_use: dict
                     Total energy use for the analysis period:
+                    
                     * 'gas', Wh
                     * 'electricity', Wh
 

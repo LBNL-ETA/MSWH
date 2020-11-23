@@ -1381,7 +1381,8 @@ class Storage(object):
             insul_thickness: float, m
                 Insulation thickness
                 Default: .04 m (1-2 inch gas,
-                2-3 inch electric, :from:`DOE WH rule`)
+                2-3 inch electric, based on DOE residential 
+                water heaters energy efficiency standard (ECS) analysis)
 
             spec_hea_cond: float, W/mK
                 Specific heat conductivity
@@ -2458,7 +2459,8 @@ class Storage(object):
             insul_thickness: float, m
                 Insulation thickness
                 Default: .04 m (1-2 inch gas,
-                2-3 inch electric, :from:`DOE WH rule`)
+                2-3 inch electric, based on DOE residential 
+                water heaters energy efficiency standard (ECS) analysis)
 
             spec_hea_cond: float, W/mK
                 Specific heat conductivity
@@ -2508,9 +2510,8 @@ class Storage(object):
 
     def volume_to_power(self, tank_volume):
         """Method to convert a gas water heater's volume input power
-        based on a linear regression of Prospector data.
-        Look in the X drive Data/Water Heaters/Regressions folder
-        for the WaterHeater_ScrapeData_Python.xlsx file.
+        based on a linear regression performed on the web scraped data.
+
         Parameters:
 
             tank_volume: float or int
