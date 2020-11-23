@@ -93,6 +93,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#usage">Usage</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#features">Features</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#approach-to-system-modeling-and-simulation">Approach to System Modeling and Simulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#code-development">Code Development</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="modules.html">Python Code Documentation</a></li>
@@ -191,6 +192,10 @@
 <p>The energy sources we consider are solar irradiation, gas and electricity. The source energy is converted, if needed stored, and distributed to meet the end-use loads for each household.</p>
 <p>Upon assembling the components into systems, we perform an annual simulation with hourly timesteps. We solve any differential equations for each time step using an explicit forward Euler method, a first order technique that provides a good approximation given the dynamics of the process observed and the level of detail required in our analysis.</p>
 <p>We configure and size each MSWH thermal configuration so that it complies with the CSI-T (California Solar Initiative - Thermal) rebate program sizing requirements. The system model assumes appropriate flow and temperature controls and includes freeze and stagnation protection.</p>
+</div>
+<div class="section" id="code-development">
+<h2>Code Development<a class="headerlink" href="#code-development" title="Permalink to this headline">¶</a></h2>
+<p>We welcome code contributions. The development primarily takes place on the <a class="reference external" href="https://github.com/LBNL-ETA/MSWH">MSWH GitHub repository</a>. Please refer to the <a class="reference external" href="https://github.com/LBNL-ETA/MSWH/blob/master/contributing.md">contributing guidelines</a> and <a class="reference external" href="https://github.com/LBNL-ETA/MSWH/blob/master/README.md">README.md</a> for further instructions, including those on running the unit tests.</p>
 </div>
 </div>
 

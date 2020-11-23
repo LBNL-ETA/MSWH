@@ -1537,7 +1537,8 @@
 <span class="sd">            insul_thickness: float, m</span>
 <span class="sd">                Insulation thickness</span>
 <span class="sd">                Default: .04 m (1-2 inch gas,</span>
-<span class="sd">                2-3 inch electric, :from:`DOE WH rule`)</span>
+<span class="sd">                2-3 inch electric, based on DOE residential </span>
+<span class="sd">                water heaters energy efficiency standard (ECS) analysis)</span>
 
 <span class="sd">            spec_hea_cond: float, W/mK</span>
 <span class="sd">                Specific heat conductivity</span>
@@ -2614,7 +2615,8 @@
 <span class="sd">            insul_thickness: float, m</span>
 <span class="sd">                Insulation thickness</span>
 <span class="sd">                Default: .04 m (1-2 inch gas,</span>
-<span class="sd">                2-3 inch electric, :from:`DOE WH rule`)</span>
+<span class="sd">                2-3 inch electric, based on DOE residential </span>
+<span class="sd">                water heaters energy efficiency standard (ECS) analysis)</span>
 
 <span class="sd">            spec_hea_cond: float, W/mK</span>
 <span class="sd">                Specific heat conductivity</span>
@@ -2664,9 +2666,8 @@
 
 <div class="viewcode-block" id="Storage.volume_to_power"><a class="viewcode-back" href="../../../source/mswh.system.html#mswh.system.components.Storage.volume_to_power">[docs]</a>    <span class="k">def</span> <span class="nf">volume_to_power</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tank_volume</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Method to convert a gas water heater&#39;s volume input power</span>
-<span class="sd">        based on a linear regression of Prospector data.</span>
-<span class="sd">        Look in the X drive Data/Water Heaters/Regressions folder</span>
-<span class="sd">        for the WaterHeater_ScrapeData_Python.xlsx file.</span>
+<span class="sd">        based on a linear regression performed on the web scraped data.</span>
+
 <span class="sd">        Parameters:</span>
 
 <span class="sd">            tank_volume: float or int</span>

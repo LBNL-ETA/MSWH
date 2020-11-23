@@ -639,7 +639,8 @@ load calculation, defaults to
 </dd>
 <dt>insul_thickness: float, m</dt><dd><p>Insulation thickness
 Default: .04 m (1-2 inch gas,
-2-3 inch electric, <a href="#id1"><span class="problematic" id="id2">:from:`DOE WH rule`</span></a>)</p>
+2-3 inch electric, based on DOE residential 
+water heaters energy efficiency standard (ECS) analysis)</p>
 </dd>
 <dt>spec_hea_cond: float, W/mK</dt><dd><p>Specific heat conductivity
 of the insulation
@@ -882,10 +883,8 @@ tank temperature limit assumption in each timestep</p></li>
 <dt id="mswh.system.components.Storage.volume_to_power">
 <code class="sig-name descname">volume_to_power</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">tank_volume</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mswh/system/components.html#Storage.volume_to_power"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mswh.system.components.Storage.volume_to_power" title="Permalink to this definition">¶</a></dt>
 <dd><p>Method to convert a gas water heater’s volume input power
-based on a linear regression of Prospector data.
-Look in the X drive Data/Water Heaters/Regressions folder
-for the WaterHeater_ScrapeData_Python.xlsx file.
-Parameters:</p>
+based on a linear regression performed on the web scraped data.</p>
+<p>Parameters:</p>
 <blockquote>
 <div><dl class="simple">
 <dt>tank_volume: float or int</dt><dd><p>Water heater tank volume [m3]</p>
@@ -1016,9 +1015,11 @@ provided system type.</p>
 <p>Returns:</p>
 <blockquote>
 <div><dl class="simple">
-<dt>en_use: dict</dt><dd><p>Total energy use for the analysis period:
-* ‘gas’, Wh
-* ‘electricity’, Wh</p>
+<dt>en_use: dict</dt><dd><p>Total energy use for the analysis period:</p>
+<ul class="simple">
+<li><p>‘gas’, Wh</p></li>
+<li><p>‘electricity’, Wh</p></li>
+</ul>
 </dd>
 <dt>sys_res: list</dt><dd><p>List containing detailed system level
 output. See dedicated methods for details</p>
