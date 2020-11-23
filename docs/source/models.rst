@@ -40,3 +40,8 @@ The energy sources we consider are solar irradiation, gas and electricity. The s
 Upon assembling the components into systems, we perform an annual simulation with hourly timesteps. We solve any differential equations for each time step using an explicit forward Euler method, a first order technique that provides a good approximation given the dynamics of the process observed and the level of detail required in our analysis.
 
 We configure and size each MSWH thermal configuration so that it complies with the CSI-T (California Solar Initiative - Thermal) rebate program sizing requirements. The system model assumes appropriate flow and temperature controls and includes freeze and stagnation protection.
+
+Code Development
+^^^^^^^^^^^^^^^^
+
+We welcome code contributions. The development primarily takes place on the `MSWH GitHub repository <https://github.com/LBNL-ETA/MSWH>`_. Please refer to the `contributing guidelines <https://github.com/LBNL-ETA/MSWH/blob/master/contributing.md>`_ and `README.md <https://github.com/LBNL-ETA/MSWH/blob/master/README.md>`_ for further instructions, including those on running the unit tests.

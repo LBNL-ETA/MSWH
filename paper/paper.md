@@ -23,8 +23,8 @@ authors:
     affiliation: "1"
   - name: Katie Coughlin
     affiliation: "1"
-  - name: Hannes Gerhart^[at the time of code creation was at affiliation 1 and 2, now is at affiliation 3]
-    affiliation: "1, 2, 3"
+  - name: Hannes Gerhart^[At the time of code creation was at affiliation 1 and 2]
+    affiliation: "1, 2"
   - name: Robert Hosbach
     affiliation: "1"
 
@@ -33,8 +33,6 @@ affiliations:
     index: 1
   - name: Technical University of Munich, Munich, Germany
     index: 2
-  - name: Cloudflare, Inc.
-    index: 3
 
 date: September 7, 2020
 bibliography: paper.bib
@@ -44,18 +42,18 @@ bibliography: paper.bib
 # Summary
 
 
-The Multiscale Solar Water Heating (MSWH) package simulates individual and community scale solar water heating projects and allows for a comparison with the simulation performance of conventional natural gas tank water heaters. The package contains a [Jupyter notebook with examples](https://github.com/LBNL-ETA/MSWH/blob/master/scripts/MSWH%20System%20Tool.ipynb), a [graphical user interface (GUI) developed using Django Framework](https://github.com/LBNL-ETA/MSWH/tree/master/web) and both functional and unit tests. Also, the package is structured so that it can be extended with further technologies, applications, and locations as needed.
+The Multiscale Solar Water Heating (MSWH) package simulates individual and community scale solar water heating projects and allows for a comparison with the simulation performance of conventional natural gas tank water heaters. The package contains a [Jupyter notebook with examples](https://github.com/LBNL-ETA/MSWH/blob/v2.0.0/scripts/MSWH%20System%20Tool.ipynb), a [graphical user interface (GUI) developed using Django Framework](https://github.com/LBNL-ETA/MSWH/tree/v2.0.0/web) and both functional and unit tests. Also, the package is structured so that it can be extended with further technologies, applications, and locations as needed.
 
 The package was initially developed in the scope of a California Energy Commission (CEC) funded project looking at costs and benefits of using community versus individual scale solar thermal water heating systems. For this reason, the database included in the MSWH software focuses primarily on California-specific hot water use profiles and climate data, but can structurally accommodate any further climate zones. The scale here refers to the number of households served by a single system. Therefore, one can apply the models to explore the benefits of grouping multiple households to be served by a single solar water heating system in comparison to a system installed in a single household. Another example application of the models is to enable calculation of gas savings when switching from a gas water heater to a solar water heater in a single household.
 
-To evaluate a solar water heating project at the design phase by looking at its simulation performance the user should create a system instance for each compared system. For this, as is done in the detailed examples we provided in [example notebooks](https://github.com/LBNL-ETA/MSWH/tree/master/scripts), the user needs to specify the following:
+To evaluate a solar water heating project at the design phase by looking at its simulation performance the user should create a system instance for each compared system. For this, as is done in the detailed examples we provided in [example notebooks](https://github.com/LBNL-ETA/MSWH/tree/v2.0.0/scripts), the user needs to specify the following:
 
 * The project location by choosing one of the climate zones for which data is available in our database. The database includes 16 California climate zone files and can be extended to other regions.
 * For each household: count of people supplied by the system and whether there is any daytime household occupancy.
 
 We developed component sizing rules and size scaling rules to account for the household occupancy and project scale, respectively. The rules are readily available in the example notebooks and can easily be modified for exploratory purposes that we further describe in the Statement of Need section. For the sizing and scaling rules, we used the following data sources: expert knowledge, web-scraped data with the help of a tool described in @Gerke:2017, sizing rules available in @Csi_thermal:2016, and certification databases such as @Ccms:2018 and @Cec_appliance:2019.
 
-The MSWH software was used to perform the engineering analysis to estimate energy consumption and savings in the @Coughlin:2020 project report as well as in the @Grahovac:2020 research paper. @Gerhart:2019 is a master's thesis that explains the development of [the GUI](https://github.com/LBNL-ETA/MSWH/tree/master/web) and how to effectively use the GUI as a flexible web framework, because it was custom-built to facilitate easy addition of new system models when those are added to the MSWH software.
+The MSWH software was used to perform the engineering analysis to estimate energy consumption and savings in the @Coughlin:2020 project report as well as in the @Grahovac:2020 research paper. @Gerhart:2019 is a master's thesis that explains the development of [the GUI](https://github.com/LBNL-ETA/MSWH/tree/v2.0.0/web) and how to effectively use the GUI as a flexible web framework, because it was custom-built to facilitate easy addition of new system models when those are added to the MSWH software.
 
 System performance time series visualizations are available both in example notebooks and through the GUI, either spun off locally or [using a web deployed version](https://solar.floweragenda.org/).
 
@@ -81,9 +79,9 @@ The component models were either developed from scratch or implemented in Python
 
 More details on the hot water demand model used in creating the database of sample hot water use load profiles, as well as extensive detail on the software's solar radiation, component and system models can be found in the project report by @Coughlin:2020. @Gerhart:2019 thesis provides additional details on the solar electric system model development.
 
-Note that the weather data are currently mostly limited to California and can be extended to other climate zones. An example climate zone outside of California was added for Banja Luka, Bosnia and Herzegovina, through an [additional example Jupyter notebook](https://github.com/LBNL-ETA/MSWH/blob/master/scripts/MSWH&#32;System&#32;Tool&#32;-&#32;Additional&#32;Climate.ipynb). The water consumption profiles can be highly location specific and their development for additional climate zones would require new research efforts. A quick approximation may be made with caution by scaling the California profiles to match the location-specific estimate of the average annual water use. This is possible as the shape of each daily profile can be assumed similar and sufficiently variable to allow for the study of transient and peak load effects at any location. The weather processor is TMY3 enabled and the user may populate the database with additional climates as needed.
+Note that the weather data are currently mostly limited to California and can be extended to other climate zones. An example climate zone outside of California was added for Banja Luka, Bosnia and Herzegovina, through an [additional example Jupyter notebook](https://github.com/LBNL-ETA/MSWH/blob/v2.0.0/scripts/MSWH&#32;System&#32;Tool&#32;-&#32;Additional&#32;Climate.ipynb). The water consumption profiles can be highly location specific and their development for additional climate zones would require new research efforts. A quick approximation may be made with caution by scaling the California profiles to match the location-specific estimate of the average annual water use. This is possible as the shape of each daily profile can be assumed similar and sufficiently variable to allow for the study of transient and peak load effects at any location. The weather processor is TMY3 enabled and the user may populate the database with additional climates as needed.
 
-The MSWH software is both accessible to a user and functionally robust. We performed extensive validation of [component models](https://github.com/LBNL-ETA/MSWH/blob/master/mswh/system/tests/test_components.py) and [system models](https://github.com/LBNL-ETA/MSWH/blob/master/mswh/system/tests/test_models.py) against performance results obtained using freely available open source tools and certification data generated using commercial tools. The validation models are a part of the test suite and show good agreement in all test comparisons.
+The MSWH software is both accessible to a user and functionally robust. We performed extensive validation of [component models](https://github.com/LBNL-ETA/MSWH/blob/v2.0.0/mswh/system/tests/test_components.py) and [system models](https://github.com/LBNL-ETA/MSWH/blob/v2.0.0/mswh/system/tests/test_models.py) against performance results obtained using freely available open source tools and certification data generated using commercial tools. The validation models are a part of the test suite and show good agreement in all test comparisons.
 
 The code is also available as DOE CODE, see @Doecode:2019.
 
@@ -99,7 +97,7 @@ Our primary motivation to develop new software was the combination of the follow
 
 Modelica buildings library by @Wetter:2014 exceeds the level of detail but proves too detailed and thus somewhat slow for our particular application. SAM tool [@Blair:2014] has a fitting level of detail, provides most of the system models that we needed but for our purposes proves not flexible enough in terms of modifying the system configuration, automating the size scaling, and embedding it into our custom life-cycle cost framework.
 
-Namely, to capture a sufficient level of detail of the California demographics, such as variability in climate zones, household types, and household occupancy, we wanted to be able to simulate a few alternative water heating systems in each of the California sample households. Secondly, to get a more realistic picture of the effect of thermal storage and distribution system losses, we opted to perform a simulation with relatively short time-steps of 1 hour for a duration of one representative year. We were not able to identify an open source tool that is capable of firstly satisfying the simulation speed requirement combined with the necessary level of detail for our analysis and secondly providing the flexibility for us to customize various integral parts of the analysis such as automate the component and system size scaling, specify hot water load profiles and solar radiation for each household or group of households in the sample.
+Namely, to capture a sufficient level of detail of the California demographics, such as variability in climate zones, household types, and household occupancy, we wanted to be able to simulate a few alternative water heating systems in each of the California sample households. Secondly, to get a more realistic picture of the effect of thermal storage and distribution system losses, we opted to perform a simulation with relatively short time-steps of one hour for a duration of one representative year. We were not able to identify an open source tool that is capable of firstly satisfying the simulation speed requirement combined with the necessary level of detail for our analysis and secondly providing the flexibility for us to customize various integral parts of the analysis such as automate the component and system size scaling, specify hot water load profiles and solar radiation for each household or group of households in the sample.
 
 To satisfy our research need we thus opted to develop lightweight simulation models for all involved systems that would allow for around 120,000 simulation runs together with the component sizing and life-cycle cost analysis to be performed on a computer with a 12-core processor in about 8 hours. The users can expect a single solar water heater simulation model to run in less than one second (the developers were experiencing run times on the order of 0.2 seconds), providing an almost instantaneous experience for a user only seeking to design and investigate a single system.
 
@@ -126,5 +124,7 @@ Lastly, simulation tools tend to be inaccessible to non-technical users, both in
 # Acknowledgements
 
 This work was supported by the California Energy Commission, Public Interest Energy Research Program, under Contract No. PIR-16-022. We thank Vagelis Vossos and Mohan Ganeshalingam for their contributions and support.
+
+We dedicate this paper to Dino Kosić.
 
 # References
