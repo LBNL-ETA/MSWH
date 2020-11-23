@@ -119,3 +119,10 @@ Milica Grahovac, Robert Hosbach, Katie Coughlin, Mohan Ganeshalingam and Hannes 
 in the scope of the CEC "Costs and Benefits of Community vs. Individual End-Use Infrastructure for Solar Water Heating" project.
 
 To cite use format provided at the [DOE CODE](https://www.osti.gov/doecode/biblio/26000) MSWH record.
+
+## Acknowledgements
+
+This work was supported by the California Energy Commission, Public Interest Energy Research Program, under Contract No. PIR-16-022.
+
+We thank the reviewers and the editor of [The Journal of Open Source Software (JOSS)](https://joss.theoj.org/), Bryn Pickering, Nithiya Streethran, and Stefan Pfenninger for their contributions in improving the code, the examples and the code documentation for the code release 2.0.0.
+
