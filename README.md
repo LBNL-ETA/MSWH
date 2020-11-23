@@ -124,5 +124,5 @@ To cite use format provided at the [DOE CODE](https://www.osti.gov/doecode/bibli
 
 This work was supported by the California Energy Commission, Public Interest Energy Research Program, under Contract No. PIR-16-022.
 
-We thank the reviewers and the editor of [The Journal of Open Source Software (JOSS)](https://joss.theoj.org/), [Bryn Pickering](@brynpickering), [Nithiya Streethran](@nmstreethran), and [Stefan Pfenninger](@sjpfenninger) for their contributions in improving the code, the examples and the code documentation for the code release 2.0.0.
+We thank the reviewers and the editor of [The Journal of Open Source Software (JOSS)](https://joss.theoj.org/), [Bryn Pickering](https://github.com/brynpickering), [Nithiya Streethran](https://github.com/nmstreethran), and [Stefan Pfenninger](https://github.com/sjpfenninger) for their contributions in improving the code, the examples and the code documentation for the code release 2.0.0.
 
