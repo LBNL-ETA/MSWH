@@ -50,7 +50,7 @@ To evaluate a solar water heating project at the design phase by looking at its 
 * The project location by choosing one of the climate zones for which data is available in our database. The database includes 16 California climate zones and can be extended to other regions.
 * For each household: count of people supplied by the system and whether there is any daytime household occupancy.
 
-The MSWH software was used to perform the engineering analysis to estimate energy consumption and savings in the @Coughlin:2021 project report as well as in the @Grahovac:2020 research paper. @Gerhart:2019 is a master's thesis that explains the development of [the GUI](https://github.com/LBNL-ETA/MSWH/tree/v2.0.0/web) and how to effectively use the GUI as a flexible web framework custom-built to facilitate easy addition of new MSWH software system models.
+The MSWH software was used to perform the engineering analysis to estimate energy consumption and savings in the @Coughlin:2020 project report as well as in the @Grahovac:2020 research paper. @Gerhart:2019 is a master's thesis that explains the development of [the GUI](https://github.com/LBNL-ETA/MSWH/tree/v2.0.0/web) and how to effectively use the GUI as a flexible web framework custom-built to facilitate easy addition of new MSWH software system models.
 
 The MSWH software is both accessible to a user and functionally robust. We performed extensive validation of [component models](https://github.com/LBNL-ETA/MSWH/blob/v2.0.0/mswh/system/tests/test_components.py) and [system models](https://github.com/LBNL-ETA/MSWH/blob/v2.0.0/mswh/system/tests/test_models.py) against performance results obtained using freely available open source tools and certification data generated using commercial tools. The validation models are a part of the test suite and show good agreement in all test comparisons.
 
@@ -60,13 +60,13 @@ This code documentation page [*mg ref docs models.html] provides more details ab
 
 # Statement of Need
 
-A project that prompted the development of this software is described in @Coughlin:2021. The project enquired whether, on the state level in California, there exist any economic benefits from grouping households to be served by one community-level solar water heating installation, in comparison to having a single solar water heating installation in each household.
+A project that prompted the development of this software is described in @Coughlin:2020. The project enquired whether, on the state level in California, there exist any economic benefits from grouping households to be served by one community-level solar water heating installation, in comparison to having a single solar water heating installation in each household.
 
 Our primary motivation to develop new software was the combination of the following needs:
 
 * The level of detail sufficient to allow for an investigation of transient effects of thermal storage.
 * The simulation time for a single system short enough to allow for over 100 thousand simulations to be performed on a personal computer within a reasonable amount of time, as this is how many we needed to be performed in a single state-level analysis run.
-* Simplicity of integration within the larger life-cycle cost framework as presented in @Coughlin:2021 and @Grahovac:2020.
+* Simplicity of integration within the larger life-cycle cost framework as presented in @Coughlin:2020 and @Grahovac:2020.
 
 We developed lightweight simulation models that allow for around 120,000 simulation runs, with component auto-sizing and life-cycle cost analysis to be performed on a computer with a 12-core processor in about 8 hours. The users can expect a single solar water heater simulation model to run in about 0.2 seconds.
 
