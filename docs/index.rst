@@ -14,6 +14,7 @@ Multiscale Solar Water Heating System Modeling
    source/installation
    source/models
    source/modules
+   source/bibliography
 
    source/legal
 
