@@ -120,6 +120,8 @@ in the scope of the CEC "Costs and Benefits of Community vs. Individual End-Use 
 
 To cite use format provided at the [DOE CODE](https://www.osti.gov/doecode/biblio/26000) MSWH record.
 
+A `pdf` version of the Code Documentation can be viewed and downloaded [here](https://github.com/LBNL-ETA/MSWH/blob/v2.0.0/docs/MSWH.pdf).
+
 ## Acknowledgements
 
 This work was supported by the California Energy Commission, Public Interest Energy Research Program, under Contract No. PIR-16-022.
