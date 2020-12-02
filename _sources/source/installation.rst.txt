@@ -1,7 +1,5 @@
-.. _sec_pkg_ins:
-
 Package Installation
---------------------
+====================
 
 Most users will be able to install the MSWH Python package by following the 
 `Setup and Installation and Simple Installation Using Conda <https://github.com/LBNL-ETA/MSWH#setup-and-installation>`_ 
