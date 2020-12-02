@@ -72,7 +72,7 @@ We developed lightweight simulation models that allow for around 120,000 simulat
 
 The policy developers and researchers could utilize the existing MSWH software by embedding it into some larger analysis framework they construct such that it provides answers to their specific research questions. Solar thermal water heating system planners, designers, and contractors may find it useful to have access to a freely available simulation tool that they can use to evaluate various system designs. Homeowners considering transitioning to a solar water heating system may be interested in analyzing a hypothetical system before seeking further professional help. Further elaboration on future use is provided in [*mg code documentation].
 
-Lastly, simulation tools tend to be inaccessible to non-technical users. The MSWH software provides a unique insight into what actually happens in a relatively simple mezzo-level simulation model due to the use of readable Python code, while the example notebooks and GUI allow for instant utilization of the models. These features make the code suitable also for educators.
+Lastly, simulation tools tend to be inaccessible to non-technical users. The MSWH software provides a unique insight into what actually happens in a relatively simple mezzo-level simulation model due to the use of readable Python code, while the example notebooks and the GUI allow for instant utilization of the models. These features also make the code suitable for educators.
 
 # Acknowledgements
 
