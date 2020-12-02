@@ -1,6 +1,8 @@
+.. _References:
+
 References
 ==========
 
 .. bibliography:: references.bib
    :all:
-   :style: alpha
+   :style: plain
