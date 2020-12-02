@@ -1,7 +1,5 @@
-.. _sec_sys_mod:
-
 Multiscale Solar Water Heating (MSWH)
--------------------------------------
+=====================================
 
 Scope
 ^^^^^
@@ -15,7 +13,7 @@ Usage
 
 The user provides a climate zone for a project, an occupancy for each household and whether any of the occupants stay at home during the day. The software can then load a set of example California specific hourly domestic hot water end-use load profiles from a database, size and locate the systems. The user can now simulate the hourly system performance over a period of one representative year, visualize and explore the simulation results using time-series plots for temperature profiles, heat and power rates, or look at annual summaries. Similarly the user can model individual household solar water heating projects and base case conventional gas tank water heater systems, such that the results can be compared between the individual, community and base case systems.
 
-This functionality is readily available through a `Jupyter notebook <https://github.com/LBNL-ETA/MSWH/blob/v2.0.0/scripts/MSWH&#32;System&#32;Tool.ipynb>`_ and a `Django web framework graphical user interface (GUI) <https://github.com/LBNL-ETA/MSWH/tree/v2.0.0/web>`_, depending on what level of detail the user would like to access. Please see the README file on the `MSWH repo <https://github.com/LBNL-ETA/MSWH>`_ for further usage and installation instructions.
+This functionality is readily available through a `Jupyter notebook <https://github.com/LBNL-ETA/MSWH/blob/v2.0.0/scripts/MSWH%20System%20Tool.ipynb>`_ and a `Django web framework graphical user interface (GUI) <https://github.com/LBNL-ETA/MSWH/tree/v2.0.0/web>`_, depending on what level of detail the user would like to access. Please see the README file on the `MSWH repo <https://github.com/LBNL-ETA/MSWH>`_ for further usage and installation instructions.
 
 System performance time series visualizations are available both in example notebooks and through the GUI, either spun off locally or `using a web deployed version <https://solar.floweragenda.org/>`_.
 
@@ -61,7 +59,7 @@ The component models were either developed from scratch or implemented in Python
 
 More details on the hot water demand model used in creating the database of sample hot water use load profiles, as well as extensive detail on the software's solar radiation, component and system models can be found in the project report by :cite:`Coughlin:2021`. :cite:`Gerhart:2019` thesis provides additional details on the solar electric system model development.
 
-Note that the weather data are currently mostly limited to California and can be extended to other climate zones. An example climate zone outside of California was added for Banja Luka, Bosnia and Herzegovina, through an `additional example Jupyter notebook <https://github.com/LBNL-ETA/MSWH/blob/v2.0.0/scripts/MSWH&#32;System&#32;Tool&#32;-&#32;Additional&#32;Climate.ipynb>`_. The water consumption profiles can be highly location specific and their development for additional climate zones would require new research efforts. A quick approximation may be made with caution by scaling the California profiles to match the location-specific estimate of the average annual water use. This is possible as the shape of each daily profile can be assumed similar and sufficiently variable to allow for the study of transient and peak load effects at any location. The weather processor is TMY3 enabled and the user may populate the database with additional climates as needed.
+Note that the weather data are currently mostly limited to California and can be extended to other climate zones. An example climate zone outside of California was added for Banja Luka, Bosnia and Herzegovina, through an `additional example Jupyter notebook <https://github.com/LBNL-ETA/MSWH/blob/v2.0.0/scripts/MSWH%20System%20Tool%20-%20Additional%20Climate.ipynb>`_. The water consumption profiles can be highly location specific and their development for additional climate zones would require new research efforts. A quick approximation may be made with caution by scaling the California profiles to match the location-specific estimate of the average annual water use. This is possible as the shape of each daily profile can be assumed similar and sufficiently variable to allow for the study of transient and peak load effects at any location. The weather processor is TMY3 enabled and the user may populate the database with additional climates as needed.
 
 The energy sources we consider are solar irradiation, gas and electricity. The source energy is converted, if needed stored, and distributed to meet the end-use loads for each household.
 
@@ -119,3 +117,4 @@ Code Development and Code Contributions
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 We welcome code contributions. The development primarily takes place on the `MSWH GitHub repository <https://github.com/LBNL-ETA/MSWH>`_. Please refer to the `contributing guidelines <https://github.com/LBNL-ETA/MSWH/blob/master/contributing.md>`_ and `README.md <https://github.com/LBNL-ETA/MSWH/blob/master/README.md>`_ for further instructions, including those on running the unit tests.
+
