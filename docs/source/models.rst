@@ -11,7 +11,7 @@ The package contains functional and unit tests and it is structured so that it c
 Usage
 ^^^^^
 
-The user provides a climate zone for a project, occupancy for each household, and whether any of the occupants stay at home during the day. The software can then load a set of example California specific hourly domestic hot water end-use load profiles from a database, size and locate the systems. Next, the user can simulate the hourly system performance over a period of one representative year, visualize and explore the simulation results using time-series plots for temperature profiles, heat and power rates, or look at annual summaries. Similarly, the user can model individual household solar water heating projects and base case conventional gas tank water heater systems, such that the results can be compared between the individual, community-scale, and base case systems.
+The user provides a climate zone for a project, occupancy for each household, and whether any of the occupants stay at home during the day. The software can then load a set of example California specific hourly domestic hot water end-use load profiles from a database, size, and locate the systems. Next, the user can simulate the hourly system performance over a period of one representative year, visualize and explore the simulation results using time-series plots for temperature profiles, heat and power rates, or look at annual summaries. Similarly, the user can model individual household solar water heating projects and base case conventional gas tank water heater systems, such that the results can be compared between the individual, community-scale, and base case systems.
 
 This functionality is readily available through a `Jupyter notebook <https://github.com/LBNL-ETA/MSWH/blob/v2.0.0/scripts/MSWH%20System%20Tool.ipynb>`_ and a `Django web framework graphical user interface (GUI) <https://github.com/LBNL-ETA/MSWH/tree/v2.0.0/web>`_, depending on what level of detail the user would like to access. Please see the README file on the `MSWH repo <https://github.com/LBNL-ETA/MSWH>`_ for further usage and installation instructions.
 
@@ -45,7 +45,15 @@ We also developed component sizing rules and size scaling rules to account for t
 Approach to Component and System Modeling and Simulation
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-In this section we briefly introduce the characteristics of the underlying models and simulation. We developed and implemented simplified fast performing energy balance based component models. We connected the component models into two preconfigured solar water heating systems, that are both provided with the MSWH software. Those models are:
+In this section we briefly introduce the characteristics of the underlying models and simulation. 
+
+We performed an extensive literature rewiew prior to developing the models. Modelica buildings library by :cite:`Wetter:2014` exceeds the level of detail but proves too detailed and thus somewhat slow for our particular application. SAM tool (:cite:`Blair:2014`) has a fitting level of detail, provides most of the system models that we needed but for our purposes proves not flexible enough in terms of modifying the system configuration, automating the size scaling, and embedding it into our custom life-cycle cost framework.
+
+Namely, to capture a sufficient level of detail of the California demographics, such as variability in climate zones, household types, and household occupancy, we wanted to be able to simulate a few alternative water heating systems in each of the California sample households. Secondly, to get a more realistic picture of the effect of thermal storage and distribution system losses, we opted to perform a simulation with relatively short time-steps of one hour for a duration of one representative year. We were not able to identify an open source tool that is capable of firstly satisfying the simulation speed requirement combined with the necessary level of detail for our analysis and secondly providing the flexibility for us to customize various integral parts of the analysis such as automate the component and system size scaling, specify hot water load profiles and solar radiation for each household or group of households in the sample.
+
+To satisfy our research need we thus opted to develop lightweight simulation models for all involved systems that would allow for around 120,000 simulation runs together with the component sizing and life-cycle cost analysis to be performed on a computer with a 12-core processor in about 8 hours. The users can expect a single solar water heater simulation model to run in less than one second (the developers were experiencing run times on the order of 0.2 seconds), providing an almost instantaneous experience for a user only seeking to design and investigate a single system.
+
+We developed and implemented simplified fast performing energy balance based component models. We connected the component models into two preconfigured solar water heating systems, that are both provided with the MSWH software. Those models are:
 
 * Solar thermal collector, hot water thermal storage tank, with a selection of backups: gas storage water heater or an instantaneous gas water heater.
 * Photovoltaic panel, heat pump tank water heater, with an electric resistance water heater as backup.
@@ -75,12 +83,6 @@ Upon assembling the components into systems, we perform an annual simulation wit
 
 We configure and size each MSWH thermal configuration so that it complies with the CSI-T (California Solar Initiative - Thermal) rebate program sizing requirements. The system model assumes appropriate flow and temperature controls and includes freeze and stagnation protection.
 
-Modelica buildings library by :cite:`Wetter:2014` exceeds the level of detail but proves too detailed and thus somewhat slow for our particular application. SAM tool (:cite:`Blair:2014`) has a fitting level of detail, provides most of the system models that we needed but for our purposes proves not flexible enough in terms of modifying the system configuration, automating the size scaling, and embedding it into our custom life-cycle cost framework.
-
-Namely, to capture a sufficient level of detail of the California demographics, such as variability in climate zones, household types, and household occupancy, we wanted to be able to simulate a few alternative water heating systems in each of the California sample households. Secondly, to get a more realistic picture of the effect of thermal storage and distribution system losses, we opted to perform a simulation with relatively short time-steps of one hour for a duration of one representative year. We were not able to identify an open source tool that is capable of firstly satisfying the simulation speed requirement combined with the necessary level of detail for our analysis and secondly providing the flexibility for us to customize various integral parts of the analysis such as automate the component and system size scaling, specify hot water load profiles and solar radiation for each household or group of households in the sample.
-
-To satisfy our research need we thus opted to develop lightweight simulation models for all involved systems that would allow for around 120,000 simulation runs together with the component sizing and life-cycle cost analysis to be performed on a computer with a 12-core processor in about 8 hours. The users can expect a single solar water heater simulation model to run in less than one second (the developers were experiencing run times on the order of 0.2 seconds), providing an almost instantaneous experience for a user only seeking to design and investigate a single system.
-
 Future Applications - Statement of Need
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -108,4 +110,3 @@ Code Development and Code Contributions
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 We welcome code contributions. The development primarily takes place on the `MSWH GitHub repository <https://github.com/LBNL-ETA/MSWH>`_. Please refer to the `contributing guidelines <https://github.com/LBNL-ETA/MSWH/blob/master/contributing.md>`_ and `README.md <https://github.com/LBNL-ETA/MSWH/blob/master/README.md>`_ for further instructions, including those on running the unit tests.
-
