@@ -5,10 +5,10 @@
 
 Folder | Content
 ------ | ------
-[mswh](mswh) | Python module to calculate solar irradiation on a tilted surface ([mswh/system/source_and_sink.py](mswh/system/source_and_sink.py)) <br><br> Python module with simplified component models ([mswh/system/components.py](mswh/system/components.py)) for Converter (solar collectors, electric resistance heater, gas burner, photovoltaic panels, heat pump), Storage (solar thermal tank, heat pump thermal tank, conventional gas tank water heater), and Distribution (distribution and solar pump, piping losses) components <br><br> Python module with preconfigured system simulation models ([mswh/system/models.py](mswh/system/models.py)) for: base case gas tank water heaters, solar thermal water heaters (solar collector feeding a storage tank, with a tankless gas water heater backup in a new installation cases and a base case gas tank water heater in a retrofit case) and solar electric water heaters (heat pump storage tank with an electric resistance backup) <br><br> Database with component performance parameters, California specific weather data and domestic hot water end-use load profiles ([mswh/comm/swh_system_input.db](mswh/comm/mswh_system_input.db)) <br><br> Modules to communicate with the database ([mswh/comm/sql.py](mswh/comm/sql.py)), unit conversion and plotting modules in [mswh/tools](mswh/tools)
-[scripts](scripts) | Jupyter notebooks with preconfigured models and any side analysis if applicable
-[web](web) | Django web framework to configure project, parametrize components and run simulation from a web browser
-[docs](docs) | [Sphinx documentation](https://lbnl-eta.github.io/MSWH/). To build HTML or LaTeX use `make html` or `make latex`
+[mswh](mswh) | Python module to calculate solar irradiation on a tilted surface ([mswh/system/source_and_sink.py](mswh/system/source_and_sink.py)) <br><br> Python module with simplified component models ([mswh/system/components.py](mswh/system/components.py)) for Converter (solar collectors, electric resistance heater, gas burner, photovoltaic panels, heat pump), Storage (solar thermal tank, heat pump thermal tank, conventional gas tank water heater), and Distribution (distribution and solar pump, piping losses) components <br><br> Python module with preconfigured system simulation models ([mswh/system/models.py](mswh/system/models.py)) for: base case gas tank water heaters, solar thermal water heaters (solar collector feeding a storage tank, with a tankless gas water heater backup in a new installation cases and a base case gas tank water heater in a retrofit case) and solar electric water heaters (heat pump storage tank with an electric resistance backup) <br><br> Database with component performance parameters, California specific weather data and domestic hot water end-use load profiles ([mswh/comm/swh_system_input.db](mswh/comm/mswh_system_input.db)) <br><br> Modules to communicate with the database ([mswh/comm/sql.py](mswh/comm/sql.py)), unit conversion and plotting modules in [mswh/tools](mswh/tools).
+[scripts](scripts) | Jupyter notebooks with preconfigured models and any side analysis if applicable.
+[web](web) | Django web framework to configure project, parametrize components and run simulation from a web browser.
+[docs](docs) | [Sphinx documentation](https://lbnl-eta.github.io/MSWH/). To build HTML or LaTeX use `make html` or `make latex`. A `pdf` version of the Code Documentation can be viewed and downloaded [here](https://github.com/LBNL-ETA/MSWH/blob/v2.0.0/docs/MSWH.pdf).
 
 ## Statement of Need
 
@@ -120,13 +120,8 @@ in the scope of the CEC "Costs and Benefits of Community vs. Individual End-Use 
 
 To cite use format provided at the [DOE CODE](https://www.osti.gov/doecode/biblio/26000) MSWH record.
 
-A `pdf` version of the Code Documentation can be viewed and downloaded [here](https://github.com/LBNL-ETA/MSWH/blob/v2.0.0/docs/MSWH.pdf).
-
 ## Acknowledgements
 
 This work was supported by the California Energy Commission, Public Interest Energy Research Program, under Contract No. PIR-16-022.
 
 We thank the reviewers and the editor of [The Journal of Open Source Software (JOSS)](https://joss.theoj.org/), [Bryn Pickering](https://github.com/brynpickering), [Nithiya Streethran](https://github.com/nmstreethran), and [Stefan Pfenninger](https://github.com/sjpfenninger) for their contributions in improving the code, the examples and the code documentation for the code release 2.0.0.
-
-*mg add link to pdf of the compiled documentation
-
