@@ -41,23 +41,22 @@ bibliography: paper.bib
 
 # Summary
 
+The Multiscale Solar Water Heating (MSWH) package simulates individual and community scale solar water heating projects and allows for a comparison with the simulation performance of conventional natural gas tank water heaters. The package contains a [Jupyter notebook with examples](https://github.com/LBNL-ETA/MSWH/blob/v2.0.0/scripts/MSWH%20System%20Tool.ipynb), a [graphical user interface (GUI) developed using Django Framework](https://github.com/LBNL-ETA/MSWH/tree/v2.0.0/web) and both functional and unit tests. System performance time series visualizations are available both in example notebooks and through the GUI, either spun off locally or [using a web deployed version](https://solar.floweragenda.org/).
 
-The Multiscale Solar Water Heating (MSWH) package simulates individual and community scale solar water heating projects and allows for a comparison with the simulation performance of conventional natural gas tank water heaters. The package contains a [Jupyter notebook with examples](https://github.com/LBNL-ETA/MSWH/blob/v2.0.0/scripts/MSWH%20System%20Tool.ipynb), a [graphical user interface (GUI) developed using Django Framework](https://github.com/LBNL-ETA/MSWH/tree/v2.0.0/web) and both functional and unit tests. Also, the package is structured so that it can be extended with further technologies, applications, and locations as needed.
-
-The package was initially developed in the scope of a California Energy Commission (CEC) funded project looking at costs and benefits of using community versus individual scale solar thermal water heating systems. For this reason, the database included in the MSWH software focuses primarily on California-specific hot water use profiles and climate data, but can structurally accommodate any further climate zones. The scale here refers to the number of households served by a single system. Therefore, one can apply the models to explore the benefits of grouping multiple households to be served by a single solar water heating system in comparison to a system installed in a single household. Another example application of the models is to enable calculation of gas savings when switching from a gas water heater to a solar water heater in a single household.
+The package was developed in the scope of a California Energy Commission (CEC) funded project looking at costs and benefits of using community versus individual scale solar thermal water heating systems. The database included in the MSWH software focuses primarily on California-specific hot water use profiles and climate data, but can structurally accommodate any further climate zones. The scale refers to the number of households served by a single system. Therefore, one can apply the models to explore the benefits of grouping multiple households to be served by a single solar water heating system in comparison to a system installed in a single household. Another example application of the models is to enable calculation of gas savings when switching from a gas water heater to a solar water heater in a single household.
 
 To evaluate a solar water heating project at the design phase by looking at its simulation performance the user should create a system instance for each compared system. For this, as is done in the detailed examples we provided in [example notebooks](https://github.com/LBNL-ETA/MSWH/tree/v2.0.0/scripts), the user needs to specify the following:
 
-* The project location by choosing one of the climate zones for which data is available in our database. The database includes 16 California climate zone files and can be extended to other regions.
+* The project location by choosing one of the climate zones for which data is available in our database. The database includes 16 California climate zones and can be extended to other regions.
 * For each household: count of people supplied by the system and whether there is any daytime household occupancy.
 
-The MSWH software was used to perform the engineering analysis to estimate energy consumption and savings in the @Coughlin:2020 project report as well as in the @Grahovac:2020 research paper. @Gerhart:2019 is a master's thesis that explains the development of [the GUI](https://github.com/LBNL-ETA/MSWH/tree/v2.0.0/web) and how to effectively use the GUI as a flexible web framework, because it was custom-built to facilitate easy addition of new system models when those are added to the MSWH software.
+The MSWH software was used to perform the engineering analysis to estimate energy consumption and savings in the @Coughlin:2020 project report as well as in the @Grahovac:2020 research paper. @Gerhart:2019 is a master's thesis that explains the development of [the GUI](https://github.com/LBNL-ETA/MSWH/tree/v2.0.0/web) and how to effectively use the GUI as a flexible web framework custom-built to facilitate easy addition of new MSWH software system models.
 
 The MSWH software is both accessible to a user and functionally robust. We performed extensive validation of [component models](https://github.com/LBNL-ETA/MSWH/blob/v2.0.0/mswh/system/tests/test_components.py) and [system models](https://github.com/LBNL-ETA/MSWH/blob/v2.0.0/mswh/system/tests/test_models.py) against performance results obtained using freely available open source tools and certification data generated using commercial tools. The validation models are a part of the test suite and show good agreement in all test comparisons.
 
-The code is also available as DOE CODE, see @Doecode:2019.
+The package is structured so that it can be extended with further technologies, applications, and locations as needed. The weather data are currently mostly limited to California and can be extended to other climate zones. An example climate zone outside of California was added for Banja Luka, Bosnia and Herzegovina, through an [additional example Jupyter notebook](https://github.com/LBNL-ETA/MSWH/blob/v2.0.0/scripts/MSWH&#32;System&#32;Tool&#32;-&#32;Additional&#32;Climate.ipynb).
 
-*mg add link to documentation to point to sources of models
+This code documentation page [*mg ref docs models.html] provides more details about the modeling and the references used in some of the model development. The code is available as DOE CODE, see @Doecode:2019.
 
 # Statement of Need
 
@@ -69,7 +68,11 @@ Our primary motivation to develop new software was the combination of the follow
 * The simulation time for a single system short enough to allow for over 100 thousand simulations to be performed on a personal computer within a reasonable amount of time, as this is how many we needed to be performed in a single state-level analysis run.
 * Simplicity of integration within the larger life-cycle cost framework as presented in @Coughlin:2020 and @Grahovac:2020.
 
-*mg: include info on performance, include summary of future use suggestions, add link to documentation for more elaborate explanations
+We developed lightweight simulation models that allow for around 120,000 simulation runs, with component auto-sizing and life-cycle cost analysis to be performed on a computer with a 12-core processor in about 8 hours. The users can expect a single solar water heater simulation model to run in about 0.2 seconds.
+
+The policy developers and researchers could utilize the existing MSWH software by embedding it into some larger analysis framework they construct such that it provides answers to their specific research questions. Solar thermal water heating system planners, designers, and contractors may find it useful to have access to a freely available simulation tool that they can use to evaluate various system designs. Homeowners considering transitioning to a solar water heating system may be interested in analyzing a hypothetical system before seeking further professional help. Further elaboration on future use is provided in [*mg code documentation].
+
+Lastly, simulation tools tend to be inaccessible to non-technical users. The MSWH software provides a unique insight into what actually happens in a relatively simple mezzo-level simulation model due to the use of readable Python code, while the example notebooks and GUI allow for instant utilization of the models. These features make the code suitable also for educators.
 
 # Acknowledgements
 
