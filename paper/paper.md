@@ -75,7 +75,7 @@ Our primary motivation to develop new software was the combination of the follow
 * The simulation time for a single system short enough to allow for over 100,000 simulations to be performed on a personal computer within a reasonable amount of time.
 * Simplicity of integration within the larger life-cycle cost framework as presented in @Coughlin:2021 and @Grahovac:2020.
 
-We developed lightweight models that allow for around 120,000 hourly annual system simulation runs, including component auto-sizing and life-cycle cost analysis to be performed on a computer with a 12-core processor in about 8 hours. The users can expect an annual solar WH system simulation to complete in less than 0.2 seconds.
+We developed lightweight models that allow for around 120,000 hourly annual system simulation runs, including component auto-sizing and life-cycle cost analysis to be performed on a personal computer with an Intel(R) Core(TM) i7-8700 CPU @ 3.2GHz in about 8 hours. The users can expect an annual solar WH system simulation to complete in less than 0.2 seconds.
 
 Policy developers and researchers could utilize the existing MSWH software by embedding it into a larger analysis framework for their specific research questions. Solar thermal water heating system planners, designers, and contractors may find it useful to have access to a freely available simulation tool that they can use to evaluate various system designs. Homeowners considering transitioning to a solar water heating system may be interested in analyzing a hypothetical system before seeking professional assistance. Further possible use cases are elaborated in [this section of the documentation](https://lbnl-eta.github.io/MSWH/source/models.html#future-applications-statement-of-need).
 
