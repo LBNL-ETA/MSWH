@@ -54,14 +54,14 @@ The preconfigured system simulation models provided in the package include base-
 
 To evaluate a solar water heating project at the design phase by looking at its simulation performance the user should create a system instance for each compared system. This is described in detail in our [example notebooks](https://github.com/LBNL-ETA/MSWH/tree/v2.0.0/scripts). The user needs to specify the following:
 
-* The project location by choosing one of the climate zones for which data is available in our database. The database includes 16 California climate zones and can be extended to other regions.
+* The project location by choosing one of the climate zones for which data is available in our database.
 * For each household: count of people supplied by the system and whether there is any daytime household occupancy.
 
-The MSWH software was used to perform the engineering analysis to estimate energy consumption and savings in the @Coughlin:2021 project report as well as in the @Grahovac:2020 research paper. @Gerhart:2019 published a master's thesis that explains the development of [the GUI](https://github.com/LBNL-ETA/MSWH/tree/v2.0.0/web) and how to effectively utilized it as a flexible web framework custom-built to facilitate easy addition of new MSWH software system models.
+The MSWH software was used to perform the engineering analysis to estimate energy consumption and savings in the @Coughlin:2021 project report as well as in the @Grahovac:2020 research paper. @Gerhart:2019 published a master's thesis that explains the development of [the GUI](https://github.com/LBNL-ETA/MSWH/tree/v2.0.0/web) and how to effectively utilize it to facilitate easy addition of new MSWH software system models.
 
-The MSWH software is both accessible to a user and functionally robust. We performed extensive validation of [component models](https://github.com/LBNL-ETA/MSWH/blob/v2.0.0/mswh/system/tests/test_components.py) and [system models](https://github.com/LBNL-ETA/MSWH/blob/v2.0.0/mswh/system/tests/test_models.py) against performance results obtained using freely available open source tools and certification data generated using commercial tools. The validation models are a part of the test suite and show good agreement in all test comparisons.
+The MSWH software is both accessible and functionally robust. We performed extensive validation of [component models](https://github.com/LBNL-ETA/MSWH/blob/v2.0.0/mswh/system/tests/test_components.py) and [system models](https://github.com/LBNL-ETA/MSWH/blob/v2.0.0/mswh/system/tests/test_models.py) against performance results obtained using freely available open source tools and certification data generated using commercial tools. The validation models are a part of the test suite and show good agreement in all test comparisons.
 
-The package is structured so that it can be extended with further technologies, applications, and locations as needed. The weather data are currently mostly limited to California and can be extended to other climate zones. An example climate zone outside of California was added for Banja Luka, Bosnia and Herzegovina, through an [additional example Jupyter notebook](https://github.com/LBNL-ETA/MSWH/blob/v2.0.0/scripts/MSWH&#32;System&#32;Tool&#32;-&#32;Additional&#32;Climate.ipynb).
+The package is structured so that it can be extended with further technologies, applications, and locations as needed. The weather data are currently mostly limited to 16 California climate zones and can be extended to other climate zones. An example climate zone outside of California was added for Banja Luka, Bosnia and Herzegovina, through an [additional example Jupyter notebook](https://github.com/LBNL-ETA/MSWH/blob/v2.0.0/scripts/MSWH&#32;System&#32;Tool&#32;-&#32;Additional&#32;Climate.ipynb).
 
 The code is available as DOE CODE, see @Doecode:2019.
 
@@ -72,14 +72,14 @@ A project that prompted the development of this software is described in @Coughl
 Our primary motivation to develop new software was the combination of the following needs:
 
 * The level of detail sufficient to allow for an investigation of transient effects of thermal storage.
-* The simulation time for a single system short enough to allow for over 100 thousand simulations to be performed on a personal computer within a reasonable amount of time, as this is how many we needed to be performed in a single state-level analysis run.
+* The simulation time for a single system short enough to allow for over 100,000 simulations to be performed on a personal computer within a reasonable amount of time.
 * Simplicity of integration within the larger life-cycle cost framework as presented in @Coughlin:2021 and @Grahovac:2020.
 
 We developed lightweight models that allow for around 120,000 hourly annual system simulation runs, including component auto-sizing and life-cycle cost analysis to be performed on a computer with a 12-core processor in about 8 hours. The users can expect an annual solar WH system simulation to complete in less than 0.2 seconds.
 
-The policy developers and researchers could utilize the existing MSWH software by embedding it into a larger analysis framework they construct such that it provides answers to their specific research questions. Solar thermal water heating system planners, designers, and contractors may find it useful to have access to a freely available simulation tool that they can use to evaluate various system designs. Homeowners considering transitioning to a solar water heating system may be interested in analyzing a hypothetical system before seeking professional assistance. Further  future use is elaborated in [this section of the code documentation](https://lbnl-eta.github.io/MSWH/source/models.html#future-applications-statement-of-need).
+Policy developers and researchers could utilize the existing MSWH software by embedding it into a larger analysis framework for their specific research questions. Solar thermal water heating system planners, designers, and contractors may find it useful to have access to a freely available simulation tool that they can use to evaluate various system designs. Homeowners considering transitioning to a solar water heating system may be interested in analyzing a hypothetical system before seeking professional assistance. Further possible use cases are elaborated in [this section of the documentation](https://lbnl-eta.github.io/MSWH/source/models.html#future-applications-statement-of-need).
 
-Simulation tools tend to be inaccessible to non-technical users. The MSWH software provides a unique insight into what actually happens in a relatively simple mezzo-level simulation model due to the use of readable Python code, while the example notebooks and the GUI allow for instant utilization of the models. These features also make the code suitable for educators.
+Simulation tools tend to be inaccessible to non-technical users. The MSWH software provides insight into what happens in a relatively simple simulation model due to the use of readable Python code, while the example notebooks and the GUI allow for instant utilization of the models. These features also make the code suitable for educators.
 
 # Acknowledgements
 
