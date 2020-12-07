@@ -121,6 +121,8 @@ At this point, two important aspects regarding how to deploy static files in pro
     ```
     python manage.py collectstatic
     ```
+    > :warning: Run this command every time you update one of the static files in their respective location in the Django project folder.
+
 2. Configure `nginx` to serve static files from the generated `static` folder by adding a `location /static` block to the server block of the `nginx` config file for the domain you serve the Django app with. This is an example  `nginx` server block:
     ```
     server {
