@@ -145,6 +145,9 @@ STATICFILES_DIRS = [
     ),  # statics not tied to any specific app
 ]
 
+# Domain of landing page if web app is deployed on subdomain. Override this in local_settings.py
+HOME_DOMAIN = None
+
 # Read information from local_settings.py and overwrite values specified in this file
 # Keep these lines at the end of the file
 try:
@@ -180,3 +183,6 @@ REPO_URL = "https://github.com/LBNL-ETA/MSWH"
 
 # Footer text (html formatted)
 FOOTER = 'Source code available <a href="{}">here</a>'.format(REPO_URL)
+
+# Home button text
+HOME_BUTTON = 'Home page'
