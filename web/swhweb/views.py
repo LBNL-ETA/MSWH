@@ -13,7 +13,7 @@ def time_format(date_time):
 def home(request):
 
     # Define data to be passed to the template
-    data = {"footer": settings.FOOTER}
+    data = {"footer": settings.FOOTER, "home_domain": settings.HOME_DOMAIN}
 
     # Return the html page as view including optional data
     return render(request, "home.html", data)
