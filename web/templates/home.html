@@ -50,7 +50,9 @@
           </ul>
         </div>
       </nav>
-    <a href="http://localhost.local:5000/"><div class="fab">Take me back</div></a>
+    {% if home_domain %}
+    <a href="{{ home_domain | safe }}"><div class="fab">Take me back</div></a>
+    {% endif %}
     </header>
 
     <!-- Begin page content -->
