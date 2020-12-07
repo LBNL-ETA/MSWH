@@ -4,6 +4,7 @@
 # =====
 
 # SECURITY WARNING: keep the secret key used in production secret!
+# !! Don't use this key in production and set a new !!
 SECRET_KEY = 'zd6^l28fyl08rd!$f9g1g!r!8oak+a6n9drke3+(@ht*sgp(gt'
 
 # Override debug to be False
