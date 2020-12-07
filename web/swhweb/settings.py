@@ -183,3 +183,6 @@ REPO_URL = "https://github.com/LBNL-ETA/MSWH"
 
 # Footer text (html formatted)
 FOOTER = 'Source code available <a href="{}">here</a>'.format(REPO_URL)
+
+# Home button text
+HOME_BUTTON = 'Home page'
