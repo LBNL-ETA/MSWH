@@ -17,3 +17,6 @@ VIRTUALENV_PACKAGES_PATH = '<path_to_virtualenv_packages>'
 
 # add the path to the mswh Python package
 MSWH_PROJECT_PATH = '<path_to_mswh_repo>'
+
+# add the landing page if the web app is deployed on a subdomain
+HOME_DOMAIN = 'https://domain.com'
