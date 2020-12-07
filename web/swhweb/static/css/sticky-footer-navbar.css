@@ -35,3 +35,27 @@ body > .container {
 code {
   font-size: 80%;
 }
+
+/* Home button styling */
+.fab {
+   width: 140px;
+   height: 40px;
+   background-color: orange;
+   border-radius: 10%;
+   box-shadow: 0 6px 10px 0 #666;
+   transition: all 0.2s ease-in-out;
+
+   font-size: 20px;
+   color: black;
+   text-align: center;
+   line-height: 40px;
+
+   position: fixed;
+   right: 50px;
+   top: 70px;
+}
+
+.fab:hover {
+   box-shadow: 0 6px 14px 0 #666;
+   transform: scale(1.0);
+}
