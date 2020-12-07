@@ -1,0 +1,2 @@
+# Ignore files specific to this Django project
+*local_settings.py
