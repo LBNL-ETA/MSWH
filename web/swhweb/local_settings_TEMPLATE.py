@@ -19,5 +19,11 @@ VIRTUALENV_PACKAGES_PATH = '<path_to_virtualenv_packages>'
 # add the path to the mswh Python package
 MSWH_PROJECT_PATH = '<path_to_mswh_repo>'
 
-# add the landing page if the web app is deployed on a subdomain
+# add the landing page if the web app is deployed on a subdomain (include scheme in URL)
 HOME_DOMAIN = 'https://domain.com'
+
+# add the domain the webapp is deployed on for production
+SOLAR_DOMAIN = 'solar.domain.com'
+
+# Trusted domains for POST requests (see https://docs.djangoproject.com/en/3.0/ref/settings/#std:setting-CSRF_TRUSTED_ORIGINS)
+CSRF_TRUSTED_ORIGINS = [SOLAR_DOMAIN]
