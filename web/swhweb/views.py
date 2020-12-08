@@ -21,3 +21,17 @@ def home(request):
 
     # Return the html page as view including optional data
     return render(request, "home.html", data)
+
+# Show the license page
+def license(request):
+
+    # Define data to be passed to the template
+    data = {
+        "footer": settings.FOOTER, \
+        "license_title": settings.LICENSE_TITLE, \
+        "license_text": settings.LICENSE_TEXT, \
+        "license_url": settings.LICENSE_URL, \
+    }
+
+    # Return the html page as view including optional data
+    return render(request, "license.html", data)
