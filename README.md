@@ -39,13 +39,13 @@ If you opt to use the web framework the shortest path to explore the simulaton r
 
 To configure new system types in the web framework (such as `Solar Thermal Retrofit`) one would need to map it through the backend analogously to the currently preconfigured systems.
 
-An example demonstrating usage of the simulation models for an additional climate outside 
+An example demonstrating usage of the simulation models for an additional climate outside
 of California, that is Banja Luka in Bosnia & Herzegovina, is provided in [this notebook](scripts/MSWH&#32;System&#32;Tool&#32;-&#32;Additional&#32;Climate.ipynb).
 
 ## Setup and Installation
 
 1. Make sure that `pip` [is installed](https://pip.pypa.io/en/stable/installing/).
-   
+
 2. Unless you already have [`conda`](https://docs.conda.io/en/latest/) installed, please install the lightweight option [`Miniconda`](https://docs.conda.io/en/latest/miniconda.html) or [`Anaconda`](https://docs.anaconda.com/anaconda/install/) software.
 
 ### Simple Installation Using `Conda`
@@ -71,28 +71,83 @@ for further help as needed.
 
 ### Detailed Installation Steps
 
-If for any reason a user encounters difficulties with the simple installation 
-instructions, the user is encouraged to consult a [more detailed installation guide that is 
+If for any reason a user encounters difficulties with the simple installation
+instructions, the user is encouraged to consult a [more detailed installation guide that is
 posted with the code documentation](https://lbnl-eta.github.io/MSWH/source/installation.html).
 
 ## Django Web Framework Deployment
 
-1. If the installation succeeded, to run the Django application navigate to the `web` folder (there should be a `manage.py` file) and start the development server on your local machine with:
+### 1. Local
+
+If the installation succeeded, to run the Django application navigate to the `web` folder (there should be a `manage.py` file) and start the development server on your local machine with:
 
         python manage.py runserver
 
    Now you can open your browser and type in `localhost:8000` (or `127.0.0.1:8000` if you are on a Windows machine) to start the web interface.
 
-   Note that to build Python extensions one needs to have `python3.x-dev` installed.
+   Note that to build python extensions one needs to have `python3.x-dev` installed.
 
-2. To deploy publicly create a file `local_settings.py` and store it in the same directory as the `settings.py`. Then add a constant called `SECRET_KEY = '<random_string>'`. The random string should be 50 characters long and can be  created (on Linux) by using the following command as super user:
+   Make sure that `DEBUG = True` in `settings.py`, this will ensure that the development server is able to serve local static files.
+
+### 2. Public
+
+#### Override settings locally
+
+To deploy publicly, rename the file `local_settings_TEMPLATE.py` to `local_settings.py` and update the constants.
+
+* `SECRET_KEY = '<random_string>'`
+
+  The random string should be 50 characters long and can created (on Linux) by using the following command as super user:
 
         </dev/urandom tr -dc '1234567890!#$?*#-.,+qwertyuiopQWERTYUIOPasdfghjklASDFGHJKLzxcvbnmZXCVBNM' | head -c50; echo ""
 
-    An example for a good secret key is this:
+    An example for a good secret key is this: `SECRET_KEY = 'O&2aYmv%)0B5#U-'9qsLTpfItC9N*V?%3L#fOHxDO,zyUm*S,U'`
 
-    `SECRET_KEY = 'O&2aYmv%)0B5#U-'9qsLTpfItC9N*V?%3L#fOHxDO,zyUm*S,U'`
-    
+* `DEBUG = False`
+
+  Keep the `Debug` constant set to `True` in `settings.py` to get more debugging info for local deployement (using the Django development server). For the public deployement, you should set it to `False` (in `local_settings.py`).
+
+#### Serving static files
+
+> For detailed documentation on how to serve static files, see the official Django documentation:
+> * [Managing static files](https://docs.djangoproject.com/en/3.1/howto/static-files/)
+> * [Deploying static files](https://docs.djangoproject.com/en/3.1/howto/static-files/deployment/)
+
+As the Django devlopment server is not meant for production and only serves static files if `Debug` is set to `True`, the static files used in the Django project need to be served another way.
+
+At this point, two important aspects regarding how to deploy static files in production will be named:
+
+1. Running this command, will create a folder `static` that will contain a copy of all static files from different directories across the Django project.
+    ```
+    python manage.py collectstatic
+    ```
+    > :warning: Run this command every time you update one of the static files in their respective location in the Django project folder.
+
+2. Configure `nginx` to serve static files from the generated `static` folder by adding a `location /static` block to the server block of the `nginx` config file for the domain you serve the Django app with. This is an example  `nginx` server block:
+    ```
+    server {
+      listen 80;
+      server_name <domain>;
+
+      access_log  /var/log/nginx/access.log;
+      error_log  /var/log/nginx/error.log;
+
+      location / {
+        # For testing, using the django development server:
+        # proxy_pass http://127.0.0.1:8000/;
+        # For production, using gunicorn:
+        proxy_pass http://unix:/run/swhweb.sock;
+      }
+
+      # Run 'python manage.py collectstatic' command in Django root project folder, so this folder will be created
+      location /static {
+        root <path_to_repo>/MSWH/web;
+        try_files $uri $uri/ =404;
+      }
+    }
+    ```
+    Replace `<path_to_repo>` with the actual path to the MSWH repository and `<domain>` with your domain.
+
 ## Contributing
 
 All are invited to contribute to the MSWH software through following the [Guidelines for Contributors](contributing.md).
