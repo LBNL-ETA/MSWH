@@ -161,12 +161,13 @@ To run tests, from the `MSWH` folder use the following command modified accordin
 ## Publications
 
 The code was used for the following publications:
-* CEC report (in press)
-* [ACEEE paper and video presentation](https://aceee2020.conferencespot.org/event-data/pdf/catalyst_activity_10923/catalyst_activity_paper_20200812133157248_498ce455_3a9c_4278_9088_6e3fdce5745b)
+* Coughlin, Katie, Milica Grahovac, Mohan Ganeshalingam, Robert Hosbach, and Vagelis Vossos. 2020. Costs and Benefits of Community versus Individual End-use Infrastructure for Solar Water Heating. California Energy Commission. CEC-XXX-2020-XXX. (in press)
+
+* Grahovac, Milica, Katie Coughlin, Mohan Ganeshalingam, Robert Hosbach and Vagelis Vossos. 2020. Costs and Benefits of Community Scale Solar Water Heating. 2020 ACEEE Study on Energy Efficiency in Buildings. Pacific Grove, California. [Link to the paper with a video presentation](https://aceee2020.conferencespot.org/event-data/pdf/catalyst_activity_10923/catalyst_activity_paper_20200812133157248_498ce455_3a9c_4278_9088_6e3fdce5745b)
 
 * Milica Grahovac, Katie Coughlin, Robert Hosbach, Hannes Gerhart, (2020). Multiscale Solar Water Heating. Journal of Open Source Software, 5(56), 2695, [![DOI](https://joss.theoj.org/papers/10.21105/joss.02695/status.svg)](https://doi.org/10.21105/joss.02695)
 
-* Hannes' Master Thesis (in press)
+* Hannes Gerhart, (2019). Flexible Django web framework and implemented a solar electric water heater simulation model, Master Thesis at Technische Universität München, research performed at LBNL
 
 ## About
 
