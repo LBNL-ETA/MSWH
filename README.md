@@ -164,6 +164,8 @@ The code was used for the following publications:
 * CEC report (in press)
 * [ACEEE paper and video presentation](https://aceee2020.conferencespot.org/event-data/pdf/catalyst_activity_10923/catalyst_activity_paper_20200812133157248_498ce455_3a9c_4278_9088_6e3fdce5745b)
 
+* Milica Grahovac, Katie Coughlin, Robert Hosbach, Hannes Gerhart, (2020). Multiscale Solar Water Heating. Journal of Open Source Software, 5(56), 2695, [![DOI](https://joss.theoj.org/papers/10.21105/joss.02695/status.svg)](https://doi.org/10.21105/joss.02695)
+
 * Hannes' Master Thesis (in press)
 
 ## About
