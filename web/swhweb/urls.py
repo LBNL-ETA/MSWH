@@ -25,5 +25,6 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("", views.home, name="home"),
     path("license/", views.license, name="license"),
+    path("db/reset", views.reset_db, name="reset_db"),
     path("system/", include("system.urls")),
 ]

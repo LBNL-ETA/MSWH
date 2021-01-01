@@ -1,13 +1,10 @@
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.conf import settings
 
 from datetime import date, datetime
 
-# Function to format the date and time (see http://strftime.org/)
-def time_format(date_time):
-    return date_time.strftime("%H:%M")
-
+from .functions import reset_database
 
 # Show the home page
 def home(request):
@@ -35,3 +32,8 @@ def license(request):
 
     # Return the html page as view including optional data
     return render(request, "license.html", data)
+
+# Endpoint to restore the database to its default state.
+def reset_db(request):
+    reset_database()
+    return redirect("home")
