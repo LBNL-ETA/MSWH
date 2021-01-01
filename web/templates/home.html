@@ -61,6 +61,7 @@
     <!-- Begin page content -->
     <main role="main" class="container">
       <h1 class="mt-3">Multiscale Solar Water Heating</h1>
+
       <h4 class="mt-5">What is this project about?</h4>
       <p>
         This user interface and the underlying simulation models were created in the scope of a research project. The configurations may break while the user experiments with parameter settings as we are currently able to keep only one copy of the underlying database. The authors are excluded from any liability regarding both the provided functionalities and the obtained simulation results.
@@ -71,6 +72,7 @@
       <p>
         For more experienced and aspiring beginner Python users it may be of interest to explore <a href="https://github.com/LBNL-ETA/MSWH">the source repository.</a> The repository also provides links to related publications.
       </p>
+
       <h4 class="mt-5">What can you do here?</h4>
       <p class="mb-3">
         This site will allow you to configure systems, run simulations and visualize results.
@@ -120,6 +122,69 @@
             </tr>
           </tbody>
         </table>
+      </div>
+
+      <h4 class="mt-5">Danger Zone</h4>
+      <div class="alert alert-danger" role="alert">
+        <div class="row align-items-center">
+          <div class="col">
+            Restore the initial state of the database. Any changes to any configuration, component, project or visualization will be lost.
+          </div>
+          <div class="col-auto">
+            <a class="btn btn-danger" href="" data-toggle="modal" data-target="#reset_db" role="button">Reset database</a>
+            <div class="modal fade" id="reset_db" tabindex="-1" role="dialog" aria-labelledby="reset_db_label" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="reset_db_label">Reset database</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body text-left">
+                      <p>You are about to reset the database.</p>
+                      <p class="text-danger"></p>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                      <a class="btn btn-danger" href="{% url 'reset_db' %}" role="button">Reset</a>
+                    </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% comment %}
+        <hr/>
+        <div class="row align-items-center">
+          <div class="col">
+            Insert description of action here. Update the id "action_name" and "action_name_label" and add a target url for the "Do it" button.
+          </div>
+          <div class="col-md-auto">
+            <a class="btn btn-danger" href="" data-toggle="modal" data-target="#" role="button">Button text</a>
+            <div class="modal fade" id="action_name" tabindex="-1" role="dialog" aria-labelledby="action_name_label" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="action_name_label">Button text</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body text-left">
+                      <p>You are about to do something dangerous.</p>
+                      <p class="text-danger"></p>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                      <a class="btn btn-danger" href="#" role="button">Do it</a>
+                    </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endcomment %}
       </div>
 
     </main>
