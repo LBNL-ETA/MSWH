@@ -21,6 +21,7 @@ def reset_database():
     This function is used to remotely restore the local database to its last commited state.
     """
     db_name = connection.settings_dict['NAME']
+    # Using 'git restore' requires git 2.23 or later
     command = ['git', 'restore', db_name]
     log.info("Restoring local database to most recent commit")
     process = subprocess.run(command, capture_output=True)
