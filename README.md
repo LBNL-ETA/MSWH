@@ -169,6 +169,8 @@ The code was used for the following publications:
 
 * Gerhart, H. (2019). Implementation of a Flexible Web Framework for Simulating Python System Models (p. 82). Technical University of Munich; Technical University of Munich. Research performed at LBNL.
 
+* Web deployed version of the Django app is under construction [on this publicly available private website](https://solar.floweragenda.org/).
+
 ## About
 
 The software may be distributed under the copyright and a BSD license provided in [legal.md](legal.md).
