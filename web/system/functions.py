@@ -454,11 +454,17 @@ def get_random_project(size):
 # Create the hot water load data for project objects
 def create_load(occupancy, at_home):
 
-    # *hg Decide for either relative or absolute path
-    if False:
-        db_path = os.path.join(os.getcwd(), "data/swh_input_weather_cons.db")
-    else:
-        db_path = "data/swh_input_weather_cons.db"
+    # path to the database stored in the 
+    # comm folder that holds the 
+    # load and weather data
+    try:        
+        db_path = os.path.join(
+            os.path.dirname( __file__ ), 
+            os.path.pardir,
+            os.path.pardir,
+            'mswh/comm/weather_and_loads.db')
+    except:
+        log.error("Failed to define a weather and load db path.")
 
     # Connecting to database
     try:
@@ -471,6 +477,9 @@ def create_load(occupancy, at_home):
         inputs = db.tables2dict(close=True)
     except:
         log.error("Failed to read input tables from DataFrame.")
+
+    print("Labels:",CONSUMER_LABELS)
+    print("Inputs database keys",inputs.keys())
 
     load, loadid_peakload = SourceAndSink._make_example_loading_inputs(
         inputs,
