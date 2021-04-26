@@ -167,7 +167,7 @@ The code was used for the following publications:
 
 * Milica Grahovac, Katie Coughlin, Robert Hosbach, Hannes Gerhart, (2020). Multiscale Solar Water Heating. Journal of Open Source Software, 5(56), 2695, [![DOI](https://joss.theoj.org/papers/10.21105/joss.02695/status.svg)](https://doi.org/10.21105/joss.02695)
 
-* Gerhart, H. (2019). Implementation of a Flexible Web Framework for Simulating Python System Models (p. 82). Technical University of Munich; Technical University of Munich. Research performed at LBNL.
+* Gerhart, H. (2019). Implementation of a Flexible Web Framework for Simulating Python System Models (p. 82). Technical University of Munich; Technical University of Munich. Research performed at LBNL. [Download link](https://gerhart.xyz/thesis.pdf)
 
 * Web deployed version of the Django app is under construction [on this publicly available private website](https://solar.floweragenda.org/).
 
