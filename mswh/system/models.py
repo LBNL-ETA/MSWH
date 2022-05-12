@@ -1015,48 +1015,48 @@ class System(object):
         ts_proj[self.c['season']] = self.season
 
         # household/project level analysis period results
-        self.cons_total.at[0, self.r['el_use']] = 0.
-        self.cons_total.at[0, self.r['el_use_s']] = 0.
-        self.cons_total.at[0, self.r['el_use_w']] = 0.
+        self.cons_total.loc[0, self.r['el_use']] = 0.
+        self.cons_total.loc[0, self.r['el_use_s']] = 0.
+        self.cons_total.loc[0, self.r['el_use_w']] = 0.
 
-        self.cons_total.at[0, self.r['gas_use']] = \
+        self.cons_total.loc[0, self.r['gas_use']] = \
             res[self.r['gas_use']].sum() * self.timestep
 
-        self.cons_total.at[0, self.r['gas_use_w']] = (
+        self.cons_total.loc[0, self.r['gas_use_w']] = (
             res[self.r['gas_use']] *
             self.it_is_winter[1:]).sum() * self.timestep
 
-        self.cons_total.at[0, self.r['gas_use_s']] = (
+        self.cons_total.loc[0, self.r['gas_use_s']] = (
             res[self.r['gas_use']] *
             self.it_is_summer[1:]).sum() * self.timestep
 
         # these are just placeholders for consistency
         # the model considers only additional distribution piping
         # in case of a solar thermal system
-        self.cons_total.at[0, self.r['gas_use_no_dist']] =\
-            self.cons_total.at[0, self.r['gas_use']]
-        self.cons_total.at[0, self.r['gas_use_s_no_dist']] =\
-            self.cons_total.at[0, self.r['gas_use_s']]
-        self.cons_total.at[0, self.r['gas_use_w_no_dist']] =\
-            self.cons_total.at[0, self.r['gas_use_w']]
+        self.cons_total.loc[0, self.r['gas_use_no_dist']] =\
+            self.cons_total.loc[0, self.r['gas_use']]
+        self.cons_total.loc[0, self.r['gas_use_s_no_dist']] =\
+            self.cons_total.loc[0, self.r['gas_use_s']]
+        self.cons_total.loc[0, self.r['gas_use_w_no_dist']] =\
+            self.cons_total.loc[0, self.r['gas_use_w']]
 
-        self.cons_total.at[0, self.r['q_del']] =\
+        self.cons_total.loc[0, self.r['q_del']] =\
             res[self.r['q_del']].sum() * self.timestep
 
-        self.cons_total.at[0, self.r['q_dem']] =\
+        self.cons_total.loc[0, self.r['q_dem']] =\
             res[self.r['q_dem']].sum() * self.timestep
 
         # zero by WHAM model definition
-        self.cons_total.at[0, self.r['q_unmet']] = 0.
-        self.cons_total.at[0, self.r['q_dump']] = 0.
-        self.cons_total.at[0, self.r['q_dist_loss']] = 0.
-        self.cons_total.at[0, self.r['q_dist_loss_at_bckp']] = 0.
-        self.cons_total.at[0, self.r['q_dist_loss_at_bckp_sum']] = 0.
-        self.cons_total.at[0, self.r['q_dist_loss_at_bckp_win']] = 0.
+        self.cons_total.loc[0, self.r['q_unmet']] = 0.
+        self.cons_total.loc[0, self.r['q_dump']] = 0.
+        self.cons_total.loc[0, self.r['q_dist_loss']] = 0.
+        self.cons_total.loc[0, self.r['q_dist_loss_at_bckp']] = 0.
+        self.cons_total.loc[0, self.r['q_dist_loss_at_bckp_sum']] = 0.
+        self.cons_total.loc[0, self.r['q_dist_loss_at_bckp_win']] = 0.
 
-        self.cons_total.at[0, self.r['sol_fra']] = 0.
+        self.cons_total.loc[0, self.r['sol_fra']] = 0.
 
-        self.cons_total.at[0, self.c['max_load']] = UnitConv(
+        self.cons_total.loc[0, self.c['max_load']] = UnitConv(
             self.load_max).m3_gal(unit_in='m3')
 
         return self.cons_total, self.cons_total.iloc[0,:], ts_proj
@@ -1222,46 +1222,46 @@ class System(object):
                 self.r['q_unmet']: ind_res[self.r['q_unmet']]}
 
             ts_cons[cons_id][self.c['season']] = self.season
-            self.cons_total.at[
+            self.cons_total.loc[
                 self.cons_total[self.c['id']] == cons_id,
                 self.r['gas_use']] = ind_res[
                     self.r['gas_use']].sum() * self.timestep
 
-            self.cons_total.at[
+            self.cons_total.loc[
                 self.cons_total[self.c['id']] == cons_id,
                 self.r['gas_use_s']] = (
                     ind_res[self.r['gas_use']] *
                     self.it_is_summer).sum() * self.timestep
 
-            self.cons_total.at[
+            self.cons_total.loc[
                 self.cons_total[self.c['id']] == cons_id,
                 self.r['gas_use_w']] = (
                     ind_res[self.r['gas_use']] *
                     self.it_is_winter).sum() * self.timestep
 
-            self.cons_total.at[
+            self.cons_total.loc[
                 self.cons_total[self.c['id']] == cons_id,
                 self.r['gas_use_no_dist']] = ind_res_no_dist_loss[
                     self.r['gas_use']].sum() * self.timestep
 
-            self.cons_total.at[
+            self.cons_total.loc[
                 self.cons_total[self.c['id']] == cons_id,
                 self.r['gas_use_s_no_dist']] = (
                     ind_res_no_dist_loss[self.r['gas_use']] *
                     self.it_is_summer).sum() * self.timestep
 
-            self.cons_total.at[
+            self.cons_total.loc[
                 self.cons_total[self.c['id']] == cons_id,
                 self.r['gas_use_w_no_dist']] = (
                     ind_res_no_dist_loss[self.r['gas_use']] *
                     self.it_is_winter).sum() * self.timestep
 
-            self.cons_total.at[
+            self.cons_total.loc[
                 self.cons_total[self.c['id']] == cons_id,
                 self.r['q_del_bckp']] = ind_res[
                     self.r['q_del_bckp']].sum() * self.timestep
 
-            self.cons_total.at[\
+            self.cons_total.loc[\
                 self.cons_total[self.c['id']] == cons_id, \
                 self.r['q_unmet']] = \
                 ind_res[self.r['q_unmet']].sum() * self.timestep
@@ -1372,17 +1372,17 @@ class System(object):
                 self.r['el_use']: ind_res[self.r['el_use']],
                 self.r['q_unmet']: ind_res[self.r['q_unmet']]}
 
-            self.cons_total.at[
+            self.cons_total.loc[
                 self.cons_total[self.c['id']] == cons_id,
                 self.r['el_use']] = ind_res[
                     self.r['el_use']].sum() * self.timestep
 
-            self.cons_total.at[
+            self.cons_total.loc[
                 self.cons_total[self.c['id']] == cons_id,
                 self.r['q_del_bckp']] = ind_res[
                     self.r['q_del_bckp']].sum() * self.timestep
 
-            self.cons_total.at[
+            self.cons_total.loc[
                 self.cons_total[self.c['id']] == cons_id,
                 self.r['q_unmet']] = ind_res[
                     self.r['q_unmet']].sum() * self.timestep
@@ -1505,45 +1505,45 @@ class System(object):
 
             ts_cons[cons_id][self.c['season']] = self.season
 
-            self.cons_total.at[
+            self.cons_total.loc[
                 self.cons_total[self.c['id']] == cons_id,
                 self.r['gas_use']] = ind_res[self.r['gas_use']].sum()
 
-            self.cons_total.at[
+            self.cons_total.loc[
                 self.cons_total[self.c['id']] == cons_id,
                 self.r['gas_use_s']] = (
                     ind_res[self.r['gas_use']] *
                     self.it_is_summer).sum() * self.timestep
 
-            self.cons_total.at[
+            self.cons_total.loc[
                 self.cons_total[self.c['id']] == cons_id,
                 self.r['gas_use_w']] = (
                     ind_res[self.r['gas_use']] *
                     self.it_is_winter).sum() * self.timestep
 
-            self.cons_total.at[
+            self.cons_total.loc[
                 self.cons_total[self.c['id']] == cons_id,
                 self.r['gas_use_no_dist']] = ind_res_no_dist_loss[
                     self.r['gas_use']].sum() * self.timestep
 
-            self.cons_total.at[
+            self.cons_total.loc[
                 self.cons_total[self.c['id']] == cons_id,
                 self.r['gas_use_s_no_dist']] = (
                     ind_res_no_dist_loss[self.r['gas_use']] *
                     self.it_is_summer).sum() * self.timestep
 
-            self.cons_total.at[
+            self.cons_total.loc[
                 self.cons_total[self.c['id']] == cons_id,
                 self.r['gas_use_w_no_dist']] = (
                     ind_res_no_dist_loss[self.r['gas_use']] *
                     self.it_is_winter).sum() * self.timestep
 
-            self.cons_total.at[
+            self.cons_total.loc[
                 self.cons_total[self.c['id']] == cons_id,
                 self.r['q_del_bckp']] = ind_res[
                     self.r['q_del_bckp']].sum()
 
-            self.cons_total.at[
+            self.cons_total.loc[
                 self.cons_total[self.c['id']] == cons_id,
                 self.r['q_unmet']] = ind_res[
                     self.r['q_unmet']].sum() * self.timestep
