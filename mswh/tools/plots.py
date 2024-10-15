@@ -297,6 +297,7 @@ class Plot(object):
     def series(
         self,
         data,
+        xtickvals=False,
         index_in_a_column=None,
         outfile="series.png",
         modes="lines+markers",
@@ -323,6 +324,10 @@ class Plot(object):
                 If None, dataframe index is used, otherwise pass a
                 column label for a column (it will not be considered
                 as a series to plot)
+
+            xtickvals: boolean or list/array
+                Array or list of x-axis tick values.
+                Default: False (uses all values passed to x-axis)
 
             outfile: str
                 Filename, include .png, .png .pdf
@@ -411,6 +416,10 @@ class Plot(object):
             )
 
         fig = go.Figure(data=plot_data, layout=self.layout)
+
+        if type(xtickvals)!=bool:
+            # Update x-axis to display the selected ticks
+            fig.update_xaxes(tickvals=xtickvals)
 
         if self.save_image:
 
