@@ -111,6 +111,7 @@ class Plot(object):
                     color="#7f7f7f",
                 ),
                 tickfont=dict(size=fontsize * 0.8),
+                gridcolor='lightgrey',
             ),
             yaxis=dict(
                 title=label_v,
@@ -120,6 +121,7 @@ class Plot(object):
                     color="#7f7f7f",
                 ),
                 tickfont=dict(size=fontsize * 0.6),
+                gridcolor='lightgrey',
             ),
             showlegend=legend,
             width=width,
@@ -130,6 +132,7 @@ class Plot(object):
                 y=legend_y,
                 font=dict(family="arial", size=fontsize * 0.8),
             ),
+            plot_bgcolor='white'
         )
 
         self.boxlayout = go.Layout(
@@ -301,6 +304,9 @@ class Plot(object):
         index_in_a_column=None,
         outfile="series.png",
         modes="lines+markers",
+        dashes="solid",
+        colors=False,
+        width=0.5,
     ):
         """Plots all series data against either the index or the first
         provided series. It can sort the data and plot the duration_curve.
@@ -337,6 +343,22 @@ class Plot(object):
                 a list of the above to assign to each column
                 of data, excluding the first column if
                 index_in_a_column is not None
+
+            dashes: str or list of str
+                'solid', 'dot', 'dash', 'longdash', 'dashdot', 'longdashdot'
+                a list of the above line types to assign to each column
+                of data, excluding the first column if
+                index_in_a_column is not None
+
+            width: int between 0 and inf
+                a list of the above integers indicating line thickness to
+                assign to each column of data, excluding the first column if
+                index_in_a_column is not None
+
+            colors: list of line colors (hex), or False
+                if False, will select from the default list
+                if customized list passed, assign to each column of data,
+                excluding the first column if index_in_a_column is not None
 
         Returns:
 
@@ -397,6 +419,28 @@ class Plot(object):
         else:
             list_modes = modes
 
+        if not isinstance(dashes, list):
+            list_dashes = [dashes] * num_columns
+        else:
+            list_dashes = dashes
+
+        if not isinstance(width, list):
+            list_width = [width] * num_columns
+        else:
+            list_width = width
+
+        # Plotly default colors
+        default_colors=['rgb(31, 119, 180)', 'rgb(255, 127, 14)',
+                            'rgb(44, 160, 44)', 'rgb(214, 39, 40)',
+                            'rgb(148, 103, 189)', 'rgb(140, 86, 75)',
+                            'rgb(227, 119, 194)', 'rgb(127, 127, 127)',
+                            'rgb(188, 189, 34)', 'rgb(23, 190, 207)']
+
+        if not isinstance(colors, list):
+            list_colors = default_colors[0:num_columns]
+        else:
+            list_colors = colors
+
         if self.duration_curve:
             for col_index in range(0, num_columns):
                 data.iloc[:, col_index] = (
@@ -411,6 +455,9 @@ class Plot(object):
                     x=labels_h_axis,
                     y=data.iloc[:, col_index],
                     mode=list_modes[col_index],
+                    line= dict(dash=list_dashes[col_index],
+                               width=list_width[col_index],
+                               color=list_colors[col_index]),
                     name=data.columns[col_index],
                 )
             )
