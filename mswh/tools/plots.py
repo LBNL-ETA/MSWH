@@ -308,6 +308,8 @@ class Plot(object):
         dashes="solid",
         colors=False,
         width=0.5,
+        xlim=False,
+        ylim=False,
     ):
         """Plots all series data against either the index or the first
         provided series. It can sort the data and plot the duration_curve.
@@ -360,6 +362,14 @@ class Plot(object):
                 if False, will select from the default list
                 if customized list passed, assign to each column of data,
                 excluding the first column if index_in_a_column is not None
+
+            xlim: tupple such as [0,1] or False (default)
+                To customize the x-axis bounds. If set to False the axis will be
+                autoscaled
+
+            ylim: tupple such as [0,1] or False (default)
+                To customize the y-axis bounds. If set to False the axis will be
+                autoscaled
 
         Returns:
 
@@ -468,6 +478,12 @@ class Plot(object):
         if type(xtickvals)!=bool:
             # Update x-axis to display the selected ticks
             fig.update_xaxes(tickvals=xtickvals)
+
+        if type(xlim)!=bool:
+            fig.update_xaxes(range=xlim)
+
+        if type(ylim)!=bool:
+            fig.update_yaxes(range=ylim)
 
         if self.save_image:
 
