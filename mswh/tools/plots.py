@@ -120,7 +120,7 @@ class Plot(object):
                     size=fontsize,
                     color="#7f7f7f",
                 ),
-                tickfont=dict(size=fontsize * 0.6),
+                tickfont=dict(size=fontsize * 0.8),
                 gridcolor='lightgrey',
             ),
             showlegend=legend,
@@ -128,6 +128,7 @@ class Plot(object):
             height=height,
             margin=dict(l=margin_l, b=margin_b),
             legend=dict(
+                bgcolor='rgba(255, 255, 255, 0.5)',
                 x=legend_x,
                 y=legend_y,
                 font=dict(family="arial", size=fontsize * 0.8),
@@ -138,7 +139,7 @@ class Plot(object):
         self.boxlayout = go.Layout(
             font=dict(size=fontsize, family="arial"),
             title=title,
-            titlefont=dict(size=fontsize * 1.2, family="arial"),
+            titlefont=dict(size=fontsize * 1., family="arial"),
             xaxis=dict(
                 title=label_h,
                 titlefont=dict(
