@@ -572,11 +572,11 @@ class System(object):
                 ts_res[self.r['q_del_bckp']]) / ts_res[self.r['q_dem']]
 
             sol_fra['monthly'] = sol_fra_hourly.groupby(
-                self.c['month']).mean().rename(
+                self.c['month']).mean(numeric_only=True).rename(
                     columns={'hourly': self.r['month_sol_fra']})
 
             sol_fra['seasonal'] = sol_fra_hourly.groupby(
-                self.c['season']).mean().rename(
+                self.c['season']).mean(numeric_only=True).rename(
                     columns={'hourly': self.r['season_sol_fra']})
 
             sol_fra['seasonal'] = sol_fra['seasonal'].drop(
