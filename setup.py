@@ -27,10 +27,10 @@ setup(
     # to run tests and use plotting capabilities one
     # also needs Orca (https://github.com/plotly/orca)
     install_requires=[
-        "pandas>=1.5.0",
-        "numpy>=1.20.3",
+        "pandas==2.2.3",
+        "numpy==2.1.3",
         "future",
-        "plotly>=3.2.0",
+        "plotly==5.24.1",
         "nbformat>=5.0.4",
         "psutil>=5.4.7",
         "django>=2.1.7",
